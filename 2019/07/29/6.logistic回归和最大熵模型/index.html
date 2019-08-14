@@ -8,19 +8,19 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>brezezee</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="[TOC] logistic回归和最大熵模型1. logistic回归模型&amp;emsp;&amp;emsp;logistic回归是一种广义线性回归（generalized linear model），因此与多重线性回归分析有很多相同之处。它们的模型形式基本上相同，都具有wx+b，其中w和b是待求参数，其区别在于他们的因变量不同，多重线性回归直接将wx+b作为因变量，即y =wx+b，而logistic回归则">
+  <meta name="description" content="logistic回归和最大熵模型1. logistic回归模型&amp;emsp;&amp;emsp;logistic回归是一种广义线性回归（generalized linear model），因此与多重线性回归分析有很多相同之处。它们的模型形式基本上相同，都具有wx+b，其中w和b是待求参数，其区别在于他们的因变量不同，多重线性回归直接将wx+b作为因变量，即y =wx+b，而logistic回归则通过函数g">
 <meta name="keywords" content="ml,dl,cv,ai">
 <meta property="og:type" content="article">
 <meta property="og:title" content="brezezee">
 <meta property="og:url" content="http://yoursite.com/2019/07/29/6.logistic回归和最大熵模型/index.html">
 <meta property="og:site_name" content="brezezee">
-<meta property="og:description" content="[TOC] logistic回归和最大熵模型1. logistic回归模型&amp;emsp;&amp;emsp;logistic回归是一种广义线性回归（generalized linear model），因此与多重线性回归分析有很多相同之处。它们的模型形式基本上相同，都具有wx+b，其中w和b是待求参数，其区别在于他们的因变量不同，多重线性回归直接将wx+b作为因变量，即y =wx+b，而logistic回归则">
+<meta property="og:description" content="logistic回归和最大熵模型1. logistic回归模型&amp;emsp;&amp;emsp;logistic回归是一种广义线性回归（generalized linear model），因此与多重线性回归分析有很多相同之处。它们的模型形式基本上相同，都具有wx+b，其中w和b是待求参数，其区别在于他们的因变量不同，多重线性回归直接将wx+b作为因变量，即y =wx+b，而logistic回归则通过函数g">
 <meta property="og:locale" content="th">
 <meta property="og:image" content="http://yoursite.com/2019/07/29/6.logistic回归和最大熵模型/sigmoid_function.png">
-<meta property="og:updated_time" content="2019-08-11T14:07:05.614Z">
+<meta property="og:updated_time" content="2019-08-14T08:15:46.503Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="brezezee">
-<meta name="twitter:description" content="[TOC] logistic回归和最大熵模型1. logistic回归模型&amp;emsp;&amp;emsp;logistic回归是一种广义线性回归（generalized linear model），因此与多重线性回归分析有很多相同之处。它们的模型形式基本上相同，都具有wx+b，其中w和b是待求参数，其区别在于他们的因变量不同，多重线性回归直接将wx+b作为因变量，即y =wx+b，而logistic回归则">
+<meta name="twitter:description" content="logistic回归和最大熵模型1. logistic回归模型&amp;emsp;&amp;emsp;logistic回归是一种广义线性回归（generalized linear model），因此与多重线性回归分析有很多相同之处。它们的模型形式基本上相同，都具有wx+b，其中w和b是待求参数，其区别在于他们的因变量不同，多重线性回归直接将wx+b作为因变量，即y =wx+b，而logistic回归则通过函数g">
 <meta name="twitter:image" content="http://yoursite.com/2019/07/29/6.logistic回归和最大熵模型/sigmoid_function.png">
   
     <link rel="alternative" href="/atom.xml" title="brezezee" type="application/atom+xml">
@@ -162,8 +162,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>[TOC]</p>
+        <!--TOC-->
 <h1 id="logistic回归和最大熵模型"><a href="#logistic回归和最大熵模型" class="headerlink" title="logistic回归和最大熵模型"></a>logistic回归和最大熵模型</h1><h2 id="1-logistic回归模型"><a href="#1-logistic回归模型" class="headerlink" title="1. logistic回归模型"></a>1. logistic回归模型</h2><p>&emsp;&emsp;logistic回归是一种广义线性回归（generalized linear model），因此与多重线性回归分析有很多相同之处。它们的模型形式基本上相同，都具有wx+b，其中w和b是待求参数，其区别在于他们的因变量不同，多重线性回归直接将wx+b作为因变量，即y =wx+b，而logistic回归则通过函数g(wx+b)让其对应一个隐状态p，p =g(wx+b),然后根据p 与1-p的比值大小（几率）决定因变量的值。如果g是logistic函数，就是logistic回归，如果g是多项式函数就是多项式回归。</p>
+<a id="more"></a>
 <p>&emsp;&emsp;logistic回归的因变量可以是二分类的，也可以是多分类的，但是二分类的更为常用，也更加容易解释，多类可以使用softmax方法进行处理。实际中最为常用的就是二分类的logistic回归。</p>
 <h3 id="1-1-logistic分布"><a href="#1-1-logistic分布" class="headerlink" title="1.1 logistic分布"></a>1.1 logistic分布</h3><p> &emsp;&emsp;设X是连续随机变量，X服从的logistic分布具有如下分布函数</p>
 <script type="math/tex; mode=display">
@@ -505,7 +506,7 @@ P(y=1|x) = &\frac {exp(w\cdot f(x,1))} {exp(w\cdot f(x,0))+exp(w\cdot f(x,1))}\\
 <script>
 var gitment = new Gitment({
   id: "http://yoursite.com",
-  owner: 'true',
+  owner: 'brezezee',
   repo: 'brezezee.gitgub.io',
   oauth: {
     client_id: 'brezezee',

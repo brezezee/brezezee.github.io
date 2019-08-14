@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>brezezee</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="[TOC] 拉格朗日对偶性(Lagrange duality)1. 从原始问题到对偶问题&amp;emsp;对偶性是优化理论中一个重要的部分，带约束的优化问题是机器学习中经常遇到的问题，这类问题都可以用如下形式表达  \begin{aligned} min \;\; &amp;f(x) \\ s.t.\;\; &amp; g_i(x) \le 0 ,\;\; i=1,\cdots, m\\ &amp; h_i(x) = 0,\;">
+  <meta name="description" content="拉格朗日对偶性(Lagrange duality)1. 从原始问题到对偶问题&amp;emsp;对偶性是优化理论中一个重要的部分，带约束的优化问题是机器学习中经常遇到的问题，这类问题都可以用如下形式表达  \begin{aligned} min \;\; &amp;f(x) \\ s.t.\;\; &amp; g_i(x) \le 0 ,\;\; i=1,\cdots, m\\ &amp; h_i(x) = 0,\;\; i=">
 <meta name="keywords" content="ml,dl,cv,ai">
 <meta property="og:type" content="article">
 <meta property="og:title" content="brezezee">
 <meta property="og:url" content="http://yoursite.com/2019/08/14/拉格朗日对偶性(Lagrange duality)/index.html">
 <meta property="og:site_name" content="brezezee">
-<meta property="og:description" content="[TOC] 拉格朗日对偶性(Lagrange duality)1. 从原始问题到对偶问题&amp;emsp;对偶性是优化理论中一个重要的部分，带约束的优化问题是机器学习中经常遇到的问题，这类问题都可以用如下形式表达  \begin{aligned} min \;\; &amp;f(x) \\ s.t.\;\; &amp; g_i(x) \le 0 ,\;\; i=1,\cdots, m\\ &amp; h_i(x) = 0,\;">
+<meta property="og:description" content="拉格朗日对偶性(Lagrange duality)1. 从原始问题到对偶问题&amp;emsp;对偶性是优化理论中一个重要的部分，带约束的优化问题是机器学习中经常遇到的问题，这类问题都可以用如下形式表达  \begin{aligned} min \;\; &amp;f(x) \\ s.t.\;\; &amp; g_i(x) \le 0 ,\;\; i=1,\cdots, m\\ &amp; h_i(x) = 0,\;\; i=">
 <meta property="og:locale" content="th">
-<meta property="og:updated_time" content="2019-08-05T08:18:53.135Z">
+<meta property="og:updated_time" content="2019-08-14T08:16:02.465Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="brezezee">
-<meta name="twitter:description" content="[TOC] 拉格朗日对偶性(Lagrange duality)1. 从原始问题到对偶问题&amp;emsp;对偶性是优化理论中一个重要的部分，带约束的优化问题是机器学习中经常遇到的问题，这类问题都可以用如下形式表达  \begin{aligned} min \;\; &amp;f(x) \\ s.t.\;\; &amp; g_i(x) \le 0 ,\;\; i=1,\cdots, m\\ &amp; h_i(x) = 0,\;">
+<meta name="twitter:description" content="拉格朗日对偶性(Lagrange duality)1. 从原始问题到对偶问题&amp;emsp;对偶性是优化理论中一个重要的部分，带约束的优化问题是机器学习中经常遇到的问题，这类问题都可以用如下形式表达  \begin{aligned} min \;\; &amp;f(x) \\ s.t.\;\; &amp; g_i(x) \le 0 ,\;\; i=1,\cdots, m\\ &amp; h_i(x) = 0,\;\; i=">
   
     <link rel="alternative" href="/atom.xml" title="brezezee" type="application/atom+xml">
   
@@ -160,7 +160,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>[TOC]</p>
+        <!--TOC-->
 <h1 id="拉格朗日对偶性-Lagrange-duality"><a href="#拉格朗日对偶性-Lagrange-duality" class="headerlink" title="拉格朗日对偶性(Lagrange duality)"></a>拉格朗日对偶性(Lagrange duality)</h1><h2 id="1-从原始问题到对偶问题"><a href="#1-从原始问题到对偶问题" class="headerlink" title="1. 从原始问题到对偶问题"></a>1. 从原始问题到对偶问题</h2><p>&emsp;对偶性是优化理论中一个重要的部分，带约束的优化问题是机器学习中经常遇到的问题，这类问题都可以用如下形式表达</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
@@ -168,6 +168,7 @@ min \;\; &f(x) \\
 s.t.\;\; & g_i(x) \le 0 ,\;\; i=1,\cdots, m\\
 & h_i(x) = 0,\;\; i=1,\cdots,n\\
 \end{aligned}</script><p>约束条件减少需要求解的空间，但在机器学习中，约束条件往往比较复杂并且较多。因此先计算约束条件再在约束空间中计算最优值非常不方便。于是用广义拉格朗日函数将带约束优化问题转化为无约束优化问题</p>
+<a id="more"></a>
 <script type="math/tex; mode=display">
 L(x,\lambda,\eta) = f(x)+\sum_i^m \lambda_i g_i(x) + \sum_i^n \eta_i h_i(x)</script><p>&emsp;这时，若按照拉格朗日乘数法直接对$x、\lambda、\eta$求偏导的话，结果对简化复杂的约束条件没有益处。我们希望获取一种能够优化原问题，又能简化计算的方法。于是进一步挖掘$\lambda、\eta$能够带来的东西，当我们对广义拉格朗日函数作关于$\lambda、\eta$ 的最大化时</p>
 <script type="math/tex; mode=display">
@@ -402,7 +403,7 @@ g_i(x^*) \le 0\\
 <script>
 var gitment = new Gitment({
   id: "http://yoursite.com",
-  owner: 'true',
+  owner: 'brezezee',
   repo: 'brezezee.gitgub.io',
   oauth: {
     client_id: 'brezezee',
