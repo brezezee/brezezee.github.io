@@ -301,14 +301,59 @@
         
           
             <p>[TOC]</p>
-<h1 id="拉格朗日对偶性-Lagrange-duality"><a href="#拉格朗日对偶性-Lagrange-duality" class="headerlink" title="拉格朗日对偶性(Lagrange duality)"></a>拉格朗日对偶性(Lagrange duality)</h1><h2 id="1-从原始问题到对偶问题"><a href="#1-从原始问题到对偶问题" class="headerlink" title="1. 从原始问题到对偶问题"></a>1. 从原始问题到对偶问题</h2><p>&emsp;对偶性是优化理论中一个重要的部分，带约束的优化问题是机器学习中经常遇到的问题，这类问题都可以用如下形式表达<br>$$<br>\begin{aligned}<br>min ;; &amp;f(x) \<br>s.t.;; &amp; g_i(x) \le 0 ,;; i=1,\cdots, m\<br>&amp; h_i(x) = 0,;; i=1,\cdots,n\<br>\end{aligned}<br>$$<br>约束条件减少需要求解的空间，但在机器学习中，约束条件往往比较复杂并且较多。因此先计算约束条件再在约束空间中计算最优值非常不方便。于是用广义拉格朗日函数将带约束优化问题转化为无约束优化问题<br>$$<br>L(x,\lambda,\eta) = f(x)+\sum_i^m \lambda_i g_i(x) + \sum_i^n \eta_i h_i(x)<br>$$<br>&emsp;这时，若按照拉格朗日乘数法直接对$x、\lambda、\eta$求偏导的话，结果对简化复杂的约束条件没有益处。我们希望获取一种能够优化原问题，又能简化计算的方法。于是进一步挖掘$\lambda、\eta$能够带来的东西，当我们对广义拉格朗日函数作关于$\lambda、\eta$ 的最大化时<br>$$<br>\theta_P(x) = \underset {\lambda \ge 0,\eta} {max};L(x,\lambda,\eta)<br>$$<br>其中，要求$\lambda \ge 0$ ，很容易发现，在这个最大化问题中，若$x$ 不满足原问题中的约束，那么这个最大化的结果一定是正无穷。例如，$g_i(x)&gt;0$ ，在关于$\lambda、\eta$ 最大化时，其系数便会趋于无穷大使得整个式子趋于无穷大。而当$x$ 满足约束时，最大化的结果一定是$f(x)$ 。依据这个特性，我们可以将原广义拉格朗日函数的极小化问题拆解为两步<br>$$<br>\underset x {min} ;L(x,\lambda,\eta) = \underset x {min} ;\theta_P(x) = \underset x {min} ;\underset {\lambda \ge 0,\eta} {max};L(x,\lambda,\eta)<br>$$</p>
-<p>拆解后的问题$ \underset x {min} ;\underset {\lambda \ge 0,\eta} {max};L(x,\lambda,\eta)$ 称为广义拉格朗日函数的极小极大问题，它与原问题是完全等价的。在对偶性中，这个问题被称为原始问题（Primal problem）。</p>
-<p>&emsp;&emsp;通过原始问题的极小极大问题，可以引出它的对偶问题（Dual problem），其对偶问题就是极小极大问题交换一个位置而已。首先定义<br>$$<br>\theta_D(\lambda,\eta) = \underset {x} {min} L(x,\lambda,\eta)<br>$$<br>那么其对偶问题就是<br>$$<br>\underset {\lambda \ge 0,\eta} {max} ; \theta_D(\lambda,\eta)= \underset {\lambda \ge 0,\eta} {max} ;\underset {x} {min} L(x,\lambda,\eta)<br>$$<br>这个问题是广义拉格朗日函数的极大极小问题，将其展开为约束最优化问题得到<br>$$<br>\underset {\lambda ,\eta} {max} ; \theta_D(\lambda,\eta)= \underset {\lambda ,\eta} {max} ;\underset {x} {min} L(x,\lambda,\eta)\<br>s.t. \lambda_i \ge 0,;; i= 1,2,\cdots,k<br>$$<br>&emsp;&emsp;可以看出两个函数的变量并不相同，对于原始问题，它的变量是$x$，而对于对偶问题，它的变量是$\lambda,;\eta$ 。并且，这两个问题并不等价，有时候甚至差的有点多。可以理解为其他国家最厉害的乒乓球队员，也没有中国最菜的乒乓球队员厉害，当然这比喻并不准确。</p>
-<h2 id="2-弱对偶与强对偶"><a href="#2-弱对偶与强对偶" class="headerlink" title="2. 弱对偶与强对偶"></a>2. 弱对偶与强对偶</h2><p>&emsp;&emsp;对偶函数可以理解为给原始函数找了一个下界，在原始函数计算困难的时候，可以通过解对偶函数来得到一个近似的值。并且在函数满足一定条件的时候，对偶函数的解与原始函数的解是等价的。具体来说，对偶 函数$\theta_D(\lambda,\eta)=\underset {x} {min} L(x,\lambda,\eta)$ 确定了原始问题的一个下界，即<br>$$<br>\theta_D(\lambda,\eta) =\underset {x} {min} L(x,\lambda,\eta)\le L(x,\lambda,\eta)\le \underset {\lambda \ge 0,\eta} {max};L(x,\lambda,\eta)=\theta_P(x) \tag{2-a}<br>$$</p>
-<p>即<br>$$<br>\theta_D(\lambda,\eta) \le \theta_P(x)<br>$$<br>其中，$\theta_d(\lambda,\eta)$看作其他国家乒乓球运动员，$\theta_P(x)$看作中国乒乓球运动员，那么其他国家最厉害的也不一定比得上中国最差的。即<br>$$<br>d^* =\underset {\lambda ,\eta} {max} ; \theta_D(\lambda,\eta)\le \underset x {min} ;\theta_P(x)=p^* \tag{2-b}<br>$$<br>这个性质便是<strong>弱对偶性（ weak duality ）</strong>。弱对偶性对任何优化问题都成立，这似乎是显然的，因为这个下界并不严格，有时候甚至取到非常小，对近似原问题的解没多大帮助。既有弱对偶性，那么便有强对偶性，<strong>强对偶性</strong>是指<br>$$<br>d^* = p^*<br>$$<br>显然这是一个令人惊喜的性质，这意味着可以通过求解较简单的对偶问题（因为对偶问题总是一个凸优化问题）来得到原问题的解。不过强对偶性在优化问题中是一个非常高深的问题，对我来说更是如此。因此我只能介绍关于强对偶的两个条件：严格条件和KKT条件。</p>
+<h1 id="拉格朗日对偶性-Lagrange-duality"><a href="#拉格朗日对偶性-Lagrange-duality" class="headerlink" title="拉格朗日对偶性(Lagrange duality)"></a>拉格朗日对偶性(Lagrange duality)</h1><h2 id="1-从原始问题到对偶问题"><a href="#1-从原始问题到对偶问题" class="headerlink" title="1. 从原始问题到对偶问题"></a>1. 从原始问题到对偶问题</h2><p>&emsp;对偶性是优化理论中一个重要的部分，带约束的优化问题是机器学习中经常遇到的问题，这类问题都可以用如下形式表达</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+min \;\; &f(x) \\
+s.t.\;\; & g_i(x) \le 0 ,\;\; i=1,\cdots, m\\
+& h_i(x) = 0,\;\; i=1,\cdots,n\\
+\end{aligned}</script><p>约束条件减少需要求解的空间，但在机器学习中，约束条件往往比较复杂并且较多。因此先计算约束条件再在约束空间中计算最优值非常不方便。于是用广义拉格朗日函数将带约束优化问题转化为无约束优化问题</p>
+<script type="math/tex; mode=display">
+L(x,\lambda,\eta) = f(x)+\sum_i^m \lambda_i g_i(x) + \sum_i^n \eta_i h_i(x)</script><p>&emsp;这时，若按照拉格朗日乘数法直接对$x、\lambda、\eta$求偏导的话，结果对简化复杂的约束条件没有益处。我们希望获取一种能够优化原问题，又能简化计算的方法。于是进一步挖掘$\lambda、\eta$能够带来的东西，当我们对广义拉格朗日函数作关于$\lambda、\eta$ 的最大化时</p>
+<script type="math/tex; mode=display">
+\theta_P(x) = \underset {\lambda \ge 0,\eta} {max}\;L(x,\lambda,\eta)</script><p>其中，要求$\lambda \ge 0$ ，很容易发现，在这个最大化问题中，若$x$ 不满足原问题中的约束，那么这个最大化的结果一定是正无穷。例如，$g_i(x)&gt;0$ ，在关于$\lambda、\eta$ 最大化时，其系数便会趋于无穷大使得整个式子趋于无穷大。而当$x$ 满足约束时，最大化的结果一定是$f(x)$ 。依据这个特性，我们可以将原广义拉格朗日函数的极小化问题拆解为两步</p>
+<script type="math/tex; mode=display">
+\underset x {min} \;L(x,\lambda,\eta) = \underset x {min} \;\theta_P(x) = \underset x {min} \;\underset {\lambda \ge 0,\eta} {max}\;L(x,\lambda,\eta)</script><p>拆解后的问题$ \underset x {min} \;\underset {\lambda \ge 0,\eta} {max}\;L(x,\lambda,\eta)$ 称为广义拉格朗日函数的极小极大问题，它与原问题是完全等价的。在对偶性中，这个问题被称为原始问题（Primal problem）。</p>
+<p>&emsp;&emsp;通过原始问题的极小极大问题，可以引出它的对偶问题（Dual problem），其对偶问题就是极小极大问题交换一个位置而已。首先定义</p>
+<script type="math/tex; mode=display">
+\theta_D(\lambda,\eta) = \underset {x} {min} L(x,\lambda,\eta)</script><p>那么其对偶问题就是</p>
+<script type="math/tex; mode=display">
+\underset {\lambda \ge 0,\eta} {max} \; \theta_D(\lambda,\eta)= \underset {\lambda \ge 0,\eta} {max} \;\underset {x} {min} L(x,\lambda,\eta)</script><p>这个问题是广义拉格朗日函数的极大极小问题，将其展开为约束最优化问题得到</p>
+<script type="math/tex; mode=display">
+\underset {\lambda ,\eta} {max} \; \theta_D(\lambda,\eta)= \underset {\lambda ,\eta} {max} \;\underset {x} {min} L(x,\lambda,\eta)\\
+s.t. \lambda_i \ge 0,\;\; i= 1,2,\cdots,k</script><p>&emsp;&emsp;可以看出两个函数的变量并不相同，对于原始问题，它的变量是$x$，而对于对偶问题，它的变量是$\lambda,\;\eta$ 。并且，这两个问题并不等价，有时候甚至差的有点多。可以理解为其他国家最厉害的乒乓球队员，也没有中国最菜的乒乓球队员厉害，当然这比喻并不准确。</p>
+<h2 id="2-弱对偶与强对偶"><a href="#2-弱对偶与强对偶" class="headerlink" title="2. 弱对偶与强对偶"></a>2. 弱对偶与强对偶</h2><p>&emsp;&emsp;对偶函数可以理解为给原始函数找了一个下界，在原始函数计算困难的时候，可以通过解对偶函数来得到一个近似的值。并且在函数满足一定条件的时候，对偶函数的解与原始函数的解是等价的。具体来说，对偶 函数$\theta_D(\lambda,\eta)=\underset {x} {min} L(x,\lambda,\eta)$ 确定了原始问题的一个下界，即</p>
+<script type="math/tex; mode=display">
+\theta_D(\lambda,\eta) =\underset {x} {min} L(x,\lambda,\eta)\le L(x,\lambda,\eta)\le \underset {\lambda \ge 0,\eta} {max}\;L(x,\lambda,\eta)=\theta_P(x) \tag{2-a}</script><p>即</p>
+<script type="math/tex; mode=display">
+\theta_D(\lambda,\eta) \le \theta_P(x)</script><p>其中，$\theta_d(\lambda,\eta)$看作其他国家乒乓球运动员，$\theta_P(x)$看作中国乒乓球运动员，那么其他国家最厉害的也不一定比得上中国最差的。即</p>
+<script type="math/tex; mode=display">
+d^* =\underset {\lambda ,\eta} {max} \; \theta_D(\lambda,\eta)\le \underset x {min} \;\theta_P(x)=p^* \tag{2-b}</script><p>这个性质便是<strong>弱对偶性（ weak duality ）</strong>。弱对偶性对任何优化问题都成立，这似乎是显然的，因为这个下界并不严格，有时候甚至取到非常小，对近似原问题的解没多大帮助。既有弱对偶性，那么便有强对偶性，<strong>强对偶性</strong>是指</p>
+<script type="math/tex; mode=display">
+d^* = p^*</script><p>显然这是一个令人惊喜的性质，这意味着可以通过求解较简单的对偶问题（因为对偶问题总是一个凸优化问题）来得到原问题的解。不过强对偶性在优化问题中是一个非常高深的问题，对我来说更是如此。因此我只能介绍关于强对偶的两个条件：严格条件和KKT条件。</p>
 <h2 id="3-KKT条件"><a href="#3-KKT条件" class="headerlink" title="3. KKT条件"></a>3. KKT条件</h2><p>&emsp;&emsp;<strong>严格条件</strong>是指原始问题是凸函数，约束条件是仿射函数，若此时不等式约束满足严格条件，即不等号是严格不等号，不能取等号，则强对偶性成立。这个条件在SVM中即变成了对任意一个点，都存在超平面能对其正确划分，也就是数据集是线性可分的。严格条件是强对偶性的充分条件，但并不是必要条件。有些不满足严格条件的可能也有强对偶性。</p>
-<p>&emsp;&emsp;<strong>KKT条件</strong>是在满足严格条件的情况下，推导出的变量取值的关系，假设原始问题和对偶问题的极值点分别是$x^<em>$和$\lambda^</em>,\eta^<em>$ ，对应的极值分别是$p^</em>$和$d^<em>$ 。由于满足强对偶性，有$p^</em>=d^<em>$  。将极值点带入得到<br>$$<br>d^</em> = \theta_D(\lambda^<em>,\eta^</em>) =\underset x {min} L(x,\lambda^<em>,\eta^</em>) \tag{3-a}<br>$$<br>这说明$x^<em>$是$L(x,\lambda^</em>,\eta^<em>)$的一个极值点，那么$L(x,\lambda^</em>,\eta^<em>)$在$x^</em>$处的梯度为0，即<br>$$<br>\triangledown f(x^<em>)+\sum_i^m\lambda_i g_i(x^</em>) + \sum_i^n \eta_i h_i(x^<em>) = 0 \tag{3-b}<br>$$<br>由式$(2-a)$ ，<br>$$<br>\begin{aligned}<br>d^</em> =&amp; \underset x {min} L(x,\lambda^<em>,\eta^</em>) \<br>    \le &amp;L(x^<em>,\lambda^</em>,\eta^<em>)\<br>    =&amp; f(x^</em>) + \sum_i^m \lambda_i g_i(x^<em>) + \sum_i^n \eta_i h_i(x^</em>)\<br>    \le &amp; p^* = f(x^<em>)<br>\end{aligned} \tag{3-c}<br>$$<br>由于$p^</em>=d^<em>$，因此上式不等号应取到等号，再与式$(3-b)$ 得<br>$$<br>\sum_i^m \lambda_i g_i(x^</em>) + \sum_i^n \eta_i h_i(x^<em>) = 0  \tag{3-d}<br>$$<br>由于注意$x^</em>$作为该问题的解，是一定满足$h(x^*) = 0$的，因此<br>$$<br>\lambda_i g_i(x) = 0,;;;i=1,2,\cdots,m<br>$$<br>这个条件叫做互补松弛性（complementary slackness）。</p>
-<p>&emsp;&emsp;其中，$\lambda \ge 0$称为对偶可行性。并且它似乎可以从原始问题到对偶问题的极小极大问题中总结出。不过这里可以有另一种解释，简化一下，考虑只有不等式约束的问题<br>$$<br>\begin{aligned}<br>min ;; &amp;f(x) \<br>s.t.;; &amp; g(x) \le 0 \<br>\end{aligned}<br>$$<br>其中$g(x) \le 0$称为原始可行性，由它确定的区间称为可行域。假设$x^*$为该问题的解，那么其位置有两种情况</p>
+<p>&emsp;&emsp;<strong>KKT条件</strong>是在满足严格条件的情况下，推导出的变量取值的关系，假设原始问题和对偶问题的极值点分别是$x^<em>$和$\lambda^</em>,\eta^<em>$ ，对应的极值分别是$p^</em>$和$d^<em>$ 。由于满足强对偶性，有$p^</em>=d^*$  。将极值点带入得到</p>
+<script type="math/tex; mode=display">
+d^* = \theta_D(\lambda^*,\eta^*) =\underset x {min} L(x,\lambda^*,\eta^*) \tag{3-a}</script><p>这说明$x^<em>$是$L(x,\lambda^</em>,\eta^<em>)$的一个极值点，那么$L(x,\lambda^</em>,\eta^<em>)$在$x^</em>$处的梯度为0，即</p>
+<script type="math/tex; mode=display">
+\triangledown f(x^*)+\sum_i^m\lambda_i g_i(x^*) + \sum_i^n \eta_i h_i(x^*) = 0 \tag{3-b}</script><p>由式$(2-a)$ ，</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+d^* =& \underset x {min} L(x,\lambda^*,\eta^*) \\ 
+    \le &L(x^*,\lambda^*,\eta^*)\\
+    =& f(x^*) + \sum_i^m \lambda_i g_i(x^*) + \sum_i^n \eta_i h_i(x^*)\\
+    \le & p^* = f(x^*) 
+\end{aligned} \tag{3-c}</script><p>由于$p^<em>=d^</em>$，因此上式不等号应取到等号，再与式$(3-b)$ 得</p>
+<script type="math/tex; mode=display">
+\sum_i^m \lambda_i g_i(x^*) + \sum_i^n \eta_i h_i(x^*) = 0  \tag{3-d}</script><p>由于注意$x^<em>$作为该问题的解，是一定满足$h(x^</em>) = 0$的，因此</p>
+<script type="math/tex; mode=display">
+\lambda_i g_i(x) = 0,\;\;\;i=1,2,\cdots,m</script><p>这个条件叫做互补松弛性（complementary slackness）。</p>
+<p>&emsp;&emsp;其中，$\lambda \ge 0$称为对偶可行性。并且它似乎可以从原始问题到对偶问题的极小极大问题中总结出。不过这里可以有另一种解释，简化一下，考虑只有不等式约束的问题</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+min \;\; &f(x) \\
+s.t.\;\; & g(x) \le 0 \\
+\end{aligned}</script><p>其中$g(x) \le 0$称为原始可行性，由它确定的区间称为可行域。假设$x^*$为该问题的解，那么其位置有两种情况</p>
 <ul>
 <li><p>(1) $g(x^*)&lt;0$时，解在可行域中取得。这时解称为内部解，约束条件无效，原问题变为无约束问题。</p>
 </li>
@@ -316,12 +361,22 @@
 </li>
 </ul>
 <p>内部解直接由梯度为0即可解得，这里主要讨论边界解。</p>
-<p>&emsp;&emsp;对于$g(x)=0$的约束问题，建立拉格朗日函数<br>$$<br>L(x,\lambda) = f(x) + \lambda g(x)<br>$$<br>因为驻点$x^<em>$在其上取得，那么该函数在$x^</em>$处的梯度为0，即<br>$$<br>\triangledown f(x^<em>) + \lambda \triangledown g(x^</em>) = 0<br>$$<br>这里两个梯度的方向应该是可以确定的，$f(x)$的极小值在边界取到，那么可行域内部的$f(x)$应该都是大于这个极小值的，因此$\triangledown f$的方向是可行域内部。而$\triangledown g$的方向是可行域外部，因为约束条件是$g(x)\le 0$，也就是可行域外部都是$g(x)&gt;0$，所以梯度方向指向函数增加的方向。这说明两个函数的梯度方向相反，那上面这个等式要成立，$\lambda$只能是大于等于0。这就是对偶可行性。</p>
-<p>&emsp;&emsp;再将其他的条件组合起来，便得到了KKT条件：<br>$$<br>\begin{aligned}<br>\triangledown _x L(x^<em>,\lambda^</em>,\eta^<em>) =0 \<br>g_i(x^</em>) \le 0\<br>\lambda_i \ge 0\<br>\lambda_i g_i(x^*) =0<br>\end{aligned}<br>$$</p>
-<h2 id="Reference："><a href="#Reference：" class="headerlink" title="Reference："></a>Reference：</h2><p>[1] <a href="https://web.stanford.edu/~boyd/cvxbook/" target="_blank" rel="noopener">Convex Optimization</a></p>
+<p>&emsp;&emsp;对于$g(x)=0$的约束问题，建立拉格朗日函数</p>
+<script type="math/tex; mode=display">
+L(x,\lambda) = f(x) + \lambda g(x)</script><p>因为驻点$x^<em>$在其上取得，那么该函数在$x^</em>$处的梯度为0，即</p>
+<script type="math/tex; mode=display">
+\triangledown f(x^*) + \lambda \triangledown g(x^*) = 0</script><p>这里两个梯度的方向应该是可以确定的，$f(x)$的极小值在边界取到，那么可行域内部的$f(x)$应该都是大于这个极小值的，因此$\triangledown f$的方向是可行域内部。而$\triangledown g$的方向是可行域外部，因为约束条件是$g(x)\le 0$，也就是可行域外部都是$g(x)&gt;0$，所以梯度方向指向函数增加的方向。这说明两个函数的梯度方向相反，那上面这个等式要成立，$\lambda$只能是大于等于0。这就是对偶可行性。</p>
+<p>&emsp;&emsp;再将其他的条件组合起来，便得到了KKT条件：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\triangledown _x L(x^*,\lambda^*,\eta^*) =0 \\
+g_i(x^*) \le 0\\
+\lambda_i \ge 0\\
+\lambda_i g_i(x^*) =0
+\end{aligned}</script><h2 id="Reference："><a href="#Reference：" class="headerlink" title="Reference："></a>Reference：</h2><p>[1] <a href="https://web.stanford.edu/~boyd/cvxbook/" target="_blank" rel="noopener">Convex Optimization</a></p>
 <p>[2] Pattern Recognition and Machine Learning.</p>
 <p>[3] 统计学习方法</p>
-<p>[4] <a href="http://blog.pluskid.org/?p=702&cpage=1#comment-7347" target="_blank" rel="noopener">支持向量机：Duality</a></p>
+<p>[4] <a href="http://blog.pluskid.org/?p=702&amp;cpage=1#comment-7347" target="_blank" rel="noopener">支持向量机：Duality</a></p>
 <p>[5] <a href="https://zhuanlan.zhihu.com/p/38163970" target="_blank" rel="noopener">KKT条件</a></p>
 
           
@@ -461,86 +516,399 @@ y = sign(\boldsymbol{w^* \cdot x} + b^*)
 $$
 定义的分类模型。其中sign是符号函数。当$\boldsymbol{w^*\cdot x} +b^* > 0$时取 1 ，反之取0 。并且$|w^*x+b^*|$越大代表确信度越高。
 
-<h3 id="1-1-函数间隔和几何间隔"><a href="#1-1-函数间隔和几何间隔" class="headerlink" title="1.1 函数间隔和几何间隔"></a>1.1 函数间隔和几何间隔</h3><p>&emsp;&emsp;数据集中，一个点离超平面越远，那么确信其判断正确性的可能就越大，它可以由$\boldsymbol{w\cdot x}+b$来表示。若要建立一个即可判断确信度又能判断其分类正确性的函数，则需要引进一个符号变量，巧合的是$y\in{-1,1}$，并且若分类正确$\boldsymbol{w\cdot x} +b$与$y$的符号是一致的。那么可由$y(\boldsymbol{w\cdot x} + b)$来表示分类的正确性和确信度，这就是函数间隔的意义。</p>
-<p>&emsp;&emsp;对于给定样本集和超平面，超平面关于样本点$(\boldsymbol{x_i},y_i)$的函数间隔为<br>$$<br>\widehat \gamma_i = y_i(\boldsymbol{w\cdot x_i} + b)<br>$$<br>超平面关于数据集的函数间隔为<br>$$<br>\widehat \gamma = \underset {i} {min} ;\widehat \gamma _i<br>$$<br>事实上，超平面关于整个数据集的函数间隔就是超平面关于支持向量的函数间隔。显然，我们需要优化的便是这个关于支持向量的间隔，使它最大也就使得超平面对数据集中所有点都有较远距离。</p>
-<p>&emsp;&emsp;但是直接对函数间隔最大化有个问题，函数间隔是关于参数$\boldsymbol{w},b$的函数，若$\boldsymbol{w},b$成比例的增加，这时超平面是<strong>不会变</strong>的，但是函数间隔会按相同比例增加。所以直接最大化函数间隔得到的结果肯定是无穷大了，因此需要对其进行规范化。这里对法向量$w$进行标准化，标准化后的结果就是几何间隔<br>$$<br>\gamma_i = y_i\frac { \boldsymbol{w \cdot x_i} +b } {||\boldsymbol{w}||}<br>$$<br>其中，$||\boldsymbol{w}||$是第二范式。</p>
-<p>&emsp;&emsp;在二维情形下，$\boldsymbol{w}\cdot \boldsymbol{x} + b/ ||w||$就是点到直线的距离公式没加绝对值符号，标准化后的几何间隔就不会因$\boldsymbol{w},b$按比例放缩而产生变化。同样，超平面关于数据集的几何间隔为<br>$$<br>\gamma = \underset i {min} ; \gamma _i<br>$$<br>函数间隔与几何间隔只是相差一个标准化因子<br>$$<br>\gamma_i = \frac {\widehat \gamma_i} {||\boldsymbol{w}||}\<br>\gamma = \frac {\widehat \gamma} {||\boldsymbol{w}||}<br>$$</p>
-<h3 id="1-2-间隔最大化"><a href="#1-2-间隔最大化" class="headerlink" title="1.2 间隔最大化"></a>1.2 间隔最大化</h3><p>&emsp;&emsp;定义了几何间隔后，就能通过最大化支持向量到超平面的几何间隔得到一个最优的分类超平面。在感知机中，学习的方法是最小化误差距离。这种方法只要超平面能够正确分类已知的数据，学习过程便结束。而对SVM中最大化几何间隔来说，当还未能正确分类所有样本点时，数据集中几何间隔最小的样本点是负的，此时的最大化过程是找到一个能够正确分割数据集的超平面。当几何间隔学习到大于0的时侯，超平面已能将数据集正确分割，但学习过程不会停止，SVM希望让最靠近超平面的样本点的分类结果仍有较大的确信度，这就是最大化几何间隔的目的。</p>
-<p>&emsp;&emsp;现在导出其数学表达，目的是求解关于参数$\boldsymbol{w},b$的超平面，使超平面到数据集中几何间隔最小的的点关于它的几何间隔最大<br>$$<br>arg \underset {w,b} {max};\underset {i} {min} ;\gamma_i \tag{1.2-a}<br>$$<br>若对该式直接计算，难度非常大，因为$\gamma$ 的分子和分母都包含了变量$\boldsymbol{w},b$，因此先将其等价替换为函数间隔，问题变为<br>$$<br>arg  \underset {w,b} {max};\underset {i} {min} ;\frac {\widehat \gamma_i}{||\boldsymbol{w}||} \tag{1.2-b}<br>$$<br>因为$||\boldsymbol{w}||$与 $i$无关，可以直接将其提出来<br>$$<br>arg  \underset {w,b} {max};\left {  \frac {1}{||\boldsymbol{w}||}  \underset {i} {min} ; \widehat \gamma_i  \right } \tag{1.2-c} \<br>$$<br>为了简化计算，需要利用函数间隔的性质：函数间隔的大小随$\boldsymbol{w},b$的放缩而放缩，对于同一组$\boldsymbol{w},b$ 所有样本的函数间隔的相对间隔也是按相同比例放缩。所以我们可以用函数间隔最小的点作为基准点，将其函数间隔令为1。那么其他点的函数间隔只是按$1/\gamma$的比例进行放缩，并不影响其相对超平面的位置，也不会影响超平面的位置。直接将其令为1后就不能这样写作一个式子了，需要将其他点函数间隔大于1的约束单独写出来，则问题变为解一个规划问题<br>$$<br>\begin{aligned}<br>\underset {w,b} {max} ;; &amp;\frac {1} {||\boldsymbol{w}||}\<br>\underset i {min} ;;&amp;\widehat \gamma_i \geqslant 1,;;; i=1,2,\cdots, n<br>\end{aligned}<br>$$<br>同样为了计算方便，将最大化$||\boldsymbol{w}||^{-1}$改为等价的最小化$||\boldsymbol{w}||^2$，于是问题变为二次规划问题<br>$$<br>\begin{aligned}<br>\underset {w,b} {min} ;; &amp; \frac 1 2 {||\boldsymbol{w}||^2} \<br>\underset i {min} ;;&amp;\widehat \gamma_i \geqslant 1,;;; i=1,2,\cdots, n<br>\end{aligned}<br>$$<br>&emsp;&emsp;其中$1/ 2$是为了简化计算结果。这就是SVM要解决的基本问题，下面讨论SVM如何解决这一问题，并且对于更复杂的情形如何处理。</p>
-<h2 id="2-线性可分SVM"><a href="#2-线性可分SVM" class="headerlink" title="2. 线性可分SVM"></a>2. 线性可分SVM</h2><p>&emsp;&emsp;定义中导出的问题实际就是根据线性可分的情况推导的，因此我们只需要求解基本情况的二次规划问题就能得到一个线性可分的SVM模型。求解这类带约束优化问题的基本思路就是先通过拉格朗日函数转化为无约束优化问题。<br>$$<br>L(w,b,\lambda) = \frac 1 2 ||\boldsymbol{w}||^2 +\sum_i^n \lambda_i -  \sum_i^n \lambda_i [y_i(\boldsymbol{\boldsymbol{w}\cdot x_i} + b) ]<br>$$<br>注意$\boldsymbol{w},; \boldsymbol{x_i}$是维度相同的<strong>向量</strong>，对于这个广义拉格朗日的最小化问题可以求偏导令为0，再利用KKT条件约束来解，但这样计算量太大。因为这个函数是凸函数，所以可以求解其对偶问题来得到原问题等价的解。关于对偶性在另一篇笔记<a href="https://www.cnblogs.com/breezezz/p/11303722.html" target="_blank" rel="noopener">拉格朗日对偶性（lagrange duality）</a>。</p>
-<h3 id="2-1-对偶问题"><a href="#2-1-对偶问题" class="headerlink" title="2.1 对偶问题"></a>2.1 对偶问题</h3><p>&emsp;&emsp;首先写出原问题的极小极大形式<br>$$<br>\underset {\boldsymbol{w},b}{min}; L(\boldsymbol{w},b,\lambda) = \underset {w,b} {min}; \underset {\lambda} {max} ;L(\boldsymbol{w},b,\lambda)<br>$$<br>其对偶问题便是极大极小问题<br>$$<br>\underset {\lambda} {max} ;\underset {w,b} {min}; L(\boldsymbol{w},b,\lambda)<br>$$<br>在原问题中，先求关于$\lambda$的极大，便会对$\lambda$求偏导得到一串等式，但这个结果实际上就是原来的约束条件。仍未简化问题，但若先对$\boldsymbol{w},b$先计算极小，则会得到一个较易计算的式子。这是使用对偶性的原因。具体关于对偶性在<a href="https://www.cnblogs.com/breezezz/p/11303722.html" target="_blank" rel="noopener">拉格朗日对偶性（lagrange duality）</a>中，这里直接使用，不再介绍。</p>
-<p>&emsp;&emsp;那么可以先求解内部的极小问题，对$\boldsymbol{w},b$求偏导并令为0得<br>$$<br>\begin{aligned}<br>\triangledown _wL(\boldsymbol{w},b,\lambda) =\boldsymbol{w} - \sum_i^n \lambda_i y_i\boldsymbol{x_i}=0\<br>\triangledown _bL(\boldsymbol{w},b,\lambda) =-\sum_i^n  \lambda_i y_i = 0<br>\end{aligned}<br>$$<br>注意对$\boldsymbol{w}$的求导是对向量的求导，可查阅矩阵微分方面的内容。由上式得到<br>$$<br>\begin{aligned}<br>\boldsymbol{w} = \sum_i^n \lambda_i y_i\boldsymbol{x_i}\<br>\sum_i^n  \lambda_i y_i = 0<br>\end{aligned}<br>$$<br>带入原拉格朗日函数<br>$$<br>\begin{aligned}<br>L(w,b,\lambda) =&amp; \frac 1 2 \boldsymbol{w^Tw} +\sum_i^n \lambda_i - \sum_i^n \lambda_iy_i(\boldsymbol{\boldsymbol{w^T}\cdot x_i} + b)\</p>
-<pre><code>=&amp; \frac 1 2 \left( \sum_i^n\lambda_i y_i \boldsymbol{x_i} \right)^T \boldsymbol{\cdot} \left ( \sum_j^n \lambda_j y_j \boldsymbol{x_j} \right)+\sum_i^n \lambda_i - \sum_i^n \lambda_iy_i  \left (\left( \sum_j^n \lambda_j y_j \boldsymbol{x_j} \right)\cdot \boldsymbol{x_i}+b \right)\\
+### 1.1 函数间隔和几何间隔
 
-=&amp; \frac 1 2\ \sum_i^n\lambda_i y_i \boldsymbol{x_i} ^T \boldsymbol{\cdot} \sum_j^n \lambda_j y_j \boldsymbol{x_j} +\sum_i^n \lambda_i - \sum_i^n \lambda_iy_i  \left (\left( \sum_j^n \lambda_j y_j \boldsymbol{x_j} \right)\cdot \boldsymbol{x_i}+b \right)\\
+&emsp;&emsp;数据集中，一个点离超平面越远，那么确信其判断正确性的可能就越大，它可以由$\boldsymbol{w\cdot x}+b$来表示。若要建立一个即可判断确信度又能判断其分类正确性的函数，则需要引进一个符号变量，巧合的是$y\in\{-1,1\}$，并且若分类正确$\boldsymbol{w\cdot x} +b$与$y$的符号是一致的。那么可由$y(\boldsymbol{w\cdot x} + b)$来表示分类的正确性和确信度，这就是函数间隔的意义。
 
-=&amp; \frac 1 2 \sum_i^n\sum_j^n \lambda_i\lambda_jy_iy_j (\boldsymbol{x_i^T\cdot x_j})+\sum_i^n \lambda_i - \sum_i^n\sum_j^n \lambda_i\lambda_jy_iy_j (\boldsymbol{x_i^T\cdot x_j})-\sum_i^n\lambda_i y_ib\\
-=&amp;- \frac 1 2\sum_i^n\sum_j^n \lambda_i\lambda_jy_iy_j (\boldsymbol{x_i^T\cdot x_j}) + \sum_i^n \lambda_i</code></pre><p>\end{aligned}<br>$$</p>
-<p>这个函数是对$\boldsymbol{w},b$求极小后的函数，那么现在它只与$\lambda$有关。这样我们就得到了对偶问题，对$\lambda$求极大<br>$$<br>\begin{aligned}<br> \underset \lambda {max} ;; &amp;- \frac 1 2 \sum_i^n\sum_j^n \lambda_i\lambda_jy_iy_j (\boldsymbol{x_i^T\cdot x_j}) + \sum_i^n \lambda_i\</p>
-<p>s.t.;;&amp; \sum_i^n \lambda_i y_i = 0 \<br>&amp; \lambda_i \ge 0, ;; i=1,\cdots,n<br>\end{aligned}<br>$$<br>根据凸优化习惯，将极大化转化为极小化<br>$$<br>\begin{aligned}<br> \underset \lambda {min} ;; &amp; \frac 1 2 \sum_i^n\sum_j^n \lambda_i\lambda_jy_iy_j (\boldsymbol{x_i^T\cdot x_j}) - \sum_i^n \lambda_i\</p>
-<p>s.t.;;&amp; \sum_i^n \lambda_i y_i = 0 \<br>&amp; \lambda_i \ge 0, ;; i=1,\cdots,n<br>\end{aligned}<br>$$<br>其中，只有$\lambda$是未知变量，当未知变量个数较少时，可以较轻松的算出来，比如李航书中给出一个$\lambda$数量为3的例题，可以直接将下面约束中的等式将其中一个变量带换掉，然后对两个未知变量求偏导。依据不等式约束判断是否符合，不符合则在边界取得极值，两个变量尝试边界也较简单，分别带入比较大小即可。可是该对偶问题的未知变量$\lambda$的数量与样本数成正比，机器学习中成千上万的样本量使得计算变得非常复杂，很多变量不能轻易消去，且带边界的时候有很多组合。于是下面介绍简化这个问题的优化算法——SMO。</p>
-<h3 id="2-2-序列最小最优算法（SMO）"><a href="#2-2-序列最小最优算法（SMO）" class="headerlink" title="2.2 序列最小最优算法（SMO）"></a>2.2 序列最小最优算法（SMO）</h3><h4 id="2-2-1-坐标下降法"><a href="#2-2-1-坐标下降法" class="headerlink" title="2.2.1 坐标下降法"></a>2.2.1 坐标下降法</h4><p>&emsp;&emsp;SMO算法的思想与坐标下降法十分类似，因此先介绍下坐标下降法。它是一种非梯度优化算法，梯度优化算法是每次选择梯度最大的方向进行优化，当然这使得每次优化的程度较大。不过计算量较多，尤其是变量较多的情况。而坐标下降法每次只对一个坐标方向进行优化，如此循环，对每个坐标轴依次优化。这样的做法可能会使得优化过程显得较为”曲折“，不过中间每步对单个坐标轴的计算比整个梯度的计算小得多。可以由下图表示</p>
-<p><img src="Ljo3cruROhkdwTl.png" alt="坐标下降法.png"></p>
-<p>&emsp;&emsp;坐标下降法不一定是对坐标方向进行优化，也可以自己选择一组基，对这组基的方向进行优化。不过它的优化方向仍是在一开始就决定了。SMO也是这种思想，在SVM的对偶问题中，其对偶变量为$\boldsymbol\lambda$，而$\boldsymbol\lambda$的数量与样本的数量成正比。对如此多的变量同时优化无疑是比较困难的，因此借鉴坐标下降法，对其中一部分变量进行优化，不断循环的对所有变量依次优化，这样迭代可以得到一个期望的优化结果。</p>
-<p>&emsp;&emsp;对于SVM的对偶问题<br>$$<br>\begin{aligned}<br> \underset \lambda {min} ;; &amp; \frac 1 2 \sum_i^n\sum_j^n \lambda_i\lambda_jy_iy_j (\boldsymbol{x_i^T\cdot x_j}) - \sum_i^n \lambda_i\</p>
-<p>s.t.;;&amp; \sum_i^n \lambda_i y_i = 0 \<br>&amp; \lambda_i \ge 0, ;; i=1,\cdots,n<br>\end{aligned}<br>$$<br>由于$\boldsymbol\lambda$数量等于样本$(\boldsymbol{x_i},y_i)$数量，使得这个二次规划问题计算量较大，因此选择其中两个作为变量，其他看做常数，对这两个变量解二次规划问题，并且这时两个变量满足约束$\sum_i^n \lambda_i y_i = 0 $ ，所以这个问题有解析解，求解速度非常快。</p>
-<ul>
-<li><p><strong>Q：</strong>为什么选两个变量？</p>
-<p>同样是因为约束条件$\sum_i^n \lambda_i y_i = 0 $ ，$\lambda_i$在更新后需要满足它们之间的等式，所以需要同时更新两个变量。</p>
-</li>
-</ul>
-<h4 id="2-2-2-SMO求解方法"><a href="#2-2-2-SMO求解方法" class="headerlink" title="2.2.2 SMO求解方法"></a>2.2.2 SMO求解方法</h4><p>&emsp;&emsp;不失一般性，假设选择的两个变量为$\lambda_1,\lambda_2$ ，其他变量看作常数，则原二次规划问题变为<br>$$<br>\begin{aligned}<br> \underset {\lambda_1,\lambda_2} {min} ;;;;;;;; &amp; W(\lambda_1,\lambda_2)=\frac 1 2 \lambda_1^2(x_1^Tx_1)+\frac 1 2 \lambda_2^2(x_2^Tx_2) + \lambda_1\lambda_2y_1y_2(x_1^Tx_2) + \</p>
-<p> &amp;;;;;;;;;;;;;;;;   \lambda_1y_1\sum_{i=3}^n\lambda_iy_i(x_1^Tx_i) + \lambda_2y_2\sum_{i=3}^n\lambda_iy_i(x_2^Tx_i) -(\lambda_1+\lambda_2)+ Constant       \</p>
-<p>s.t.;;;;;;;;;&amp; \lambda_1y_1+\lambda_2y_2=-\sum_{i=3}^n\lambda_iy_i= \zeta \<br>&amp; \lambda_i \ge 0, ;; i=1,2<br>\end{aligned}<br>$$<br>对这两个变量的优化中，其中的等式约束给出了它们之间的关系。那么可用其中一个表示另一个变为一个变量的优化，这里用$\lambda_1$表示$\lambda_2$，且目标函数中的常数项不需要再考虑<br>$$<br>\lambda_1 =y_1\zeta - \lambda_2 y_1y_2  \tag{2.2.2-1}<br>$$<br> &emsp;&emsp;通过等式约束得到两个变量之间的关系后，将其带入原优化表达式，便能够对单变量进行优化，这当然是我们希望看到的情况，不过除了等式约束还有不等式约束。好在只有两个变量，我们可以先计算出单变量迭代的结果，再考察是否满足不等式约束，对结果进行修剪。</p>
-<h5 id="2-2-2-1-求解等式约束"><a href="#2-2-2-1-求解等式约束" class="headerlink" title="2.2.2.1 求解等式约束"></a>2.2.2.1 求解等式约束</h5><p> &emsp; &emsp;简化表达，记<br>$$<br>v_i = \sum_{j=3}^n \lambda_jy_j(x_i^Tx_j)<br>$$<br>则目标函数可写作<br>$$<br>\begin{aligned}<br>W(\lambda_1,\lambda_2)=&amp; \frac 1 2 \lambda_1^2(x_1^Tx_1)+\frac 1 2 \lambda_2^2(x_2^Tx_2) + \lambda_1\lambda_2y_1y_2(x_1^Tx_2) + \</p>
-<p> &amp;;;;;;  \lambda_1y_1v_1 + \lambda_2y_2v_2 -(\lambda_1+\lambda_2)   \</p>
-<p>\end{aligned} \tag{2.2.2.1-1}<br>$$<br>将$(2.2.1-1)$代入得到<br>$$<br>\begin{aligned}<br>W(\lambda_2)=&amp; \frac 1 2 (\zeta - \lambda_2 y_2)^2(x_1^Tx_1)+\frac 1 2 \lambda_2^2(x_2^Tx_2) + (\zeta - \lambda_2 y_2)\lambda_2y_2(x_1^Tx_2) + \</p>
-<p> &amp;;;;;;  (\zeta - \lambda_2 y_2)v_1 + \lambda_2y_2v_2 -y_1(\zeta - \lambda_2 y_2)-\lambda_2   \</p>
-<p>\end{aligned} \tag{2.2.2.1-1}<br>$$<br>对$\lambda_2$求偏导，<br>$$<br>\frac {\partial W} {\part \lambda_2} = \lambda_2 (x_1^Tx_1) - \zeta y_2(x_1^Tx_1) + \lambda_2(x_2^Tx_2)<br>-2\lambda_2 (x_1^Tx_2) + \zeta y_2 (x_1^Tx_2) \<br>  -y_2 v_1 + y_2 v_2 + y_1y_2 - 1<br>$$<br>令为0<br>$$<br>\begin{aligned}<br>(x_1^Tx_1+x_2^Tx_2-2x_1^Tx_2)\lambda_2 =&amp; \zeta; y_2[;(x_1^Tx_1)-(x_1^Tx_2)] + y_2(v_1-v_2)+y_2(y_2-y_1)\<br> =&amp; y_2;[ \zeta (x_1^Tx_1-x_1^Tx_2) + (v_1-v_2)+(y_2-y_1) ]<br>\end{aligned}\tag{2.2.2.1-2}<br>$$</p>
-<p>将$\zeta = y_1\lambda_1^{old} +y_2\lambda_2^{old}$与$v_1,v_2$代入得到右边<br>$$<br>\begin{aligned}<br>&amp;y_2 \left [ (y_1\lambda_1^{old}+y_2\lambda_2^{old})(x_1^Tx_1-x_1^Tx_2)  +\left ( \sum_{j=3}^n\lambda_j^{old}y_j(x_1^Tx_j) \right)- \left (  \sum_{j=3}^n\lambda_j^{old}y_j(x_2^Tx_j)  \right)  +y_2 - y_1  \right]\<br>=&amp; y_2 \left [ y_2\lambda_2^{old}(x_1^Tx_1+x_2^Tx_2-2x_1^Tx_2)+ \left ( \sum_{j=1}^n\lambda_j^{old}y_j(x_1^Tx_j) \right)- \left (  \sum_{j=1}^n\lambda_j^{old}y_j(x_2^Tx_j)  \right) +y_2-y_1 \right]\<br>\end{aligned}<br>$$<br>上式将后面求和缺少的前两项补上了，这样前面凑出来的部分正好和$2.2.2.1-2$的左端系数相同，再看后面部分的求和$\sum_{j=1}^n\lambda_j^{old}y_j(x_1^Tx_j)$ ，若加上偏置$b$，则表示的正是输入数据$x_1$到超平面的函数间隔，后面还有个$y_1$，表示$x_1$的正确类别，这似乎是故意凑好的，它们之差就是对$x_i$的预测值和它的真实值的差。且SVM中的函数间隔是以支持向量的1作为标准，与$y$的取值${-1,1}$可以说是一个标准下的比较。对上式稍作调整<br>$$<br>\begin{aligned}<br>&amp; y_2 \left [ y_2\lambda_2^{old}(x_1^Tx_1+x_2^Tx_2-2x_1^Tx_2)+ \left ( \sum_{j=1}^n\lambda_j^{old}y_j(x_1^Tx_j) \right)- \left (  \sum_{j=1}^n\lambda_j^{old}y_j(x_2^Tx_j)  \right) +y_2-y_1 \right]\<br>=&amp;\lambda_2^{old}(x_1^Tx_1+x_2^Tx_2-2x_1^Tx_2) + y_2\left [\left ( \sum_{j=1}^n\lambda_j^{old}y_j(x_1^Tx_j) -b\right)-y_1 \right] - y_2\left [  \left (  \sum_{j=1}^n\lambda_j^{old}y_j(x_2^Tx_j) -b \right) -y_2 \right]<br>\end{aligned}<br>$$<br>为表述方便，令对$x$的预测值为函数$g(x)$，其实这就是SVM的分类函数<br>$$<br>g(x) =  \sum_{i=1}^n\lambda_iy_i(x^Tx_i) -b<br>$$<br>令预测值与真实值之差为$E$<br>$$<br>E_i = g(x_i) -y_i<br>$$<br>将右端结果带回式$(2.2.2.1-2)$<br>$$<br>\begin{aligned}<br>(x_1^Tx_1+x_2^Tx_2-2x_1^Tx_2)\lambda_2 =&amp; \lambda_2^{old}(x_1^Tx_1+x_2^Tx_2-2x_1^Tx_2) + y_2(E_1-E_2)<br>\end{aligned}<br>$$<br>令$\eta=(x_1^Tx_1+x_2^Tx_2-2x_1^Tx_2)$,带入得到未修剪的$\lambda_2^{new,unc}$<br>$$<br>\lambda_2^{new,unc} = \lambda_2^{old} + \frac {y_2(E_1-E_2)}{\eta}<br>$$</p>
-<h5 id="2-2-2-2-不等式约束修剪"><a href="#2-2-2-2-不等式约束修剪" class="headerlink" title="2.2.2.2 不等式约束修剪"></a>2.2.2.2 不等式约束修剪</h5><p>&emsp;&emsp; 上面求解了优化问题在等式约束下的解，对于这两个变量来说，等式约束实际上把他们约束在一条平面直线上，而$\lambda \ge 0$便将它们约束到<strong>第一象限</strong>。其且它们的系数不是-1就是1，这意味着它们组成的直线只有两个方向，$45^o或135^o$ 。这样就能通过作图来确定它们的上下界，且通过关系式的直线，只需确定$\lambda_2$的范围即可。这里只有下界限制，后面软间隔需要添加合页损失函数，那时会有上界，不过处理方法都相同，先看这里的情况，注意变量只有$\lambda_2$</p>
+&emsp;&emsp;对于给定样本集和超平面，超平面关于样本点$(\boldsymbol{x_i},y_i)$的函数间隔为
+$$
+\widehat \gamma_i = y_i(\boldsymbol{w\cdot x_i} + b)
+$$
+超平面关于数据集的函数间隔为
+$$
+\widehat \gamma = \underset {i} {min} \;\widehat \gamma _i
+$$
+事实上，超平面关于整个数据集的函数间隔就是超平面关于支持向量的函数间隔。显然，我们需要优化的便是这个关于支持向量的间隔，使它最大也就使得超平面对数据集中所有点都有较远距离。
+
+&emsp;&emsp;但是直接对函数间隔最大化有个问题，函数间隔是关于参数$\boldsymbol{w},b$的函数，若$\boldsymbol{w},b$成比例的增加，这时超平面是**不会变**的，但是函数间隔会按相同比例增加。所以直接最大化函数间隔得到的结果肯定是无穷大了，因此需要对其进行规范化。这里对法向量$w$进行标准化，标准化后的结果就是几何间隔
+$$
+\gamma_i = y_i\frac { \boldsymbol{w \cdot x_i} +b } {||\boldsymbol{w}||}
+$$
+其中，$||\boldsymbol{w}||$是第二范式。
+
+&emsp;&emsp;在二维情形下，$\boldsymbol{w}\cdot \boldsymbol{x} + b/ ||w||$就是点到直线的距离公式没加绝对值符号，标准化后的几何间隔就不会因$\boldsymbol{w},b$按比例放缩而产生变化。同样，超平面关于数据集的几何间隔为
+$$
+\gamma = \underset i {min} \; \gamma _i
+$$
+函数间隔与几何间隔只是相差一个标准化因子
+$$
+\gamma_i = \frac {\widehat \gamma_i} {||\boldsymbol{w}||}\\
+\gamma = \frac {\widehat \gamma} {||\boldsymbol{w}||}
+$$
+### 1.2 间隔最大化
+
+&emsp;&emsp;定义了几何间隔后，就能通过最大化支持向量到超平面的几何间隔得到一个最优的分类超平面。在感知机中，学习的方法是最小化误差距离。这种方法只要超平面能够正确分类已知的数据，学习过程便结束。而对SVM中最大化几何间隔来说，当还未能正确分类所有样本点时，数据集中几何间隔最小的样本点是负的，此时的最大化过程是找到一个能够正确分割数据集的超平面。当几何间隔学习到大于0的时侯，超平面已能将数据集正确分割，但学习过程不会停止，SVM希望让最靠近超平面的样本点的分类结果仍有较大的确信度，这就是最大化几何间隔的目的。
+
+&emsp;&emsp;现在导出其数学表达，目的是求解关于参数$\boldsymbol{w},b$的超平面，使超平面到数据集中几何间隔最小的的点关于它的几何间隔最大
+$$
+arg \underset {w,b} {max}\;\underset {i} {min} \;\gamma_i \tag{1.2-a}
+$$
+若对该式直接计算，难度非常大，因为$\gamma$ 的分子和分母都包含了变量$\boldsymbol{w},b$，因此先将其等价替换为函数间隔，问题变为
+$$
+arg  \underset {w,b} {max}\;\underset {i} {min} \;\frac {\widehat \gamma_i}{||\boldsymbol{w}||} \tag{1.2-b}
+$$
+因为$||\boldsymbol{w}||$与 $i$无关，可以直接将其提出来
+$$
+arg  \underset {w,b} {max}\;\left \{  \frac {1}{||\boldsymbol{w}||}  \underset {i} {min} \; \widehat \gamma_i  \right \} \tag{1.2-c} \\
+$$
+为了简化计算，需要利用函数间隔的性质：函数间隔的大小随$\boldsymbol{w},b$的放缩而放缩，对于同一组$\boldsymbol{w},b$ 所有样本的函数间隔的相对间隔也是按相同比例放缩。所以我们可以用函数间隔最小的点作为基准点，将其函数间隔令为1。那么其他点的函数间隔只是按$1/\gamma$的比例进行放缩，并不影响其相对超平面的位置，也不会影响超平面的位置。直接将其令为1后就不能这样写作一个式子了，需要将其他点函数间隔大于1的约束单独写出来，则问题变为解一个规划问题
+$$
+\begin{aligned}
+\underset {w,b} {max} \;\; &\frac {1} {||\boldsymbol{w}||}\\
+\underset i {min} \;\;&\widehat \gamma_i \geqslant 1,\;\;\; i=1,2,\cdots, n
+\end{aligned}
+$$
+同样为了计算方便，将最大化$||\boldsymbol{w}||^{-1}$改为等价的最小化$||\boldsymbol{w}||^2$，于是问题变为二次规划问题
+$$
+\begin{aligned}
+\underset {w,b} {min} \;\; & \frac 1 2 {||\boldsymbol{w}||^2} \\
+\underset i {min} \;\;&\widehat \gamma_i \geqslant 1,\;\;\; i=1,2,\cdots, n
+\end{aligned}
+$$
+&emsp;&emsp;其中$1/ 2$是为了简化计算结果。这就是SVM要解决的基本问题，下面讨论SVM如何解决这一问题，并且对于更复杂的情形如何处理。
+
+## 2. 线性可分SVM
+
+&emsp;&emsp;定义中导出的问题实际就是根据线性可分的情况推导的，因此我们只需要求解基本情况的二次规划问题就能得到一个线性可分的SVM模型。求解这类带约束优化问题的基本思路就是先通过拉格朗日函数转化为无约束优化问题。
+$$
+L(w,b,\lambda) = \frac 1 2 ||\boldsymbol{w}||^2 +\sum_i^n \lambda_i -  \sum_i^n \lambda_i [y_i(\boldsymbol{\boldsymbol{w}\cdot x_i} + b) ]
+$$
+注意$\boldsymbol{w},\; \boldsymbol{x_i}$是维度相同的**向量**，对于这个广义拉格朗日的最小化问题可以求偏导令为0，再利用KKT条件约束来解，但这样计算量太大。因为这个函数是凸函数，所以可以求解其对偶问题来得到原问题等价的解。关于对偶性在另一篇笔记[拉格朗日对偶性（lagrange duality）](https://www.cnblogs.com/breezezz/p/11303722.html)。
+
+### 2.1 对偶问题
+
+&emsp;&emsp;首先写出原问题的极小极大形式
+$$
+\underset {\boldsymbol{w},b}{min}\; L(\boldsymbol{w},b,\lambda) = \underset {w,b} {min}\; \underset {\lambda} {max} \;L(\boldsymbol{w},b,\lambda)
+$$
+其对偶问题便是极大极小问题
+$$
+\underset {\lambda} {max} \;\underset {w,b} {min}\; L(\boldsymbol{w},b,\lambda)
+$$
+在原问题中，先求关于$\lambda$的极大，便会对$\lambda$求偏导得到一串等式，但这个结果实际上就是原来的约束条件。仍未简化问题，但若先对$\boldsymbol{w},b$先计算极小，则会得到一个较易计算的式子。这是使用对偶性的原因。具体关于对偶性在[拉格朗日对偶性（lagrange duality）](https://www.cnblogs.com/breezezz/p/11303722.html)中，这里直接使用，不再介绍。
+
+&emsp;&emsp;那么可以先求解内部的极小问题，对$\boldsymbol{w},b$求偏导并令为0得
+$$
+\begin{aligned}
+\triangledown _wL(\boldsymbol{w},b,\lambda) =\boldsymbol{w} - \sum_i^n \lambda_i y_i\boldsymbol{x_i}=0\\
+\triangledown _bL(\boldsymbol{w},b,\lambda) =-\sum_i^n  \lambda_i y_i = 0
+\end{aligned}
+$$
+注意对$\boldsymbol{w}$的求导是对向量的求导，可查阅矩阵微分方面的内容。由上式得到
+$$
+\begin{aligned}
+\boldsymbol{w} = \sum_i^n \lambda_i y_i\boldsymbol{x_i}\\
+\sum_i^n  \lambda_i y_i = 0
+\end{aligned}
+$$
+带入原拉格朗日函数
+$$
+\begin{aligned}
+L(w,b,\lambda) =& \frac 1 2 \boldsymbol{w^Tw} +\sum_i^n \lambda_i - \sum_i^n \lambda_iy_i(\boldsymbol{\boldsymbol{w^T}\cdot x_i} + b)\\
+
+               =& \frac 1 2 \left( \sum_i^n\lambda_i y_i \boldsymbol{x_i} \right)^T \boldsymbol{\cdot} \left ( \sum_j^n \lambda_j y_j \boldsymbol{x_j} \right)+\sum_i^n \lambda_i - \sum_i^n \lambda_iy_i  \left (\left( \sum_j^n \lambda_j y_j \boldsymbol{x_j} \right)\cdot \boldsymbol{x_i}+b \right)\\
+
+               =& \frac 1 2\ \sum_i^n\lambda_i y_i \boldsymbol{x_i} ^T \boldsymbol{\cdot} \sum_j^n \lambda_j y_j \boldsymbol{x_j} +\sum_i^n \lambda_i - \sum_i^n \lambda_iy_i  \left (\left( \sum_j^n \lambda_j y_j \boldsymbol{x_j} \right)\cdot \boldsymbol{x_i}+b \right)\\
+
+               =& \frac 1 2 \sum_i^n\sum_j^n \lambda_i\lambda_jy_iy_j (\boldsymbol{x_i^T\cdot x_j})+\sum_i^n \lambda_i - \sum_i^n\sum_j^n \lambda_i\lambda_jy_iy_j (\boldsymbol{x_i^T\cdot x_j})-\sum_i^n\lambda_i y_ib\\
+               =&- \frac 1 2\sum_i^n\sum_j^n \lambda_i\lambda_jy_iy_j (\boldsymbol{x_i^T\cdot x_j}) + \sum_i^n \lambda_i
+\end{aligned}
+$$
+
+这个函数是对$\boldsymbol{w},b$求极小后的函数，那么现在它只与$\lambda$有关。这样我们就得到了对偶问题，对$\lambda$求极大
+$$
+\begin{aligned}
+ \underset \lambda {max} \;\; &- \frac 1 2 \sum_i^n\sum_j^n \lambda_i\lambda_jy_iy_j (\boldsymbol{x_i^T\cdot x_j}) + \sum_i^n \lambda_i\\
+
+s.t.\;\;& \sum_i^n \lambda_i y_i = 0 \\
+& \lambda_i \ge 0, \;\; i=1,\cdots,n
+\end{aligned}
+$$
+根据凸优化习惯，将极大化转化为极小化
+$$
+\begin{aligned}
+ \underset \lambda {min} \;\; & \frac 1 2 \sum_i^n\sum_j^n \lambda_i\lambda_jy_iy_j (\boldsymbol{x_i^T\cdot x_j}) - \sum_i^n \lambda_i\\
+
+s.t.\;\;& \sum_i^n \lambda_i y_i = 0 \\
+& \lambda_i \ge 0, \;\; i=1,\cdots,n
+\end{aligned}
+$$
+其中，只有$\lambda$是未知变量，当未知变量个数较少时，可以较轻松的算出来，比如李航书中给出一个$\lambda$数量为3的例题，可以直接将下面约束中的等式将其中一个变量带换掉，然后对两个未知变量求偏导。依据不等式约束判断是否符合，不符合则在边界取得极值，两个变量尝试边界也较简单，分别带入比较大小即可。可是该对偶问题的未知变量$\lambda$的数量与样本数成正比，机器学习中成千上万的样本量使得计算变得非常复杂，很多变量不能轻易消去，且带边界的时候有很多组合。于是下面介绍简化这个问题的优化算法——SMO。
+
+### 2.2 序列最小最优算法（SMO）
+
+#### 2.2.1 坐标下降法
+
+&emsp;&emsp;SMO算法的思想与坐标下降法十分类似，因此先介绍下坐标下降法。它是一种非梯度优化算法，梯度优化算法是每次选择梯度最大的方向进行优化，当然这使得每次优化的程度较大。不过计算量较多，尤其是变量较多的情况。而坐标下降法每次只对一个坐标方向进行优化，如此循环，对每个坐标轴依次优化。这样的做法可能会使得优化过程显得较为”曲折“，不过中间每步对单个坐标轴的计算比整个梯度的计算小得多。可以由下图表示
+
+![坐标下降法.png](Ljo3cruROhkdwTl.png)
+
+&emsp;&emsp;坐标下降法不一定是对坐标方向进行优化，也可以自己选择一组基，对这组基的方向进行优化。不过它的优化方向仍是在一开始就决定了。SMO也是这种思想，在SVM的对偶问题中，其对偶变量为$\boldsymbol\lambda$，而$\boldsymbol\lambda$的数量与样本的数量成正比。对如此多的变量同时优化无疑是比较困难的，因此借鉴坐标下降法，对其中一部分变量进行优化，不断循环的对所有变量依次优化，这样迭代可以得到一个期望的优化结果。
+
+&emsp;&emsp;对于SVM的对偶问题
+$$
+\begin{aligned}
+ \underset \lambda {min} \;\; & \frac 1 2 \sum_i^n\sum_j^n \lambda_i\lambda_jy_iy_j (\boldsymbol{x_i^T\cdot x_j}) - \sum_i^n \lambda_i\\
+
+s.t.\;\;& \sum_i^n \lambda_i y_i = 0 \\
+& \lambda_i \ge 0, \;\; i=1,\cdots,n
+\end{aligned}
+$$
+由于$\boldsymbol\lambda$数量等于样本$(\boldsymbol{x_i},y_i)$数量，使得这个二次规划问题计算量较大，因此选择其中两个作为变量，其他看做常数，对这两个变量解二次规划问题，并且这时两个变量满足约束$\sum_i^n \lambda_i y_i = 0 $ ，所以这个问题有解析解，求解速度非常快。
+
+- **Q：**为什么选两个变量？
+
+  同样是因为约束条件$\sum_i^n \lambda_i y_i = 0 $ ，$\lambda_i$在更新后需要满足它们之间的等式，所以需要同时更新两个变量。
+
+#### 2.2.2 SMO求解方法
+
+&emsp;&emsp;不失一般性，假设选择的两个变量为$\lambda_1,\lambda_2$ ，其他变量看作常数，则原二次规划问题变为
+$$
+\begin{aligned}
+ \underset {\lambda_1,\lambda_2} {min} \;\;\;\;\;\;\;\; & W(\lambda_1,\lambda_2)=\frac 1 2 \lambda_1^2(x_1^Tx_1)+\frac 1 2 \lambda_2^2(x_2^Tx_2) + \lambda_1\lambda_2y_1y_2(x_1^Tx_2) + \\
+
+ &\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;   \lambda_1y_1\sum_{i=3}^n\lambda_iy_i(x_1^Tx_i) + \lambda_2y_2\sum_{i=3}^n\lambda_iy_i(x_2^Tx_i) -(\lambda_1+\lambda_2)+ Constant       \\
+
+s.t.\;\;\;\;\;\;\;\;\;& \lambda_1y_1+\lambda_2y_2=-\sum_{i=3}^n\lambda_iy_i= \zeta \\
+& \lambda_i \ge 0, \;\; i=1,2
+\end{aligned}
+$$
+对这两个变量的优化中，其中的等式约束给出了它们之间的关系。那么可用其中一个表示另一个变为一个变量的优化，这里用$\lambda_1$表示$\lambda_2$，且目标函数中的常数项不需要再考虑
+$$
+\lambda_1 =y_1\zeta - \lambda_2 y_1y_2  \tag{2.2.2-1}
+$$
+ &emsp;&emsp;通过等式约束得到两个变量之间的关系后，将其带入原优化表达式，便能够对单变量进行优化，这当然是我们希望看到的情况，不过除了等式约束还有不等式约束。好在只有两个变量，我们可以先计算出单变量迭代的结果，再考察是否满足不等式约束，对结果进行修剪。
+
+##### 2.2.2.1 求解等式约束
+
+ &emsp; &emsp;简化表达，记
+$$
+v_i = \sum_{j=3}^n \lambda_jy_j(x_i^Tx_j)
+$$
+则目标函数可写作
+$$
+\begin{aligned}
+W(\lambda_1,\lambda_2)=& \frac 1 2 \lambda_1^2(x_1^Tx_1)+\frac 1 2 \lambda_2^2(x_2^Tx_2) + \lambda_1\lambda_2y_1y_2(x_1^Tx_2) + \\
+
+ &\;\;\;\;\;  \lambda_1y_1v_1 + \lambda_2y_2v_2 -(\lambda_1+\lambda_2)   \\
+
+\end{aligned} \tag{2.2.2.1-1}
+$$
+将$(2.2.1-1)$代入得到
+$$
+\begin{aligned}
+W(\lambda_2)=& \frac 1 2 (\zeta - \lambda_2 y_2)^2(x_1^Tx_1)+\frac 1 2 \lambda_2^2(x_2^Tx_2) + (\zeta - \lambda_2 y_2)\lambda_2y_2(x_1^Tx_2) + \\
+
+ &\;\;\;\;\;  (\zeta - \lambda_2 y_2)v_1 + \lambda_2y_2v_2 -y_1(\zeta - \lambda_2 y_2)-\lambda_2   \\
+
+\end{aligned} \tag{2.2.2.1-1}
+$$
+对$\lambda_2$求偏导，
+$$
+\frac {\partial W} {\part \lambda_2} = \lambda_2 (x_1^Tx_1) - \zeta y_2(x_1^Tx_1) + \lambda_2(x_2^Tx_2)
+-2\lambda_2 (x_1^Tx_2) + \zeta y_2 (x_1^Tx_2) \\
+  -y_2 v_1 + y_2 v_2 + y_1y_2 - 1
+$$
+令为0
+$$
+\begin{aligned}
+(x_1^Tx_1+x_2^Tx_2-2x_1^Tx_2)\lambda_2 =& \zeta\; y_2[\;(x_1^Tx_1)-(x_1^Tx_2)] + y_2(v_1-v_2)+y_2(y_2-y_1)\\
+ =& y_2\;[ \zeta (x_1^Tx_1-x_1^Tx_2) + (v_1-v_2)+(y_2-y_1) ]
+\end{aligned}\tag{2.2.2.1-2}
+$$
+
+
+将$\zeta = y_1\lambda_1^{old} +y_2\lambda_2^{old}$与$v_1,v_2$代入得到右边
+$$
+\begin{aligned}
+&y_2 \left [ (y_1\lambda_1^{old}+y_2\lambda_2^{old})(x_1^Tx_1-x_1^Tx_2)  +\left ( \sum_{j=3}^n\lambda_j^{old}y_j(x_1^Tx_j) \right)- \left (  \sum_{j=3}^n\lambda_j^{old}y_j(x_2^Tx_j)  \right)  +y_2 - y_1  \right]\\
+=& y_2 \left [ y_2\lambda_2^{old}(x_1^Tx_1+x_2^Tx_2-2x_1^Tx_2)+ \left ( \sum_{j=1}^n\lambda_j^{old}y_j(x_1^Tx_j) \right)- \left (  \sum_{j=1}^n\lambda_j^{old}y_j(x_2^Tx_j)  \right) +y_2-y_1 \right]\\
+\end{aligned}
+$$
+上式将后面求和缺少的前两项补上了，这样前面凑出来的部分正好和$2.2.2.1-2$的左端系数相同，再看后面部分的求和$\sum_{j=1}^n\lambda_j^{old}y_j(x_1^Tx_j)$ ，若加上偏置$b$，则表示的正是输入数据$x_1$到超平面的函数间隔，后面还有个$y_1$，表示$x_1$的正确类别，这似乎是故意凑好的，它们之差就是对$x_i$的预测值和它的真实值的差。且SVM中的函数间隔是以支持向量的1作为标准，与$y$的取值$\{-1,1\}$可以说是一个标准下的比较。对上式稍作调整
+$$
+\begin{aligned}
+& y_2 \left [ y_2\lambda_2^{old}(x_1^Tx_1+x_2^Tx_2-2x_1^Tx_2)+ \left ( \sum_{j=1}^n\lambda_j^{old}y_j(x_1^Tx_j) \right)- \left (  \sum_{j=1}^n\lambda_j^{old}y_j(x_2^Tx_j)  \right) +y_2-y_1 \right]\\
+=&\lambda_2^{old}(x_1^Tx_1+x_2^Tx_2-2x_1^Tx_2) + y_2\left [\left ( \sum_{j=1}^n\lambda_j^{old}y_j(x_1^Tx_j) -b\right)-y_1 \right] - y_2\left [  \left (  \sum_{j=1}^n\lambda_j^{old}y_j(x_2^Tx_j) -b \right) -y_2 \right]
+\end{aligned}
+$$
+为表述方便，令对$x$的预测值为函数$g(x)$，其实这就是SVM的分类函数
+$$
+g(x) =  \sum_{i=1}^n\lambda_iy_i(x^Tx_i) -b 
+$$
+令预测值与真实值之差为$E$
+$$
+E_i = g(x_i) -y_i
+$$
+将右端结果带回式$(2.2.2.1-2)$
+$$
+\begin{aligned}
+(x_1^Tx_1+x_2^Tx_2-2x_1^Tx_2)\lambda_2 =& \lambda_2^{old}(x_1^Tx_1+x_2^Tx_2-2x_1^Tx_2) + y_2(E_1-E_2)
+\end{aligned}
+$$
+令$\eta=(x_1^Tx_1+x_2^Tx_2-2x_1^Tx_2)$,带入得到未修剪的$\lambda_2^{new,unc}$
+$$
+\lambda_2^{new,unc} = \lambda_2^{old} + \frac {y_2(E_1-E_2)}{\eta}
+$$
+
+##### 2.2.2.2 不等式约束修剪
+
+&emsp;&emsp; 上面求解了优化问题在等式约束下的解，对于这两个变量来说，等式约束实际上把他们约束在一条平面直线上，而$\lambda \ge 0$便将它们约束到**第一象限**。其且它们的系数不是-1就是1，这意味着它们组成的直线只有两个方向，$45^o或135^o$ 。这样就能通过作图来确定它们的上下界，且通过关系式的直线，只需确定$\lambda_2$的范围即可。这里只有下界限制，后面软间隔需要添加合页损失函数，那时会有上界，不过处理方法都相同，先看这里的情况，注意变量只有$\lambda_2$
+
 <center class="half">
 <img src="https://i.loli.net/2019/08/14/MLGToeqSHXImVQC.png" width="1200">
 </center>
 
-<p>&emsp;&emsp;如图，当$y_1 \ne y_2$时，约束区域是图中的实心线，$\lambda_2$的下界与直线在$\lambda_2$轴上的截距有关，且$\lambda_2$上的截距可表示为<br>$$<br>\lambda_2 - \lambda_1 = b<br>$$<br>当截距$b&gt;0$，即绿线情况时，才会取这个截距为下界，不然就取0，即<br>$$<br>L = max(0,b)<br>$$<br>&emsp;&emsp;当$y_1 = y_2$时，其下界只需满足$\lambda_2 \ge 0$即可，不过这种情况为它带来了上界，图中很清楚，若$\lambda_2$的数值超过其在$\lambda_2$轴上的截距$b=\lambda_1+\lambda_2$，则$\lambda_1$会小于0，因此<br>$$<br>L = 0 ,\<br>H = b<br>$$<br>综上<br>$$<br>\begin{cases}<br>max(0,\lambda_2^{old} - \lambda_1^{old})\le \lambda_2^{new}   , ;; &amp;y_1 \ne y_2\<br>0 \le  \lambda_2^{new} \le  \lambda_1^{old} + \lambda_2^{old}, &amp;y_1=y_2<br>\end{cases}<br>$$<br>&emsp;&emsp;这是不等式约束$\lambda \ge 0$带来的下界，将得到的未修剪$\lambda_2^{new,unc}$与之比较，若满足上述约束，则$\lambda_2^{new} = \lambda_2^{new,unc}$ ，若不满足约束，则取下界值即可。  这种情况较简单，在下一节解决软间隔SVM的时候，加入合页损失函数，不等式约束变为$0 \le \lambda \le C$ ，则变量不止有下界，还有上界了。不过仍可用相同的分析方法。</p>
+<p>&emsp;&emsp;如图，当$y_1 \ne y_2$时，约束区域是图中的实心线，$\lambda_2$的下界与直线在$\lambda_2$轴上的截距有关，且$\lambda_2$上的截距可表示为</p>
+<script type="math/tex; mode=display">
+\lambda_2 - \lambda_1 = b</script><p>当截距$b&gt;0$，即绿线情况时，才会取这个截距为下界，不然就取0，即</p>
+<script type="math/tex; mode=display">
+L = max(0,b)</script><p>&emsp;&emsp;当$y_1 = y_2$时，其下界只需满足$\lambda_2 \ge 0$即可，不过这种情况为它带来了上界，图中很清楚，若$\lambda_2$的数值超过其在$\lambda_2$轴上的截距$b=\lambda_1+\lambda_2$，则$\lambda_1$会小于0，因此</p>
+<script type="math/tex; mode=display">
+L = 0 ,\\
+H = b</script><p>综上</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+max(0,\lambda_2^{old} - \lambda_1^{old})\le \lambda_2^{new}   , \;\; &y_1 \ne y_2\\
+0 \le  \lambda_2^{new} \le  \lambda_1^{old} + \lambda_2^{old}, &y_1=y_2
+\end{cases}</script><p>&emsp;&emsp;这是不等式约束$\lambda \ge 0$带来的下界，将得到的未修剪$\lambda_2^{new,unc}$与之比较，若满足上述约束，则$\lambda_2^{new} = \lambda_2^{new,unc}$ ，若不满足约束，则取下界值即可。  这种情况较简单，在下一节解决软间隔SVM的时候，加入合页损失函数，不等式约束变为$0 \le \lambda \le C$ ，则变量不止有下界，还有上界了。不过仍可用相同的分析方法。</p>
 <center class="half">
 <img src="https://i.loli.net/2019/08/14/h8HJUOzANEdFcDe.png" width="1300">
 </center>
 
 <p>&emsp;&emsp;这是添加了合页损失函数后的约束空间，用截距的方法也比较容易分析，图中绿色的线会确定一个$\lambda_2$的下界，红色的线会确定一个上界，注意仍考虑$\lambda_2$的范围。</p>
-<p>&emsp;&emsp;当$y_1 \ne y_2$时，截距大于0的绿线会确定一个下界，截距小于0的红线会确定一个上界<br>$$<br>L = max(0, \lambda_2^{old} - \lambda_1^{old}) ,\<br>H = min(C, \lambda_2^{old} - \lambda_1^{old} +C )<br>$$<br>&emsp;&emsp;当$y_1 = y_2$时， 截距大于C的绿线会确定一个下界，截距小于C的红线会确定一个上界<br>$$<br>L = max(0,\lambda_1^{old}+ \lambda_2^{old} - C),\<br>H = min(C,\lambda_1^{old} + \lambda_2^{old} )<br>$$<br>得到其不等式约束后，便可对前面求得的未修剪的$\lambda_2^{new,unc}$ 进行修剪，修剪后的数据代入SMO优化问题继续迭代，直到达到迭代误差要求。</p>
+<p>&emsp;&emsp;当$y_1 \ne y_2$时，截距大于0的绿线会确定一个下界，截距小于0的红线会确定一个上界</p>
+<script type="math/tex; mode=display">
+L = max(0, \lambda_2^{old} - \lambda_1^{old}) ,\\
+H = min(C, \lambda_2^{old} - \lambda_1^{old} +C )</script><p>&emsp;&emsp;当$y_1 = y_2$时， 截距大于C的绿线会确定一个下界，截距小于C的红线会确定一个上界</p>
+<script type="math/tex; mode=display">
+L = max(0,\lambda_1^{old}+ \lambda_2^{old} - C),\\
+H = min(C,\lambda_1^{old} + \lambda_2^{old} )</script><p>得到其不等式约束后，便可对前面求得的未修剪的$\lambda_2^{new,unc}$ 进行修剪，修剪后的数据代入SMO优化问题继续迭代，直到达到迭代误差要求。</p>
 <h5 id="2-2-2-3-变量的选择方法"><a href="#2-2-2-3-变量的选择方法" class="headerlink" title="2.2.2.3 变量的选择方法"></a>2.2.2.3 变量的选择方法</h5><p>留坑</p>
-<p>&emsp;&emsp;最终，我们得到了分离超平面<br>$$<br>\sum_i^n \lambda_i^* y_i (x^Tx_i)+ b^* = 0<br>$$<br>分类决策函数<br>$$<br>f(x) = sign\left ( \sum_i^n \lambda_i^* y_i (x^Tx_i) + b^*  \right)<br>$$<br>上式意味着，分类决策函数只依赖于输入样本的$x$和训练样本的$x$之间的内积。这是后面引入核方法进行非线性推广的基础。同时，决策函数中的内积只需要计算输入向量和样本求出的支持向量之间的即可。因为其他非支持向量的系数$\lambda$为0，支持向量机便是这样一个由少数支持向量决定的分类模型。</p>
+<p>&emsp;&emsp;最终，我们得到了分离超平面</p>
+<script type="math/tex; mode=display">
+\sum_i^n \lambda_i^* y_i (x^Tx_i)+ b^* = 0</script><p>分类决策函数</p>
+<script type="math/tex; mode=display">
+f(x) = sign\left ( \sum_i^n \lambda_i^* y_i (x^Tx_i) + b^*  \right)</script><p>上式意味着，分类决策函数只依赖于输入样本的$x$和训练样本的$x$之间的内积。这是后面引入核方法进行非线性推广的基础。同时，决策函数中的内积只需要计算输入向量和样本求出的支持向量之间的即可。因为其他非支持向量的系数$\lambda$为0，支持向量机便是这样一个由少数支持向量决定的分类模型。</p>
 <h2 id="3-线性不可分SVM"><a href="#3-线性不可分SVM" class="headerlink" title="3. 线性不可分SVM"></a>3. 线性不可分SVM</h2><p>&emsp;&emsp;前述算法是针对数据线性可分的情况，在数据不可分的情况该算法无法收敛。不过在明白了线性可分SVM的基础原理后，将其推广至线性不可分的SVM其实并不难。</p>
 <h3 id="3-1-松弛变量"><a href="#3-1-松弛变量" class="headerlink" title="3.1 松弛变量"></a>3.1 松弛变量</h3><p>&emsp;&emsp;若一组数据整体线性可分，只是有一些奇异点干扰。如下图</p>
 <center class="half">
 <img src="https://i.loli.net/2019/08/14/Rjc2Nl3XLP1AwDo.jpg" width="700">
 </center>
 
-<p>这些少量的奇异点使得不能找到一个超平面将所有数据正确划分，然而数据整体又是可分的，为了继续使用线性SVM，我们需要对这些奇异点添加一个松弛变量$\xi$。也就是对它们的错误进行一定程度的容忍，也就是使得这些奇异点的函数间隔加上松弛变量后能够满足大于等于1 的约束。<br>$$<br>\widehat \gamma = y_i(w\cdot x_i + b ) + \xi_i \ge 1<br>$$<br>既然对约束条件进行了弱化，那么就需要在目标优化函数$\frac 1 2 ||w||^2$中付出一定的代价<br>$$<br>\frac 1 2 ||w||^2 + C \sum_i^n \xi _i<br>$$<br>其中，$\xi \ge 0$</p>
-<p>&emsp;&emsp;由此得到新的SVM优化问题<br>$$<br>\begin{aligned}<br>\underset {w,b,\xi} {min} ;;; &amp; \frac 1 2 ||w||^2 + C \sum_i^n \xi _i\<br>s.t. ;;; &amp; y_i(w\cdot x_i + b) + \xi_i \ge 1\<br>&amp; \xi_i \ge 0</p>
-<p>\end{aligned}<br>$$<br>得到软间隔下的优化问题后，步骤就与线性可分SVM相同了，先找到对偶问题，再用SMO算法求解即可。</p>
+<p>这些少量的奇异点使得不能找到一个超平面将所有数据正确划分，然而数据整体又是可分的，为了继续使用线性SVM，我们需要对这些奇异点添加一个松弛变量$\xi$。也就是对它们的错误进行一定程度的容忍，也就是使得这些奇异点的函数间隔加上松弛变量后能够满足大于等于1 的约束。</p>
+<script type="math/tex; mode=display">
+\widehat \gamma = y_i(w\cdot x_i + b ) + \xi_i \ge 1</script><p>既然对约束条件进行了弱化，那么就需要在目标优化函数$\frac 1 2 ||w||^2$中付出一定的代价</p>
+<script type="math/tex; mode=display">
+\frac 1 2 ||w||^2 + C \sum_i^n \xi _i</script><p>其中，$\xi \ge 0$</p>
+<p>&emsp;&emsp;由此得到新的SVM优化问题</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\underset {w,b,\xi} {min} \;\;\; & \frac 1 2 ||w||^2 + C \sum_i^n \xi _i\\
+s.t. \;\;\; & y_i(w\cdot x_i + b) + \xi_i \ge 1\\
+& \xi_i \ge 0
+
+\end{aligned}</script><p>得到软间隔下的优化问题后，步骤就与线性可分SVM相同了，先找到对偶问题，再用SMO算法求解即可。</p>
 <h3 id="3-2-求解对偶问题"><a href="#3-2-求解对偶问题" class="headerlink" title="3.2 求解对偶问题"></a>3.2 求解对偶问题</h3><p>&emsp;&emsp;找对偶问题也是按流程来就行了，先列出拉格朗日函数，转化为极大极小问题，求解关于$w,b,\xi$的极小问题，再对得到的极小函数求解关于$\lambda,\eta$ 的极大问题，也就是对偶问题。</p>
 <ul>
 <li>原始问题的拉格朗日函数</li>
 </ul>
-<p>$$<br>L(w,b,\xi,\lambda,\eta) = \frac 1 2 ||w||^2 + C\sum_i^n\xi_i - \sum_i^n\lambda_i[y_i(w\cdot x_i+b)+\xi_i -1] - \sum_i^n \eta_i \xi_i \tag{3.1}<br>$$</p>
-<p>其中，$\lambda_i\ge 0,\eta \ge 0$。</p>
-<p>&emsp;&emsp;转化为极大极小问题，先求解关于$w,b,\xi$ 的极小问题，对拉格朗日函数求关于$w,b,\xi$的偏导并令为0<br>$$<br>\triangledown_ w L(w,b,\xi,\lambda,\eta)=w - \sum_i^n \lambda_i y_i x_i = 0\<br>\triangledown _b L(w,b,\xi,\lambda,\eta) = -\sum_i^n \lambda_iy_i = 0\<br>\triangledown _\xi L(w,b,\xi,\lambda,\eta) = C - \lambda_i - \eta_i = 0<br>$$<br>得到<br>$$<br>\begin{eqnarray<em>}<br>\sum_i^n\lambda_i y_i x_i &amp;=&amp;  w   \tag{3.2}  \<br>\sum_i^n\lambda_i y_i &amp;=&amp; 0       \tag{3.3}  \<br>C - \lambda_i - \eta_i &amp;=&amp; 0  \tag{3.4}<br>\end{eqnarray</em>}<br>$$<br>将它们带回式$(3.1)$<br>$$<br>\begin{aligned}<br>\underset {w,b,\xi} {min} ;;L(w,b,\xi,\lambda,\eta) =&amp; \frac 1 2\left ( \sum_i^n\lambda_iy_ix_i \right)\left ( \sum_j^n\lambda_jy_jx_j \right) +(C -\lambda_i-\eta_i)\sum_i^n \xi_i -\<br>&amp; ;;;;;; \sum_i^n \lambda_iy_i\sum_j^n\lambda_jy_jx_j^Tx_i-\sum_i^n \lambda_iy_ib+\sum_i^n\lambda_i\<br>=&amp; -\frac 1 2 \sum_i^n\sum_j^n\lambda_i\lambda_jy_iy_j(x_i^Tx_j) + \sum_i^n\lambda_i<br>\end{aligned}<br>$$<br>再对其求关于$\lambda,\eta$ 的极大即得到对偶问题<br>$$<br>\begin{aligned}<br>\underset {\lambda,\eta}{max} ;; &amp;-\frac 1 2\sum_i^n\sum_j^n\lambda_i\lambda_jy_iy_j(x_i^Tx_j) + \sum_i^T\lambda_i\<br>s.t.;; &amp; \sum_i^n \lambda_iy_i = 0\<br>&amp;C-\lambda_i-\eta_i = 0\<br>&amp;\lambda_i \ge 0 , ;; i=1,\cdots,n\<br>&amp;\eta _i \ge 0 ,;; i=1,\cdots,n<br>\end{aligned}<br>$$<br>注意被优化函数中并没有$\eta$，和有关于它的等式，将$\eta_i = C-\lambda_i$带入$\eta_i\ge 0$<br>$$<br>C \ge \lambda_i<br>$$<br>整理得到<br>$$<br>\begin{aligned}<br>\underset {\lambda}{max} ;; &amp;-\frac 1 2\sum_i^n\sum_j^n\lambda_i\lambda_jy_iy_j(x_i^Tx_j) + \sum_i^T\lambda_i\<br>s.t.;; &amp; \sum_i^n \lambda_iy_i = 0\<br>&amp; 0\le \lambda_i \le C ,;;;i=1,\cdots,n<br>\end{aligned}<br>$$<br>&emsp;&emsp;相较与线性可分下的SVM，软间隔SVM的对偶问题在形式上只比线性可分情况下的对偶问题多一个$\lambda_i$ 的上界约束C，对于求解过程中的差异主要表现在SMO算法的修剪过程中，需要确定的约束范围变小了。而这一变化在上节线性 可分SVM的SMO中已经给出了，后面的SMO过程可以说与线性可分SVM完全相同了。这样就得到一个可以容忍噪声奇异点干扰的SVM线性分类器了。</p>
+<script type="math/tex; mode=display">
+L(w,b,\xi,\lambda,\eta) = \frac 1 2 ||w||^2 + C\sum_i^n\xi_i - \sum_i^n\lambda_i[y_i(w\cdot x_i+b)+\xi_i -1] - \sum_i^n \eta_i \xi_i \tag{3.1}</script><p>其中，$\lambda_i\ge 0,\eta \ge 0$。</p>
+<p>&emsp;&emsp;转化为极大极小问题，先求解关于$w,b,\xi$ 的极小问题，对拉格朗日函数求关于$w,b,\xi$的偏导并令为0</p>
+<script type="math/tex; mode=display">
+\triangledown_ w L(w,b,\xi,\lambda,\eta)=w - \sum_i^n \lambda_i y_i x_i = 0\\
+\triangledown _b L(w,b,\xi,\lambda,\eta) = -\sum_i^n \lambda_iy_i = 0\\
+\triangledown _\xi L(w,b,\xi,\lambda,\eta) = C - \lambda_i - \eta_i = 0</script><p>得到</p>
+<script type="math/tex; mode=display">
+\begin{eqnarray*}
+\sum_i^n\lambda_i y_i x_i &=&  w   \tag{3.2}  \\ 
+\sum_i^n\lambda_i y_i &=& 0       \tag{3.3}  \\
+C - \lambda_i - \eta_i &=& 0  \tag{3.4}
+\end{eqnarray*}</script><p>将它们带回式$(3.1)$</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\underset {w,b,\xi} {min} \;\;L(w,b,\xi,\lambda,\eta) =& \frac 1 2\left ( \sum_i^n\lambda_iy_ix_i \right)\left ( \sum_j^n\lambda_jy_jx_j \right) +(C -\lambda_i-\eta_i)\sum_i^n \xi_i -\\
+& \;\;\;\;\;\; \sum_i^n \lambda_iy_i\sum_j^n\lambda_jy_jx_j^Tx_i-\sum_i^n \lambda_iy_ib+\sum_i^n\lambda_i\\
+=& -\frac 1 2 \sum_i^n\sum_j^n\lambda_i\lambda_jy_iy_j(x_i^Tx_j) + \sum_i^n\lambda_i 
+\end{aligned}</script><p>再对其求关于$\lambda,\eta$ 的极大即得到对偶问题</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\underset {\lambda,\eta}{max} \;\; &-\frac 1 2\sum_i^n\sum_j^n\lambda_i\lambda_jy_iy_j(x_i^Tx_j) + \sum_i^T\lambda_i\\
+s.t.\;\; & \sum_i^n \lambda_iy_i = 0\\
+&C-\lambda_i-\eta_i = 0\\
+&\lambda_i \ge 0 , \;\; i=1,\cdots,n\\
+&\eta _i \ge 0 ,\;\; i=1,\cdots,n
+\end{aligned}</script><p>注意被优化函数中并没有$\eta$，和有关于它的等式，将$\eta_i = C-\lambda_i$带入$\eta_i\ge 0$</p>
+<script type="math/tex; mode=display">
+C \ge \lambda_i</script><p>整理得到</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\underset {\lambda}{max} \;\; &-\frac 1 2\sum_i^n\sum_j^n\lambda_i\lambda_jy_iy_j(x_i^Tx_j) + \sum_i^T\lambda_i\\
+s.t.\;\; & \sum_i^n \lambda_iy_i = 0\\
+& 0\le \lambda_i \le C ,\;\;\;i=1,\cdots,n
+\end{aligned}</script><p>&emsp;&emsp;相较与线性可分下的SVM，软间隔SVM的对偶问题在形式上只比线性可分情况下的对偶问题多一个$\lambda_i$ 的上界约束C，对于求解过程中的差异主要表现在SMO算法的修剪过程中，需要确定的约束范围变小了。而这一变化在上节线性 可分SVM的SMO中已经给出了，后面的SMO过程可以说与线性可分SVM完全相同了。这样就得到一个可以容忍噪声奇异点干扰的SVM线性分类器了。</p>
 <h3 id="3-3-支持向量求解参数-w-b"><a href="#3-3-支持向量求解参数-w-b" class="headerlink" title="3.3 支持向量求解参数$w,b$"></a>3.3 支持向量求解参数$w,b$</h3><p>&emsp;&emsp;求解出对偶问题的参数$\lambda$ 后，还需考虑一个问题，就是如何通过这个参数$\lambda$和训练数据${x,y}$得到我们需要的参数$w,b$ 。因为原始问题是凸二次规划问题，可以通过KKT条件来从<strong>原始问题</strong>中找出$w,b$ 与$\lambda,x,y$ 之间的关系。</p>
-<p>&emsp;&emsp;根据KKT条件中的梯度为0条件，可以很容易的得出$w$的表达式<br>$$<br>\triangledown_wL(w^<em>,b^</em>,\xi^<em>,\lambda^</em>,\eta^<em>) = w^</em> - \sum_i^n\lambda_i^<em>y_ix_i = 0<br>$$<br>得到<br>$$<br>w^</em> = \sum_i^n \lambda_i^* y_i x_i<br>$$<br>&emsp;&emsp;对于$b$，并没有一个直接的等式让我们求出其表达式。唯一一个等式是由松弛互补性得到的<br>$$<br>\lambda_i ( y_i(w^<em>\cdot x + b^</em>) + \xi_i^<em>-1) = 0  \tag{3.5}<br>$$<br>如果$\lambda_i &gt; 0$的话，那么就能得到一个关于$b$的等式<br>$$<br>\begin{aligned}<br>b^</em> =&amp; (1-\xi_i^<em>)y_i -w^*\cdot x\<br>=&amp;(1-\xi_i^</em>)y_i - \sum_j^n\lambda_j^<em>y_j(x_i^Tx_j)<br>\end{aligned} \tag{3.6}<br>$$<br>其中，$\xi_i^</em>$比较讨厌，但是在一定条件下可以利用KKT中其他约束将其消去<br>$$<br>\begin{eqnarray<em>}<br>\triangledown_\xi L(w^</em>,b^<em>,\xi^</em>,\lambda^<em>,\eta^</em>) = C-\lambda_i-\eta_i = 0  \tag{3.7}  \<br>\eta_i \xi_i = 0  \tag{3.8}<br>\end{eqnarray<em>}<br>$$<br>由$(3.7)与(3.8)$可以得到，当$0&lt;\lambda_i &lt; C$ 时，$\eta_i &gt; 0$，$\xi_i = 0$，此时<br>$$<br>b = y_i -\sum_j^n\lambda_j^</em>y_j (x_i^Tx_j)<br>$$<br>当$\lambda_i = C$ 时，则$\xi_i$不一定等于0了，而是很有可能大于0，此时若用$\lambda_i$ 进行计算就得使用$(3.6)$的形式，因此在参数$b$的计算中，最好的情况是找一个$0&lt;\lambda_i &lt; C$的点进行计算。</p>
+<p>&emsp;&emsp;根据KKT条件中的梯度为0条件，可以很容易的得出$w$的表达式</p>
+<script type="math/tex; mode=display">
+\triangledown_wL(w^*,b^*,\xi^*,\lambda^*,\eta^*) = w^* - \sum_i^n\lambda_i^*y_ix_i = 0</script><p>得到</p>
+<script type="math/tex; mode=display">
+w^* = \sum_i^n \lambda_i^* y_i x_i</script><p>&emsp;&emsp;对于$b$，并没有一个直接的等式让我们求出其表达式。唯一一个等式是由松弛互补性得到的</p>
+<script type="math/tex; mode=display">
+\lambda_i ( y_i(w^*\cdot x + b^*) + \xi_i^*-1) = 0  \tag{3.5}</script><p>如果$\lambda_i &gt; 0$的话，那么就能得到一个关于$b$的等式</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+b^* =& (1-\xi_i^*)y_i -w^*\cdot x\\
+=&(1-\xi_i^*)y_i - \sum_j^n\lambda_j^*y_j(x_i^Tx_j)
+\end{aligned} \tag{3.6}</script><p>其中，$\xi_i^*$比较讨厌，但是在一定条件下可以利用KKT中其他约束将其消去</p>
+<script type="math/tex; mode=display">
+\begin{eqnarray*}
+\triangledown_\xi L(w^*,b^*,\xi^*,\lambda^*,\eta^*) = C-\lambda_i-\eta_i = 0  \tag{3.7}  \\
+\eta_i \xi_i = 0  \tag{3.8}
+\end{eqnarray*}</script><p>由$(3.7)与(3.8)$可以得到，当$0&lt;\lambda_i &lt; C$ 时，$\eta_i &gt; 0$，$\xi_i = 0$，此时</p>
+<script type="math/tex; mode=display">
+b = y_i -\sum_j^n\lambda_j^*y_j (x_i^Tx_j)</script><p>当$\lambda_i = C$ 时，则$\xi_i$不一定等于0了，而是很有可能大于0，此时若用$\lambda_i$ 进行计算就得使用$(3.6)$的形式，因此在参数$b$的计算中，最好的情况是找一个$0&lt;\lambda_i &lt; C$的点进行计算。</p>
 <center class="half">
 <img src="https://i.loli.net/2019/08/14/Rjc2Nl3XLP1AwDo.jpg" width="700">
 </center>
 
-<p>&emsp;&emsp;事实上，如图，当$0&lt;\lambda_i&lt; C$时，样本$x_i$ 便是支持向量，其代价$\xi_i = 0$ ，正好在间隔边界上。当$\lambda_i = 0$时，该向量不是支持向量，位于正确分割的间隔边界外。当$ \lambda_i = C,;\xi_i&lt;1$ 时，此时$x_i$也是支持向量，被正确分割，位于超平面和正确分割边界之间。当$\lambda_i = C, ; \xi_i = 1$ 时，$x_i$是支持向量，位于超平面上。当$\lambda_i = C,; \xi_i &gt; 1$ 时，$x_i$是支持向量，位于误分类一侧。</p>
+<p>&emsp;&emsp;事实上，如图，当$0&lt;\lambda_i&lt; C$时，样本$x_i$ 便是支持向量，其代价$\xi_i = 0$ ，正好在间隔边界上。当$\lambda_i = 0$时，该向量不是支持向量，位于正确分割的间隔边界外。当$ \lambda_i = C,\;\xi_i<1$ 时，此时$x_i$也是支持向量，被正确分割，位于超平面和正确分割边界之间。当$\lambda_i="C," \; \xi_i="1$" 时，$x_i$是支持向量，位于超平面上。当$\lambda_i="C,\;"> 1$ 时，$x_i$是支持向量，位于误分类一侧。</1$></p>
 <p>&emsp;&emsp;所以，$b$ 的计算最好选择恰在间隔边界上的支持向量。</p>
-<h2 id="4-非线性SVM"><a href="#4-非线性SVM" class="headerlink" title="4. 非线性SVM"></a>4. 非线性SVM</h2><p>&emsp;&emsp;在线性SVM中，我们求解的目标都是一个线性的分离超平面<br>$$<br>w^T\cdot x + b = 0<br>$$<br>只要参数$w，b$ 得到了，那对于新的输入向量$x$ ，其不同分量与$w$分量的线性组合（也就是内积）加上$b$ 便决定了分类结果。显然以此定义的模型只能训练出线性分类模型。</p>
-<p>&emsp;&emsp;若要实现对非线性模型的分类，我们需要得到一些关于$x$ 分量的一些非线性组合。$w$是$x$的系数，那只能从$x$入手了。如果将$x$的不同分量映射到一个更高维的空间，这些映射后的分量的线性组合也能实现$x$ 原分量的非线性组合。比如<br>$$<br>x = \begin{bmatrix}<br>x_1\<br>x_2<br>\end{bmatrix};;; \Rightarrow ;;;<br>\Phi = \begin{bmatrix}<br>x_1^2\<br>x_1x_2\<br>x_2^2<br>\end{bmatrix}<br>$$<br>其中，$x$的维度是2，说明这应该是一个在二维平面中分类的模型，$\Phi$ 是$x$ 的一个映射，映射后的数据变为了三维的，但是其训练后关于这三个变量的线性组合中变量仍只有$x_1,x_2$ ，不过通过对它训练，我们可以得到一个关于$x_1,x_2$的非线性模型，比如训练得到的参数 $w=[1,0,1]^T$  ，那实际上得到的是一个关于$x_1,x_2$ 的一个圆。</p>
+<h2 id="4-非线性SVM"><a href="#4-非线性SVM" class="headerlink" title="4. 非线性SVM"></a>4. 非线性SVM</h2><p>&emsp;&emsp;在线性SVM中，我们求解的目标都是一个线性的分离超平面</p>
+<script type="math/tex; mode=display">
+w^T\cdot x + b = 0</script><p>只要参数$w，b$ 得到了，那对于新的输入向量$x$ ，其不同分量与$w$分量的线性组合（也就是内积）加上$b$ 便决定了分类结果。显然以此定义的模型只能训练出线性分类模型。</p>
+<p>&emsp;&emsp;若要实现对非线性模型的分类，我们需要得到一些关于$x$ 分量的一些非线性组合。$w$是$x$的系数，那只能从$x$入手了。如果将$x$的不同分量映射到一个更高维的空间，这些映射后的分量的线性组合也能实现$x$ 原分量的非线性组合。比如</p>
+<script type="math/tex; mode=display">
+x = \begin{bmatrix}
+x_1\\ 
+x_2
+\end{bmatrix}\;\;\; \Rightarrow \;\;\;
+\Phi = \begin{bmatrix}
+x_1^2\\ 
+x_1x_2\\
+x_2^2
+\end{bmatrix}</script><p>其中，$x$的维度是2，说明这应该是一个在二维平面中分类的模型，$\Phi$ 是$x$ 的一个映射，映射后的数据变为了三维的，但是其训练后关于这三个变量的线性组合中变量仍只有$x_1,x_2$ ，不过通过对它训练，我们可以得到一个关于$x_1,x_2$的非线性模型，比如训练得到的参数 $w=[1,0,1]^T$  ，那实际上得到的是一个关于$x_1,x_2$ 的一个圆。</p>
 <p>&emsp;&emsp;这种方法将原始数据映射到新的高维空间，也叫特征空间（希尔伯特空间）。关于希尔伯特空间可参考<a href="http://open.163.com/movie/2013/3/T/0/M8PTB0GHI_M8PTBUHT0.html" target="_blank" rel="noopener">上海交通大学公开课</a> ，希尔伯特空间可大致理解为有限的欧几里得内积空间添加了完备性后的空间。这里有一篇对这个公开课较好的<a href="https://blog.csdn.net/weixin_36811328/article/details/81207753" target="_blank" rel="noopener">总结</a> 。由泰勒展开公式可知，一个函数展开到的阶数越高，就越能拟合复杂的曲线。上面的例子中阶数仅仅提升到2，若有较复杂的分割模型，它仍不能较好的完成任务。但是若将其提升到很高的维度，甚至是无穷大维，计算量是非常大甚至是难以计算的。因为既要计算$x$到$\Phi$的映射，还要计算高维$\Phi$与系数的乘积后的求和。</p>
-<p>&emsp;&emsp;现在似乎找到了解决非线性问题的一个方法，但是计算量太大了，幸运的是，在SVM的对偶问题中，目标函数与求解得到的分类决策函数都是输入向量之间的内积<br>$$<br>W(\lambda) = \frac 1 2 \sum_i^n\sum_j^n \lambda_i\lambda_jy_iy_j (x_i^Tx_j) - \sum_i^n \lambda_i<br>$$<br>输入向量使用相同的映射到高维空间，并且是内积的形式，那么这种情况可以使用<strong>核方法</strong>来减少计算量。核方法可以跳过求解$x$到$\Phi$的映射和计算映射后的函数的内积的过程。</p>
-<p>&emsp;&emsp;它的主要依据是，先定义一个关于原输入向量内积的核函数，总可以将其拆解为输入向量的映射之间的内积的形式。比如一个简单的 平方核函数<br>$$<br>K(x,z) = (x\cdot z)^2<br>$$<br>它是关于输入向量的内积的平方函数，可以通过将输入向量映射到<br>$$<br>\Phi(x) = (x_1^2,\sqrt2 x_1x_2,x_2^2)^T<br>$$<br>可以验证<br>$$<br>\Phi(x) \cdot \Phi(z) = (x\cdot z)^2 = K(x,z)<br>$$<br>当然拆解的映射函数不止这一种，这说明当需要将一个向量映射到高维空间并且作内积时，为了减少计算量，可以不用管映射函数，而只是计算核函数的值便等价与计算映射后的函数的内积。</p>
+<p>&emsp;&emsp;现在似乎找到了解决非线性问题的一个方法，但是计算量太大了，幸运的是，在SVM的对偶问题中，目标函数与求解得到的分类决策函数都是输入向量之间的内积</p>
+<script type="math/tex; mode=display">
+W(\lambda) = \frac 1 2 \sum_i^n\sum_j^n \lambda_i\lambda_jy_iy_j (x_i^Tx_j) - \sum_i^n \lambda_i</script><p>输入向量使用相同的映射到高维空间，并且是内积的形式，那么这种情况可以使用<strong>核方法</strong>来减少计算量。核方法可以跳过求解$x$到$\Phi$的映射和计算映射后的函数的内积的过程。</p>
+<p>&emsp;&emsp;它的主要依据是，先定义一个关于原输入向量内积的核函数，总可以将其拆解为输入向量的映射之间的内积的形式。比如一个简单的 平方核函数</p>
+<script type="math/tex; mode=display">
+K(x,z) = (x\cdot z)^2</script><p>它是关于输入向量的内积的平方函数，可以通过将输入向量映射到</p>
+<script type="math/tex; mode=display">
+\Phi(x) = (x_1^2,\sqrt2 x_1x_2,x_2^2)^T</script><p>可以验证</p>
+<script type="math/tex; mode=display">
+\Phi(x) \cdot \Phi(z) = (x\cdot z)^2 = K(x,z)</script><p>当然拆解的映射函数不止这一种，这说明当需要将一个向量映射到高维空间并且作内积时，为了减少计算量，可以不用管映射函数，而只是计算核函数的值便等价与计算映射后的函数的内积。</p>
 <p>&emsp;&emsp;核函数肯定不是随便定义一个都行的，它需要满足正定核条件，正定核的充要条件是该核函数的Gram矩阵是半正定的。</p>
 <h2 id="5-Reference"><a href="#5-Reference" class="headerlink" title="5. Reference:"></a>5. Reference:</h2><p>[1]  <a href="https://web.stanford.edu/~boyd/cvxbook/" target="_blank" rel="noopener">Convex Optimization</a></p>
 <p>[2] Pattern Recognition and Machine Learning.</p>
@@ -665,23 +1033,85 @@ $$
         
           
             <p>[TOC]</p>
-<h1 id="熵、交叉熵及似然函数的关系"><a href="#熵、交叉熵及似然函数的关系" class="headerlink" title="熵、交叉熵及似然函数的关系"></a>熵、交叉熵及似然函数的关系</h1><h2 id="1-熵"><a href="#1-熵" class="headerlink" title="1. 熵"></a>1. 熵</h2><h3 id="1-1-信息量"><a href="#1-1-信息量" class="headerlink" title="1.1 信息量"></a>1.1 信息量</h3><p>&emsp;&emsp;<strong>信息量</strong>：最初的定义是信号取值数量m的对数为信息量$I$,即 $I=log_2m$。这是与比特数相关的，比如一个信号只有两个取值，那么用1个bit便能将其表示。后来著名的香农指出，得到的信号取值结果是随机的，因此其信息量应该也是关于概率的函数，于是得到随机变量$X$的信息量<br>$$<br>I(X=x_i) = -logP(x_i)<br>$$<br>&emsp;&emsp;在机器学习中，熵是描述一个变量发生的不确定性的度量，不确定性越大，这里面包含的信息量就越大。比如有的学生常年不及格，让你预测他这次考试是否能及格，你肯定会说十有八九不会及格，也就是能否及格的确定性很大了，这时我们不会太关心其结果，因为其发生的结果太容易预料了，所以其信息量比较小。若该学生有时候能及格，有时候不能及格，这就有点捉摸不定了，我们很难猜中他能不能及格，这时他能否及格的信息量比较大。</p>
-<h3 id="1-3-熵"><a href="#1-3-熵" class="headerlink" title="1.3 熵"></a>1.3 熵</h3><p>&emsp;&emsp;既然熵是反应变量（信号）总体不确定性的大小（信息量大小）的度量，那么如何确定熵的大小也就很明显了——对所有可能的取值计算其平均信息量，也就是求信息量关于概率P的期望。这样就表达了该信号（随机变量）的不确定性大小。<br>$$<br>H(X)=E_P[-logP(x)]=-\sum_xp(x_i)logp(x_i)<br>$$<br>&emsp;&emsp;当X服从均匀分布时，X的熵的结果与最原始的信息量的定义相同，n为信号的取值数量<br>$$<br>H(x) = -\sum_n \frac 1 n log \frac 1 n= logn<br>$$<br>实际上只有当所有事件的概率相等时，熵取最大值$logn$。<br>&emsp;&emsp;于是得出我个人的猜测：信息量是描述变量取某个值时的信息量，熵则描述其所有可能取值的平均信息量，也就是该信号到底取哪个值的不确定性。</p>
+<h1 id="熵、交叉熵及似然函数的关系"><a href="#熵、交叉熵及似然函数的关系" class="headerlink" title="熵、交叉熵及似然函数的关系"></a>熵、交叉熵及似然函数的关系</h1><h2 id="1-熵"><a href="#1-熵" class="headerlink" title="1. 熵"></a>1. 熵</h2><h3 id="1-1-信息量"><a href="#1-1-信息量" class="headerlink" title="1.1 信息量"></a>1.1 信息量</h3><p>&emsp;&emsp;<strong>信息量</strong>：最初的定义是信号取值数量m的对数为信息量$I$,即 $I=log_2m$。这是与比特数相关的，比如一个信号只有两个取值，那么用1个bit便能将其表示。后来著名的香农指出，得到的信号取值结果是随机的，因此其信息量应该也是关于概率的函数，于是得到随机变量$X$的信息量</p>
+<script type="math/tex; mode=display">
+I(X=x_i) = -logP(x_i)</script><p>&emsp;&emsp;在机器学习中，熵是描述一个变量发生的不确定性的度量，不确定性越大，这里面包含的信息量就越大。比如有的学生常年不及格，让你预测他这次考试是否能及格，你肯定会说十有八九不会及格，也就是能否及格的确定性很大了，这时我们不会太关心其结果，因为其发生的结果太容易预料了，所以其信息量比较小。若该学生有时候能及格，有时候不能及格，这就有点捉摸不定了，我们很难猜中他能不能及格，这时他能否及格的信息量比较大。</p>
+<h3 id="1-3-熵"><a href="#1-3-熵" class="headerlink" title="1.3 熵"></a>1.3 熵</h3><p>&emsp;&emsp;既然熵是反应变量（信号）总体不确定性的大小（信息量大小）的度量，那么如何确定熵的大小也就很明显了——对所有可能的取值计算其平均信息量，也就是求信息量关于概率P的期望。这样就表达了该信号（随机变量）的不确定性大小。</p>
+<script type="math/tex; mode=display">
+H(X)=E_P[-logP(x)]=-\sum_xp(x_i)logp(x_i)</script><p>&emsp;&emsp;当X服从均匀分布时，X的熵的结果与最原始的信息量的定义相同，n为信号的取值数量</p>
+<script type="math/tex; mode=display">
+H(x) = -\sum_n \frac 1 n log \frac 1 n= logn</script><p>实际上只有当所有事件的概率相等时，熵取最大值$logn$。<br>&emsp;&emsp;于是得出我个人的猜测：信息量是描述变量取某个值时的信息量，熵则描述其所有可能取值的平均信息量，也就是该信号到底取哪个值的不确定性。</p>
 <h2 id="2-最大熵中的极大似然函数"><a href="#2-最大熵中的极大似然函数" class="headerlink" title="2. 最大熵中的极大似然函数"></a>2. 最大熵中的极大似然函数</h2><p>&emsp;&emsp;按理说熵后面应该接着说交叉熵的，但是我发现极大似然函数的对数形式与熵的定义十分相近，于是先介绍它们的来路与区别。这种形式的似然函数在最大熵模型中用到过。</p>
-<p>&emsp;&emsp;首先我先给出在最大熵模型中用到的似然函数<br>$$<br>L_{\widetilde P} = \prod_{x,y} P(y|x)^{\widetilde P(x,y)}<br>$$<br>李航书中直接给出该定义，这个定义应该是由如下似然函数推导而来的<br>$$<br>L(x_1,\cdots,x_n,\theta)=\prod_x P(x)^{\widehat P(x)}<br>$$</p>
-<h3 id="2-1-指数型似然函数推导"><a href="#2-1-指数型似然函数推导" class="headerlink" title="2.1 指数型似然函数推导"></a>2.1 指数型似然函数推导</h3><p>&emsp;&emsp;我不知道这种形式的似然函数叫什么名字，所以这个名字是我自己取的。指数型似然函数与我们常用的由n个样本带入表示的模型概率之积，也就是它们的联合概率作为似然函数不同，在常用的似然函数L中<br>$$<br>L(x,\theta)=\prod _{i=1}^n P(x_i)<br>$$<br>它的概率乘积依据于样本数，最大熵则依据变量x的取值数量，然而这两种方式本质都是一样的。最大熵中的似然函数相当于把n个样本中取值相同的整理到一起，用指数数量表示。</p>
-<p>&emsp;&emsp;假设样本集大小为$n$，$X$的取值数量为$m$，取值集合为｛$v_1,\cdots,v_m$｝。样本集中观测值$v_i$出现的次数由$C(X=v_i)$表示，于是似然函数可以表示为<br>$$<br>L(x,\theta) = \prod _{i=1}^m P(x_i)^{C(X=x_i)}<br>$$<br>再对该似然函数开$n$次方<br>$$<br>L(x,\theta)^{\frac 1 n} = \prod _{i=1} ^m P(x_i) ^{\frac {C(X=x_i)} {n}}<br>$$<br>其中，<br>$$<br>\frac {C(X=x_i)} {n} = \widetilde P(x_i)<br>$$<br>并且，似然函数开$n$次方并不影响其最大化，于是可以直接将其定义为新的似然函数<br>$$<br>L(x,\theta)  =  \prod _{i=1} ^m P(x_i) ^{\frac {C(X=x_i)} {n}}<br>$$<br>带入$\widetilde P(x_i)$简化得到<br>$$<br>L(x,\theta) = \prod _x P(x) ^{\widetilde P(x)}<br>$$<br>那么对数似然函数便是<br>$$<br>L(x,\theta) = \widetilde P(x) \sum_x log P(x)<br>$$</p>
-<h3 id="2-2-最大熵中的似然函数推导"><a href="#2-2-最大熵中的似然函数推导" class="headerlink" title="2.2 最大熵中的似然函数推导"></a>2.2 最大熵中的似然函数推导</h3><p>&emsp;&emsp;根据上文得出的似然函数的另一种表示后，由它便可推导出最大熵模型中用到的对数似然函数<br>$$<br>\begin{aligned}<br>L_{\widetilde P} =&amp; log\prod_{x,y} P(x,y) ^{\widetilde P(x,y)}\<br>=&amp;\sum_{x,y} \widetilde P(x,y)log[\widetilde P(x) P(y|x)]\<br>=&amp;\sum_{x,y} \widetilde P(x,y)logP(y|x) + \sum_{x,y} \widetilde P(x,y) log \widetilde P(x)\<br>=&amp; \sum_{x,y} \widetilde P(x,y) logP(y|x) + constant\<br>\Rightarrow L_{\widetilde P}  =&amp; \sum_{x,y} \widetilde P(x,y) logP(y|x)<br>\end{aligned}<br>$$<br>推导这个只是顺便，目的还是比较指数型对数似然函数$L=\widetilde P(x)\sum_xlog P(x)$与熵的定义的关系。</p>
-<p>&emsp;&emsp;再回顾熵的定义<br>$$<br>H(X) = -\sum_xP(x) log P(x)<br>$$<br>它们的数学形式长得确实挺像的，不过仔细看还是有很大差别，似然函数中具有经验分布和需要估计的模型的分布，所以似然函数实际上是判断估计模型与经验分布的<strong>相似度</strong>，最大似然估计就是让估计模型尽可能的去接近我们得到样本产生的经验分布。而熵的定义中只有概率模型本身，它表示的是该模型本身的每个取值之间的不确定性大小，或者说是该模型本身的混乱程度。而最大熵原理的思想是在面对一个未知内容较多（约束条件不足）的估计时，我们会尽量将其看做等概率的均匀分布。</p>
+<p>&emsp;&emsp;首先我先给出在最大熵模型中用到的似然函数</p>
+<script type="math/tex; mode=display">
+L_{\widetilde P} = \prod_{x,y} P(y|x)^{\widetilde P(x,y)}</script><p>李航书中直接给出该定义，这个定义应该是由如下似然函数推导而来的</p>
+<script type="math/tex; mode=display">
+L(x_1,\cdots,x_n,\theta)=\prod_x P(x)^{\widehat P(x)}</script><h3 id="2-1-指数型似然函数推导"><a href="#2-1-指数型似然函数推导" class="headerlink" title="2.1 指数型似然函数推导"></a>2.1 指数型似然函数推导</h3><p>&emsp;&emsp;我不知道这种形式的似然函数叫什么名字，所以这个名字是我自己取的。指数型似然函数与我们常用的由n个样本带入表示的模型概率之积，也就是它们的联合概率作为似然函数不同，在常用的似然函数L中</p>
+<script type="math/tex; mode=display">
+L(x,\theta)=\prod _{i=1}^n P(x_i)</script><p>它的概率乘积依据于样本数，最大熵则依据变量x的取值数量，然而这两种方式本质都是一样的。最大熵中的似然函数相当于把n个样本中取值相同的整理到一起，用指数数量表示。</p>
+<p>&emsp;&emsp;假设样本集大小为$n$，$X$的取值数量为$m$，取值集合为｛$v_1,\cdots,v_m$｝。样本集中观测值$v_i$出现的次数由$C(X=v_i)$表示，于是似然函数可以表示为</p>
+<script type="math/tex; mode=display">
+L(x,\theta) = \prod _{i=1}^m P(x_i)^{C(X=x_i)}</script><p>再对该似然函数开$n$次方</p>
+<script type="math/tex; mode=display">
+L(x,\theta)^{\frac 1 n} = \prod _{i=1} ^m P(x_i) ^{\frac {C(X=x_i)} {n}}</script><p>其中，</p>
+<script type="math/tex; mode=display">
+\frac {C(X=x_i)} {n} = \widetilde P(x_i)</script><p>并且，似然函数开$n$次方并不影响其最大化，于是可以直接将其定义为新的似然函数</p>
+<script type="math/tex; mode=display">
+L(x,\theta)  =  \prod _{i=1} ^m P(x_i) ^{\frac {C(X=x_i)} {n}}</script><p>带入$\widetilde P(x_i)$简化得到</p>
+<script type="math/tex; mode=display">
+L(x,\theta) = \prod _x P(x) ^{\widetilde P(x)}</script><p>那么对数似然函数便是</p>
+<script type="math/tex; mode=display">
+L(x,\theta) = \widetilde P(x) \sum_x log P(x)</script><h3 id="2-2-最大熵中的似然函数推导"><a href="#2-2-最大熵中的似然函数推导" class="headerlink" title="2.2 最大熵中的似然函数推导"></a>2.2 最大熵中的似然函数推导</h3><p>&emsp;&emsp;根据上文得出的似然函数的另一种表示后，由它便可推导出最大熵模型中用到的对数似然函数</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+L_{\widetilde P} =& log\prod_{x,y} P(x,y) ^{\widetilde P(x,y)}\\
+=&\sum_{x,y} \widetilde P(x,y)log[\widetilde P(x) P(y|x)]\\
+=&\sum_{x,y} \widetilde P(x,y)logP(y|x) + \sum_{x,y} \widetilde P(x,y) log \widetilde P(x)\\
+=& \sum_{x,y} \widetilde P(x,y) logP(y|x) + constant\\
+\Rightarrow L_{\widetilde P}  =& \sum_{x,y} \widetilde P(x,y) logP(y|x)
+\end{aligned}</script><p>推导这个只是顺便，目的还是比较指数型对数似然函数$L=\widetilde P(x)\sum_xlog P(x)$与熵的定义的关系。</p>
+<p>&emsp;&emsp;再回顾熵的定义</p>
+<script type="math/tex; mode=display">
+H(X) = -\sum_xP(x) log P(x)</script><p>它们的数学形式长得确实挺像的，不过仔细看还是有很大差别，似然函数中具有经验分布和需要估计的模型的分布，所以似然函数实际上是判断估计模型与经验分布的<strong>相似度</strong>，最大似然估计就是让估计模型尽可能的去接近我们得到样本产生的经验分布。而熵的定义中只有概率模型本身，它表示的是该模型本身的每个取值之间的不确定性大小，或者说是该模型本身的混乱程度。而最大熵原理的思想是在面对一个未知内容较多（约束条件不足）的估计时，我们会尽量将其看做等概率的均匀分布。</p>
 <p>&emsp;&emsp;由最大熵原理推导出的最大熵模型的思想就是在满足假设条件的模型中，选择模型内部最混乱，也就是信息量最大的那个模型！</p>
 <h2 id="3-交叉熵与极大似然"><a href="#3-交叉熵与极大似然" class="headerlink" title="3. 交叉熵与极大似然"></a>3. 交叉熵与极大似然</h2><p>&emsp;&emsp;上述解释了熵与极大似然的一个重要区别在于熵是描述模型本身混乱度（信息量）的一个度量，而极大似然是描述估计模型和经验分布的相似度的一个度量。那么熵到底与指数型似然函数有什么关系呢？</p>
-<h3 id="3-1-联系"><a href="#3-1-联系" class="headerlink" title="3.1 联系"></a>3.1 联系</h3><p>&emsp;&emsp;熵描述模型内部的信息量，而交叉熵则描述两个模型之间的关系。交叉熵中用到了KL散度，KL散度是描述两个概率分布$p,q$相似性的一种度量，记作$D(p||q)$。对于离散随机变量，KL散度定义为<br>$$<br>D(p||q) = \sum_x p(x)log \frac {p(x)} {q(x)}<br>$$<br>&emsp;&emsp;KL散度满足：$D(p|q) \geqslant 0$，且仅当$p=q$时，$D(p|q)=0$。证明如下：<br>$$<br>\begin{aligned}<br>-D(p||q) =&amp; \sum_x p(x) log \frac {q(x)} {p(x)}\<br>(Jense) \Rightarrow         \leqslant &amp; log \sum_xp(x)\frac {q(x)}{p(x)}\<br>         =&amp; log \sum_x q(x) = 0<br>\end {aligned}<br>$$<br>&emsp;&emsp;关于Jense不等式在EM算法中已经总结过了，这里不再赘述。这里log是凹函数，$E[f(x)] \leqslant f(E[x])$。注意$p(x)$满足$\sum_xp(x) = 1$。由定义式可以看出KL散度是非对称的，不是严格意义上的距离度量。</p>
-<p>&emsp;&emsp;Wiki对交叉熵的定义是：在信息论中，基于相同事件测度的两个概率分布$p$和 $q$的交叉熵是指，当基于一个“非自然”（相对于“真实”分布$p$而言）的概率分布 $q$进行编码时，在事件集合中唯一标识一个事件所需要的平均比特数（bit）。基于概率的交叉熵定义为<br>$$<br>H(p,q) = E_p[-log q]= H(p) + D_{KL}(p||q)<br>$$<br>其中，$H(p)$是熵，$D_{KL}(p||q)$是p到q的KL散度，对于离散的p，q<br>$$<br>H(p,q) = -\sum_x p(x) log q(x)<br>$$<br>&emsp;&emsp;这个定义与最开始的信息量和熵的定义是同源的，关于比特数表示可以参照信息量的定义。现在讨论关于p和q的关系，Wiki中说$p$是一个“真实”分布，在此基础上对$q$进行二进制编码所需要的平均比特数。如果对这个说法不能很好理解的话，可以将其转化为下面这个我们经常见到的形式<br>$$<br>-\sum_x \widetilde p(x) log p(x)<br>$$<br>其中，$\widetilde p(x)$是经验分布，看做我们从样本中得到的“真实”分布，而$p(x)$是我们需要编码（求解）的模型分布。</p>
-<p>&emsp;&emsp;再来看看上面提到的指数型对数似然函数<br>$$<br>L_\widetilde p = \sum_x \widetilde p(x)log p(x)<br>$$<br>它们正好是相反数，因此极大化似然函数等价于最小化交叉熵。$[Mark]$：</p>
+<h3 id="3-1-联系"><a href="#3-1-联系" class="headerlink" title="3.1 联系"></a>3.1 联系</h3><p>&emsp;&emsp;熵描述模型内部的信息量，而交叉熵则描述两个模型之间的关系。交叉熵中用到了KL散度，KL散度是描述两个概率分布$p,q$相似性的一种度量，记作$D(p||q)$。对于离散随机变量，KL散度定义为</p>
+<script type="math/tex; mode=display">
+D(p||q) = \sum_x p(x)log \frac {p(x)} {q(x)}</script><p>&emsp;&emsp;KL散度满足：$D(p|q) \geqslant 0$，且仅当$p=q$时，$D(p|q)=0$。证明如下：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+-D(p||q) =& \sum_x p(x) log \frac {q(x)} {p(x)}\\
+(Jense) \Rightarrow         \leqslant & log \sum_xp(x)\frac {q(x)}{p(x)}\\
+         =& log \sum_x q(x) = 0
+\end {aligned}</script><p>&emsp;&emsp;关于Jense不等式在EM算法中已经总结过了，这里不再赘述。这里log是凹函数，$E[f(x)] \leqslant f(E[x])$。注意$p(x)$满足$\sum_xp(x) = 1$。由定义式可以看出KL散度是非对称的，不是严格意义上的距离度量。</p>
+<p>&emsp;&emsp;Wiki对交叉熵的定义是：在信息论中，基于相同事件测度的两个概率分布$p$和 $q$的交叉熵是指，当基于一个“非自然”（相对于“真实”分布$p$而言）的概率分布 $q$进行编码时，在事件集合中唯一标识一个事件所需要的平均比特数（bit）。基于概率的交叉熵定义为</p>
+<script type="math/tex; mode=display">
+H(p,q) = E_p[-log q]= H(p) + D_{KL}(p||q)</script><p>其中，$H(p)$是熵，$D_{KL}(p||q)$是p到q的KL散度，对于离散的p，q</p>
+<script type="math/tex; mode=display">
+H(p,q) = -\sum_x p(x) log q(x)</script><p>&emsp;&emsp;这个定义与最开始的信息量和熵的定义是同源的，关于比特数表示可以参照信息量的定义。现在讨论关于p和q的关系，Wiki中说$p$是一个“真实”分布，在此基础上对$q$进行二进制编码所需要的平均比特数。如果对这个说法不能很好理解的话，可以将其转化为下面这个我们经常见到的形式</p>
+<script type="math/tex; mode=display">
+-\sum_x \widetilde p(x) log p(x)</script><p>其中，$\widetilde p(x)$是经验分布，看做我们从样本中得到的“真实”分布，而$p(x)$是我们需要编码（求解）的模型分布。</p>
+<p>&emsp;&emsp;再来看看上面提到的指数型对数似然函数</p>
+<script type="math/tex; mode=display">
+L_\widetilde p = \sum_x \widetilde p(x)log p(x)</script><p>它们正好是相反数，因此极大化似然函数等价于最小化交叉熵。$[Mark]$：</p>
 <p>&emsp;&emsp;根据定义，交叉熵的含义也比较明显了，它也是表示两个概率模型之间的相似度的。这也与极大似然函数的含义相同。若两个概率模型完全相同呢？由KL散度可知，$p=q$时散度为0，交叉熵变成了熵。从离散形式的定义式也能看出，相等时变为了熵的定义式，交叉熵退化为熵。并且此时交叉熵取最小值，证明如下：</p>
-<p>&emsp;&emsp;假设$p(x)$分布已知，其值为常数，且$q(x)$满足约束条件<br>$$<br>\sum_x q(x) = 1<br>$$<br>构造拉格朗日乘子函数<br>$$<br>L(x,\lambda) = -\sum_{x} p(x) log q(x) +\lambda (\sum_x p(x) - 1))<br>$$<br>对$\lambda$和所有的$x$求偏导得<br>$$<br>-\frac {p(x)} {q(x)} +\lambda = 0\<br>\sum_x q(x) = 1\<br>\sum_x p(x) = 1<br>$$<br>注意，第一个式子实际上有m个等式，m是变量x的取值个数，解得<br>$$<br>\lambda = 1\<br>p(x) = q(x)<br>$$</p>
-<h3 id="3-2-交叉熵损失函数"><a href="#3-2-交叉熵损失函数" class="headerlink" title="3.2 交叉熵损失函数"></a>3.2 交叉熵损失函数</h3><p>&emsp;&emsp;至此，再联系一下交叉熵损失函数。交叉熵损失函数经常用于分类问题中，特别是在神经网络做分类问题时，也经常使用交叉熵作为损失函数，此外，由于交叉熵涉及到计算每个类别的概率，所以交叉熵几乎每次都和<strong>softmax函数</strong>一起出现。</p>
-<p>&emsp;&emsp;交叉熵损失函数的一般形式是<br>$$<br>CrossEntropy=−\sum_{i=1} ^n  y_i^T \cdot log(h(x_i))<br>$$<br>其中，$y和x$是m维列向量，m是$y$的取值数量。当$y$取值为｛0,1｝时，就是我们常见的0-1分布的交叉熵损失函数<br>$$<br>CrossEntropy=-\sum_{i=1}^n (y_i\cdot log (h(x_i)) +(1-y_i) \cdot log (1-(h(x_i)))<br>$$<br>这里$y和x$是数值。</p>
+<p>&emsp;&emsp;假设$p(x)$分布已知，其值为常数，且$q(x)$满足约束条件</p>
+<script type="math/tex; mode=display">
+\sum_x q(x) = 1</script><p>构造拉格朗日乘子函数</p>
+<script type="math/tex; mode=display">
+L(x,\lambda) = -\sum_{x} p(x) log q(x) +\lambda (\sum_x p(x) - 1))</script><p>对$\lambda$和所有的$x$求偏导得</p>
+<script type="math/tex; mode=display">
+-\frac {p(x)} {q(x)} +\lambda = 0\\
+\sum_x q(x) = 1\\
+\sum_x p(x) = 1</script><p>注意，第一个式子实际上有m个等式，m是变量x的取值个数，解得</p>
+<script type="math/tex; mode=display">
+\lambda = 1\\
+p(x) = q(x)</script><h3 id="3-2-交叉熵损失函数"><a href="#3-2-交叉熵损失函数" class="headerlink" title="3.2 交叉熵损失函数"></a>3.2 交叉熵损失函数</h3><p>&emsp;&emsp;至此，再联系一下交叉熵损失函数。交叉熵损失函数经常用于分类问题中，特别是在神经网络做分类问题时，也经常使用交叉熵作为损失函数，此外，由于交叉熵涉及到计算每个类别的概率，所以交叉熵几乎每次都和<strong>softmax函数</strong>一起出现。</p>
+<p>&emsp;&emsp;交叉熵损失函数的一般形式是</p>
+<script type="math/tex; mode=display">
+CrossEntropy=−\sum_{i=1} ^n  y_i^T \cdot log(h(x_i))</script><p>其中，$y和x$是m维列向量，m是$y$的取值数量。当$y$取值为｛0,1｝时，就是我们常见的0-1分布的交叉熵损失函数</p>
+<script type="math/tex; mode=display">
+CrossEntropy=-\sum_{i=1}^n (y_i\cdot log (h(x_i)) +(1-y_i) \cdot log (1-(h(x_i)))</script><p>这里$y和x$是数值。</p>
 <p>&emsp;&emsp;交叉熵损失函数与交叉熵的区别在于将原来的“真实”概率分布替换为“真实”标签（label）$y_i$，这与前面推导指数型似然函数的原理基本是一致的。不再赘述。将公式中$h(x)$替换为logistic中的分布函数则得到logistic中的损失函数。</p>
 <h2 id="Reference："><a href="#Reference：" class="headerlink" title="Reference："></a>Reference：</h2><p><a href="https://book.douban.com/subject/10590856/" target="_blank" rel="noopener">统计学习方法</a></p>
 <p><a href="https://book.douban.com/subject/2061116/" target="_blank" rel="noopener">Pattern Recognition and Machine Learning</a></p>
@@ -807,47 +1237,167 @@ $$
             <p>[TOC]</p>
 <h1 id="logistic回归和最大熵模型"><a href="#logistic回归和最大熵模型" class="headerlink" title="logistic回归和最大熵模型"></a>logistic回归和最大熵模型</h1><h2 id="1-logistic回归模型"><a href="#1-logistic回归模型" class="headerlink" title="1. logistic回归模型"></a>1. logistic回归模型</h2><p>&emsp;&emsp;logistic回归是一种广义线性回归（generalized linear model），因此与多重线性回归分析有很多相同之处。它们的模型形式基本上相同，都具有wx+b，其中w和b是待求参数，其区别在于他们的因变量不同，多重线性回归直接将wx+b作为因变量，即y =wx+b，而logistic回归则通过函数g(wx+b)让其对应一个隐状态p，p =g(wx+b),然后根据p 与1-p的比值大小（几率）决定因变量的值。如果g是logistic函数，就是logistic回归，如果g是多项式函数就是多项式回归。</p>
 <p>&emsp;&emsp;logistic回归的因变量可以是二分类的，也可以是多分类的，但是二分类的更为常用，也更加容易解释，多类可以使用softmax方法进行处理。实际中最为常用的就是二分类的logistic回归。</p>
-<h3 id="1-1-logistic分布"><a href="#1-1-logistic分布" class="headerlink" title="1.1 logistic分布"></a>1.1 logistic分布</h3><p> &emsp;&emsp;设X是连续随机变量，X服从的logistic分布具有如下分布函数<br>$$<br>F(x) = P(X \leqslant x) = \frac {1} {1+exp(\frac {-(x-\mu)} {\gamma})}<br>$$<br>其中，$\mu$ 为位置参数，$\gamma &gt; 0$为形状参数。</p>
-<p>&emsp;&emsp;我们最常用的是$\mu =0,\gamma =1 $的标准logistic分布，即sigmoid函数<br>$$<br>\sigma(x) = \frac {1} {1+e^{-x}}<br>$$<br>其图像如下</p>
+<h3 id="1-1-logistic分布"><a href="#1-1-logistic分布" class="headerlink" title="1.1 logistic分布"></a>1.1 logistic分布</h3><p> &emsp;&emsp;设X是连续随机变量，X服从的logistic分布具有如下分布函数</p>
+<script type="math/tex; mode=display">
+F(x) = P(X \leqslant x) = \frac {1} {1+exp(\frac {-(x-\mu)} {\gamma})}</script><p>其中，$\mu$ 为位置参数，$\gamma &gt; 0$为形状参数。</p>
+<p>&emsp;&emsp;我们最常用的是$\mu =0,\gamma =1 $的标准logistic分布，即sigmoid函数</p>
+<script type="math/tex; mode=display">
+\sigma(x) = \frac {1} {1+e^{-x}}</script><p>其图像如下</p>
 <p><img src="sigmoid_function.png" alt>{zoom:40%;}</p>
 <h3 id="1-2-二项logistic回归模型"><a href="#1-2-二项logistic回归模型" class="headerlink" title="1.2 二项logistic回归模型"></a>1.2 二项logistic回归模型</h3><p>&emsp;&emsp;二项logistic回归模型是一种分类模型，以往都是将分类和回归作为两个类别的，为什么logistic回归是一种分类模型呢？原因在于logistic回归计算两个类别的条件概率的大小，再将其比值作为输出，将类别划分为比值大的那一类。所以它的输出是连续值，只是用来分类而已。</p>
-<p>&emsp;&emsp;logistic回归由条件概率$P(Y|X)$的形式表示，其中，随便变量X取值为实数，随机变量Y取值为1或0。二项logistic回归模型是如下的条件概率分布：<br>$$<br>\begin{aligned}<br>P(Y=1|x) =&amp; \frac {1}{1+exp(-(w^T\cdot x+b))}\<br>P(Y=0|x) =&amp; 1-P(Y=1|x)\<br>         =&amp; \frac {1}{1+exp(w^T\cdot x +b)}<br>\end{aligned}<br>$$<br>&emsp;&emsp;计算出上式两个概率值后，它们的比值就是logistic回归模型的输出，最后将输入实例x分类到比值大的那一类。</p>
-<p>&emsp;&emsp;若不关心logistic函数作为随机变量的分布函数，该模型计算的就是普通的二项分布，而使用logistic函数使得该二项分布具有一个很好的特性。logistic回归模型计算概率的比值$\frac {p}{1-p}$，这个比值叫做事件发生的几率。取对数后叫做对数几率。因此logistic回归也有人叫做对数几率回归。当分布函数是sigmoid时<br>$$<br>log\frac {p}{1-p} = log \frac {P(Y=1|x)}{P(Y=0|x)}=w^T\cdot x +b<br>$$<br>&emsp;&emsp;这个式子表明，logistic回归模型取对数后是一个线性模型，即它是一个对数线性模型。普通的线性模型$w\cdot x +b$的取值范围可能会非常大，而logistic模型将其值约束在$0\sim 1$之间，从根本上解决了因变量不是连续变量的问题。</p>
-<h3 id="1-3-模型参数估计"><a href="#1-3-模型参数估计" class="headerlink" title="1.3  模型参数估计"></a>1.3  模型参数估计</h3><p>&emsp;&emsp;对logistic回归模型学习用的损失函数是根据极大似然估计推导而来，X服从二项logistic分布，对于有N组数据的训练集，其似然函数为<br>$$<br>\prod_{i=1}^N [\pi(x_i)]^{y_i}[1-\pi(x_i)]^{1-y_i}<br>$$<br>对数似然函数为<br>$$<br>\begin{aligned}<br>L(w) = &amp; \sum_{i=1}^N[y_ilog\pi(x_i)+(1-y_i)log(1-\pi(x_i))]\<br>     = &amp; \sum_{i=1}^N \left [ y_ilog\frac {\pi(x_i)}{1-\pi(x_i)}+log(1-\pi(x_i)) \right ]\<br>     = &amp; \sum_{i=1}^N [y_i(w^T\cdot x_i)-log(1+exp(w^T\cdot x_i)]<br>\end{aligned}<br>$$<br>估计<br>$$<br>\widehat w = arg\underset w {max} L(w)<br>$$<br>得到参数$w$的估计值</p>
-<p>&emsp;&emsp;$L(w)$的最大化是一个无约束的最优化问题，求解这类问题的经典方法是梯度下降和牛顿法。这里求极大化应该用梯度上升，不过原理都是一样的，下面以梯度上升为例，先对$L(w)$求偏导<br>$$<br>\begin{aligned}<br>\frac {\part L(w)}{\part w_k} = &amp; \sum_i^n\left[ x_{ik}y_i -\frac {exp(w^T\cdot x_i)}{1+exp(w^T\cdot x_i)} x_{ik} \right]\<br>        =&amp; \sum_i^n [y_i - \sigma(x_i)]\cdot x_{ik}<br>\end{aligned}<br>$$<br>其中，$x_{ik}$表示第$i$ 个样本向量的第$k$ 维数据。</p>
-<p>&emsp;&emsp;那么，迭代方程为<br>$$<br>\widetilde w_k = w_k + \alpha \sum_i^n[y_i- \sigma(x_i)] \cdot x_{ik}<br>$$<br>其中，$\alpha$为学习率。</p>
+<p>&emsp;&emsp;logistic回归由条件概率$P(Y|X)$的形式表示，其中，随便变量X取值为实数，随机变量Y取值为1或0。二项logistic回归模型是如下的条件概率分布：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+P(Y=1|x) =& \frac {1}{1+exp(-(w^T\cdot x+b))}\\
+P(Y=0|x) =& 1-P(Y=1|x)\\
+         =& \frac {1}{1+exp(w^T\cdot x +b)}
+\end{aligned}</script><p>&emsp;&emsp;计算出上式两个概率值后，它们的比值就是logistic回归模型的输出，最后将输入实例x分类到比值大的那一类。</p>
+<p>&emsp;&emsp;若不关心logistic函数作为随机变量的分布函数，该模型计算的就是普通的二项分布，而使用logistic函数使得该二项分布具有一个很好的特性。logistic回归模型计算概率的比值$\frac {p}{1-p}$，这个比值叫做事件发生的几率。取对数后叫做对数几率。因此logistic回归也有人叫做对数几率回归。当分布函数是sigmoid时</p>
+<script type="math/tex; mode=display">
+log\frac {p}{1-p} = log \frac {P(Y=1|x)}{P(Y=0|x)}=w^T\cdot x +b</script><p>&emsp;&emsp;这个式子表明，logistic回归模型取对数后是一个线性模型，即它是一个对数线性模型。普通的线性模型$w\cdot x +b$的取值范围可能会非常大，而logistic模型将其值约束在$0\sim 1$之间，从根本上解决了因变量不是连续变量的问题。</p>
+<h3 id="1-3-模型参数估计"><a href="#1-3-模型参数估计" class="headerlink" title="1.3  模型参数估计"></a>1.3  模型参数估计</h3><p>&emsp;&emsp;对logistic回归模型学习用的损失函数是根据极大似然估计推导而来，X服从二项logistic分布，对于有N组数据的训练集，其似然函数为</p>
+<script type="math/tex; mode=display">
+\prod_{i=1}^N [\pi(x_i)]^{y_i}[1-\pi(x_i)]^{1-y_i}</script><p>对数似然函数为</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+L(w) = & \sum_{i=1}^N[y_ilog\pi(x_i)+(1-y_i)log(1-\pi(x_i))]\\
+     = & \sum_{i=1}^N \left [ y_ilog\frac {\pi(x_i)}{1-\pi(x_i)}+log(1-\pi(x_i)) \right ]\\
+     = & \sum_{i=1}^N [y_i(w^T\cdot x_i)-log(1+exp(w^T\cdot x_i)]
+\end{aligned}</script><p>估计</p>
+<script type="math/tex; mode=display">
+\widehat w = arg\underset w {max} L(w)</script><p>得到参数$w$的估计值</p>
+<p>&emsp;&emsp;$L(w)$的最大化是一个无约束的最优化问题，求解这类问题的经典方法是梯度下降和牛顿法。这里求极大化应该用梯度上升，不过原理都是一样的，下面以梯度上升为例，先对$L(w)$求偏导</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\frac {\part L(w)}{\part w_k} = & \sum_i^n\left[ x_{ik}y_i -\frac {exp(w^T\cdot x_i)}{1+exp(w^T\cdot x_i)} x_{ik} \right]\\
+        =& \sum_i^n [y_i - \sigma(x_i)]\cdot x_{ik}
+\end{aligned}</script><p>其中，$x_{ik}$表示第$i$ 个样本向量的第$k$ 维数据。</p>
+<p>&emsp;&emsp;那么，迭代方程为</p>
+<script type="math/tex; mode=display">
+\widetilde w_k = w_k + \alpha \sum_i^n[y_i- \sigma(x_i)] \cdot x_{ik}</script><p>其中，$\alpha$为学习率。</p>
 <ul>
 <li><strong>迭代过程向量化</strong></li>
 </ul>
 <h2 id="2-最大熵模型"><a href="#2-最大熵模型" class="headerlink" title="2. 最大熵模型"></a>2. 最大熵模型</h2><h3 id="2-1-最大熵原理"><a href="#2-1-最大熵原理" class="headerlink" title="2.1 最大熵原理"></a>2.1 最大熵原理</h3><p>&emsp;&emsp;最大熵模型根据最大熵原理而来，而最大熵原理是概率模型学习中的一个准则。即在满足已有的事实（约束条件）的情况下，若没有其他更多的信息，那么剩下的一些不能确定的部分都应当作“等可能的”，也就是一个模型如果是等可能的，它的不确定性就很大。熵就是用于表示这种不确定性，因此在学习中，应尽量满足熵最大化的原则。这就是最大熵原理。</p>
-<p>&emsp;&emsp;假设离散随机变量X的概率分布是$P(X)$，其熵的定义如下<br>$$<br>H(P) = - \sum_x P(x)log P(x)<br>$$<br>它满足不等式：<br>$$<br>0 \leqslant H(P) \leqslant log | num(X) |<br>$$<br>当且仅当$X$是均匀分布的时候右边取等号，即均匀分布时的熵最大。此时<br>$$<br>H(P)=-\sum_n\frac 1 n log\frac 1 n = logn<br>$$<br>&emsp;&emsp;关于熵的理解在另一篇笔记中<a href="../熵、交叉熵、极大似然.md">《熵、交叉熵、极大似然》</a>。总的来说，熵表示了模型内部的混乱度，或者说信息量的大小和不确定性的大小。</p>
+<p>&emsp;&emsp;假设离散随机变量X的概率分布是$P(X)$，其熵的定义如下</p>
+<script type="math/tex; mode=display">
+H(P) = - \sum_x P(x)log P(x)</script><p>它满足不等式：</p>
+<script type="math/tex; mode=display">
+0 \leqslant H(P) \leqslant log | num(X) |</script><p>当且仅当$X$是均匀分布的时候右边取等号，即均匀分布时的熵最大。此时</p>
+<script type="math/tex; mode=display">
+H(P)=-\sum_n\frac 1 n log\frac 1 n = logn</script><p>&emsp;&emsp;关于熵的理解在另一篇笔记中<a href="../熵、交叉熵、极大似然.md">《熵、交叉熵、极大似然》</a>。总的来说，熵表示了模型内部的混乱度，或者说信息量的大小和不确定性的大小。</p>
 <h3 id="2-2-最大熵模型"><a href="#2-2-最大熵模型" class="headerlink" title="2.2 最大熵模型"></a>2.2 最大熵模型</h3><p>&emsp;&emsp;依据最大熵原理，在没有获取充足的模型约束情况下。一个好的方法便是在<strong>满足已有约束的条件下</strong>，对未知情况的抉择使用均匀分布去代替，也就是选择一个熵最大（信息量最大，不确定性最大，最混乱）的模型。这就是最大熵模型的思想，可以分解为两步。一、根据已有约束条件，得出所有满足约束的概率模型。二、在得到的模型中选择一个熵最大的模型作为最优模型。</p>
 <p>&emsp;&emsp;假设一个分类模型是一个条件概率分布$P(Y|X)$，表示对于给定输入$X$，模型给出一个分类结果$Y$。已知训练集后，我们能够得到该训练集中$X,Y$的联合分布$P(X,Y)$和边缘分布$P(X)$的经验分布，分别由$\widetilde P(X,Y),\widetilde P(X)$表示。</p>
-<p>&emsp;&emsp;为了添加一些约束条件，最大熵模型引入了特征函数来表达$x$与$y$之间满足的一些约束<br>$$<br>f(x,y) = \begin{cases}<br>1, &amp;x与y满足某约束\<br>0，&amp;否则<br>\end{cases}<br>$$<br>&emsp;&emsp;如何表达该模型满足特征函数的约束条件呢？前面我们由训练数据集可以得出$X,Y$的联合分布与$X$的边缘分布的经验分布，那么首先，模型$P(Y|X)$应满足的条件便是<br>$$<br>\widetilde P(X) \cdot P(Y|X) = \widetilde P(X,Y)<br>$$<br>如果该模型$P(Y|X)$同时满足特征函数的约束，那么特征函数关于上式两端的期望都应该<strong>相同</strong>，特征函数$f(x,y)$关于$\widetilde P(X,Y)$的期望为<br>$$<br>E_{\widetilde P} (f) = \sum_{x,y} \widetilde P(x,y) f(x,y)<br>$$<br>关于$P(Y|X)$与$\widetilde P(X)$的期望为<br>$$<br>E_p(f) = \sum_{x,y} \widetilde P(X) P(Y|X) f(x,y)<br>$$<br>&emsp;&emsp;得到关于特征函数的约束为<br>$$<br>E_{\widetilde P} (f)= E_P(f)<br>$$</p>
-<ul>
+<p>&emsp;&emsp;为了添加一些约束条件，最大熵模型引入了特征函数来表达$x$与$y$之间满足的一些约束</p>
+<script type="math/tex; mode=display">
+f(x,y) = \begin{cases}
+1, &x与y满足某约束\\
+0，&否则
+\end{cases}</script><p>&emsp;&emsp;如何表达该模型满足特征函数的约束条件呢？前面我们由训练数据集可以得出$X,Y$的联合分布与$X$的边缘分布的经验分布，那么首先，模型$P(Y|X)$应满足的条件便是</p>
+<script type="math/tex; mode=display">
+\widetilde P(X) \cdot P(Y|X) = \widetilde P(X,Y)</script><p>如果该模型$P(Y|X)$同时满足特征函数的约束，那么特征函数关于上式两端的期望都应该<strong>相同</strong>，特征函数$f(x,y)$关于$\widetilde P(X,Y)$的期望为</p>
+<script type="math/tex; mode=display">
+E_{\widetilde P} (f) = \sum_{x,y} \widetilde P(x,y) f(x,y)</script><p>关于$P(Y|X)$与$\widetilde P(X)$的期望为</p>
+<script type="math/tex; mode=display">
+E_p(f) = \sum_{x,y} \widetilde P(X) P(Y|X) f(x,y)</script><p>&emsp;&emsp;得到关于特征函数的约束为</p>
+<script type="math/tex; mode=display">
+E_{\widetilde P} (f)= E_P(f)</script><ul>
 <li>最大熵模型定义</li>
 </ul>
-<p>&emsp;&emsp;假设满足所有特征函数的模型集合为<br>$$<br>C \equiv  { P\in \mathbb{P}|E_{\widetilde P} (f_i)= E_P(f_i) }<br>$$<br>&emsp;&emsp;在得到满足特征函数约束的模型集合后，计算其熵的大小，选择其中熵最大的模型即是最优模型，$P(Y|X)$的条件熵为<br>$$<br>H(P) = -\sum_{x,y} \widetilde P(x)P(y|x) log P(y|x)<br>$$<br>则，最大熵模型$p^<em>$为<br>$$<br>P^</em> = arg\underset {P\in C} {max} H(P)<br>$$</p>
-<h3 id="2-3-最大熵模型的学习"><a href="#2-3-最大熵模型的学习" class="headerlink" title="2.3 最大熵模型的学习"></a>2.3 最大熵模型的学习</h3><p>&emsp;&emsp;得到最大熵模型的定义后，便可对该模型进行学习，而最大熵模型学习的过程实际上就是其求解过程，因为通过学习选择的模型就是最大熵模型。最大熵模型的定义分为两部分，首先是提出约束条件，再选择最优模型。因此最大熵模型的学习可以形式化为约束最优化问题。</p>
-<p>&emsp;&emsp;形式化为如下最优化问题：<br>$$<br>\begin{aligned}<br>\underset {P\in C} {max} ;;; &amp;H(P) = -\sum_{x,y} \widetilde P(x)P(y|x) log P(y|x) \<br>s.t. ;;;;                   &amp;E_P(f_i) = E_{\widetilde P}(f_i), ;;;;i=1,2,\cdots, n \<br>&amp;\sum_yP(y|x) =1<br>\end{aligned}<br>$$<br>&emsp;&emsp;依据凸优化，我们常常喜欢处理凸函数，所以将原问题转化为等价的最小化问题：<br>$$<br>\begin{aligned}<br>\underset {P\in C} {min} ;;; &amp;-H(P) = \sum_{x,y} \widetilde P(x)P(y|x) log P(y|x) \<br>s.t. ;;;;                   &amp;E_P(f_i) = E_{\widetilde P}(f_i), ;;;;i=1,2,\cdots, n \<br>&amp;\sum_yP(y|x) =1<br>\end{aligned}<br>$$<br>&emsp;&emsp;这是一个典型的线性规划问题，求解这种带约束的线性规划问题，通常的做法都是将其转化为无约束的最优化问题，而求解这个无约束的最优化问题用的方法又常常是求解其对偶问题。带约束问题转化为无约束问题的方法就是我们常用的拉格朗日乘数法：<br>$$<br>\begin{aligned}<br>L(P,w) =&amp; -H(P) +w_0(1-\sum_yP(y|x))+\sum_{i=1}^nw_i(E_p(f_i) - E_{\widetilde P}(f_i))\<br>       =&amp; \sum_{x,y}\widetilde P(x) P(y|x) log P(Y|x) +w_0(1-\sum_yP(y|x))\<br>       + &amp;\sum_{i=1}^n w_i \left (  \sum_{x,y} \widetilde P(x,y) logP(y|x) + \sum_{x,y} \widetilde P(x) P(y|x) log P(y|x)  \right )<br>\end{aligned}<br>$$<br>&emsp;&emsp;得到无约束的广义拉格朗日函数后，如果按照普通的拉格朗日乘数法求极值的步骤，现在就应该对$P,w$求偏导了，然后解一大堆方程组。但是在这个问题中，对$w$求偏导的难度较大。其实对$w$求偏导后的结果就是原问题中的约束条件，里面各种$P$，并且需要求出$P$满足的各种约束，复杂度很高。</p>
-<p>&emsp;&emsp;因此继续将这个问题拆解为两个问题：先求$\underset w {max};;;L(P,w)$，再计算<br>$$<br>\underset {P\in C} {min} ;\underset w {max};;;L(P,w)<br>$$<br>&emsp;&emsp;这个函数称为广义拉格朗日函数的极小极大问题，也叫原始问题。这个函数与原拉格朗日函数是等价的，因为在求对关于$w$的极大化时，若该问题中的约束条件不满足，则$w$系数后面的内容就不为0，那么极大化这个函数使得$w$会往正无穷或负无穷变化，最终使得函数极大化结果为正无穷。若满足约束条件的话，这个函数始终等于$-H(P)$。于是这两步分解，使得函数满足了约束条件，同时也将对$P,w$的处理分解开来，让我们有机会处理这个问题。具体的分析写在单独的对偶性分析里，这里不再赘述。关于对偶性可以参数李航老师书后面的附录，和Convex Optimization Overview (cnt’d) 及相关凸优化书籍。</p>
+<p>&emsp;&emsp;假设满足所有特征函数的模型集合为</p>
+<script type="math/tex; mode=display">
+C \equiv  \{ P\in \mathbb{P}|E_{\widetilde P} (f_i)= E_P(f_i) \}</script><p>&emsp;&emsp;在得到满足特征函数约束的模型集合后，计算其熵的大小，选择其中熵最大的模型即是最优模型，$P(Y|X)$的条件熵为</p>
+<script type="math/tex; mode=display">
+H(P) = -\sum_{x,y} \widetilde P(x)P(y|x) log P(y|x)</script><p>则，最大熵模型$p^*$为</p>
+<script type="math/tex; mode=display">
+P^* = arg\underset {P\in C} {max} H(P)</script><h3 id="2-3-最大熵模型的学习"><a href="#2-3-最大熵模型的学习" class="headerlink" title="2.3 最大熵模型的学习"></a>2.3 最大熵模型的学习</h3><p>&emsp;&emsp;得到最大熵模型的定义后，便可对该模型进行学习，而最大熵模型学习的过程实际上就是其求解过程，因为通过学习选择的模型就是最大熵模型。最大熵模型的定义分为两部分，首先是提出约束条件，再选择最优模型。因此最大熵模型的学习可以形式化为约束最优化问题。</p>
+<p>&emsp;&emsp;形式化为如下最优化问题：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\underset {P\in C} {max} \;\;\; &H(P) = -\sum_{x,y} \widetilde P(x)P(y|x) log P(y|x) \\
+s.t. \;\;\;\;                   &E_P(f_i) = E_{\widetilde P}(f_i), \;\;\;\;i=1,2,\cdots, n \\
+&\sum_yP(y|x) =1
+\end{aligned}</script><p>&emsp;&emsp;依据凸优化，我们常常喜欢处理凸函数，所以将原问题转化为等价的最小化问题：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\underset {P\in C} {min} \;\;\; &-H(P) = \sum_{x,y} \widetilde P(x)P(y|x) log P(y|x) \\
+s.t. \;\;\;\;                   &E_P(f_i) = E_{\widetilde P}(f_i), \;\;\;\;i=1,2,\cdots, n \\
+&\sum_yP(y|x) =1
+\end{aligned}</script><p>&emsp;&emsp;这是一个典型的线性规划问题，求解这种带约束的线性规划问题，通常的做法都是将其转化为无约束的最优化问题，而求解这个无约束的最优化问题用的方法又常常是求解其对偶问题。带约束问题转化为无约束问题的方法就是我们常用的拉格朗日乘数法：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+L(P,w) =& -H(P) +w_0(1-\sum_yP(y|x))+\sum_{i=1}^nw_i(E_p(f_i) - E_{\widetilde P}(f_i))\\
+       =& \sum_{x,y}\widetilde P(x) P(y|x) log P(Y|x) +w_0(1-\sum_yP(y|x))\\
+       + &\sum_{i=1}^n w_i \left (  \sum_{x,y} \widetilde P(x,y) logP(y|x) + \sum_{x,y} \widetilde P(x) P(y|x) log P(y|x)  \right )
+\end{aligned}</script><p>&emsp;&emsp;得到无约束的广义拉格朗日函数后，如果按照普通的拉格朗日乘数法求极值的步骤，现在就应该对$P,w$求偏导了，然后解一大堆方程组。但是在这个问题中，对$w$求偏导的难度较大。其实对$w$求偏导后的结果就是原问题中的约束条件，里面各种$P$，并且需要求出$P$满足的各种约束，复杂度很高。</p>
+<p>&emsp;&emsp;因此继续将这个问题拆解为两个问题：先求$\underset w {max}\;\;\;L(P,w)$，再计算</p>
+<script type="math/tex; mode=display">
+\underset {P\in C} {min} \;\underset w {max}\;\;\;L(P,w)</script><p>&emsp;&emsp;这个函数称为广义拉格朗日函数的极小极大问题，也叫原始问题。这个函数与原拉格朗日函数是等价的，因为在求对关于$w$的极大化时，若该问题中的约束条件不满足，则$w$系数后面的内容就不为0，那么极大化这个函数使得$w$会往正无穷或负无穷变化，最终使得函数极大化结果为正无穷。若满足约束条件的话，这个函数始终等于$-H(P)$。于是这两步分解，使得函数满足了约束条件，同时也将对$P,w$的处理分解开来，让我们有机会处理这个问题。具体的分析写在单独的对偶性分析里，这里不再赘述。关于对偶性可以参数李航老师书后面的附录，和Convex Optimization Overview (cnt’d) 及相关凸优化书籍。</p>
 <p>&emsp;&emsp;前面说了，对$w$求偏导的结果十分复杂，若直接求解极小极大问题对优化工作量没有帮助。根据凸优化理论，$L(P,w)$是凸函数，因此我们可以求解其对偶问题来减少工作量，且对偶问题的解与原始问题的解是等价的——满足KKT条件。</p>
-<p>其对偶问题是<br>$$<br>\underset w {max}; \underset {P\in C} {min} ; L(P,w)<br>$$<br>如此，我们可以先对$P$求导，对它求导的结果看起来会舒服很多，其中极小化得到的函数是关于$w$的函数，它就是对偶函数，记为<br>$$<br>\Psi(w) = \underset {P\in C} {min} ; L(P,w) = L(P_w,w)<br>$$<br>它的解自然是一个关于$w$的概率模型$P$，记作<br>$$<br>P_w = arg \underset {P\in C} {min} ; L(P,w) = P_w(y|x)<br>$$<br>再用外部的极大化确定$w$的参数取值，带入$P_w$即得到最大熵模型。</p>
+<p>其对偶问题是</p>
+<script type="math/tex; mode=display">
+\underset w {max}\; \underset {P\in C} {min} \; L(P,w)</script><p>如此，我们可以先对$P$求导，对它求导的结果看起来会舒服很多，其中极小化得到的函数是关于$w$的函数，它就是对偶函数，记为</p>
+<script type="math/tex; mode=display">
+\Psi(w) = \underset {P\in C} {min} \; L(P,w) = L(P_w,w)</script><p>它的解自然是一个关于$w$的概率模型$P$，记作</p>
+<script type="math/tex; mode=display">
+P_w = arg \underset {P\in C} {min} \; L(P,w) = P_w(y|x)</script><p>再用外部的极大化确定$w$的参数取值，带入$P_w$即得到最大熵模型。</p>
 <p>&emsp;&emsp;具体过程如下：</p>
 <ol>
 <li>求解内部极小问题</li>
 </ol>
-<p>&emsp;&emsp;对$P$求偏导<br>$$<br>\begin{aligned}<br>   \frac {\partial L(P,x)} {\partial P(y|x)} = &amp; \sum_y \widetilde P(x) (logP(y|x)+1)-\sum_y w_0 -\sum_{x,y} \left (  \widetilde P(x) \sum_{i=1} ^n w_i f_i(x,y)  \right)\<br>   =&amp; \sum_{x,y} \widetilde P(x) \left ( logP(y|x) + 1 -\sum_x \widetilde P(x)\sum_y w_0 -\sum_{i=1}^n w_if_i(x,y)  \right)\<br>   =&amp; \sum_{x,y} \widetilde P(x) \left ( logP(y|x) + 1 - w_0 -\sum_{i=1}^n w_if_i(x,y)  \right)\<br>   \end {aligned}<br>$$<br>   令该式为0，$\widetilde P(x) &gt; 0$解得<br>$$<br>   P(y|x) = exp \left ( \sum_{i=1}^n w_i f_i(x,y) + w_0 -1  \right)= \frac {exp \left ( \sum_{i=1}^n w_i f_i(x,y) \right)} {exp(1-w_0)}<br>$$<br>&emsp;&emsp;得到的这个$P(y|x)$可能并不是一个真正的概率，因为求解过程中消去了一些变量，比如$\widetilde P(x)$。因此，它应该只是表达了所有可能取值之间的一个比值关系，是一个非规范化概率，所有对其规范化，由于<br>$$<br>   \sum_yP(y|x) = 1<br>$$<br>   得到规范化因子<br>$$<br>   Z_w(x) = \sum_y exp\left (\sum_{i=1} {n} w_i f_i (x,y)\right)<br>$$<br>   ps: $exp(1-w_0)$是常数会被约去</p>
-<p> &emsp;&emsp;  最终得到<br>$$<br>   P_w(y|x) = \frac 1 {Z_w(x)} exp\left (\sum_{i=1} {n} w_i f_i (x,y)\right)<br>$$</p>
-<ol start="2">
+<p>&emsp;&emsp;对$P$求偏导</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+   \frac {\partial L(P,x)} {\partial P(y|x)} = & \sum_y \widetilde P(x) (logP(y|x)+1)-\sum_y w_0 -\sum_{x,y} \left (  \widetilde P(x) \sum_{i=1} ^n w_i f_i(x,y)  \right)\\
+   =& \sum_{x,y} \widetilde P(x) \left ( logP(y|x) + 1 -\sum_x \widetilde P(x)\sum_y w_0 -\sum_{i=1}^n w_if_i(x,y)  \right)\\
+   =& \sum_{x,y} \widetilde P(x) \left ( logP(y|x) + 1 - w_0 -\sum_{i=1}^n w_if_i(x,y)  \right)\\
+   \end {aligned}</script><p>   令该式为0，$\widetilde P(x) &gt; 0$解得</p>
+<script type="math/tex; mode=display">
+   P(y|x) = exp \left ( \sum_{i=1}^n w_i f_i(x,y) + w_0 -1  \right)= \frac {exp \left ( \sum_{i=1}^n w_i f_i(x,y) \right)} {exp(1-w_0)}</script><p>&emsp;&emsp;得到的这个$P(y|x)$可能并不是一个真正的概率，因为求解过程中消去了一些变量，比如$\widetilde P(x)$。因此，它应该只是表达了所有可能取值之间的一个比值关系，是一个非规范化概率，所有对其规范化，由于</p>
+<script type="math/tex; mode=display">
+   \sum_yP(y|x) = 1</script><p>   得到规范化因子</p>
+<script type="math/tex; mode=display">
+   Z_w(x) = \sum_y exp\left (\sum_{i=1} {n} w_i f_i (x,y)\right)</script><p>   ps: $exp(1-w_0)$是常数会被约去</p>
+<p> &emsp;&emsp;  最终得到</p>
+<script type="math/tex; mode=display">
+   P_w(y|x) = \frac 1 {Z_w(x)} exp\left (\sum_{i=1} {n} w_i f_i (x,y)\right)</script><ol>
 <li>最大化对偶函数$\Psi(w)$</li>
 </ol>
-<p>&emsp;&emsp;将得到的结果带入$\Psi(w) = L(P_w,w)$，接着求解对偶函数$\Psi(w)$的极大化问题<br>$$<br>\underset w {max} \Psi(w)<br>$$<br>其解为<br>$$<br>w^* = arg \underset w {max} ; \Psi(w)<br>$$<br>求解方法同样是对$w$求偏导令为0即可。</p>
+<p>&emsp;&emsp;将得到的结果带入$\Psi(w) = L(P_w,w)$，接着求解对偶函数$\Psi(w)$的极大化问题</p>
+<script type="math/tex; mode=display">
+\underset w {max} \Psi(w)</script><p>其解为</p>
+<script type="math/tex; mode=display">
+w^* = arg \underset w {max} \; \Psi(w)</script><p>求解方法同样是对$w$求偏导令为0即可。</p>
 <p>&emsp;&emsp;得到参数$w^*$后带入$P_w(y|x)$即得最大熵模型。</p>
-<h2 id="3-极大似然估计"><a href="#3-极大似然估计" class="headerlink" title="3. 极大似然估计"></a>3. 极大似然估计</h2><p>&emsp;&emsp;下面证明最大熵模型的极大似然估计等价与上面用到的对偶函数的极大化。最大熵的极大似然函数使用的是对数似然函数，关于这个似然函数在我的另一篇笔记<a href="../熵、交叉熵、极大似然.md">《熵、交叉熵、极大似然》</a>中有提到和推导。下面直接给出其形式<br>$$<br>L_{\widetilde P}(P) = log \prod_{x,y}P(y|x)^{\widetilde P(x,y)} = \sum_{x,y} \widetilde P(x,y) log P(y|x)<br>$$<br>将$P_w(y|x)$带入<br>$$<br>\begin{aligned}<br>L_{\widetilde P}(P_w) =&amp; \sum_{x,y} \widetilde P(x,y) \sum_{i=1} ^n w_i f_i(x,y) -\sum_{x,y} \widetilde P(x,y)  log Z_w(x)\<br>=&amp; \sum_{x,y} \widetilde P(x,y) \sum_{i=1} ^n w_i f_i(x,y) -\sum_x\widetilde P(x) log Z_w(x)<br>\end{aligned}<br>$$<br>&emsp;&emsp;对于对偶函数<br>$$<br>\begin{aligned}<br>\Psi(w) =&amp; \sum_{x,y} \widetilde P(x) P_w(y|x)log P_w(y|x) + \sum_{i=1} ^n w_i \left (  \sum_{x,y} \widetilde P(x,y) f_i(x,y) - \sum_{x,y} \widetilde P(x) P_w(y|x)f_i(x,y)  \right)\<br>=&amp;\sum_{x,y} \widetilde P(x,y) \sum_{i=1}^n w_i f_i(x,y) +\sum_{x,y} \widetilde P(x) P_w(y|x) \left ( logP_w(y|x) - \sum_{i=1}^n w_i f_i (x,y)  \right)\<br>=&amp; \sum_{x,y} \widetilde P(x,y) \sum_{i=1} ^n w_i f_i(x,y) -\sum_{x,y} \widetilde P(x,y)  log Z_w(x)\<br>=&amp; \sum_{x,y} \widetilde P(x,y) \sum_{i=1} ^n w_i f_i(x,y) -\sum_x\widetilde P(x) log Z_w(x)<br>\end{aligned}<br>$$<br>两个过程的最后一步都用到$\sum_yP(y|x) = 1$。</p>
+<h2 id="3-极大似然估计"><a href="#3-极大似然估计" class="headerlink" title="3. 极大似然估计"></a>3. 极大似然估计</h2><p>&emsp;&emsp;下面证明最大熵模型的极大似然估计等价与上面用到的对偶函数的极大化。最大熵的极大似然函数使用的是对数似然函数，关于这个似然函数在我的另一篇笔记<a href="../熵、交叉熵、极大似然.md">《熵、交叉熵、极大似然》</a>中有提到和推导。下面直接给出其形式</p>
+<script type="math/tex; mode=display">
+L_{\widetilde P}(P) = log \prod_{x,y}P(y|x)^{\widetilde P(x,y)} = \sum_{x,y} \widetilde P(x,y) log P(y|x)</script><p>将$P_w(y|x)$带入</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+L_{\widetilde P}(P_w) =& \sum_{x,y} \widetilde P(x,y) \sum_{i=1} ^n w_i f_i(x,y) -\sum_{x,y} \widetilde P(x,y)  log Z_w(x)\\
+=& \sum_{x,y} \widetilde P(x,y) \sum_{i=1} ^n w_i f_i(x,y) -\sum_x\widetilde P(x) log Z_w(x)
+\end{aligned}</script><p>&emsp;&emsp;对于对偶函数</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\Psi(w) =& \sum_{x,y} \widetilde P(x) P_w(y|x)log P_w(y|x) + \sum_{i=1} ^n w_i \left (  \sum_{x,y} \widetilde P(x,y) f_i(x,y) - \sum_{x,y} \widetilde P(x) P_w(y|x)f_i(x,y)  \right)\\
+=&\sum_{x,y} \widetilde P(x,y) \sum_{i=1}^n w_i f_i(x,y) +\sum_{x,y} \widetilde P(x) P_w(y|x) \left ( logP_w(y|x) - \sum_{i=1}^n w_i f_i (x,y)  \right)\\
+=& \sum_{x,y} \widetilde P(x,y) \sum_{i=1} ^n w_i f_i(x,y) -\sum_{x,y} \widetilde P(x,y)  log Z_w(x)\\
+=& \sum_{x,y} \widetilde P(x,y) \sum_{i=1} ^n w_i f_i(x,y) -\sum_x\widetilde P(x) log Z_w(x)
+\end{aligned}</script><p>两个过程的最后一步都用到$\sum_yP(y|x) = 1$。</p>
 <p>这样，最大熵模型的学习过程就转化为求解对数似然函数极大化或对偶函数极大化的问题。</p>
 <h2 id="4-最大熵与logistic回归的关系"><a href="#4-最大熵与logistic回归的关系" class="headerlink" title="4. 最大熵与logistic回归的关系"></a>4. 最大熵与logistic回归的关系</h2><p>&emsp;&emsp;在本章中，logistic回归和最大熵模型放在一起，那么它们有什么关系呢。实际上，最大熵模型可以退化为logistic回归模型。</p>
-<p>&emsp;&emsp;首先限定y是一个二元变量，不失一般性，假设取值为0,1.即$y\in { 0,1}$，再定义关于x，y的特征函数为<br>$$<br>f(x,y) = \begin{cases}<br>g(x) &amp; y=1\<br>0&amp;y=0<br>\end{cases}<br>$$<br>它与最大熵模型特征函数的区别在于，最大熵模型特征函数是限定了$x,y$之间的关系，而这里显然没有。将其带入最大熵模型<br>$$<br>\begin{aligned}<br>P(y=1|x) = &amp;\frac {exp(w\cdot f(x,1))} {exp(w\cdot f(x,0))+exp(w\cdot f(x,1))}\<br>=&amp; \frac {exp(w\cdot g(x)} {exp(0)+exp(w\cdot g(x))}\<br>=&amp; \frac 1 {exp(-w\cdot g(x))+1}\<br>\end{aligned}<br>$$<br>当$g(x)$为sigmoid函数时，这就是logistic回归模型。</p>
+<p>&emsp;&emsp;首先限定y是一个二元变量，不失一般性，假设取值为0,1.即$y\in { 0,1}$，再定义关于x，y的特征函数为</p>
+<script type="math/tex; mode=display">
+f(x,y) = \begin{cases}
+g(x) & y=1\\
+0&y=0
+\end{cases}</script><p>它与最大熵模型特征函数的区别在于，最大熵模型特征函数是限定了$x,y$之间的关系，而这里显然没有。将其带入最大熵模型</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+P(y=1|x) = &\frac {exp(w\cdot f(x,1))} {exp(w\cdot f(x,0))+exp(w\cdot f(x,1))}\\
+=& \frac {exp(w\cdot g(x)} {exp(0)+exp(w\cdot g(x))}\\
+=& \frac 1 {exp(-w\cdot g(x))+1}\\
+\end{aligned}</script><p>当$g(x)$为sigmoid函数时，这就是logistic回归模型。</p>
 <p>同理可计算$P(y=0|x)$。</p>
 <p>关于模型的最优化算法单独写一篇。</p>
 <h2 id="5-总结"><a href="#5-总结" class="headerlink" title="5. 总结"></a>5. 总结</h2><p>&emsp;&emsp;logistic回归是一个对数线性模型，它与线性模型相比有更好的特性，可以处理范围波动较大的数据。其学习通过极大似然估计，且其似然函数形如伯努利分布的似然函数。</p>
