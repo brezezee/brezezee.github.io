@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next mist use-motion" lang="th_Hans">
+<html class="theme-next mist use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.9.0">
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -87,10 +87,10 @@
 <meta name="keywords" content="SVM, SMO">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SVM推导">
-<meta property="og:url" content="http://yoursite.com/2019/08/14/SVM推导/index.html">
+<meta property="og:url" content="https://brezezee.github.io/2019/08/14/SVM推导/index.html">
 <meta property="og:site_name" content="brezezee">
 <meta property="og:description" content="&amp;emsp;&amp;emsp;支持向量机是一种二分类模型，它以间隔最大作为优化目标，因此它比感知机仅仅以误分类推动的模型要优胜不少。数据线性可分时，SVM直接以间隔最大训练出一个线性分类模型。当数据线性不可分时，SVM通过软间隔最大化解决这种问题。此时的模型仍是一个线性模型，若采用核方法和软间隔最大化，则得到一个非线性模型。可以看到SVM在解决变复杂的情况时是逐步改进的。">
-<meta property="og:locale" content="th_Hans">
+<meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://i.loli.net/2019/08/14/i2t9IzB1c7qQJVv.jpg">
 <meta property="og:image" content="https://i.loli.net/2019/08/27/PyvipKD32dVbUHT.png">
 <meta property="og:image" content="https://i.loli.net/2019/08/14/MLGToeqSHXImVQC.png">
@@ -111,7 +111,7 @@
     root: '/',
     scheme: 'Mist',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":true},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -131,7 +131,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/08/14/SVM推导/">
+  <link rel="canonical" href="https://brezezee.github.io/2019/08/14/SVM推导/">
 
 
 
@@ -149,7 +149,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="th_Hans">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
   
   
@@ -161,7 +161,7 @@
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
+  <div class="site-meta custom-logo">
     
 
     <div class="custom-logo-site-title">
@@ -195,7 +195,7 @@
         <li class="menu-item menu-item-home">
           <a href rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
             
             Home
           </a>
@@ -274,7 +274,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com">
+    <link itemprop="mainEntityOfPage" href="https://brezezee.github.io">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="brezezee">
@@ -326,7 +326,7 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="../../../../source/categories/机器学习/" itemprop="url" rel="index">
+                  <a href="../../../../categories/meachine-learning/" itemprop="url" rel="index">
                     <span itemprop="name">机器学习</span>
                   </a>
                 </span>
@@ -346,6 +346,25 @@
 
           
 
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  
+                </span>
+              
+
+              
+
+              
+            </div>
           
 
           
@@ -766,7 +785,7 @@ K(x,z) = (x\cdot z)^2</script><p>它是关于输入向量的内积的平方函�
       
         <div class="post-tags">
           
-            <a href="../../../../source/tags/SVM-SMO/" rel="tag"># SVM, SMO</a>
+            <a href="../../../../tags/SVM-SMO/" rel="tag"># SVM, SMO</a>
           
         </div>
       
@@ -837,6 +856,8 @@ K(x,z) = (x\cdot z)^2</script><p>它是关于输入向量的内积的平方函�
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
     
     <div class="sidebar-inner">
 
@@ -923,7 +944,7 @@ K(x,z) = (x\cdot z)^2</script><p>它是关于输入向量的内积的平方函�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-定义"><span class="nav-number">1.</span> <span class="nav-text">1. 定义</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-2-SMO求解方法"><span class="nav-number">1.0.1.</span> <span class="nav-text">2.2.2 SMO求解方法</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#3-线性不可分SVM"><span class="nav-number">2.</span> <span class="nav-text">3. 线性不可分SVM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-松弛变量"><span class="nav-number">2.1.</span> <span class="nav-text">3.1 松弛变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-求解对偶问题"><span class="nav-number">2.2.</span> <span class="nav-text">3.2 求解对偶问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-支持向量求解参数-w-b"><span class="nav-number">2.3.</span> <span class="nav-text">3.3 支持向量求解参数$w,b$</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-非线性SVM"><span class="nav-number">3.</span> <span class="nav-text">4. 非线性SVM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Reference"><span class="nav-number">4.</span> <span class="nav-text">5. Reference:</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-定义"><span class="nav-text">1. 定义</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-2-SMO求解方法"><span class="nav-text">2.2.2 SMO求解方法</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#3-线性不可分SVM"><span class="nav-text">3. 线性不可分SVM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-松弛变量"><span class="nav-text">3.1 松弛变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-求解对偶问题"><span class="nav-text">3.2 求解对偶问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-支持向量求解参数-w-b"><span class="nav-text">3.3 支持向量求解参数$w,b$</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-非线性SVM"><span class="nav-text">4. 非线性SVM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Reference"><span class="nav-text">5. Reference:</span></a></li></div>
             
 
           </div>
@@ -949,6 +970,15 @@ K(x,z) = (x\cdot z)^2</script><p>它是关于输入向量的内积的平方函�
   </span>
   <span class="author" itemprop="copyrightHolder">brezezee</span>
 
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count"></span>
   
 </div>
 
@@ -1118,6 +1148,21 @@ K(x,z) = (x\cdot z)^2</script><p>它是关于输入向量的内积的平方函�
   
 
   
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
 
   
   

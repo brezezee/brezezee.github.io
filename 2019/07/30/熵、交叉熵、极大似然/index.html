@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next mist use-motion" lang="th_Hans">
+<html class="theme-next mist use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.9.0">
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -87,10 +87,10 @@
 <meta name="keywords" content="熵, 交叉熵, 似然函数">
 <meta property="og:type" content="article">
 <meta property="og:title" content="熵、交叉熵及似然函数的关系">
-<meta property="og:url" content="http://yoursite.com/2019/07/30/熵、交叉熵、极大似然/index.html">
+<meta property="og:url" content="https://brezezee.github.io/2019/07/30/熵、交叉熵、极大似然/index.html">
 <meta property="og:site_name" content="brezezee">
 <meta property="og:description" content="熵、交叉熵及似然函数的关系1. 熵1.1 信息量&amp;emsp;&amp;emsp;信息量：最初的定义是信号取值数量m的对数为信息量$I$,即 $I=log_2m$。这是与比特数相关的，比如一个信号只有两个取值，那么用1个bit便能将其表示。后来著名的香农指出，得到的信号取值结果是随机的，因此其信息量应该也是关于概率的函数，于是得到随机变量$X$的信息量">
-<meta property="og:locale" content="th_Hans">
+<meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-08-27T10:08:54.763Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="熵、交叉熵及似然函数的关系">
@@ -104,7 +104,7 @@
     root: '/',
     scheme: 'Mist',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":true},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -124,7 +124,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/07/30/熵、交叉熵、极大似然/">
+  <link rel="canonical" href="https://brezezee.github.io/2019/07/30/熵、交叉熵、极大似然/">
 
 
 
@@ -142,7 +142,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="th_Hans">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
   
   
@@ -154,7 +154,7 @@
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
+  <div class="site-meta custom-logo">
     
 
     <div class="custom-logo-site-title">
@@ -188,7 +188,7 @@
         <li class="menu-item menu-item-home">
           <a href rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
             
             Home
           </a>
@@ -267,7 +267,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com">
+    <link itemprop="mainEntityOfPage" href="https://brezezee.github.io">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="brezezee">
@@ -319,7 +319,7 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="../../../../source/categories/机器学习/" itemprop="url" rel="index">
+                  <a href="../../../../categories/meachine-learning/" itemprop="url" rel="index">
                     <span itemprop="name">机器学习</span>
                   </a>
                 </span>
@@ -339,6 +339,25 @@
 
           
 
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  
+                </span>
+              
+
+              
+
+              
+            </div>
           
 
           
@@ -457,7 +476,7 @@ CrossEntropy=-\sum_{i=1}^n (y_i\cdot log (h(x_i)) +(1-y_i) \cdot log (1-(h(x_i))
       
         <div class="post-tags">
           
-            <a href="../../../../source/tags/熵-交叉熵-似然函数/" rel="tag"># 熵, 交叉熵, 似然函数</a>
+            <a href="../../../../tags/熵-交叉熵-似然函数/" rel="tag"># 熵, 交叉熵, 似然函数</a>
           
         </div>
       
@@ -528,6 +547,8 @@ CrossEntropy=-\sum_{i=1}^n (y_i\cdot log (h(x_i)) +(1-y_i) \cdot log (1-(h(x_i))
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
     
     <div class="sidebar-inner">
 
@@ -614,7 +635,7 @@ CrossEntropy=-\sum_{i=1}^n (y_i\cdot log (h(x_i)) +(1-y_i) \cdot log (1-(h(x_i))
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#熵、交叉熵及似然函数的关系"><span class="nav-number">1.</span> <span class="nav-text">熵、交叉熵及似然函数的关系</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-熵"><span class="nav-number">1.1.</span> <span class="nav-text">1. 熵</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-信息量"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1 信息量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-熵"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.3 熵</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-最大熵中的极大似然函数"><span class="nav-number">1.2.</span> <span class="nav-text">2. 最大熵中的极大似然函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-指数型似然函数推导"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 指数型似然函数推导</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-最大熵中的似然函数推导"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 最大熵中的似然函数推导</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-交叉熵与极大似然"><span class="nav-number">1.3.</span> <span class="nav-text">3. 交叉熵与极大似然</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-联系"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 联系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-交叉熵损失函数"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2 交叉熵损失函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference："><span class="nav-number">1.4.</span> <span class="nav-text">Reference：</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#熵、交叉熵及似然函数的关系"><span class="nav-text">熵、交叉熵及似然函数的关系</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-熵"><span class="nav-text">1. 熵</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-信息量"><span class="nav-text">1.1 信息量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-熵"><span class="nav-text">1.3 熵</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-最大熵中的极大似然函数"><span class="nav-text">2. 最大熵中的极大似然函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-指数型似然函数推导"><span class="nav-text">2.1 指数型似然函数推导</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-最大熵中的似然函数推导"><span class="nav-text">2.2 最大熵中的似然函数推导</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-交叉熵与极大似然"><span class="nav-text">3. 交叉熵与极大似然</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-联系"><span class="nav-text">3.1 联系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-交叉熵损失函数"><span class="nav-text">3.2 交叉熵损失函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference："><span class="nav-text">Reference：</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -640,6 +661,15 @@ CrossEntropy=-\sum_{i=1}^n (y_i\cdot log (h(x_i)) +(1-y_i) \cdot log (1-(h(x_i))
   </span>
   <span class="author" itemprop="copyrightHolder">brezezee</span>
 
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count"></span>
   
 </div>
 
@@ -809,6 +839,21 @@ CrossEntropy=-\sum_{i=1}^n (y_i\cdot log (h(x_i)) +(1-y_i) \cdot log (1-(h(x_i))
   
 
   
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
 
   
   
