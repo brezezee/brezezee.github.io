@@ -5,9 +5,9 @@
   
 
 
-<html class="theme-next muse use-motion" lang="th_Hans">
+<html class="theme-next mist use-motion" lang="th_Hans">
 <head><meta name="generator" content="Hexo 3.9.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
@@ -72,7 +72,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="熵, 交叉熵, 似然函数,">
 
 
 
@@ -84,16 +84,16 @@
 
 
 <meta name="description" content="熵、交叉熵及似然函数的关系1. 熵1.1 信息量&amp;emsp;&amp;emsp;信息量：最初的定义是信号取值数量m的对数为信息量$I$,即 $I=log_2m$。这是与比特数相关的，比如一个信号只有两个取值，那么用1个bit便能将其表示。后来著名的香农指出，得到的信号取值结果是随机的，因此其信息量应该也是关于概率的函数，于是得到随机变量$X$的信息量">
-<meta name="keywords" content="ml,dl,cv,ai">
+<meta name="keywords" content="熵, 交叉熵, 似然函数">
 <meta property="og:type" content="article">
-<meta property="og:title" content="brezezee">
+<meta property="og:title" content="熵、交叉熵及似然函数的关系">
 <meta property="og:url" content="http://yoursite.com/2019/07/30/熵、交叉熵、极大似然/index.html">
 <meta property="og:site_name" content="brezezee">
 <meta property="og:description" content="熵、交叉熵及似然函数的关系1. 熵1.1 信息量&amp;emsp;&amp;emsp;信息量：最初的定义是信号取值数量m的对数为信息量$I$,即 $I=log_2m$。这是与比特数相关的，比如一个信号只有两个取值，那么用1个bit便能将其表示。后来著名的香农指出，得到的信号取值结果是随机的，因此其信息量应该也是关于概率的函数，于是得到随机变量$X$的信息量">
 <meta property="og:locale" content="th_Hans">
-<meta property="og:updated_time" content="2019-08-14T08:15:22.291Z">
+<meta property="og:updated_time" content="2019-08-27T10:08:54.763Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="brezezee">
+<meta name="twitter:title" content="熵、交叉熵及似然函数的关系">
 <meta name="twitter:description" content="熵、交叉熵及似然函数的关系1. 熵1.1 信息量&amp;emsp;&amp;emsp;信息量：最初的定义是信号取值数量m的对数为信息量$I$,即 $I=log_2m$。这是与比特数相关的，比如一个信号只有两个取值，那么用1个bit便能将其表示。后来著名的香农指出，得到的信号取值结果是随机的，因此其信息量应该也是关于概率的函数，于是得到随机变量$X$的信息量">
 
 
@@ -102,7 +102,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Mist',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -130,7 +130,7 @@
 
 
 
-  <title> | brezezee</title>
+  <title>熵、交叉熵及似然函数的关系 | brezezee</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -149,7 +149,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -191,6 +191,36 @@
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
           </a>
         </li>
       
@@ -254,7 +284,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline"></h1>
+          <h1 class="post-title" itemprop="name headline">熵、交叉熵及似然函数的关系</h1>
         
 
         <div class="post-meta">
@@ -276,6 +306,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="../../../../source/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -403,6 +455,12 @@ CrossEntropy=-\sum_{i=1}^n (y_i\cdot log (h(x_i)) +(1-y_i) \cdot log (1-(h(x_i))
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="../../../../source/tags/熵-交叉熵-似然函数/" rel="tag"># 熵, 交叉熵, 似然函数</a>
+          
+        </div>
+      
 
       
       
@@ -412,8 +470,8 @@ CrossEntropy=-\sum_{i=1}^n (y_i\cdot log (h(x_i)) +(1-y_i) \cdot log (1-(h(x_i))
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="../../29/6.logistic回归和最大熵模型/" rel="next" title>
-                <i class="fa fa-chevron-left"></i> 
+              <a href="../../29/6.logistic回归和最大熵模型/" rel="next" title="logistic回归和最大熵模型">
+                <i class="fa fa-chevron-left"></i> logistic回归和最大熵模型
               </a>
             
           </div>
@@ -422,8 +480,8 @@ CrossEntropy=-\sum_{i=1}^n (y_i\cdot log (h(x_i)) +(1-y_i) \cdot log (1-(h(x_i))
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="../../../08/14/Hexo + github 博客搭建/" rel="prev" title>
-                 <i class="fa fa-chevron-right"></i>
+              <a href="../../../08/14/Hexo + github 博客搭建/" rel="prev" title="Hexo+github博客搭建">
+                Hexo+github博客搭建 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -501,14 +559,32 @@ CrossEntropy=-\sum_{i=1}^n (y_i\cdot log (h(x_i)) +(1-y_i) \cdot log (1-(h(x_i))
               
                 <a href="../../../../archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="../../../../categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="../../../../tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
             
 
           </nav>
@@ -576,7 +652,7 @@ CrossEntropy=-\sum_{i=1}^n (y_i\cdot log (h(x_i)) +(1-y_i) \cdot log (1-(h(x_i))
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
 
 
 
@@ -757,7 +833,7 @@ CrossEntropy=-\sum_{i=1}^n (y_i\cdot log (h(x_i)) +(1-y_i) \cdot log (1-(h(x_i))
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
