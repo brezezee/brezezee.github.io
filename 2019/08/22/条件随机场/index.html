@@ -83,13 +83,13 @@
 
 
 
-<meta name="description" content="&amp;emsp;&amp;emsp;为了不学迷糊，条件随机场这儿应该理一理它与其他概率图模型的关系和区别。上一文讲的隐马尔可夫模型（HMM）是经典的有向图模型，同时也是一个生成模型，通过对$P(Y,X)$建模得到。HMM有两个重要假设，通过上文的推导过程也能体会到，这两个假设大大简化了计算过程。但是实际应用中，这两个假设往往不是很合理，后面出现了 最大熵马尔可夫模型（MEMM），它消除观测独立的假设，本文要讲">
+<meta name="description" content="序&amp;emsp;&amp;emsp;为了不学迷糊，条件随机场这儿应该理一理它与其他概率图模型的关系和区别。上一文讲的隐马尔可夫模型（HMM）是经典的有向图模型，同时也是一个生成模型，通过对$P(Y,X)$建模得到。HMM有两个重要假设，通过上文的推导过程也能体会到，这两个假设大大简化了计算过程。但是实际应用中，这两个假设往往不是很合理，后面出现了 最大熵马尔可夫模型（MEMM），它消除观测独立的假设，本文要">
 <meta name="keywords" content="机器学习,条件随机场,概率图模型">
 <meta property="og:type" content="article">
 <meta property="og:title" content="条件随机场">
 <meta property="og:url" content="https://brezezee.github.io/2019/08/22/条件随机场/index.html">
 <meta property="og:site_name" content="brezezee">
-<meta property="og:description" content="&amp;emsp;&amp;emsp;为了不学迷糊，条件随机场这儿应该理一理它与其他概率图模型的关系和区别。上一文讲的隐马尔可夫模型（HMM）是经典的有向图模型，同时也是一个生成模型，通过对$P(Y,X)$建模得到。HMM有两个重要假设，通过上文的推导过程也能体会到，这两个假设大大简化了计算过程。但是实际应用中，这两个假设往往不是很合理，后面出现了 最大熵马尔可夫模型（MEMM），它消除观测独立的假设，本文要讲">
+<meta property="og:description" content="序&amp;emsp;&amp;emsp;为了不学迷糊，条件随机场这儿应该理一理它与其他概率图模型的关系和区别。上一文讲的隐马尔可夫模型（HMM）是经典的有向图模型，同时也是一个生成模型，通过对$P(Y,X)$建模得到。HMM有两个重要假设，通过上文的推导过程也能体会到，这两个假设大大简化了计算过程。但是实际应用中，这两个假设往往不是很合理，后面出现了 最大熵马尔可夫模型（MEMM），它消除观测独立的假设，本文要">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190716111138198.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190716105557734.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1MTQ0Nzk1,size_16,color_FFFFFF,t_70">
@@ -97,10 +97,10 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190719003651960.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1MTQ0Nzk1,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190719101248366.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1MTQ0Nzk1,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190720105348989.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1MTQ0Nzk1,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-08-28T03:31:00.614Z">
+<meta property="og:updated_time" content="2019-08-28T04:35:00.823Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="条件随机场">
-<meta name="twitter:description" content="&amp;emsp;&amp;emsp;为了不学迷糊，条件随机场这儿应该理一理它与其他概率图模型的关系和区别。上一文讲的隐马尔可夫模型（HMM）是经典的有向图模型，同时也是一个生成模型，通过对$P(Y,X)$建模得到。HMM有两个重要假设，通过上文的推导过程也能体会到，这两个假设大大简化了计算过程。但是实际应用中，这两个假设往往不是很合理，后面出现了 最大熵马尔可夫模型（MEMM），它消除观测独立的假设，本文要讲">
+<meta name="twitter:description" content="序&amp;emsp;&amp;emsp;为了不学迷糊，条件随机场这儿应该理一理它与其他概率图模型的关系和区别。上一文讲的隐马尔可夫模型（HMM）是经典的有向图模型，同时也是一个生成模型，通过对$P(Y,X)$建模得到。HMM有两个重要假设，通过上文的推导过程也能体会到，这两个假设大大简化了计算过程。但是实际应用中，这两个假设往往不是很合理，后面出现了 最大熵马尔可夫模型（MEMM），它消除观测独立的假设，本文要">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190716111138198.png">
 
 
@@ -382,7 +382,7 @@
       
 
       
-        <p>&emsp;&emsp;为了不学迷糊，条件随机场这儿应该理一理它与其他概率图模型的关系和区别。上一文讲的隐马尔可夫模型（HMM）是经典的有向图模型，同时也是一个生成模型，通过对$P(Y,X)$建模得到。HMM有两个重要假设，通过上文的推导过程也能体会到，这两个假设大大简化了计算过程。但是实际应用中，这两个假设往往不是很合理，后面出现了 最大熵马尔可夫模型（MEMM），它消除观测独立的假设，本文要讲的条件随机场则消除了齐次马尔可夫性。<br>&emsp;&emsp;先来回顾下HMM，它的模型如下图所示，在HMM中 $0_2$只依赖于$i_2$，而$i_2$只依赖于$i_1$，在HMM的预测（标注）问题中，虽然维特比算法依据整个观测序列概率最大来计算的状态序列，但在计算中实际使用的仍是前向后向概率，它们都是由观测独立与齐次马尔可夫假设条件下简化过的。因此，可以认为并未考虑观测之间的影响因素。</p>
+        <h3 id="序"><a href="#序" class="headerlink" title="序"></a>序</h3><p>&emsp;&emsp;为了不学迷糊，条件随机场这儿应该理一理它与其他概率图模型的关系和区别。上一文讲的隐马尔可夫模型（HMM）是经典的有向图模型，同时也是一个生成模型，通过对$P(Y,X)$建模得到。HMM有两个重要假设，通过上文的推导过程也能体会到，这两个假设大大简化了计算过程。但是实际应用中，这两个假设往往不是很合理，后面出现了 最大熵马尔可夫模型（MEMM），它消除观测独立的假设，本文要讲的条件随机场则消除了齐次马尔可夫性。<br>&emsp;&emsp;先来回顾下HMM，它的模型如下图所示，在HMM中 $0_2$只依赖于$i_2$，而$i_2$只依赖于$i_1$，在HMM的预测（标注）问题中，虽然维特比算法依据整个观测序列概率最大来计算的状态序列，但在计算中实际使用的仍是前向后向概率，它们都是由观测独立与齐次马尔可夫假设条件下简化过的。因此，可以认为并未考虑观测之间的影响因素。</p>
 <center>
     <img src="https://img-blog.csdnimg.cn/20190716111138198.png" width="700">
 </center>
@@ -525,6 +525,7 @@ a_{01}b_{11}c_{11}+a_{02}b_{21}c_{11}+\cdots+a_{02}b_{22}c_{21}</script><p>实�
 \alpha_i^T(x)=\alpha_{i-1}^T(x)M_i(x)</script><p>其中$\alpha_i(y_i|x)$表示从初始位置到当前位置$i$，并且状态是$y_i$的非规范化概率，$y_i$有m个取值，因此$\alpha_i(x)$是m维列向量。</p>
 <blockquote>
 <p>对于这个递推式还是很好理解的，向量的每个元素代表了一个状态，向量乘矩阵就是将原来是上一个位置的m种状态到当前位置的m种状态的非规范化概率总结了一下，把它们到当前位置的同一个状态的归纳起来就从二维矩阵变成了一维向量。</p>
+</blockquote>
 <p>&emsp;&emsp;同样，对每个位置定义后向向量$\beta_i(x)$：</p>
 <script type="math/tex; mode=display">
 \beta_{n+1}(y_{n+1}|x) =  \left\{\begin{aligned}
@@ -537,7 +538,6 @@ a_{01}b_{11}c_{11}+a_{02}b_{21}c_{11}+\cdots+a_{02}b_{22}c_{21}</script><p>实�
 \beta_i(x) = M_{i+1}(x) \beta_{i+1}(x)</script><p>其中，$\beta_i(y_i|x)$表示从位置n 到 位置$i+1$，且位置$i$的状态为$y_i$的非规范化概率。<br>&emsp;&emsp;由前向-后向向量的定义可以得到：</p>
 <script type="math/tex; mode=display">
 Z(x) = \alpha_n^T(x) \cdot1 = 1^T\cdot \beta_1(x)</script><p>其中，1是元素均为1的m维列向量。</p>
-</blockquote>
 <ul>
 <li><strong>概率计算</strong></li>
 </ul>
@@ -714,7 +714,7 @@ E_{P(X,Y)}[f_k] =& \sum_{X,Y}P(x,y)\sum_{i=1}^{n+1}f_k(y_{i-1},y_i,x,i)\\
               
               <div class="site-state-item site-state-tags">
                 <a href="../../../../tags/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -747,7 +747,7 @@ E_{P(X,Y)}[f_k] =& \sum_{X,Y}P(x,y)\sum_{i=1}^{n+1}f_k(y_{i-1},y_i,x,i)\\
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-概率无向图"><span class="nav-text">1. 概率无向图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-条件随机场"><span class="nav-text">2. 条件随机场</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-定义"><span class="nav-text">2.1 定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-条件随机场的参数化形式"><span class="nav-text">2.2 条件随机场的参数化形式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-条件随机场的概率计算"><span class="nav-text">2.3 条件随机场的概率计算</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#序"><span class="nav-text">序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-概率无向图"><span class="nav-text">1. 概率无向图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-条件随机场"><span class="nav-text">2. 条件随机场</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-定义"><span class="nav-text">2.1 定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-条件随机场的参数化形式"><span class="nav-text">2.2 条件随机场的参数化形式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-条件随机场的概率计算"><span class="nav-text">2.3 条件随机场的概率计算</span></a></li></ol></li></ol></div>
             
 
           </div>
