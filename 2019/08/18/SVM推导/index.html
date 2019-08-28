@@ -7,7 +7,7 @@
 
 <html class="theme-next mist use-motion" lang="en">
 <head><meta name="generator" content="Hexo 3.9.0">
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+  <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="这篇文章的目录乱了，本地是对的，也没有跳级编号。不知道是什么情况，有人知道如何解决的话还请告知一声，强迫症看着很难受  &amp;emsp;&amp;emsp;支持向量机是一种二分类模型，它以间隔最大作为优化目标，因此它比感知机仅仅以误分类推动的模型要优胜不少。数据线性可分时，SVM直接以间隔最大训练出一个线性分类模型。当数据线性不可分时，SVM通过软间隔最大化解决这种问题。此时的模型仍是一个线性模型，若采用核">
+<meta name="description" content="这篇文章的目录乱了，本地是对的，也没有跳级编号。不知道是什么情况，有人知道如何解决的话还请告知一声，强迫症看着难受  &amp;emsp;&amp;emsp;支持向量机是一种二分类模型，它以间隔最大作为优化目标，因此它比感知机仅仅以误分类推动的模型要优胜不少。数据线性可分时，SVM直接以间隔最大训练出一个线性分类模型。当数据线性不可分时，SVM通过软间隔最大化解决这种问题。此时的模型仍是一个线性模型，若采用核方">
 <meta name="keywords" content="机器学习,SVM,SMO">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SVM推导">
 <meta property="og:url" content="https://brezezee.github.io/2019/08/18/SVM推导/index.html">
 <meta property="og:site_name" content="brezezee">
-<meta property="og:description" content="这篇文章的目录乱了，本地是对的，也没有跳级编号。不知道是什么情况，有人知道如何解决的话还请告知一声，强迫症看着很难受  &amp;emsp;&amp;emsp;支持向量机是一种二分类模型，它以间隔最大作为优化目标，因此它比感知机仅仅以误分类推动的模型要优胜不少。数据线性可分时，SVM直接以间隔最大训练出一个线性分类模型。当数据线性不可分时，SVM通过软间隔最大化解决这种问题。此时的模型仍是一个线性模型，若采用核">
+<meta property="og:description" content="这篇文章的目录乱了，本地是对的，也没有跳级编号。不知道是什么情况，有人知道如何解决的话还请告知一声，强迫症看着难受  &amp;emsp;&amp;emsp;支持向量机是一种二分类模型，它以间隔最大作为优化目标，因此它比感知机仅仅以误分类推动的模型要优胜不少。数据线性可分时，SVM直接以间隔最大训练出一个线性分类模型。当数据线性不可分时，SVM通过软间隔最大化解决这种问题。此时的模型仍是一个线性模型，若采用核方">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.loli.net/2019/08/14/i2t9IzB1c7qQJVv.jpg">
 <meta property="og:image" content="https://i.loli.net/2019/08/27/PyvipKD32dVbUHT.png">
@@ -93,10 +93,10 @@
 <meta property="og:image" content="https://i.loli.net/2019/08/14/h8HJUOzANEdFcDe.png">
 <meta property="og:image" content="https://i.loli.net/2019/08/14/Rjc2Nl3XLP1AwDo.jpg">
 <meta property="og:image" content="https://i.loli.net/2019/08/14/Rjc2Nl3XLP1AwDo.jpg">
-<meta property="og:updated_time" content="2019-08-28T03:25:42.033Z">
+<meta property="og:updated_time" content="2019-08-28T12:41:28.619Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SVM推导">
-<meta name="twitter:description" content="这篇文章的目录乱了，本地是对的，也没有跳级编号。不知道是什么情况，有人知道如何解决的话还请告知一声，强迫症看着很难受  &amp;emsp;&amp;emsp;支持向量机是一种二分类模型，它以间隔最大作为优化目标，因此它比感知机仅仅以误分类推动的模型要优胜不少。数据线性可分时，SVM直接以间隔最大训练出一个线性分类模型。当数据线性不可分时，SVM通过软间隔最大化解决这种问题。此时的模型仍是一个线性模型，若采用核">
+<meta name="twitter:description" content="这篇文章的目录乱了，本地是对的，也没有跳级编号。不知道是什么情况，有人知道如何解决的话还请告知一声，强迫症看着难受  &amp;emsp;&amp;emsp;支持向量机是一种二分类模型，它以间隔最大作为优化目标，因此它比感知机仅仅以误分类推动的模型要优胜不少。数据线性可分时，SVM直接以间隔最大训练出一个线性分类模型。当数据线性不可分时，SVM通过软间隔最大化解决这种问题。此时的模型仍是一个线性模型，若采用核方">
 <meta name="twitter:image" content="https://i.loli.net/2019/08/14/i2t9IzB1c7qQJVv.jpg">
 
 
@@ -107,7 +107,7 @@
     root: '/',
     scheme: 'Mist',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":true},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -133,7 +133,7 @@
 
 
 
-  <title>SVM推导 | brezezee</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>SVM推导 | brezezee</title>
   
 
 
@@ -152,12 +152,12 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta custom-logo">
+  <div class="site-meta ">
     
 
     <div class="custom-logo-site-title">
@@ -189,11 +189,21 @@
       
         
         <li class="menu-item menu-item-home">
-          <a href="https://brezezee.github.io/" rel="section">
+          <a href="https://brezezee.github.io" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="https://brezezee.github.io/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
           </a>
         </li>
       
@@ -221,19 +231,9 @@
         <li class="menu-item menu-item-archives">
           <a href="https://brezezee.github.io/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archives"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             Archives
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="https://brezezee.github.io/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-about"></i> <br>
-            
-            About
           </a>
         </li>
       
@@ -315,7 +315,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-08-28T11:25:42+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2019-08-28T20:41:28+08:00">
                 2019-08-28
               </time>
             
@@ -347,6 +347,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/08/18/SVM推导/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -365,24 +375,12 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  
+                  7.9k
                 </span>
               
 
               
-                <span class="post-meta-divider">|</span>
-              
 
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  
-                </span>
               
             </div>
           
@@ -403,7 +401,7 @@
 
       
         <blockquote>
-<p>这篇文章的目录乱了，本地是对的，也没有跳级编号。不知道是什么情况，有人知道如何解决的话还请告知一声，强迫症看着很难受</p>
+<p>这篇文章的目录乱了，本地是对的，也没有跳级编号。不知道是什么情况，有人知道如何解决的话还请告知一声，强迫症看着难受</p>
 </blockquote>
 <p>&emsp;&emsp;支持向量机是一种二分类模型，它以间隔最大作为优化目标，因此它比感知机仅仅以误分类推动的模型要优胜不少。数据线性可分时，SVM直接以间隔最大训练出一个线性分类模型。当数据线性不可分时，SVM通过软间隔最大化解决这种问题。此时的模型仍是一个线性模型，若采用核方法和软间隔最大化，则得到一个非线性模型。可以看到SVM在解决变复杂的情况时是逐步改进的。</p>
 <a id="more"></a>
@@ -414,23 +412,21 @@
 </center>
 
 <center> <b>图 1 线性可分SVM</b> </center> 
-&emsp;&emsp;**定义:**线性可分支持向量机是给定数据集，通过最大间隔法确定的分离超平面
+&emsp;&emsp; 定义:线性可分支持向量机是给定数据集，通过最大间隔法确定的分离超平面
 $$
-\boldsymbol{w^*\cdot x} + b^* = 0
+\boldsymbol{w^{\ast}\cdot x} + b^{\ast} = 0
 $$
 和分类决策函数
 $$
-y = sign(\boldsymbol{w^* \cdot x} + b^*)
+y = sign(\boldsymbol{w^{\ast} \cdot x} + b^{\ast})
 $$
-所定义的分类模型。其中sign是符号函数，当$\boldsymbol{w^*\cdot x} +b^* > 0$时取 1 ，反之取0 。并且$|w^*x+b^*|$越大代表确信度越高。
+所定义的分类模型。其中sign是符号函数，当$\boldsymbol{w^{\ast}\cdot x} +b^{\ast} > 0$时取 1 ，反之取0 。并且$|w^{\ast}x+b^{\ast}|$越大代表确信度越高。
 
 
-
-###  1.1 函数间隔和几何间隔
-
+##  1.1 函数间隔和几何间隔
 
 
-数据集中，一个点离超平面越远，那么确信其判断正确性的可能就越大，它可以由$\boldsymbol{w\cdot x}+b$来表示。若要建立一个即可判断确信度又能判断其分类正确性的函数，则需要引进一个符号变量，巧合的是$y\in\{-1,1\}$，并且若分类正确$\boldsymbol{w\cdot x} +b$与$y$的符号是一致的。那么可由$y(\boldsymbol{w\cdot x} + b)$来表示分类的正确性和确信度，这就是函数间隔的意义。
+&emsp;&emsp;数据集中，一个点离超平面越远，那么确信其判断正确性的可能就越大，它可以由$\boldsymbol{w\cdot x}+b$来表示。若要建立一个即可判断确信度又能判断其分类正确性的函数，则需要引进一个符号变量，巧合的是$y\in\{-1,1\}$，并且若分类正确 $\boldsymbol{w\cdot x} +b$ 与$y$的符号是一致的。那么可由$y(\boldsymbol{w\cdot x} + b)$来表示分类的正确性和确信度，这就是函数间隔的意义。
 
 &emsp;&emsp;对于给定样本集和超平面，超平面关于样本点$(\boldsymbol{x_i},y_i)$的函数间隔为
 $$
@@ -440,22 +436,30 @@ $$
 $$
 \widehat \gamma = \underset {i} {min} \;\widehat \gamma _i
 $$
+
 事实上，超平面关于整个数据集的函数间隔就是超平面关于支持向量的函数间隔。显然，我们需要优化的便是这个关于支持向量的间隔，使它最大也就使得超平面对数据集中所有点都有较远距离。
 
-&emsp;&emsp;但是直接对函数间隔最大化有个问题，函数间隔是关于参数$\boldsymbol{w},b$的函数，若$\boldsymbol{w},b$成比例的增加，这时超平面是**不会变**的，但是函数间隔会按相同比例增加。所以直接最大化函数间隔得到的结果肯定是无穷大了，因此需要对其进行规范化。这里对法向量$w$进行标准化，标准化后的结果就是几何间隔
+&emsp;&emsp;但是直接对函数间隔最大化有个问题，函数间隔是关于参数$\boldsymbol{w},b$的函数，若$\boldsymbol{w},b$成比例的增加，这时超平面是 不会变 的，但是函数间隔会按相同比例增加。所以直接最大化函数间隔得到的结果肯定是无穷大了，因此需要对其进行规范化。这里对法向量 $w$ 进行标准化，标准化后的结果就是几何间隔.
+
 $$
 \gamma_i = y_i\frac { \boldsymbol{w \cdot x_i} +b } {||\boldsymbol{w}||}
 $$
+
 其中，$||\boldsymbol{w}||$ 是第二范式。
 
 &emsp;&emsp;在二维情形下，$\boldsymbol{w}\cdot \boldsymbol{x} + b/ ||w||$就是点到直线的距离公式没加绝对值符号，标准化后的几何间隔就不会因$\boldsymbol{w},b$按比例放缩而产生变化。同样，超平面关于数据集的几何间隔为
+
 $$
-\gamma = \underset i {min} \; \gamma _i
+\gamma = \underset i {min} \; \gamma_i
 $$
+
 函数间隔与几何间隔只是相差一个标准化因子
+
 $$
-\gamma_i = \frac {\widehat \gamma_i} {||\boldsymbol{w}||}\\
-\gamma = \frac {\widehat \gamma} {||\boldsymbol{w}||}
+\begin{aligned}
+\gamma_i &= \frac {\widehat \gamma_i} {||\boldsymbol{w}||}\\
+\gamma &= \frac {\widehat \gamma} {||\boldsymbol{w}||}
+\end{aligned}
 $$
 
 ###  1.2 间隔最大化
@@ -463,18 +467,25 @@ $$
 &emsp;&emsp;定义了几何间隔后，就能通过最大化支持向量到超平面的几何间隔得到一个最优的分类超平面。在感知机中，学习的方法是最小化误差距离。这种方法只要超平面能够正确分类已知的数据，学习过程便结束。而对SVM中最大化几何间隔来说，当还未能正确分类所有样本点时，数据集中几何间隔最小的样本点是负的，此时的最大化过程是找到一个能够正确分割数据集的超平面。当几何间隔学习到大于0的时侯，超平面已能将数据集正确分割，但学习过程不会停止，SVM希望让最靠近超平面的样本点的分类结果仍有较大的确信度，这就是最大化几何间隔的目的。
 
 &emsp;&emsp;现在导出其数学表达，目的是求解关于参数$\boldsymbol{w},b$的超平面，使超平面到数据集中几何间隔最小的的点关于它的几何间隔最大
+
 $$
 arg \underset {w,b} {max}\;\underset {i} {min} \;\gamma_i \tag{1.2-a}
 $$
+
 若对该式直接计算，难度非常大，因为$\gamma$ 的分子和分母都包含了变量$\boldsymbol{w},b$，因此先将其等价替换为函数间隔，问题变为
+
 $$
 arg  \underset {w,b} {max}\;\underset {i} {min} \;\frac {\widehat \gamma_i}{||\boldsymbol{w}||} \tag{1.2-b}
 $$
+
 因为$||\boldsymbol{w}||$与 $i$无关，可以直接将其提出来
+
 $$
 arg  \underset {w,b} {max}\;\left \{  \frac {1}{||\boldsymbol{w}||}  \underset {i} {min} \; \widehat \gamma_i  \right \} \tag{1.2-c} \\
 $$
+
 为了简化计算，需要利用函数间隔的性质：函数间隔的大小随$\boldsymbol{w},b$的放缩而放缩，对于同一组$\boldsymbol{w},b$ 所有样本的函数间隔的相对间隔也是按相同比例放缩。所以我们可以用函数间隔最小的点作为基准点，将其函数间隔令为1。那么其他点的函数间隔只是按$1/\gamma$的比例进行放缩，并不影响其相对超平面的位置，也不会影响超平面的位置。直接将其令为1后就不能这样写作一个式子了，需要将其他点函数间隔大于1的约束单独写出来，则问题变为解一个规划问题
+
 $$
 \begin{aligned}
 \underset {w,b} {max} \;\; &\frac {1} {||\boldsymbol{w}||}\\
@@ -496,7 +507,7 @@ $$
 $$
 L(w,b,\lambda) = \frac 1 2 ||\boldsymbol{w}||^2 +\sum_i^n \lambda_i -  \sum_i^n \lambda_i [y_i(\boldsymbol{\boldsymbol{w}\cdot x_i} + b) ]
 $$
-注意$\boldsymbol{w},\; \boldsymbol{x_i}$是维度相同的**向量**，对于这个广义拉格朗日的最小化问题可以求偏导令为0，再利用KKT条件约束来解，但这样计算量太大。因为这个函数是凸函数，所以可以求解其对偶问题来得到原问题等价的解。关于对偶性在另一篇笔记。[拉格朗日对偶性(Lagrange duality)](https://brezezee.github.io/2019/08/14/拉格朗日对偶性(Lagrange duality)/#more).
+注意$\boldsymbol{w},\; \boldsymbol{x_i}$是维度相同的 **向量** ，对于这个广义拉格朗日的最小化问题可以求偏导令为0，再利用KKT条件约束来解，但这样计算量太大。因为这个函数是凸函数，所以可以求解其对偶问题来得到原问题等价的解。关于对偶性在另一篇笔记——拉格朗日对偶性(Lagrange duality)
 
 ###  2.1 对偶问题
 
@@ -508,7 +519,7 @@ $$
 $$
 \underset {\lambda} {max} \;\underset {w,b} {min}\; L(\boldsymbol{w},b,\lambda)
 $$
-在原问题中，先求关于$\lambda$的极大，便会对$\lambda$求偏导得到一串等式，但这个结果实际上就是原来的约束条件。仍未简化问题，但若先对$\boldsymbol{w},b$先计算极小，则会得到一个较易计算的式子。这是使用对偶性的原因。具体关于对偶性在[拉格朗日对偶性(Lagrange duality)](https://brezezee.github.io/2019/08/14/拉格朗日对偶性(Lagrange duality)/#more)中，这里直接使用，不再介绍。
+在原问题中，先求关于$\lambda$的极大，便会对$\lambda$求偏导得到一串等式，但这个结果实际上就是原来的约束条件。仍未简化问题，但若先对$\boldsymbol{w},b$先计算极小，则会得到一个较易计算的式子。这是使用对偶性的原因。
 
 &emsp;&emsp;那么可以先求解内部的极小问题，对$\boldsymbol{w},b$求偏导并令为0得
 $$
@@ -663,9 +674,9 @@ H = min(C,\lambda_1^{old} + \lambda_2^{old} )</script><p>得到其不等式约�
 <p>留坑</p>
 <p>&emsp;&emsp;最终，我们得到了分离超平面</p>
 <script type="math/tex; mode=display">
-\sum_i^n \lambda_i^* y_i (x^Tx_i)+ b^* = 0</script><p>分类决策函数</p>
+\sum_i^n \lambda_i^* y_i (x^Tx_i)+ b^{\ast} = 0</script><p>分类决策函数</p>
 <script type="math/tex; mode=display">
-f(x) = sign\left ( \sum_i^n \lambda_i^* y_i (x^Tx_i) + b^*  \right)</script><p>上式意味着，分类决策函数只依赖于输入样本的$x$和训练样本的$x$之间的内积。这是后面引入核方法进行非线性推广的基础。同时，决策函数中的内积只需要计算输入向量和样本求出的支持向量之间的即可。因为其他非支持向量的系数$\lambda$为0，支持向量机便是这样一个由少数支持向量决定的分类模型。</p>
+f(x) = sign\left ( \sum_i^n \lambda_i^{\ast} y_i (x^Tx_i) + b^{\ast}  \right)</script><p>上式意味着，分类决策函数只依赖于输入样本的$x$和训练样本的$x$之间的内积。这是后面引入核方法进行非线性推广的基础。同时，决策函数中的内积只需要计算输入向量和样本求出的支持向量之间的即可。因为其他非支持向量的系数$\lambda$为0，支持向量机便是这样一个由少数支持向量决定的分类模型。</p>
 <h2 id="3-线性不可分SVM"><a href="#3-线性不可分SVM" class="headerlink" title="3. 线性不可分SVM"></a>3. 线性不可分SVM</h2><p>&emsp;&emsp;前述算法是针对数据线性可分的情况，在数据不可分的情况该算法无法收敛。不过在明白了线性可分SVM的基础原理后，将其推广至线性不可分的SVM其实并不难。</p>
 <h3 id="3-1-松弛变量"><a href="#3-1-松弛变量" class="headerlink" title="3.1 松弛变量"></a>3.1 松弛变量</h3><p>&emsp;&emsp;若一组数据整体线性可分，只是有一些奇异点干扰。如下图</p>
 <center class="half">
@@ -723,7 +734,7 @@ C \ge \lambda_i</script><p>整理得到</p>
 s.t.\;\; & \sum_i^n \lambda_iy_i = 0\\
 & 0\le \lambda_i \le C ,\;\;\;i=1,\cdots,n
 \end{aligned}</script><p>&emsp;&emsp;相较与线性可分下的SVM，软间隔SVM的对偶问题在形式上只比线性可分情况下的对偶问题多一个$\lambda_i$ 的上界约束C，对于求解过程中的差异主要表现在SMO算法的修剪过程中，需要确定的约束范围变小了。而这一变化在上节线性 可分SVM的SMO中已经给出了，后面的SMO过程可以说与线性可分SVM完全相同了。这样就得到一个可以容忍噪声奇异点干扰的SVM线性分类器了。</p>
-<h3 id="3-3-支持向量求解参数-w-b"><a href="#3-3-支持向量求解参数-w-b" class="headerlink" title="3.3 支持向量求解参数$w,b$"></a>3.3 支持向量求解参数$w,b$</h3><p>&emsp;&emsp;求解出对偶问题的参数$\lambda$ 后，还需考虑一个问题，就是如何通过这个参数$\lambda$和训练数据$\{x,y\}$得到我们需要的参数$w,b$ 。因为原始问题是凸二次规划问题，可以通过KKT条件来从<strong>原始问题</strong>中找出$w,b$ 与$\lambda,x,y$ 之间的关系。</p>
+<h3 id="3-3-支持向量求解参数-w-b"><a href="#3-3-支持向量求解参数-w-b" class="headerlink" title="3.3 支持向量求解参数$w,b$"></a>3.3 支持向量求解参数$w,b$</h3><p>&emsp;&emsp;求解出对偶问题的参数$\lambda$ 后，还需考虑一个问题，就是如何通过这个参数$\lambda$和训练数据$\{x,y\}$得到我们需要的参数$w,b$ 。因为原始问题是凸二次规划问题，可以通过KKT条件来从 <strong>原始问题</strong> 中找出$w,b$ 与$\lambda,x,y$ 之间的关系。</p>
 <p>&emsp;&emsp;根据KKT条件中的梯度为0条件，可以很容易的得出$w$的表达式</p>
 <script type="math/tex; mode=display">
 \triangledown_wL(w^*,b^*,\xi^*,\lambda^*,\eta^*) = w^* - \sum_i^n\lambda_i^*y_ix_i = 0</script><p>得到</p>
@@ -735,7 +746,7 @@ w^* = \sum_i^n \lambda_i^* y_i x_i</script><p>&emsp;&emsp;对于$b$，并没有�
 \begin{aligned}
 b^* =& (1-\xi_i^*)y_i -w^*\cdot x\\
 =&(1-\xi_i^*)y_i - \sum_j^n\lambda_j^*y_j(x_i^Tx_j)
-\end{aligned} \tag{3.6}</script><p>其中，$\xi_i^*$比较讨厌，但是在一定条件下可以利用KKT中其他约束将其消去</p>
+\end{aligned} \tag{3.6}</script><p>其中，$\xi_i^{\ast}$比较讨厌，但是在一定条件下可以利用KKT中其他约束将其消去</p>
 <script type="math/tex; mode=display">
 \begin{eqnarray*}
 \triangledown_\xi L(w^*,b^*,\xi^*,\lambda^*,\eta^*) = C-\lambda_i-\eta_i = 0  \tag{3.7}  \\
@@ -854,6 +865,16 @@ K(x,z) = (x\cdot z)^2</script><p>它是关于输入向量的内积的平方函�
           
 
   
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
 
 
 
@@ -870,8 +891,6 @@ K(x,z) = (x\cdot z)^2</script><p>它是关于输入向量的内积的平方函�
   </div>
 
   <aside id="sidebar" class="sidebar">
-    
-      <div id="sidebar-dimmer"></div>
     
     <div class="sidebar-inner">
 
@@ -936,6 +955,16 @@ K(x,z) = (x\cdot z)^2</script><p>它是关于输入向量的内积的平方函�
           
 
           
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/brezezee" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
 
           
           
@@ -992,7 +1021,7 @@ K(x,z) = (x\cdot z)^2</script><p>它是关于输入向量的内积的平方函�
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count"></span>
+    <span title="Site words total count">46.9k</span>
   
 </div>
 
@@ -1052,6 +1081,8 @@ K(x,z) = (x\cdot z)^2</script><p>它是关于输入向量的内积的平方函�
   
 
 
+  
+
 
 
 
@@ -1092,6 +1123,11 @@ K(x,z) = (x\cdot z)^2</script><p>它是关于输入向量的内积的平方函�
     <script type="text/javascript" src="../../../../lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
   
 
+  
+  
+    <script type="text/javascript" src="../../../../lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
 
   
 
@@ -1120,6 +1156,26 @@ K(x,z) = (x\cdot z)^2</script><p>它是关于输入向量的内积的平方函�
 
   
 
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://brezezee.github.io/2019/08/18/SVM推导/';
+          this.page.identifier = '2019/08/18/SVM推导/';
+          this.page.title = 'SVM推导';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
 
   
 
@@ -1162,21 +1218,6 @@ K(x,z) = (x\cdot z)^2</script><p>它是关于输入向量的内积的平方函�
   
 
   
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-
 
   
   
@@ -1201,24 +1242,7 @@ K(x,z) = (x\cdot z)^2</script><p>它是关于输入向量的内积的平方函�
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
