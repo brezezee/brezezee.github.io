@@ -83,13 +83,13 @@
 
 
 
-<meta name="description" content="&amp;emsp;&amp;emsp;支持向量机是一种二分类模型，它以间隔最大作为优化目标，因此它比感知机仅仅以误分类推动的模型要优胜不少。数据线性可分时，SVM直接以间隔最大训练出一个线性分类模型。当数据线性不可分时，SVM通过软间隔最大化解决这种问题。此时的模型仍是一个线性模型，若采用核方法和软间隔最大化，则得到一个非线性模型。可以看到SVM在解决变复杂的情况时是逐步改进的。">
+<meta name="description" content="这篇文章的目录乱了，本地是对的，也没有跳级编号。不知道是什么情况，有人知道如何解决的话还请告知一声，强迫症看着很难受  &amp;emsp;&amp;emsp;支持向量机是一种二分类模型，它以间隔最大作为优化目标，因此它比感知机仅仅以误分类推动的模型要优胜不少。数据线性可分时，SVM直接以间隔最大训练出一个线性分类模型。当数据线性不可分时，SVM通过软间隔最大化解决这种问题。此时的模型仍是一个线性模型，若采用核">
 <meta name="keywords" content="机器学习,SVM,SMO">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SVM推导">
 <meta property="og:url" content="https://brezezee.github.io/2019/08/18/SVM推导/index.html">
 <meta property="og:site_name" content="brezezee">
-<meta property="og:description" content="&amp;emsp;&amp;emsp;支持向量机是一种二分类模型，它以间隔最大作为优化目标，因此它比感知机仅仅以误分类推动的模型要优胜不少。数据线性可分时，SVM直接以间隔最大训练出一个线性分类模型。当数据线性不可分时，SVM通过软间隔最大化解决这种问题。此时的模型仍是一个线性模型，若采用核方法和软间隔最大化，则得到一个非线性模型。可以看到SVM在解决变复杂的情况时是逐步改进的。">
+<meta property="og:description" content="这篇文章的目录乱了，本地是对的，也没有跳级编号。不知道是什么情况，有人知道如何解决的话还请告知一声，强迫症看着很难受  &amp;emsp;&amp;emsp;支持向量机是一种二分类模型，它以间隔最大作为优化目标，因此它比感知机仅仅以误分类推动的模型要优胜不少。数据线性可分时，SVM直接以间隔最大训练出一个线性分类模型。当数据线性不可分时，SVM通过软间隔最大化解决这种问题。此时的模型仍是一个线性模型，若采用核">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.loli.net/2019/08/14/i2t9IzB1c7qQJVv.jpg">
 <meta property="og:image" content="https://i.loli.net/2019/08/27/PyvipKD32dVbUHT.png">
@@ -97,10 +97,10 @@
 <meta property="og:image" content="https://i.loli.net/2019/08/14/h8HJUOzANEdFcDe.png">
 <meta property="og:image" content="https://i.loli.net/2019/08/14/Rjc2Nl3XLP1AwDo.jpg">
 <meta property="og:image" content="https://i.loli.net/2019/08/14/Rjc2Nl3XLP1AwDo.jpg">
-<meta property="og:updated_time" content="2019-08-28T02:49:53.665Z">
+<meta property="og:updated_time" content="2019-08-28T03:25:42.033Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SVM推导">
-<meta name="twitter:description" content="&amp;emsp;&amp;emsp;支持向量机是一种二分类模型，它以间隔最大作为优化目标，因此它比感知机仅仅以误分类推动的模型要优胜不少。数据线性可分时，SVM直接以间隔最大训练出一个线性分类模型。当数据线性不可分时，SVM通过软间隔最大化解决这种问题。此时的模型仍是一个线性模型，若采用核方法和软间隔最大化，则得到一个非线性模型。可以看到SVM在解决变复杂的情况时是逐步改进的。">
+<meta name="twitter:description" content="这篇文章的目录乱了，本地是对的，也没有跳级编号。不知道是什么情况，有人知道如何解决的话还请告知一声，强迫症看着很难受  &amp;emsp;&amp;emsp;支持向量机是一种二分类模型，它以间隔最大作为优化目标，因此它比感知机仅仅以误分类推动的模型要优胜不少。数据线性可分时，SVM直接以间隔最大训练出一个线性分类模型。当数据线性不可分时，SVM通过软间隔最大化解决这种问题。此时的模型仍是一个线性模型，若采用核">
 <meta name="twitter:image" content="https://i.loli.net/2019/08/14/i2t9IzB1c7qQJVv.jpg">
 
 
@@ -382,7 +382,10 @@
       
 
       
-        <p>&emsp;&emsp;支持向量机是一种二分类模型，它以间隔最大作为优化目标，因此它比感知机仅仅以误分类推动的模型要优胜不少。数据线性可分时，SVM直接以间隔最大训练出一个线性分类模型。当数据线性不可分时，SVM通过软间隔最大化解决这种问题。此时的模型仍是一个线性模型，若采用核方法和软间隔最大化，则得到一个非线性模型。可以看到SVM在解决变复杂的情况时是逐步改进的。</p>
+        <blockquote>
+<p>这篇文章的目录乱了，本地是对的，也没有跳级编号。不知道是什么情况，有人知道如何解决的话还请告知一声，强迫症看着很难受</p>
+</blockquote>
+<p>&emsp;&emsp;支持向量机是一种二分类模型，它以间隔最大作为优化目标，因此它比感知机仅仅以误分类推动的模型要优胜不少。数据线性可分时，SVM直接以间隔最大训练出一个线性分类模型。当数据线性不可分时，SVM通过软间隔最大化解决这种问题。此时的模型仍是一个线性模型，若采用核方法和软间隔最大化，则得到一个非线性模型。可以看到SVM在解决变复杂的情况时是逐步改进的。</p>
 <a id="more"></a>
 <h2 id="1-定义"><a href="#1-定义" class="headerlink" title="1. 定义"></a>1. 定义</h2><p>&emsp;&emsp;前面已经学习过的线性分类有感知机和$Logistic$回归。感知机对误分类点进行优化，得到一个对训练样本的分类超平面，但这个超平面并不是最优的，而且只能用于数据线性可分的情况。而$Logistic$回归是一个对数线性模型，它将数据映射到0到1之间，对有较大差异的数据有较好适应性。通常，$Logistic$回归中的线性部分$w^Tx+b &gt; 0$时，该模型输出就大于0.5 这时输入$x$被分为$y=1$那一类。</p>
 <p>&emsp;&emsp;上面已说到，SVM问题分三个阶段，一是线性可分、二是线性不可分但可放弃部分奇异点用线性分割、三是线性不可分且数据本身就非线性可分。解决这些问题都是一步一步来的，图1 是一个线性可分的SVM示意图，中间是得到的分类超平面，两端虚线是支持向量到超平面的最大间隔线。而这条线上的就是支持向量，支持向量到超平面的间隔是所有样本点中最近的。</p>
@@ -799,8 +802,8 @@ K(x,z) = (x\cdot z)^2</script><p>它是关于输入向量的内积的平方函�
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="../../27/剑指offer/" rel="prev" title="剑指offer">
-                剑指offer <i class="fa fa-chevron-right"></i>
+              <a href="../../22/条件随机场/" rel="prev" title="条件随机场">
+                条件随机场 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -880,7 +883,7 @@ K(x,z) = (x\cdot z)^2</script><p>它是关于输入向量的内积的平方函�
               
                 <a href="https://brezezee.github.io/archives">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -902,7 +905,7 @@ K(x,z) = (x\cdot z)^2</script><p>它是关于输入向量的内积的平方函�
               
               <div class="site-state-item site-state-tags">
                 <a href="../../../../tags/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
