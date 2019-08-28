@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="../../../../lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="../../../../lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="../../../../lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="../../../../css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="../../../../images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="python,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="基础语法1. python变量 变量定义  &amp;emsp;&amp;emsp;python是动态类型的语言，其变量声明不需要指明其数据类型，直接将对应的数值赋值给它即完成变量的定义。 12a = 10;b = &quot;hello&quot;  变量与内存地址  &amp;emsp;&amp;emsp;与C语言变量名就是内存地址，对变量赋值就是改变该地址上的内容不同，python的变量赋值是改变内存地址使其指向数值为所赋值数值的地址，并不是">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python基础语法（一）">
+<meta property="og:url" content="https://brezezee.github.io/2019/08/22/python基础1/index.html">
+<meta property="og:site_name" content="brezezee">
+<meta property="og:description" content="基础语法1. python变量 变量定义  &amp;emsp;&amp;emsp;python是动态类型的语言，其变量声明不需要指明其数据类型，直接将对应的数值赋值给它即完成变量的定义。 12a = 10;b = &quot;hello&quot;  变量与内存地址  &amp;emsp;&amp;emsp;与C语言变量名就是内存地址，对变量赋值就是改变该地址上的内容不同，python的变量赋值是改变内存地址使其指向数值为所赋值数值的地址，并不是">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://brezezee.github.io/2019/08/22/python基础1/06list01.png">
+<meta property="og:image" content="http://liao.cpython.org/pic/07slice01.png">
+<meta property="og:image" content="https://brezezee.github.io/2019/08/22/python基础1/07slice02-1566541437490.png">
+<meta property="og:updated_time" content="2019-08-28T09:05:56.796Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python基础语法（一）">
+<meta name="twitter:description" content="基础语法1. python变量 变量定义  &amp;emsp;&amp;emsp;python是动态类型的语言，其变量声明不需要指明其数据类型，直接将对应的数值赋值给它即完成变量的定义。 12a = 10;b = &quot;hello&quot;  变量与内存地址  &amp;emsp;&amp;emsp;与C语言变量名就是内存地址，对变量赋值就是改变该地址上的内容不同，python的变量赋值是改变内存地址使其指向数值为所赋值数值的地址，并不是">
+<meta name="twitter:image" content="https://brezezee.github.io/2019/08/22/python基础1/06list01.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://brezezee.github.io/2019/08/22/python基础1/">
+
+
+
+
+
+  <title>python基础语法（一） | brezezee</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta custom-logo">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">brezezee</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="https://brezezee.github.io/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="https://brezezee.github.io/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="https://brezezee.github.io/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-categories"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="https://brezezee.github.io/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archives"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="https://brezezee.github.io/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-about"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://brezezee.github.io">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="brezezee">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="../../../../images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="brezezee">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python基础语法（一）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-22T22:12:43+08:00">
+                2019-08-22
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2019-08-28T17:05:56+08:00">
+                2019-08-28
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="../../../../categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h2><h3 id="1-python变量"><a href="#1-python变量" class="headerlink" title="1. python变量"></a>1. python变量</h3><ol>
+<li>变量定义</li>
+</ol>
+<p>&emsp;&emsp;python是动态类型的语言，其变量声明不需要指明其数据类型，直接将对应的数值赋值给它即完成变量的定义。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">10</span>;</span><br><span class="line">b = <span class="string">"hello"</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>变量与内存地址</li>
+</ol>
+<p>&emsp;&emsp;与C语言变量名就是内存地址，对变量赋值就是改变该地址上的内容不同，python的变量赋值是改变内存地址使其指向数值为所赋值数值的地址，并不是原地址上数值的变化。这与C语言中的<code>void *</code>，和C++中的引用 <code>&amp;</code> 很像。例如</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">10</span>;</span><br><span class="line">b = <span class="number">12</span>;</span><br><span class="line">a = b;</span><br><span class="line">a = <span class="string">"str"</span></span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;执行完这几条语句后，变量a，b的地址相同，可用<code>id(a)</code>函数查看变量的地址。并且类型不同的变量之间也能直接赋值，这在C中是不允许的，所以说它类似与C中的<code>void *</code> 。实际上，python中普通numbers类型属于<strong>不可修改类型</strong>，因此num变量的改变是指向一个新的地址，而不是改变该地址的内容。</p>
+<p>&emsp;&emsp;还可从函数调用中的内存变化来看其参数传递方式</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">10</span>;</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun</span><span class="params">(x)</span>:</span></span><br><span class="line">	x = <span class="number">0</span></span><br><span class="line">	<span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">fun(a)</span><br><span class="line">print(a)</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;通过查看变量地址发现，在函数调用过程中的局部变量x与原变量a的地址是相同的，赋值<code>x=0</code>时该变量的地址改变，指向值为0的地址，调用结束后该变量的地址又变了回来。</p>
+<p><strong>总结：</strong>python是<strong>动态类型</strong>语言，在运行时确定其变量类型。python变量与C中的<code>void *</code>和C++中的<code>&amp;</code>很像，在赋值时，像指针一样直接指过去，并且可以跨类型赋值，这与<code>void *</code>属性一样，在函数传参时，直接传递变量地址，和C的指针和C++的引用一样。numbers是不可修改类型，改变时变化的是地址，类似指针和引用操作。</p>
+<p>&emsp;&emsp;作为一个动态类型语言，python将其数据的类型归于该数据的这个对象，而变量名只拥有该对象的一个引用。变量名和对象之间可以看作一个绑定关系，绑定之后就可以通过对象来获取该数据的属性和方法。一个变量一次只能绑定一个对象，但是可以多次绑定不同类型的对象。python中，变量是一个指向对象的指针，给变量赋新值并不替换原来的对象，只是让这个变量去引用一个新的对象。</p>
+<ul>
+<li>分支结构</li>
+</ul>
+<p>python分支主要靠if语句</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> a&lt;<span class="number">10</span>:</span><br><span class="line">	print(<span class="string">"some value"</span>)</span><br><span class="line"><span class="keyword">elif</span> b&lt;<span class="number">10</span>:</span><br><span class="line">	print(<span class="string">"    "</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">	print(<span class="string">"    "</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="2-集合"><a href="#2-集合" class="headerlink" title="2. 集合"></a>2. 集合</h3><p>&emsp;&emsp;集合其实是一堆基本数据类型用特定的符号(通常是括号：圆括号、花括号、方括号等)将这堆数据作为一个整体来处理，在C语言里要求数据的类型必须一样，而可爱的Python较为宽容或者说不严谨，允许这一堆数据构造出的新类型里的各个数据的类型可以不一样。</p>
+<p>常见的集合有列表list、字符串、元组tuple、字典dict、集set这几种。</p>
+<ul>
+<li>有序与无序</li>
+</ul>
+<p>&emsp;&emsp;有序是说某数据集合中的每个元素都有一个位置信息，通常用index表示，可以借助这种集合类型名和位置信息访问集合里的某元素值。其中，有序集合：list、string、tuple。无序集合：dict、set。</p>
+<ul>
+<li>可修改与不可修改</li>
+</ul>
+<p>&emsp;&emsp;可不可修改的意思即是该集合是只读的还是可以修改的。其中，可修改集合：list、dict、set。不可修改：string、tuple。</p>
+<h4 id="2-1-列表List"><a href="#2-1-列表List" class="headerlink" title="2.1 列表List"></a>2.1 列表List</h4><p>&emsp;&emsp;列表是python最常用的集合类，定义list的集合符号是方括号<code>[ ]</code> ，用逗号间隔每个元素，元素之间的类型可以不同。列表是一种<strong>有序且可修改</strong>的集合类型。</p>
+<ul>
+<li>创建列表</li>
+</ul>
+<ol>
+<li>用方括号直接创建</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">b = [<span class="number">1</span>, <span class="number">2</span>, <span class="string">'string'</span>]</span><br></pre></td></tr></table></figure>
+<ol>
+<li>用list()函数将数据转化为list</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">str = <span class="string">"string"</span></span><br><span class="line">li = list(s)</span><br><span class="line">print(li)</span><br><span class="line"><span class="comment">##['s', 't', 'r', 'i', 'n', 'g']</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>列表访问与修改</li>
+</ul>
+<p>&emsp;&emsp;前面说到，列表是有序的，那么就可以通过下标来访问其元素。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">'python'</span></span><br><span class="line">li = list(s)</span><br><span class="line"><span class="comment">#['p', 'y', 't', 'h', 'o', 'n']</span></span><br></pre></td></tr></table></figure>
+<p>对于列表<code>li</code> ，它有两个方向的下标（index），正向和负向。</p>
+<p><img src="06list01.png" alt="fig1"></p>
+<p>&emsp;&emsp;负向下标可以大大方便从后向前访问的情形。列表除了有序，也是一个可修改的集合类型。通过下标访问到之后，便可以直接对其修改：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="string">'python'</span></span><br><span class="line">li = list(a)</span><br><span class="line">print(li[<span class="number">0</span>],li[<span class="number">-6</span>])</span><br><span class="line">li[<span class="number">0</span>] = <span class="string">'c'</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>列表的遍历</li>
+</ul>
+<p>&emsp;&emsp;列表的遍历需要借助循环体，while或for都行。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">i = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> i &lt; len(li)</span><br><span class="line">	print(li[i])</span><br><span class="line">	i = i + <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<h5 id="2-2-1-列表相关函数"><a href="#2-2-1-列表相关函数" class="headerlink" title="2.2.1 列表相关函数"></a>2.2.1 列表相关函数</h5><ol>
+<li>index函数</li>
+</ol>
+<p>&emsp;&emsp;列表index与字符串index一样，返回某值在集合里首次出现的位置。并且找不到会报错，然而列表没有字符串里的find函数去解决这一问题，一个解决方法是通过<code>count</code>函数或者<code>in</code>运算看列表是否有该值再使用index</p>
+<ol>
+<li>count函数</li>
+</ol>
+<p>&emsp;&emsp;count函数可以统计某指定值再列表出现的次数。</p>
+<ol>
+<li>insert函数</li>
+</ol>
+<p>&emsp;&emsp;在列表的某个位置插入一个指定数值的数，它帮我们将后面的数移动了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;a = [<span class="number">1</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line">&gt;&gt;&gt;a.insert(<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line">&gt;&gt;&gt;print(a)</span><br><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br></pre></td></tr></table></figure>
+<ol>
+<li>append函数</li>
+</ol>
+<p>&emsp;&emsp;在列表的尾部插入数据，一次性只能插入一个，但是可以插入列表，插入列表后就相当于C++中的二维向量。可以通过二重索引访问。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;a = [<span class="number">1</span>,<span class="number">2</span>]</span><br><span class="line">&gt;&gt;&gt;a.append[<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line">&gt;&gt;&gt;print(a)</span><br><span class="line">[<span class="number">1</span>,<span class="number">2</span>,[<span class="number">3</span>,<span class="number">4</span>]]</span><br><span class="line">&gt;&gt;&gt;print(a[<span class="number">2</span>])</span><br><span class="line">[<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line">&gt;&gt;&gt;print(a[<span class="number">2</span>][<span class="number">0</span>])</span><br><span class="line"><span class="number">3</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>extend函数</li>
+</ol>
+<p>上面的append函数一次性只能插入一个，使用extend可以一次性插入多个，类似于列表的合并。输入参数可以使元组或者列表</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;a = [<span class="number">1</span>,<span class="number">2</span>]</span><br><span class="line">&gt;&gt;&gt;b = [<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line">&gt;&gt;&gt;c = range(<span class="number">5</span>,<span class="number">2</span>)</span><br><span class="line">&gt;&gt;&gt;a.extend(b)</span><br><span class="line">&gt;&gt;&gt;a.extend(c)</span><br><span class="line">&gt;&gt;&gt;print(a)</span><br><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]</span><br></pre></td></tr></table></figure>
+<ol>
+<li>pop函数</li>
+</ol>
+<p>&emsp;&emsp;pop函数可将列表<strong>指定位置或尾部</strong>的数据从列表删除，列表为空时使用会报错。其返回值是删除的值，默认情况删除尾部，若指定的index超出了列表范围也会报错</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;a = range(<span class="number">3</span>)</span><br><span class="line">&gt;&gt;&gt;print(a)</span><br><span class="line">[<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>]</span><br><span class="line">&gt;&gt;&gt;a.pop()</span><br><span class="line"><span class="number">2</span></span><br><span class="line">&gt;&gt;&gt;a.pop(<span class="number">0</span>)</span><br><span class="line"><span class="number">0</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>sort函数</li>
+</ol>
+<p>对列表元素进行排序。</p>
+<ul>
+<li>小运用</li>
+</ul>
+<p>将一个即包含列表，又包含单个数据的列表整理为一维列表。</p>
+<p>ps: isinstance函数可以判断变量的类型，第一个参数是变量，第二个参数是类型，如果符合则返回True</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span>,<span class="number">2</span>,[<span class="number">3</span>,<span class="number">4</span>],<span class="number">5</span>]</span><br><span class="line">b = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> a:</span><br><span class="line">	<span class="keyword">if</span> isinstance(i, list):</span><br><span class="line">		b.extend(i)</span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		b.append(i)</span><br><span class="line">print(a)</span><br><span class="line">print(b)</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;列表可以当作堆栈和队列使用，不过列表在尾部进行弹出和添加的效率高些，因为在头部操作需要将其他元素移动。因此列表可以很容易的实现堆栈，在列表尾部进行append和pop操作即可。</p>
+<h4 id="2-2-字符串"><a href="#2-2-字符串" class="headerlink" title="2.2 字符串"></a>2.2 字符串</h4><p>&emsp;&emsp;字符串是有序不可修改集合，即可用下标访问。用引号括起来，包括单引号、双引号和三引号（三个单或双）。字符串不可修改，但是可以拼接，可截取一串字符与另一串组合。</p>
+<h5 id="2-2-1-字符串运算符"><a href="#2-2-1-字符串运算符" class="headerlink" title="2.2.1 字符串运算符"></a>2.2.1 字符串运算符</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 字符串连接  “+” </span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = <span class="string">"hello"</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = <span class="string">"world"</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a + b</span><br><span class="line"><span class="string">"hello world"</span></span><br><span class="line"><span class="comment"># 重复输出 “*”</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a * <span class="number">2</span></span><br><span class="line">hellohello</span><br><span class="line"><span class="comment"># 通过索引访问，即有序性</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[<span class="number">0</span>]</span><br><span class="line">h</span><br><span class="line"><span class="comment"># 截取字符串，有序集合的切片功能</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[:<span class="number">4</span>]</span><br><span class="line">hell</span><br><span class="line"><span class="comment"># 成员运算符 “in”、“not in”</span></span><br><span class="line">&gt;&gt;&gt;<span class="string">'h'</span> <span class="keyword">in</span> a</span><br><span class="line"><span class="literal">True</span></span><br><span class="line">&gt;&gt;&gt;<span class="string">'h'</span> <span class="keyword">not</span> <span class="keyword">in</span> a</span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="comment"># 以原始字符串方式使用该字符串，即无视转义字符。</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(<span class="string">r'\n'</span>)</span><br><span class="line">\n</span><br></pre></td></tr></table></figure>
+<p><strong>PS:</strong>  python2中，普通字符串是8位ASCII编码的，要使用16位的Unicode需要假设u前缀。而python3默认使用Unicode编码。</p>
+<h5 id="2-2-2-字符串函数"><a href="#2-2-2-字符串函数" class="headerlink" title="2.2.2 字符串函数"></a>2.2.2 字符串函数</h5><p>&emsp;&emsp; Python为字符串对象定义了许多有用的函数。下面总结几个常用的</p>
+<ol>
+<li>index与find函数</li>
+</ol>
+<p>&emsp;&emsp;它们的作用都是在一个字符串中查找子串，用法都是一样的，唯一的区别是index在查找不到的时候会报错，而find查找不到会返回-1。它们的语法格式是</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Str.find(sub [, start [, end]])</span><br></pre></td></tr></table></figure>
+<p>sub是需要查找的子串，而start和end是可选参数，可以用来约束查找范围。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;s = <span class="string">'hello python'</span></span><br><span class="line">&gt;&gt;&gt;p = s.find(<span class="string">'p'</span>,<span class="number">4</span>)</span><br><span class="line">&gt;&gt;&gt;q = s.find(<span class="string">'p'</span>,<span class="number">8</span>)</span><br><span class="line">&gt;&gt;&gt;print(p,q)</span><br><span class="line"><span class="number">6</span>,<span class="number">-1</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>replace函数</li>
+</ol>
+<p>&emsp;&emsp;replace将字符串中的某子串替换成另一子串，返回值是新字符串，即不改变原字符串，产生一个新字符串。语法如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Str.replace(sub_old, sub_new[, count])</span><br></pre></td></tr></table></figure>
+<p>sub_old是要被替换的子串，sub_new是替换的子串，count是可选参数，代表从左到右替换几处。</p>
+<ol>
+<li>split函数</li>
+</ol>
+<p>&emsp;&emsp;依据规则将字符串分割成列表，语法如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Str.split([sep [,maxsplit]])</span><br></pre></td></tr></table></figure>
+<p>它的参数都是可选参数，因此可以不含参数的调用，默认情况下以空格、回车、制表符等作为分割符号。后面的maxsplit代表分割成几个，没指定就能分多少分多少。</p>
+<ol>
+<li>strip函数</li>
+</ol>
+<p>&emsp;&emsp;去掉字符串<strong>首尾</strong>的某些字符</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Str.strip([chars])</span><br></pre></td></tr></table></figure>
+<p>eg:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;s = <span class="string">"%^!#pyt!#%on#!"</span></span><br><span class="line">&gt;&gt;&gt;c = <span class="string">"!#"</span></span><br><span class="line">&gt;&gt;&gt;t = s.strip(c)</span><br><span class="line">&gt;&gt;&gt;print(t)</span><br><span class="line">%^pyt!<span class="comment">#%on</span></span><br></pre></td></tr></table></figure>
+<h4 id="2-3-字典"><a href="#2-3-字典" class="headerlink" title="2.3 字典"></a>2.3 字典</h4><p>&emsp;&emsp;字典是一种无序可修改的集合，不能通过下标来访问集合中元素的值，它的访问与数据库中的键值对类似。不过它更灵活，可以存储任意类型的对象。字典的键和值用冒号分割，每个键值对之间用逗号分割，整个字典包括在花括号中，如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dic = &#123;key1 : value1, key2 : value2&#125;</span><br></pre></td></tr></table></figure>
+<p>其中，值可以取任意值，但是键必须是唯一的，并且键不可变。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">dict = &#123;<span class="string">"cat"</span> : <span class="number">123</span>, <span class="string">"dog"</span> : <span class="string">"123"</span>, <span class="number">123</span> : <span class="number">456</span>&#125;</span><br><span class="line"><span class="comment">##访问</span></span><br><span class="line">print(<span class="string">"cat price:"</span>,dict[<span class="string">'cat'</span>])</span><br><span class="line"><span class="comment">##添加</span></span><br><span class="line">dict[<span class="string">"pig"</span>] = <span class="number">1024</span></span><br><span class="line"><span class="comment">##修改</span></span><br><span class="line">dict[<span class="string">"dog"</span>] = <span class="number">299</span></span><br><span class="line"><span class="comment">##删除一个键</span></span><br><span class="line"><span class="keyword">del</span> dict[<span class="number">123</span>[]]</span><br><span class="line"><span class="comment">##清空字典</span></span><br><span class="line">dict.clear()</span><br><span class="line"><span class="comment">##删除字典</span></span><br><span class="line"><span class="keyword">del</span> dict</span><br></pre></td></tr></table></figure>
+<p>其搭配都是任意的。</p>
+<ul>
+<li>字典键的特性</li>
+</ul>
+<p>&emsp;&emsp;键有两个重要的特征，一是<strong>唯一性</strong>，当创建时有两个相同的键时，后面的键值会被记住。二是<strong>不可修改</strong>，可用数字，字符串，元组充当，而可修改的列表就不行。</p>
+<ul>
+<li>字典内置函数和方法</li>
+</ul>
+<p>函数：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">函数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">len(dict)</td>
+<td style="text-align:center">计算字典元素个数</td>
+</tr>
+<tr>
+<td style="text-align:center">str(dict)</td>
+<td style="text-align:center">输出字典，以可打印字符串表示</td>
+</tr>
+<tr>
+<td style="text-align:center">type(variable)</td>
+<td style="text-align:center">返回类型，对字典来说返回字典</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>方法：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">方法</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">dict.clear()</td>
+<td style="text-align:left">删除字典内所有元素</td>
+</tr>
+<tr>
+<td style="text-align:center">dict.copy()</td>
+<td style="text-align:left">返回一个字典的浅复制</td>
+</tr>
+<tr>
+<td style="text-align:center">dict.formkeys()</td>
+<td style="text-align:left">返回类型，对字典来说返回字典</td>
+</tr>
+<tr>
+<td style="text-align:center">dict.get()</td>
+<td style="text-align:left">与dict[key]作用相同</td>
+</tr>
+<tr>
+<td style="text-align:center">dict.items()</td>
+<td style="text-align:left">返回一个有key-value形式的元组组成的所有键值对的列表</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>字典的遍历</li>
+</ul>
+<ol>
+<li>直接读键</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> key <span class="keyword">in</span> dict:</span><br><span class="line">	print(key, dict[key])</span><br><span class="line"><span class="keyword">for</span> key <span class="keyword">in</span> dict.keys():</span><br><span class="line">    print(key, dict[key])</span><br></pre></td></tr></table></figure>
+<ol>
+<li>读值</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> v <span class="keyword">in</span> dict.values():</span><br><span class="line">	print(v)</span><br><span class="line"><span class="comment">#缺点：无键</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>items直接返回key和value</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dict.items()</span><br><span class="line"><span class="comment">###[(key1,value1), (key2,value2),...]</span></span><br><span class="line"><span class="keyword">for</span> (k,v) <span class="keyword">in</span> dict.items():</span><br><span class="line">	print(k,v)</span><br></pre></td></tr></table></figure>
+<p>注意items()返回的是二元元组组成的列表。</p>
+<h4 id="2-4-set"><a href="#2-4-set" class="headerlink" title="2.4 set"></a>2.4 set</h4><p>&emsp;&emsp;集Set的形式和字典很像，是无序集合，也是各个数据项用逗号间隔用花括号括起来，区别数据项不是一对儿，就是一个数据，且数据项的值不重复<strong>唯一</strong>。本章的这个Python数据类型真的和数学里的集非常相似，它既有基础的创建<strong>集合set</strong>、<strong>集合set添加</strong>、<strong>集合删除</strong>又有<strong>交集</strong>、<strong>并集</strong>、<strong>差集等</strong>操作。</p>
+<p>&emsp;&emsp;集的创建可以用花括号赋值来实现，也可以用set函数创建。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;s1 = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="string">'a'</span>, <span class="string">'all'</span>&#125;</span><br><span class="line">&gt;&gt;&gt;s2 = set(<span class="string">"hello world"</span>)</span><br><span class="line">&gt;&gt;&gt;s3 = set([<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">4</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line">&gt;&gt;&gt;print(s1)</span><br><span class="line">&gt;&gt;&gt;print(s2)</span><br><span class="line">&gt;&gt;&gt;print(s3)</span><br><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="string">'a'</span>,<span class="string">'all'</span>]</span><br><span class="line">&#123;<span class="string">'e'</span>, <span class="string">' '</span>, <span class="string">'l'</span>, <span class="string">'w'</span>, <span class="string">'h'</span>, <span class="string">'r'</span>, <span class="string">'o'</span>, <span class="string">'d'</span>&#125;</span><br><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br></pre></td></tr></table></figure>
+<p>可以看到set中的数据没有重复的，且顺序与输入的顺序不一定保持一致。</p>
+<h5 id="2-4-1-set集的增删"><a href="#2-4-1-set集的增删" class="headerlink" title="2.4.1 set集的增删"></a>2.4.1 set集的增删</h5><p>&emsp;&emsp;集可修改，增加元素可用add和update函数。删除可用pop、discard、remove函数。</p>
+<ol>
+<li>增加</li>
+</ol>
+<p>add函数将输入的参数作为整体插入到set集中，而update会把传入的参数拆分，再插入到集中。例如传入一个字符串，add将其看作字符串插入，而update将字符串先拆分再传入。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;s = set(<span class="string">"abc"</span>)</span><br><span class="line">&gt;&gt;&gt;s.add(<span class="string">"def"</span>)</span><br><span class="line">&gt;&gt;&gt;print(s)</span><br><span class="line">[<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'def'</span>]</span><br><span class="line">&gt;&gt;&gt;s.update(<span class="string">"gh"</span>)</span><br><span class="line">&gt;&gt;&gt;print(s)</span><br><span class="line">[<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'def'</span>,<span class="string">'g'</span>,<span class="string">'h'</span>]</span><br></pre></td></tr></table></figure>
+<ol>
+<li>删除</li>
+</ol>
+<p>pop函数没有参数，set是无序的，因此它随机删除一个（玄学），然后返回它的值。空集pop会报错。</p>
+<p>discard函数可以删除集中某值，如果参数不属于该集则不进行任何操作。</p>
+<p>remove函数和discard基本一样，区别在于不属于该集时会报错。</p>
+<h5 id="2-4-2-集的交集、并集、差集"><a href="#2-4-2-集的交集、并集、差集" class="headerlink" title="2.4.2 集的交集、并集、差集"></a>2.4.2 集的交集、并集、差集</h5><p>交集：$A\cap B = \{ x|x \in A且x\in B \}$ 。可以用&amp;运算或者intersection函数</p>
+<p>并集：$A\cup B = \{ x|x\in A 或x\in B \}$。可以用 $|$ 运算符或者union函数。</p>
+<p>差集：$A-B = \{ x|x \in A 且x \notin B \}$。可用 $-$ 运算符或者difference函数。</p>
+<p>对称差集：$A\triangle B = \{ x|x\in A\cup B 且 x \notin A \cap B \}$。求对称差集可用^运算符或者用 symmetric_difference或symmetric_difference_update函数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;s = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;</span><br><span class="line">&gt;&gt;&gt;t = &#123;<span class="number">2</span>,<span class="number">4</span>&#125;</span><br><span class="line">&gt;&gt;&gt;u = s | t  <span class="comment"># s.union(t)</span></span><br><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line">&gt;&gt;&gt;s &amp; t   <span class="comment"># s.intersection(t)</span></span><br><span class="line">[<span class="number">2</span>]</span><br><span class="line">&gt;&gt;&gt;s - t   <span class="comment"># s.difference(t)</span></span><br><span class="line">[<span class="number">1</span>,<span class="number">3</span>]</span><br><span class="line">&gt;&gt;&gt;s ^ t   <span class="comment"># s.symmetric_difference(t)</span></span><br><span class="line">[<span class="number">1</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;集合虽然无序，但可用for循环来遍历，for会依次读取集合中的每一项。</p>
+<h4 id="2-n-切片Slice"><a href="#2-n-切片Slice" class="headerlink" title="2.n 切片Slice"></a>2.n 切片Slice</h4><p>&emsp;&emsp;切片是对有序集合进行的操作，目的是从有序集合中截取自己需要的那部分数据，构成子集和。切片需要控制的操作属性有起点start、终点end和步长step，注意步长是可以控制方向的，当步长为负时，则反方向进行截取。</p>
+<p>&emsp;&emsp;先来看一个与切片原理相同的函数<code>range()</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#函数语法 range(start, end[, step])</span></span><br><span class="line"><span class="comment">##示例</span></span><br><span class="line">&gt;&gt;&gt;range(<span class="number">1</span>,<span class="number">11</span>)</span><br><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>]</span><br><span class="line">&gt;&gt;&gt;range(<span class="number">0</span>,<span class="number">20</span>,<span class="number">5</span>)</span><br><span class="line">[<span class="number">0</span>,<span class="number">5</span>,<span class="number">10</span>,<span class="number">15</span>]</span><br><span class="line">&gt;&gt;&gt;range(<span class="number">0</span>,<span class="number">-6</span>,<span class="number">-1</span>)</span><br><span class="line">[<span class="number">0</span>,<span class="number">-1</span>,<span class="number">-2</span>,<span class="number">-3</span>,<span class="number">-4</span>,<span class="number">-5</span>]</span><br><span class="line">&gt;&gt;&gt;range(<span class="number">3</span>,<span class="number">1</span>)</span><br><span class="line">[]</span><br><span class="line">&gt;&gt;&gt;range(<span class="number">1</span>,<span class="number">3</span>,<span class="number">-1</span>)</span><br><span class="line">[]</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;上面这些情况已大致可以看出该函数的性质，从start开始，以步长step为单位产生一个到end-1的列表。并且start和end的相对位置确定了产生数据的方向，若步长与之相反，则会生成一个空列表。比如<code>range(1,3,-1)</code>，start到end方向是正向的，然步长为负向，因此切出来是空。</p>
+<p>切片的表示是直接在列表方括号中给出范围：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">切片子集名 = list_name[start: end[: step]]</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;切片与该函数原理相同，不过range中start和end的负数并不是表示从后向前的下标，而是真正的负数。它们的默认步长都是1，可以不必明确指出。正常的切片与range相同，主要区别一下start和end负索引的情况</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;s = <span class="string">'python'</span></span><br><span class="line">&gt;&gt;&gt;li = list(s)</span><br><span class="line">&gt;&gt;&gt;li[<span class="number">1</span>: <span class="number">-2</span>]</span><br><span class="line">[<span class="string">'y'</span>, <span class="string">'t'</span>, <span class="string">'h'</span>]</span><br><span class="line">&gt;&gt;&gt;li[<span class="number">1</span>: <span class="number">-2</span>: <span class="number">-1</span>]</span><br><span class="line">[]</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;该图对应的情况如下</p>
+<p><img src="http://liao.cpython.org/pic/07slice01.png" alt></p>
+<p>python会根据start和end的相对位置，判断子集的大致区域，再根据步长在该区域中选取最终的子集，步长若背离该区域，则会取到空集，另一个例子如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;li[<span class="number">-1</span>: <span class="number">2</span>: <span class="number">1</span>]</span><br><span class="line">[]</span><br><span class="line">&gt;&gt;&gt;li[<span class="number">-1</span>: <span class="number">2</span>: <span class="number">-1</span>]</span><br><span class="line">[<span class="string">'n'</span>, <span class="string">'o'</span>, <span class="string">'h'</span>]</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;对应情况如下</p>
+<p><img src="07slice02-1566541437490.png" alt="img"></p>
+<ul>
+<li>默认操作</li>
+</ul>
+<p>&emsp;&emsp;有时根据应用情景，可以不必指出start、end或step。这时它们都有默认值，字符串string也是有序集合，可以对它进行切片：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;s = <span class="string">"python"</span></span><br><span class="line">&gt;&gt;&gt;s[:]</span><br><span class="line">python</span><br><span class="line">&gt;&gt;&gt;s[ : : <span class="number">1</span>]</span><br><span class="line">python</span><br><span class="line">&gt;&gt;&gt;s[ : : <span class="number">-1</span>]</span><br><span class="line">nohtyp</span><br><span class="line">&gt;&gt;&gt;s[<span class="number">1</span>: : <span class="number">1</span>]</span><br><span class="line">ython</span><br><span class="line">&gt;&gt;&gt;s[: <span class="number">3</span>]</span><br><span class="line">pyt</span><br></pre></td></tr></table></figure>
+<h4 id="2-循环"><a href="#2-循环" class="headerlink" title="2.  循环"></a>2.  循环</h4><p>&emsp;&emsp;python中的循环包括while和for，其中while循环与C语言中的类似，但for循环与C语言有些区别。</p>
+<p>while循环当满足条件时便循环，直到条件被破坏</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">i = <span class="number">0</span></span><br><span class="line">n = <span class="number">100</span></span><br><span class="line">sum = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> i &lt;= <span class="number">100</span>:</span><br><span class="line">	sum = sum + i</span><br><span class="line">	i += <span class="number">1</span></span><br><span class="line">print(<span class="string">"ans is: %d"</span> %sum)</span><br></pre></td></tr></table></figure>
+<p>当然，while循环可以实现无限循环</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">flag = <span class="number">1</span></span><br><span class="line"><span class="keyword">while</span> flag == <span class="number">1</span>:</span><br><span class="line">	print(<span class="string">"waiting..."</span>)</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;for循环与C判断是否满足条件不同，python中的for循环每次从一个<strong>有序序列集合</strong>中取一个值赋给for关键字后的变量，直到该序列的数被取完为止。也就是该序列有多少个数值就循环多少次。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> &lt;variable&gt; <span class="keyword">in</span> &lt;sequence&gt;:</span><br><span class="line">	&lt;statements&gt;</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">	&lt;statements&gt;</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;python中的else会在执行完序列数量后的循环即将退出时执行一次else中的语句。for循环中的集合要求是有序的，即可通过下标访问，包括list、string、tuple。前面说的range函数可生成一串固定长度的有序列表，这一特性使得它经常与for循环搭配使用。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> index <span class="keyword">in</span> range(<span class="number">100</span>):</span><br><span class="line">	do something</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;python的循环中也有break和continue语句，其效果和C语言中的相同。</p>
+<h3 id="3-函数"><a href="#3-函数" class="headerlink" title="3. 函数"></a>3. 函数</h3><h4 id="3-1-函数定义"><a href="#3-1-函数定义" class="headerlink" title="3.1 函数定义"></a>3.1 函数定义</h4><p>&emsp;&emsp;python的函数定义非常简单，因为是动态类型语言，它不需要指明函数返回值的类型。其定义的语法格式是：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">function_name</span><span class="params">(parameter list)</span>:</span></span><br><span class="line">	&lt;statements&gt;</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;需要注意的是其函数内部没有括号来约束，和循环语句一样，需要通过前面加Tab来表示它是函数体内部的代码块。</p>
+<h4 id="3-2-参数传递"><a href="#3-2-参数传递" class="headerlink" title="3.2 参数传递"></a>3.2 参数传递</h4><p>&emsp;&emsp;在第一节变量中讲到，python变量只是一个引用（指针），并没有类型，它可以指向不同类型的对象。然而在python的参数传递中，它却不能直接当作C++中的引用传递来理解。python的参数传递与该变量指向对象的能否修改有关，集合中讲到的list、dict、set是可修改的，而string与整数等是不可修改的。</p>
+<p>对于python的参数传递：</p>
+<ul>
+<li>可修改类型：类似C++引用，比如list传进函数，函数内部对list的修改会作用到外部的list本身。</li>
+<li>不可修改类型：类似C++值传递，比如整数传进函数，对其修改只是影响到一个复制的对象，结束后会将变量名重新引用原来的地址。</li>
+</ul>
+<h4 id="3-3-参数类型"><a href="#3-3-参数类型" class="headerlink" title="3.3 参数类型"></a>3.3 参数类型</h4><p>python的可用参数类型包括：</p>
+<ol>
+<li>必需参数</li>
+<li>关键字参数</li>
+<li>默认参数</li>
+<li>不定长参数</li>
+</ol>
+<p>&emsp;&emsp;必需参数就是传参时必须输入和指定的参数，且顺序和数量需保持一致。关键字参数就是在调用时指定参数名，通过它可以使输入顺序不必按声明的顺序，比如</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun</span><span class="params">(pram1, pram2)</span>:</span></span><br><span class="line">	<span class="keyword">pass</span></span><br><span class="line">fun(pram2=<span class="string">" "</span>, pram1=<span class="string">" "</span>)</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;如果在声明时为参数指定了一个默认值，那么在调用时可以不输入该参数，函数会自动为它赋默认值</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun</span><span class="params">(parm1 = <span class="string">"s"</span>, parm)</span></span></span><br><span class="line"><span class="function">	<span class="title">pass</span></span></span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;不定长参数在不确定参数数量时可用，它有两种声明方法：</p>
+<ul>
+<li>声明为元组（*）</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun</span><span class="params">([formal_args,] *args_ruple)</span>:</span></span><br><span class="line">	<span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;在不定长参数前面仍可定义正常的参数，正常参数同前规范。带<code>*</code>的参数是不定长参数，对于后面输入的参数，python会把它保存在该元组中。当然，如果不输入多余正常参数的参数，那么它就是一个空元组。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">printvar</span><span class="params">(arg1, *args)</span>:</span></span><br><span class="line">	print(arg1)</span><br><span class="line">	<span class="keyword">for</span> var <span class="keyword">in</span> args:</span><br><span class="line">		print(var)</span><br><span class="line">	<span class="keyword">return</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>声明为字典（**）</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fun</span><span class="params">([formal_args,] **args_dict)</span>:</span></span><br><span class="line">	<span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<p>其调用如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fun(<span class="number">1</span>,a=<span class="number">2</span>,b=<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="3-4-匿名函数"><a href="#3-4-匿名函数" class="headerlink" title="3.4 匿名函数"></a>3.4 匿名函数</h4><p>&emsp;&emsp;如果一个函数只需要一个表达式就行，但是这个表达式会多次调用，那么可不需要专门定义一个标准的函数，使用lambda匿名函数即可。lambda函数有自己的命名空间，不能访问自己参数列表之外或全局命名空间的参数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">lambda</span> [arg1 [, arg2, ..., argn]]: expression</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sum = <span class="keyword">lambda</span> arg1, arg2: arg1 + arg2</span><br><span class="line">sun(<span class="number">1</span>,<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="4-模块与包"><a href="#4-模块与包" class="headerlink" title="4. 模块与包"></a>4. 模块与包</h3><p>&emsp;&emsp;模块首先是一个含有源代码的文件在Python里以.py结尾，文件里可以有函数的定义、变量的定义或者对象(类的实例化)的定义等等内容。如果一个项目的代码量较大，函数较多，最好把一个文件分为多个文件来管理，这样总程序脉络清晰易于维护和团队分工协作，这就是Python里存在模块的意义所在。模块名就是文件名(不含.py)，例如假设有一个模块：xopowo.py那么模块名为xopowo。</p>
+<p>&emsp;&emsp;但当一个项目的模块文件不断的增多，为了更好地管理项目，通常将功能相近相关的模块放在同一个目录下，这就是包，故包从物理结构上看对应于一个目录，一个特殊要求，包目录下必有一个空的<strong>init</strong>.py文件，这是包区分普通目录的标签或者说是标志。包下可以又有包称为子包，子包也是一个目录，子包的目录下也得有一个空的<strong>init</strong>.py文件。这样就构成了分级或者说分层的项目管理体系。</p>
+<h4 id="4-1-模块的使用"><a href="#4-1-模块的使用" class="headerlink" title="4.1 模块的使用"></a>4.1 模块的使用</h4><p>&emsp;&emsp;模块，可是Python自带的、而外安装的或者开发者自己写的，在一个文件里使用模块很简单用import即可，import有点像C语言的include。import语句会在sys中包含的path中去寻找所导入的模块，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="keyword">import</span> sys</span><br><span class="line">&gt;&gt;&gt;<span class="keyword">for</span> i <span class="keyword">in</span> sys.path:</span><br><span class="line">&gt;&gt;&gt;		print(i)</span><br><span class="line">C:\Users\<span class="number">18882</span>\python_note</span><br><span class="line">D:\IDE\Python3<span class="number">.5</span></span><br><span class="line">D:\Anaconda\python37.zip</span><br><span class="line">D:\Anaconda\DLLs</span><br><span class="line">D:\Anaconda\lib</span><br><span class="line">D:\Anaconda</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;上面其实已经演示了一种import的使用方法，直接使用<code>import module_name</code>语句会将该模块全部导入。而在使用时，需要明确使用的是模块中的具体哪一个方法。与调用对象的方法类似，使用点运算符号，比如<code>sys.path</code>。</p>
+<p>&emsp;&emsp;只需要导入模块的某些函数时，需要使用<code>form module_name import fun_name</code>语句。使用该方法导入的模块函数可以直接调用，不需要再指明是哪个模块的函数。如果要导入一个模块中的全部内容，可以使用<code>form module_name import *</code>语句，这样便可以直接使用该模块的全部函数。但是这种方法不太符合规范，不应该经常使用。</p>
+<h4 id="4-2-包的使用"><a href="#4-2-包的使用" class="headerlink" title="4.2 包的使用"></a>4.2 包的使用</h4><p>&emsp;&emsp;包，实际是更大规模的以目录形式存在的模块集合，包可以含子包，包区别于目录是包的目录下有一个空的<strong>init</strong>.py文件。包和模块一样有Python自带的包，也可以通过工具安装一些包，例如numpy就是数据科学领域比较常用的一个包，需额外安装，当然也可以自己开发一些包。</p>
+<p>&emsp;&emsp;在使用包中的模块时，也是通过点运算符来调用某一个模块。这样便可以想模块那样，不必担心不同模块之间的全局变量相互影响，也不必担心不同包（库）的模块重名现象。</p>
+<p>&emsp;&emsp;目录只有包含一个叫做 <strong>init</strong>.py 的文件才会被认作是一个包，主要是为了避免一些滥俗的名字（比如叫做 string）不小心的影响搜索路径中的有效模块。</p>
+<h3 id="5-文件操作"><a href="#5-文件操作" class="headerlink" title="5. 文件操作"></a>5. 文件操作</h3><p>&emsp;&emsp;Python对于文件的操作和其他编程语言大致一样，都是通过open函数去打开某个文件，返回这个文件对象。通过使用文件对象的一些函数方法来读取文件内容，读取完毕后使用close关闭文件。</p>
+<h4 id="5-1-open函数参数"><a href="#5-1-open函数参数" class="headerlink" title="5.1 open函数参数"></a>5.1 open函数参数</h4><p>&emsp;&emsp;open函数一般有两个参数，文件名file和模式mode，但完整格式语法为</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">open(file, mode=<span class="string">'r'</span>, buffering=<span class="number">-1</span>, encoding=<span class="literal">None</span>, errors=<span class="literal">None</span>, newline=<span class="literal">None</span>, closefd=<span class="literal">True</span>, opener=<span class="literal">None</span>)</span><br></pre></td></tr></table></figure>
+<p>参数说明：</p>
+<ul>
+<li>file: 必需，文件路径（相对或者绝对路径）。</li>
+<li>mode: 可选，文件打开模式</li>
+<li>buffering: 设置缓冲</li>
+<li>encoding: 一般使用utf8</li>
+<li>errors: 报错级别</li>
+<li>newline: 区分换行符</li>
+<li>closefd: 传入的file参数类型</li>
+<li>opener:</li>
+</ul>
+<p>模式有以下几种：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">模式</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">t</td>
+<td style="text-align:left">文本模式 (默认)。</td>
+</tr>
+<tr>
+<td style="text-align:left">x</td>
+<td style="text-align:left">写模式，新建一个文件，如果该文件已存在则会报错。</td>
+</tr>
+<tr>
+<td style="text-align:left">b</td>
+<td style="text-align:left">二进制模式。</td>
+</tr>
+<tr>
+<td style="text-align:left">+</td>
+<td style="text-align:left">打开一个文件进行更新(可读可写)。</td>
+</tr>
+<tr>
+<td style="text-align:left">U</td>
+<td style="text-align:left">通用换行模式（<strong>Python 3 不支持</strong>）。</td>
+</tr>
+<tr>
+<td style="text-align:left">r</td>
+<td style="text-align:left">以只读方式打开文件。文件的指针将会放在文件的开头。这是默认模式。</td>
+</tr>
+<tr>
+<td style="text-align:left">rb</td>
+<td style="text-align:left">以二进制格式打开一个文件用于只读。文件指针将会放在文件的开头。这是默认模式。一般用于非文本文件如图片等。</td>
+</tr>
+<tr>
+<td style="text-align:left">r+</td>
+<td style="text-align:left">打开一个文件用于读写。文件指针将会放在文件的开头。</td>
+</tr>
+<tr>
+<td style="text-align:left">rb+</td>
+<td style="text-align:left">以二进制格式打开一个文件用于读写。文件指针将会放在文件的开头。一般用于非文本文件如图片等。</td>
+</tr>
+<tr>
+<td style="text-align:left">w</td>
+<td style="text-align:left">打开一个文件只用于写入。如果该文件已存在则打开文件，并从开头开始编辑，即原有内容会被删除。如果该文件不存在，创建新文件。</td>
+</tr>
+<tr>
+<td style="text-align:left">wb</td>
+<td style="text-align:left">以二进制格式打开一个文件只用于写入。如果该文件已存在则打开文件，并从开头开始编辑，即原有内容会被删除。如果该文件不存在，创建新文件。一般用于非文本文件如图片等。</td>
+</tr>
+<tr>
+<td style="text-align:left">w+</td>
+<td style="text-align:left">打开一个文件用于读写。如果该文件已存在则打开文件，并从开头开始编辑，即原有内容会被删除。如果该文件不存在，创建新文件。</td>
+</tr>
+<tr>
+<td style="text-align:left">wb+</td>
+<td style="text-align:left">以二进制格式打开一个文件用于读写。如果该文件已存在则打开文件，并从开头开始编辑，即原有内容会被删除。如果该文件不存在，创建新文件。一般用于非文本文件如图片等。</td>
+</tr>
+<tr>
+<td style="text-align:left">a</td>
+<td style="text-align:left">打开一个文件用于追加。如果该文件已存在，文件指针将会放在文件的结尾。也就是说，新的内容将会被写入到已有内容之后。如果该文件不存在，创建新文件进行写入。</td>
+</tr>
+<tr>
+<td style="text-align:left">ab</td>
+<td style="text-align:left">以二进制格式打开一个文件用于追加。如果该文件已存在，文件指针将会放在文件的结尾。也就是说，新的内容将会被写入到已有内容之后。如果该文件不存在，创建新文件进行写入。</td>
+</tr>
+<tr>
+<td style="text-align:left">a+</td>
+<td style="text-align:left">打开一个文件用于读写。如果该文件已存在，文件指针将会放在文件的结尾。文件打开时会是追加模式。如果该文件不存在，创建新文件用于读写。</td>
+</tr>
+<tr>
+<td style="text-align:left">ab+</td>
+<td style="text-align:left">以二进制格式打开一个文件用于追加。如果该文件已存在，文件指针将会放在文件的结尾。如果该文件不存在，创建新文件用于读写。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="5-2-读文件"><a href="#5-2-读文件" class="headerlink" title="5.2 读文件"></a>5.2 读文件</h4><p>&emsp;&emsp;读文件之前需要使用open函数打开该文件，open函数返回该文件对象，之后的文件读取操作就通过该文件对象完成。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">filename = <span class="string">"./data.csv"</span></span><br><span class="line">fp = open(filename, <span class="string">'r'</span>)</span><br><span class="line">data = fp.read()</span><br><span class="line">fp.close()</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;read函数会一次性读取所有文件内容，以字符串的形式赋给data，可以使用read(size)来确定一次读多少。手动调用open函数打开的文件一定要记得关闭，因为打开文件会占用操作系统资源，操作系统同时能打开的文件数量也是有限的。</p>
+<p>&emsp;&emsp;python主要有三个类型的读取函数供选择，分别是read、readline、readlines。</p>
+<ul>
+<li>read可以指定每次读取的最大数量，如果不指定就一次性读取全部，当文件很大的时候是比较占内存的。</li>
+<li>readline一次读取一行，如果数据是按行排列的就可以采用这种方式即可分类又可节约内存。</li>
+<li>readlines从文件当前读写位置读取多行，每行作为一项，因此返回列表。</li>
+</ul>
+<h4 id="5-3-读写位置"><a href="#5-3-读写位置" class="headerlink" title="5.3 读写位置"></a>5.3 读写位置</h4><p>&emsp;&emsp;与文件读写位置相关的函数有两个：tell和seek。tell函数可以返回目前函数的读取位置，seek函数可以调整当前读写位置。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#tell</span></span><br><span class="line">filename = <span class="string">"./data.csv"</span></span><br><span class="line">fp = open(filename, <span class="string">'r'</span>)</span><br><span class="line">data = fp.read(<span class="number">10</span>)</span><br><span class="line">print(fp.tell())</span><br><span class="line">fp.close()</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;seek函数给出从三个位置出发调整读写位置的方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">seek(offset, [whence])</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;whence 有三个取值，分别是0， 1，2。0是默认值，表示从文件头开始计算偏移，offset需大于0。1表示从当前读写位置计算偏移量，此时offset可正可负。2表示从文件尾计算偏移，当然它的offset需小于0。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;filename = <span class="string">"./data.csv"</span></span><br><span class="line">&gt;&gt;&gt;fp = open(filename, <span class="string">'r'</span>)</span><br><span class="line">&gt;&gt;&gt;print(fp.tell())</span><br><span class="line"><span class="number">0</span></span><br><span class="line">&gt;&gt;&gt;fp.seek(<span class="number">5</span>)</span><br><span class="line">&gt;&gt;&gt;print(fp.tell())</span><br><span class="line"><span class="number">5</span></span><br><span class="line">&gt;&gt;&gt;fp.seek(<span class="number">2</span>, <span class="number">1</span>)</span><br><span class="line">&gt;&gt;&gt;print(fp.tell())</span><br><span class="line"><span class="number">7</span></span><br></pre></td></tr></table></figure>
+<h4 id="5-4-写文件"><a href="#5-4-写文件" class="headerlink" title="5.4 写文件"></a>5.4 写文件</h4><p>&emsp;&emsp;写文件可以通过write和writelines函数实现，写文件需要使用可写模式打开文件，当需要写入的是一整串字符串时就用write函数即可，若写入的内容可迭代就可以使用writelines，比如列表。使用writelines如果需要换行需要手动添加，不然所有数据都会在一整行。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">filename = <span class="string">"./data.csv"</span></span><br><span class="line">fp = open(filename, <span class="string">'w'</span>)</span><br><span class="line">str = <span class="string">"hello world"</span>.split()</span><br><span class="line">fp.writelines(line + <span class="string">'\n'</span> <span class="keyword">for</span> line <span class="keyword">in</span> str)</span><br><span class="line">fp.close</span><br></pre></td></tr></table></figure>
+<h4 id="5-5-CSV文件操作"><a href="#5-5-CSV文件操作" class="headerlink" title="5.5 CSV文件操作"></a>5.5 CSV文件操作</h4><p>&emsp;&emsp;有的文件通过一些分隔符号，例如逗号、分号、冒号等将一条记录的各个字段分割开，这样的存储数据的方式典型的文件类型有csv文件、xml文件等。</p>
+<p>&emsp;&emsp;python自带有CSV模块可以方便的读取scv类型的文件。该模块里有一个reader函数，用以读取csv文件内容，返回可迭代类型。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> csv</span><br><span class="line">filename <span class="string">"./data.csv"</span></span><br><span class="line">fp = open(filename, <span class="string">'r'</span>)</span><br><span class="line">data = csv.reader(fp, delimiter=<span class="string">','</span>)</span><br><span class="line">print(data)</span><br><span class="line">fp.close()</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;reader函数中的参数delimiter代表csv文件中每行的各字段数据用什么分割。例如我们可以将原来是’，‘分割的csv文件读取出来后用’；‘再写回去。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> csv</span><br><span class="line">filename = <span class="string">"./test.csv"</span></span><br><span class="line">fp = open(filename, <span class="string">'w'</span>)</span><br><span class="line"><span class="comment">#str = "hello world".split()</span></span><br><span class="line">str = [<span class="string">"1,2,3,4,5"</span>,<span class="string">"6,7,8,9,10"</span>]</span><br><span class="line">fp.writelines(line + <span class="string">'\n'</span> <span class="keyword">for</span> line <span class="keyword">in</span> str)</span><br><span class="line">fp = open(filename, <span class="string">'r'</span>)</span><br><span class="line">data = csv.reader(fp,delimiter=<span class="string">','</span>)</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> data:</span><br><span class="line">    print(x)</span><br><span class="line">print(type(data))</span><br><span class="line">filename = <span class="string">"./test.txt"</span></span><br><span class="line">fpw = open(filename, <span class="string">'w'</span>)</span><br><span class="line">write_obj = csv.writer(fpw, delimiter=<span class="string">':'</span>)</span><br><span class="line">write_obj.writerows(data)</span><br><span class="line">fpw = open(filename, <span class="string">'r'</span>)</span><br><span class="line">print(fpw.read())</span><br><span class="line">fpw.close()</span><br><span class="line">fp.close()</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;上面说到csv.reader是一个可迭代的类型，但并没说明它是python中的什么类型，实际上它是csv里实现的一个对象。将其type打印出来就能发现，上面程序结果如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;, &apos;4&apos;, &apos;5&apos;]</span><br><span class="line">[&apos;6&apos;, &apos;7&apos;, &apos;8&apos;, &apos;9&apos;, &apos;10&apos;]</span><br><span class="line">&lt;class &apos;_csv.reader&apos;&gt;</span><br><span class="line">&lt;class &apos;_csv.writer&apos;&gt;</span><br><span class="line">1:2:3:4:5</span><br><span class="line">6:7:8:9:10</span><br></pre></td></tr></table></figure>
+<h4 id="5-6-使用with-open"><a href="#5-6-使用with-open" class="headerlink" title="5.6 使用with open"></a>5.6 使用with open</h4><p>&emsp;&emsp;在上面的例子中，每次打开文件后都需要进行关闭，实在是有些麻烦。并且，当打开的文件目录不存在或读写过程中都有可能产生IOError，产生IOError后就不能正常的close文件。为此，我们可能需要使用try-catch语句来调用open函数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">	fp = open(filename, <span class="string">'r'</span>)</span><br><span class="line">	print(fp.read())</span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">	<span class="keyword">if</span> fp:</span><br><span class="line">		fp.close()</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;这谁顶得住？所以，python为我们提供了一个简单的方法来打开文件，它可以帮助我们管理open与close。使用方法如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(filename, <span class="string">'r'</span>) <span class="keyword">as</span> fp:</span><br><span class="line">	print(fp.read())</span><br></pre></td></tr></table></figure>
+<p>这样with语句中的文件读写操作都与前面的一样了，不用写close了，非常方便。</p>
+<h3 id="Reference："><a href="#Reference：" class="headerlink" title="Reference："></a>Reference：</h3><p>[1] <a href="http://liao.cpython.org/21file/" target="_blank" rel="noopener">Python学习园</a></p>
+<p>[2] <a href="https://www.runoob.com/python3/python3-tutorial.html" target="_blank" rel="noopener">python3教程</a></p>
+<p>[3] <a href="https://www.cnblogs.com/ymjyqsx/p/6554817.html" target="_blank" rel="noopener">with open语句</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:</strong>
+    brezezee
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link:</strong>
+    <a href="https://brezezee.github.io/2019/08/22/python基础1/" title="python基础语法（一）">https://brezezee.github.io/2019/08/22/python基础1/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice: </strong>
+    All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="../../../../tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="../条件随机场/" rel="next" title="条件随机场">
+                <i class="fa fa-chevron-left"></i> 条件随机场
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="../../27/剑指offer/" rel="prev" title="剑指offer">
+                剑指offer <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">brezezee</p>
+              <p class="site-description motion-element" itemprop="description">A learning notes blog</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="https://brezezee.github.io/archives">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="../../../../categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="../../../../tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础语法"><span class="nav-text">基础语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-python变量"><span class="nav-text">1. python变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-集合"><span class="nav-text">2. 集合</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-列表List"><span class="nav-text">2.1 列表List</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-1-列表相关函数"><span class="nav-text">2.2.1 列表相关函数</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-字符串"><span class="nav-text">2.2 字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-1-字符串运算符"><span class="nav-text">2.2.1 字符串运算符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-2-字符串函数"><span class="nav-text">2.2.2 字符串函数</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-字典"><span class="nav-text">2.3 字典</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-set"><span class="nav-text">2.4 set</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-4-1-set集的增删"><span class="nav-text">2.4.1 set集的增删</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-4-2-集的交集、并集、差集"><span class="nav-text">2.4.2 集的交集、并集、差集</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-n-切片Slice"><span class="nav-text">2.n 切片Slice</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-循环"><span class="nav-text">2.  循环</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-函数"><span class="nav-text">3. 函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-函数定义"><span class="nav-text">3.1 函数定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-参数传递"><span class="nav-text">3.2 参数传递</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-参数类型"><span class="nav-text">3.3 参数类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-匿名函数"><span class="nav-text">3.4 匿名函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-模块与包"><span class="nav-text">4. 模块与包</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-模块的使用"><span class="nav-text">4.1 模块的使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-包的使用"><span class="nav-text">4.2 包的使用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-文件操作"><span class="nav-text">5. 文件操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-open函数参数"><span class="nav-text">5.1 open函数参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-读文件"><span class="nav-text">5.2 读文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-读写位置"><span class="nav-text">5.3 读写位置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-4-写文件"><span class="nav-text">5.4 写文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-5-CSV文件操作"><span class="nav-text">5.5 CSV文件操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-6-使用with-open"><span class="nav-text">5.6 使用with open</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reference："><span class="nav-text">Reference：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">brezezee</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count"></span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="../../../../lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="../../../../js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="../../../../js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="../../../../js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
