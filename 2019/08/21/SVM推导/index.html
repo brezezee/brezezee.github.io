@@ -83,7 +83,7 @@
 <meta name="keywords" content="机器学习,SVM,SMO">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SVM推导">
-<meta property="og:url" content="https://brezezee.github.io/2019/08/18/SVM推导/index.html">
+<meta property="og:url" content="https://brezezee.github.io/2019/08/21/SVM推导/index.html">
 <meta property="og:site_name" content="brezezee">
 <meta property="og:description" content="&amp;emsp;&amp;emsp;支持向量机是一种二分类模型，它以间隔最大作为优化目标，因此它比感知机仅仅以误分类推动的模型要优胜不少。数据线性可分时，SVM直接以间隔最大训练出一个线性分类模型。当数据线性不可分时，SVM通过软间隔最大化解决这种问题。此时的模型仍是一个线性模型，若采用核方法和软间隔最大化，则得到一个非线性模型。可以看到SVM在解决变复杂的情况时是逐步改进的。 1. 定义&amp;emsp;&amp;ems">
 <meta property="og:locale" content="en">
@@ -93,7 +93,7 @@
 <meta property="og:image" content="https://i.loli.net/2019/08/14/h8HJUOzANEdFcDe.png">
 <meta property="og:image" content="https://i.loli.net/2019/08/14/Rjc2Nl3XLP1AwDo.jpg">
 <meta property="og:image" content="https://i.loli.net/2019/08/14/Rjc2Nl3XLP1AwDo.jpg">
-<meta property="og:updated_time" content="2019-08-28T14:08:55.102Z">
+<meta property="og:updated_time" content="2019-08-28T14:30:28.511Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SVM推导">
 <meta name="twitter:description" content="&amp;emsp;&amp;emsp;支持向量机是一种二分类模型，它以间隔最大作为优化目标，因此它比感知机仅仅以误分类推动的模型要优胜不少。数据线性可分时，SVM直接以间隔最大训练出一个线性分类模型。当数据线性不可分时，SVM通过软间隔最大化解决这种问题。此时的模型仍是一个线性模型，若采用核方法和软间隔最大化，则得到一个非线性模型。可以看到SVM在解决变复杂的情况时是逐步改进的。 1. 定义&amp;emsp;&amp;ems">
@@ -127,7 +127,7 @@
 
 
 
-  <link rel="canonical" href="https://brezezee.github.io/2019/08/18/SVM推导/">
+  <link rel="canonical" href="https://brezezee.github.io/2019/08/21/SVM推导/">
 
 
 
@@ -299,8 +299,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-18T19:32:12+08:00">
-                2019-08-18
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-21T19:32:12+08:00">
+                2019-08-21
               </time>
             
 
@@ -315,7 +315,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-08-28T22:08:55+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2019-08-28T22:30:28+08:00">
                 2019-08-28
               </time>
             
@@ -353,7 +353,7 @@
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/08/18/SVM推导/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/08/21/SVM推导/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -513,8 +513,7 @@ s.t.\;\;\;\;\;\;\;\;\;& \lambda_1y_1+\lambda_2y_2=-\sum_{i=3}^n\lambda_iy_i= \ze
 \end{aligned}</script><p>对这两个变量的优化中，其中的等式约束给出了它们之间的关系。那么可用其中一个表示另一个变为一个变量的优化，这里用$\lambda_1$表示$\lambda_2$，且目标函数中的常数项不需要再考虑</p>
 <script type="math/tex; mode=display">
 \lambda_1 =y_1\zeta - \lambda_2 y_1y_2  \tag{2.2.2-1}</script><p> &emsp;&emsp;通过等式约束得到两个变量之间的关系后，将其带入原优化表达式，便能够对单变量进行优化，这当然是我们希望看到的情况，不过除了等式约束还有不等式约束。好在只有两个变量，我们可以先计算出单变量迭代的结果，再考察是否满足不等式约束，对结果进行修剪。</p>
-<p>2.2.2.1 求解等式约束</p>
-<p> &emsp; &emsp;简化表达，记</p>
+<h5 id="2-2-2-1-求解等式约束"><a href="#2-2-2-1-求解等式约束" class="headerlink" title="2.2.2.1 求解等式约束"></a>2.2.2.1 求解等式约束</h5><p> &emsp; &emsp;简化表达，记</p>
 <script type="math/tex; mode=display">
 v_i = \sum_{j=3}^n \lambda_jy_j(x_i^Tx_j)</script><p>则目标函数可写作</p>
 <script type="math/tex; mode=display">
@@ -555,8 +554,7 @@ E_i = g(x_i) -y_i</script><p>将右端结果带回式$(2.2.2.1-2)$</p>
 (x_1^Tx_1+x_2^Tx_2-2x_1^Tx_2)\lambda_2 =& \lambda_2^{old}(x_1^Tx_1+x_2^Tx_2-2x_1^Tx_2) + y_2(E_1-E_2)
 \end{aligned}</script><p>令$\eta=(x_1^Tx_1+x_2^Tx_2-2x_1^Tx_2)$,带入得到未修剪的$\lambda_2^{new,unc}$</p>
 <script type="math/tex; mode=display">
-\lambda_2^{new,unc} = \lambda_2^{old} + \frac {y_2(E_1-E_2)}{\eta}</script><p> 2.2.2.2 不等式约束修剪</p>
-<p>&emsp;&emsp; 上面求解了优化问题在等式约束下的解，对于这两个变量来说，等式约束实际上把他们约束在一条平面直线上，而$\lambda \ge 0$便将它们约束到<strong>第一象限</strong>。其且它们的系数不是-1就是1，这意味着它们组成的直线只有两个方向，$45^o或135^o$ 。这样就能通过作图来确定它们的上下界，且通过关系式的直线，只需确定$\lambda_2$的范围即可。这里只有下界限制，后面软间隔需要添加合页损失函数，那时会有上界，不过处理方法都相同，先看这里的情况，注意变量只有$\lambda_2$</p>
+\lambda_2^{new,unc} = \lambda_2^{old} + \frac {y_2(E_1-E_2)}{\eta}</script><h5 id="2-2-2-2-不等式约束修剪"><a href="#2-2-2-2-不等式约束修剪" class="headerlink" title="2.2.2.2 不等式约束修剪"></a>2.2.2.2 不等式约束修剪</h5><p>&emsp;&emsp; 上面求解了优化问题在等式约束下的解，对于这两个变量来说，等式约束实际上把他们约束在一条平面直线上，而$\lambda \ge 0$便将它们约束到<strong>第一象限</strong>。其且它们的系数不是-1就是1，这意味着它们组成的直线只有两个方向，$45^o或135^o$ 。这样就能通过作图来确定它们的上下界，且通过关系式的直线，只需确定$\lambda_2$的范围即可。这里只有下界限制，后面软间隔需要添加合页损失函数，那时会有上界，不过处理方法都相同，先看这里的情况，注意变量只有$\lambda_2$</p>
 <center class="half">
 <img src="https://i.loli.net/2019/08/14/MLGToeqSHXImVQC.png" width="1000">
 </center>
@@ -586,8 +584,7 @@ H = min(C, \lambda_2^{old} - \lambda_1^{old} +C )</script><p>&emsp;&emsp;当$y_1
 <script type="math/tex; mode=display">
 L = max(0,\lambda_1^{old}+ \lambda_2^{old} - C),\\
 H = min(C,\lambda_1^{old} + \lambda_2^{old} )</script><p>得到其不等式约束后，便可对前面求得的未修剪的$\lambda_2^{new,unc}$ 进行修剪，修剪后的数据代入SMO优化问题继续迭代，直到达到迭代误差要求。</p>
-<p>2.2.2.3 变量的选择方法</p>
-<p>留坑</p>
+<h5 id="2-2-2-3-变量的选择方法"><a href="#2-2-2-3-变量的选择方法" class="headerlink" title="2.2.2.3 变量的选择方法"></a>2.2.2.3 变量的选择方法</h5><p>留坑</p>
 <p>&emsp;&emsp;最终，我们得到了分离超平面</p>
 <script type="math/tex; mode=display">
 \sum_i^n \lambda_i^* y_i (x^Tx_i)+ b^{\ast} = 0</script><p>分类决策函数</p>
@@ -739,8 +736,8 @@ K(x,z) = (x\cdot z)^2</script><p>它是关于输入向量的内积的平方函�
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="../../12/熵、交叉熵、极大似然/" rel="next" title="熵、交叉熵及似然函数的关系">
-                <i class="fa fa-chevron-left"></i> 熵、交叉熵及似然函数的关系
+              <a href="../../18/隐马尔可夫模型/" rel="next" title="隐马尔可夫模型">
+                <i class="fa fa-chevron-left"></i> 隐马尔可夫模型
               </a>
             
           </div>
@@ -893,7 +890,7 @@ K(x,z) = (x\cdot z)^2</script><p>它是关于输入向量的内积的平方函�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-定义"><span class="nav-text">1. 定义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-函数间隔和几何间隔"><span class="nav-text">1.1 函数间隔和几何间隔</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-间隔最大化"><span class="nav-text">1.2 间隔最大化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-线性可分SVM"><span class="nav-text">2. 线性可分SVM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-对偶问题"><span class="nav-text">2.1 对偶问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-序列最小最优算法（SMO）"><span class="nav-text">2.2 序列最小最优算法（SMO）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1-坐标下降法"><span class="nav-text">2.2.1 坐标下降法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-2-SMO求解方法"><span class="nav-text">2.2.2 SMO求解方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-线性不可分SVM"><span class="nav-text">3. 线性不可分SVM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-松弛变量"><span class="nav-text">3.1 松弛变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-求解对偶问题"><span class="nav-text">3.2 求解对偶问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-支持向量求解参数-w-b"><span class="nav-text">3.3 支持向量求解参数$w,b$</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-非线性SVM"><span class="nav-text">4. 非线性SVM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Reference"><span class="nav-text">5. Reference:</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-定义"><span class="nav-text">1. 定义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-函数间隔和几何间隔"><span class="nav-text">1.1 函数间隔和几何间隔</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-间隔最大化"><span class="nav-text">1.2 间隔最大化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-线性可分SVM"><span class="nav-text">2. 线性可分SVM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-对偶问题"><span class="nav-text">2.1 对偶问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-序列最小最优算法（SMO）"><span class="nav-text">2.2 序列最小最优算法（SMO）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1-坐标下降法"><span class="nav-text">2.2.1 坐标下降法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-2-SMO求解方法"><span class="nav-text">2.2.2 SMO求解方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-2-1-求解等式约束"><span class="nav-text">2.2.2.1 求解等式约束</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-2-2-不等式约束修剪"><span class="nav-text">2.2.2.2 不等式约束修剪</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-2-3-变量的选择方法"><span class="nav-text">2.2.2.3 变量的选择方法</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-线性不可分SVM"><span class="nav-text">3. 线性不可分SVM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-松弛变量"><span class="nav-text">3.1 松弛变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-求解对偶问题"><span class="nav-text">3.2 求解对偶问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-支持向量求解参数-w-b"><span class="nav-text">3.3 支持向量求解参数$w,b$</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-非线性SVM"><span class="nav-text">4. 非线性SVM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Reference"><span class="nav-text">5. Reference:</span></a></li></ol></div>
             
 
           </div>
@@ -1072,8 +1069,8 @@ K(x,z) = (x\cdot z)^2</script><p>它是关于输入向量的内积的平方函�
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'https://brezezee.github.io/2019/08/18/SVM推导/';
-          this.page.identifier = '2019/08/18/SVM推导/';
+          this.page.url = 'https://brezezee.github.io/2019/08/21/SVM推导/';
+          this.page.identifier = '2019/08/21/SVM推导/';
           this.page.title = 'SVM推导';
         };
         var d = document, s = d.createElement('script');
