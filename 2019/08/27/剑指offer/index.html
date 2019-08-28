@@ -92,7 +92,7 @@
 <meta property="og:description" content="1. 二维数组(vector)查找 题目描述  在一个二维数组中（每个一维数组的长度相同），每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。 法一： 左下/右上查找 &amp;emsp;&amp;emsp;该题给出的数组单看行或者列都是单增的，但是中间某点只能确定其左上的区域是小于它的，并不能确定在其余三个区域中的">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://brezezee.github.io/2019/08/27/剑指offer/1566483039647.png">
-<meta property="og:updated_time" content="2019-08-27T10:08:04.690Z">
+<meta property="og:updated_time" content="2019-08-27T15:10:14.585Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="剑指offer">
 <meta name="twitter:description" content="1. 二维数组(vector)查找 题目描述  在一个二维数组中（每个一维数组的长度相同），每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。 法一： 左下/右上查找 &amp;emsp;&amp;emsp;该题给出的数组单看行或者列都是单增的，但是中间某点只能确定其左上的区域是小于它的，并不能确定在其余三个区域中的">
@@ -188,9 +188,9 @@
       
         
         <li class="menu-item menu-item-home">
-          <a href="../" rel="section">
+          <a href="https://brezezee.github.io/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-/"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             Home
           </a>
@@ -198,9 +198,9 @@
       
         
         <li class="menu-item menu-item-tags">
-          <a href="../tags" rel="section">
+          <a href="https://brezezee.github.io/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-/tags"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             Tags
           </a>
@@ -208,9 +208,9 @@
       
         
         <li class="menu-item menu-item-categories">
-          <a href="../categories" rel="section">
+          <a href="https://brezezee.github.io/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-/categories"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-categories"></i> <br>
             
             Categories
           </a>
@@ -218,9 +218,9 @@
       
         
         <li class="menu-item menu-item-archives">
-          <a href="../archives" rel="section">
+          <a href="archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-/archives"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-archives"></i> <br>
             
             Archives
           </a>
@@ -228,9 +228,9 @@
       
         
         <li class="menu-item menu-item-about">
-          <a href="../about" rel="section">
+          <a href="about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-/about"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-about"></i> <br>
             
             About
           </a>
@@ -466,18 +466,29 @@ f(n) =& 2 \times f(n-1)\\
 =&2^{n-1}
 \end{aligned}</script><p>那么这个题比上一个题还要简单了</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//C++ 3ms 453k</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">jumpFloorII</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123;</span><br><span class="line">           <span class="keyword">if</span>(number &lt;= <span class="number">2</span>)</span><br><span class="line">               <span class="keyword">return</span> number;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">2</span>&lt;&lt;(number<span class="number">-2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h4 id="10-矩形覆盖"><a href="#10-矩形覆盖" class="headerlink" title="10. 矩形覆盖"></a>10. 矩形覆盖</h4><ul>
+<h3 id="10-矩形覆盖"><a href="#10-矩形覆盖" class="headerlink" title="10. 矩形覆盖"></a>10. 矩形覆盖</h3><ul>
 <li>题目描述</li>
 </ul>
 <p>我们可以用2*1的小矩形横着或者竖着去覆盖更大的矩形。请问用n个2*1的小矩形无重叠地覆盖一个2*n的大矩形，总共有多少种方法？</p>
 <p>&emsp;&emsp;稍微分析就能看出，当有一块矩形横着放的时候，一定有另一块矩形在它的正下方横着放，那么相当于有1*2的矩形和2*2的矩形去覆盖。实质上就与跳台阶问题相同了，就是一个斐波那契数列问题。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//C++  3ms 484k</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">rectCover</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(number &lt;= <span class="number">2</span>)</span><br><span class="line">            <span class="keyword">return</span> number;</span><br><span class="line">        <span class="keyword">int</span> a1 = <span class="number">1</span>, a2 = <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">3</span>; i &lt;= number; i++)&#123;</span><br><span class="line">            a2 = a2 + a1;</span><br><span class="line">            a1 = a2 - a1;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> a2 ;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h4 id="11-二进制中1的个数"><a href="#11-二进制中1的个数" class="headerlink" title="11. 二进制中1的个数"></a>11. 二进制中1的个数</h4><ul>
+<h3 id="11-二进制中1的个数"><a href="#11-二进制中1的个数" class="headerlink" title="11. 二进制中1的个数"></a>11. 二进制中1的个数</h3><ul>
 <li>题目描述</li>
 </ul>
 <p>输入一个整数，输出该数二进制表示中1的个数。其中负数用补码表示。</p>
 <p>&emsp;&emsp;这题常规做法可以让n与1做与运算，再右移，如此迭代可计算1的个数。不过可以通过二进制减法的借位来实现一个快速算法。二进制数减1时，会向左边一直借位，直到有一个位是1可以让它借位为止。比如<code>10100-1 = 10011</code>，在找到第三位的1后便停止了。不会影响到更左边的1，而第三位后面的位全部反转成1，但将被减数与得到的结果相与之后就会变成0。因此每进行这样一个过程就会去掉原数中的一个 <code>1</code> 。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//C++ 3ms 472k</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">     <span class="function"><span class="keyword">int</span>  <span class="title">NumberOf1</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">         <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">         <span class="keyword">while</span>(n)&#123;</span><br><span class="line">             n = (n<span class="number">-1</span>)&amp;n;</span><br><span class="line">             count++;</span><br><span class="line">         &#125;</span><br><span class="line">         <span class="keyword">return</span> count;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="12-数值的整数次方"><a href="#12-数值的整数次方" class="headerlink" title="12. 数值的整数次方"></a>12. 数值的整数次方</h3><ul>
+<li>题目描述</li>
+</ul>
+<p>给定一个double类型的浮点数base和int类型的整数exponent。求base的exponent次方。</p>
+<p>保证base和exponent不同时为0</p>
+<p>&emsp;&emsp;直接用快速幂就行了。当幂次较高时，需要做较多的乘积运算。比如求$b^{200}$，直接算需要199次乘积运算。幂次是整数，那么就一定可拆解，如$b^{100}\times b^{100}$ ，这样就能只计算100次。但这样还是比较多，如何拆解有最大收益呢。乘积的过程中会有很多中间值$b^2,b^3,\cdots,b^{100}$，为了尽可能让这些中间值利用起来，将其按幂的二进制中含1的位来进行拆解。</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+b^{200}= \;b^{11001000}=\; b^{2^7}\times b^{2^6}\times b^{2^3}
+\end{aligned}</script><p>&emsp;&emsp;以二进制拆解有一个好处，就是它们之间都是<strong>2次方</strong>的关系，比如$b^{2^7}=b^{2^6}\times b^{2^6}$ 。如此每一个前面计算过的数都能为下一个将要算的数作贡献。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//C++ 3ms 480k O(log(n)) </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">Power</span><span class="params">(<span class="keyword">double</span> base, <span class="keyword">int</span> exponent)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">double</span> ans = <span class="number">1.0</span>;</span><br><span class="line">        <span class="keyword">int</span> n;</span><br><span class="line">        n = <span class="built_in">abs</span>(exponent);</span><br><span class="line">        <span class="keyword">while</span>(n)&#123;</span><br><span class="line">            <span class="keyword">if</span>(n &amp; <span class="number">1</span>)</span><br><span class="line">                ans *= base;</span><br><span class="line">            base *= base;</span><br><span class="line">            n&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> exponent&gt;<span class="number">0</span>?ans:(<span class="number">1</span>/ans);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -599,7 +610,7 @@ f(n) =& 2 \times f(n-1)\\
               
                 <a href="../../../../archives">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -621,7 +632,7 @@ f(n) =& 2 \times f(n-1)\\
               
               <div class="site-state-item site-state-tags">
                 <a href="../../../../tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -654,7 +665,7 @@ f(n) =& 2 \times f(n-1)\\
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-二维数组-vector-查找"><span class="nav-text">1. 二维数组(vector)查找</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-字符串空格替换"><span class="nav-text">2. 字符串空格替换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-链表逆序"><span class="nav-text">3. 链表逆序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-重建二叉树（前，中序）"><span class="nav-text">4. 重建二叉树（前，中序）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-双栈队列"><span class="nav-text">5. 双栈队列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-旋转数组的最小数字"><span class="nav-text">6. 旋转数组的最小数字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-斐波那契数列"><span class="nav-text">7. 斐波那契数列</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#7-1-矩阵快速幂留坑"><span class="nav-text">7.1 矩阵快速幂留坑</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-跳台阶"><span class="nav-text">8. 跳台阶</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-变态跳台阶"><span class="nav-text">9. 变态跳台阶</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#10-矩形覆盖"><span class="nav-text">10. 矩形覆盖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#11-二进制中1的个数"><span class="nav-text">11. 二进制中1的个数</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-二维数组-vector-查找"><span class="nav-text">1. 二维数组(vector)查找</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-字符串空格替换"><span class="nav-text">2. 字符串空格替换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-链表逆序"><span class="nav-text">3. 链表逆序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-重建二叉树（前，中序）"><span class="nav-text">4. 重建二叉树（前，中序）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-双栈队列"><span class="nav-text">5. 双栈队列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-旋转数组的最小数字"><span class="nav-text">6. 旋转数组的最小数字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-斐波那契数列"><span class="nav-text">7. 斐波那契数列</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#7-1-矩阵快速幂留坑"><span class="nav-text">7.1 矩阵快速幂留坑</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-跳台阶"><span class="nav-text">8. 跳台阶</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-变态跳台阶"><span class="nav-text">9. 变态跳台阶</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-矩形覆盖"><span class="nav-text">10. 矩形覆盖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-二进制中1的个数"><span class="nav-text">11. 二进制中1的个数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-数值的整数次方"><span class="nav-text">12. 数值的整数次方</span></a></li></ol></div>
             
 
           </div>
