@@ -93,7 +93,7 @@
 <meta property="og:image" content="https://i.loli.net/2019/08/14/h8HJUOzANEdFcDe.png">
 <meta property="og:image" content="https://i.loli.net/2019/08/14/Rjc2Nl3XLP1AwDo.jpg">
 <meta property="og:image" content="https://i.loli.net/2019/08/14/Rjc2Nl3XLP1AwDo.jpg">
-<meta property="og:updated_time" content="2019-08-28T14:30:28.511Z">
+<meta property="og:updated_time" content="2019-08-29T05:55:48.712Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SVM推导">
 <meta name="twitter:description" content="&amp;emsp;&amp;emsp;支持向量机是一种二分类模型，它以间隔最大作为优化目标，因此它比感知机仅仅以误分类推动的模型要优胜不少。数据线性可分时，SVM直接以间隔最大训练出一个线性分类模型。当数据线性不可分时，SVM通过软间隔最大化解决这种问题。此时的模型仍是一个线性模型，若采用核方法和软间隔最大化，则得到一个非线性模型。可以看到SVM在解决变复杂的情况时是逐步改进的。 1. 定义&amp;emsp;&amp;ems">
@@ -315,8 +315,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-08-28T22:30:28+08:00">
-                2019-08-28
+              <time title="Post modified" itemprop="dateModified" datetime="2019-08-29T13:55:48+08:00">
+                2019-08-29
               </time>
             
           </span>
@@ -501,7 +501,7 @@ s.t.\;\;& \sum_i^n \lambda_i y_i = 0 \\
 s.t.\;\;& \sum_i^n \lambda_i y_i = 0 \\
 & \lambda_i \ge 0, \;\; i=1,\cdots,n
 \end{aligned}</script><p>由于$\boldsymbol\lambda$数量等于样本$(\boldsymbol{x_i},y_i)$数量，使得这个二次规划问题计算量较大，因此选择其中两个作为变量，其他看做常数，对这两个变量解二次规划问题，并且这时两个变量满足约束$\sum_i^n \lambda_i y_i = 0$ ，所以这个问题有解析解，求解速度非常快。</p>
-<p>那么为什么选两个变量呢？</p>
+<p><strong>Q:</strong>那么为什么选两个变量呢？</p>
 <p>&emsp;&emsp;同样是因为约束条件$\sum_i^n \lambda_i y_i = 0$ ，$\lambda_i$在更新后需要满足它们之间的等式，所以需要同时更新两个变量。</p>
 <h4 id="2-2-2-SMO求解方法"><a href="#2-2-2-SMO求解方法" class="headerlink" title="2.2.2 SMO求解方法"></a>2.2.2 SMO求解方法</h4><p>&emsp;&emsp;不失一般性，假设选择的两个变量为$\lambda_1,\lambda_2$ ，其他变量看作常数，则原二次规划问题变为</p>
 <script type="math/tex; mode=display">
@@ -924,7 +924,7 @@ K(x,z) = (x\cdot z)^2</script><p>它是关于输入向量的内积的平方函�
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">46.9k</span>
+    <span title="Site words total count">46.8k</span>
   
 </div>
 
