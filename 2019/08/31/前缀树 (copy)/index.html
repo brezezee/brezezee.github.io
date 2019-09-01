@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="前缀树,LeetCode,">
 
 
 
@@ -80,19 +80,19 @@
 
 
 <meta name="description" content="LeetCode 208. 前缀树 实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。示例:Trie trie = new Trie();trie.insert(“apple”);trie.search(“apple”);   // 返回 truetrie.search(“app”);     // 返回 falsetrie.startsW">
-<meta name="keywords" content="ml,dl,cv,ai">
+<meta name="keywords" content="前缀树,LeetCode">
 <meta property="og:type" content="article">
-<meta property="og:title" content="brezezee">
+<meta property="og:title" content="LeetCode 208. 前缀树">
 <meta property="og:url" content="https://brezezee.github.io/2019/08/31/前缀树 (copy)/index.html">
 <meta property="og:site_name" content="brezezee">
 <meta property="og:description" content="LeetCode 208. 前缀树 实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。示例:Trie trie = new Trie();trie.insert(“apple”);trie.search(“apple”);   // 返回 truetrie.search(“app”);     // 返回 falsetrie.startsW">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://brezezee.github.io/2019/08/31/1567260178655.png">
-<meta property="og:updated_time" content="2019-08-31T14:18:26.028Z">
+<meta property="og:image" content="https://i.loli.net/2019/08/31/e17YTnUQxEJrLKi.png">
+<meta property="og:updated_time" content="2019-09-01T02:25:30.582Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="brezezee">
+<meta name="twitter:title" content="LeetCode 208. 前缀树">
 <meta name="twitter:description" content="LeetCode 208. 前缀树 实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。示例:Trie trie = new Trie();trie.insert(“apple”);trie.search(“apple”);   // 返回 truetrie.search(“app”);     // 返回 falsetrie.startsW">
-<meta name="twitter:image" content="https://brezezee.github.io/2019/08/31/1567260178655.png">
+<meta name="twitter:image" content="https://i.loli.net/2019/08/31/e17YTnUQxEJrLKi.png">
 
 
 
@@ -128,7 +128,7 @@
 
 
 
-  <title> | brezezee</title>
+  <title>LeetCode 208. 前缀树 | brezezee</title>
   
 
 
@@ -282,7 +282,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline"></h1>
+          <h1 class="post-title" itemprop="name headline">LeetCode 208. 前缀树</h1>
         
 
         <div class="post-meta">
@@ -310,12 +310,34 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-08-31T22:18:26+08:00">
-                2019-08-31
+              <time title="Post modified" itemprop="dateModified" datetime="2019-09-01T10:25:30+08:00">
+                2019-09-01
               </time>
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="../../../../categories/code-practice/" itemprop="url" rel="index">
+                    <span itemprop="name">刷题</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -377,7 +399,10 @@
 <p>实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。<br>示例:<br>Trie trie = new Trie();<br>trie.insert(“apple”);<br>trie.search(“apple”);   // 返回 true<br>trie.search(“app”);     // 返回 false<br>trie.startsWith(“app”); // 返回 true<br>trie.insert(“app”);<br>trie.search(“app”);     // 返回 true<br>说明:<br>你可以假设所有的输入都是由小写字母 a-z 构成的。<br>保证所有输入均为非空字符串。</p>
 </blockquote>
 <p>&emsp;&emsp;前缀树是一种比较简单的数据结构，又名字典树。就像这个名字一样，它将输入的词汇按从前到后的字符进行索引，就像查单词时挨个输入的字符的情形。每个位置有26个可能（假设都为小写字母），因此它是一个26叉树。比如对<code>abc,abd,ac,bc</code>建立一个字典树</p>
-<p><img src="../1567260178655.png" alt="1567260178655"></p>
+<center>
+    <img src="https://i.loli.net/2019/08/31/e17YTnUQxEJrLKi.png" width="650/">
+</center>
+
 <p>&emsp;&emsp;可见，当数据的前缀有较多重复的时候，字典树可以节约较多内存。但是若杂乱无章的话可能反而增加内存消耗，因为字典树需要开辟空间来保存节点信息。图中可以看出字典树的两个特点</p>
 <ul>
 <li>根节点不含字符信息</li>
@@ -402,6 +427,14 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="../../../../tags/前缀树/" rel="tag"># 前缀树</a>
+          
+            <a href="../../../../tags/LeetCode/" rel="tag"># LeetCode</a>
+          
+        </div>
       
 
       
@@ -529,7 +562,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="../../../../tags/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -743,7 +776,7 @@
         var disqus_config = function () {
           this.page.url = 'https://brezezee.github.io/2019/08/31/前缀树 (copy)/';
           this.page.identifier = '2019/08/31/前缀树 (copy)/';
-          this.page.title = '';
+          this.page.title = 'LeetCode 208. 前缀树';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://.disqus.com/embed.js';
