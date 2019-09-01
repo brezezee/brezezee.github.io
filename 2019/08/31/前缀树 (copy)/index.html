@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="LeetCode 208. 前缀树 实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。示例:Trie trie = new Trie();trie.insert(“apple”);trie.search(“apple”);   // 返回 truetrie.search(“app”);     // 返回 falsetrie.startsW">
+<meta name="description" content="实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。  示例:  Trie trie = new Trie();  trie.insert(“apple”);  trie.search(“apple”);   // 返回 true  trie.search(“app”);     // 返回 false  trie.startsWith">
 <meta name="keywords" content="前缀树,LeetCode">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LeetCode 208. 前缀树">
 <meta property="og:url" content="https://brezezee.github.io/2019/08/31/前缀树 (copy)/index.html">
 <meta property="og:site_name" content="brezezee">
-<meta property="og:description" content="LeetCode 208. 前缀树 实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。示例:Trie trie = new Trie();trie.insert(“apple”);trie.search(“apple”);   // 返回 truetrie.search(“app”);     // 返回 falsetrie.startsW">
+<meta property="og:description" content="实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。  示例:  Trie trie = new Trie();  trie.insert(“apple”);  trie.search(“apple”);   // 返回 true  trie.search(“app”);     // 返回 false  trie.startsWith">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.loli.net/2019/08/31/e17YTnUQxEJrLKi.png">
-<meta property="og:updated_time" content="2019-09-01T02:25:30.582Z">
+<meta property="og:updated_time" content="2019-09-01T02:28:07.692Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode 208. 前缀树">
-<meta name="twitter:description" content="LeetCode 208. 前缀树 实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。示例:Trie trie = new Trie();trie.insert(“apple”);trie.search(“apple”);   // 返回 truetrie.search(“app”);     // 返回 falsetrie.startsW">
+<meta name="twitter:description" content="实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。  示例:  Trie trie = new Trie();  trie.insert(“apple”);  trie.search(“apple”);   // 返回 true  trie.search(“app”);     // 返回 false  trie.startsWith">
 <meta name="twitter:image" content="https://i.loli.net/2019/08/31/e17YTnUQxEJrLKi.png">
 
 
@@ -310,7 +310,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-09-01T10:25:30+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2019-09-01T10:28:07+08:00">
                 2019-09-01
               </time>
             
@@ -370,7 +370,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  740
+                  738
                 </span>
               
 
@@ -395,8 +395,8 @@
       
 
       
-        <h3 id="LeetCode-208-前缀树"><a href="#LeetCode-208-前缀树" class="headerlink" title="LeetCode 208. 前缀树"></a>LeetCode 208. 前缀树</h3><blockquote>
-<p>实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。<br>示例:<br>Trie trie = new Trie();<br>trie.insert(“apple”);<br>trie.search(“apple”);   // 返回 true<br>trie.search(“app”);     // 返回 false<br>trie.startsWith(“app”); // 返回 true<br>trie.insert(“app”);<br>trie.search(“app”);     // 返回 true<br>说明:<br>你可以假设所有的输入都是由小写字母 a-z 构成的。<br>保证所有输入均为非空字符串。</p>
+        <blockquote>
+<p>  实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。<br>  示例:<br>  Trie trie = new Trie();<br>  trie.insert(“apple”);<br>  trie.search(“apple”);   // 返回 true<br>  trie.search(“app”);     // 返回 false<br>  trie.startsWith(“app”); // 返回 true<br>  trie.insert(“app”);<br>  trie.search(“app”);     // 返回 true<br>  说明:<br>  你可以假设所有的输入都是由小写字母 a-z 构成的。<br>  保证所有输入均为非空字符串。</p>
 </blockquote>
 <p>&emsp;&emsp;前缀树是一种比较简单的数据结构，又名字典树。就像这个名字一样，它将输入的词汇按从前到后的字符进行索引，就像查单词时挨个输入的字符的情形。每个位置有26个可能（假设都为小写字母），因此它是一个26叉树。比如对<code>abc,abd,ac,bc</code>建立一个字典树</p>
 <center>
@@ -595,7 +595,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#LeetCode-208-前缀树"><span class="nav-text">LeetCode 208. 前缀树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reference"><span class="nav-text">Reference:</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Reference"><span class="nav-text">Reference:</span></a></li></ol></div>
             
 
           </div>
