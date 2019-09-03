@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="剑指offer,">
+  <meta name="keywords" content="剑指offer,刷题,">
 
 
 
@@ -80,19 +80,19 @@
 
 
 <meta name="description" content="1. 二维数组(vector)查找 题目描述  在一个二维数组中（每个一维数组的长度相同），每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。 法一： 左下/右上查找 &amp;emsp;&amp;emsp;该题给出的数组单看行或者列都是单增的，但是中间某点只能确定其左上的区域是小于它的，并不能确定在其余三个区域中的">
-<meta name="keywords" content="剑指offer">
+<meta name="keywords" content="剑指offer,刷题">
 <meta property="og:type" content="article">
 <meta property="og:title" content="剑指offer">
-<meta property="og:url" content="https://brezezee.github.io/2019/07/11/剑指offer/index.html">
+<meta property="og:url" content="https://brezezee.github.io/2019/08/23/剑指offer/index.html">
 <meta property="og:site_name" content="brezezee">
 <meta property="og:description" content="1. 二维数组(vector)查找 题目描述  在一个二维数组中（每个一维数组的长度相同），每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。 法一： 左下/右上查找 &amp;emsp;&amp;emsp;该题给出的数组单看行或者列都是单增的，但是中间某点只能确定其左上的区域是小于它的，并不能确定在其余三个区域中的">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://i.loli.net/2019/08/28/MstYTVFXJxgBEfN.png">
-<meta property="og:updated_time" content="2019-08-28T14:25:43.129Z">
+<meta property="og:image" content="https://brezezee.github.io/2019/08/23/剑指offer/1566483039647.png">
+<meta property="og:updated_time" content="2019-09-03T08:44:13.326Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="剑指offer">
 <meta name="twitter:description" content="1. 二维数组(vector)查找 题目描述  在一个二维数组中（每个一维数组的长度相同），每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。 法一： 左下/右上查找 &amp;emsp;&amp;emsp;该题给出的数组单看行或者列都是单增的，但是中间某点只能确定其左上的区域是小于它的，并不能确定在其余三个区域中的">
-<meta name="twitter:image" content="https://i.loli.net/2019/08/28/MstYTVFXJxgBEfN.png">
+<meta name="twitter:image" content="https://brezezee.github.io/2019/08/23/剑指offer/1566483039647.png">
 
 
 
@@ -122,7 +122,7 @@
 
 
 
-  <link rel="canonical" href="https://brezezee.github.io/2019/07/11/剑指offer/">
+  <link rel="canonical" href="https://brezezee.github.io/2019/08/23/剑指offer/">
 
 
 
@@ -294,8 +294,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-11T12:12:31+08:00">
-                2019-07-11
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-23T00:00:00+08:00">
+                2019-08-23
               </time>
             
 
@@ -310,8 +310,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-08-28T22:25:43+08:00">
-                2019-08-28
+              <time title="Post modified" itemprop="dateModified" datetime="2019-09-03T16:44:13+08:00">
+                2019-09-03
               </time>
             
           </span>
@@ -348,7 +348,7 @@
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/07/11/剑指offer/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/08/23/剑指offer/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -370,7 +370,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  4.7k
+                  5.2k
                 </span>
               
 
@@ -404,12 +404,7 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Find</span><span class="params">(<span class="keyword">int</span> target, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; <span class="built_in">array</span>)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> size_i=<span class="built_in">array</span>.size();</span><br><span class="line">        <span class="keyword">int</span> size_j=<span class="built_in">array</span>[<span class="number">0</span>].size();</span><br><span class="line">        <span class="keyword">if</span>(size_i==<span class="number">0</span> || size_j==<span class="number">0</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;<span class="comment">//判断空数组</span></span><br><span class="line">            &#125;</span><br><span class="line">        <span class="keyword">int</span> i = size_i<span class="number">-1</span>, j = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>( i &gt;= <span class="number">0</span> &amp;&amp; j &lt; size_j )&#123;</span><br><span class="line">            <span class="keyword">if</span>(target &gt; <span class="built_in">array</span>[i][j])&#123;</span><br><span class="line">                j++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(target &lt; <span class="built_in">array</span>[i][j])&#123;</span><br><span class="line">                i--;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <p><strong>法二：</strong> 旋转折半查找</p>
 <p>&emsp;&emsp; 这种形式的数据还有一个规律，以边界上的点作切割，其右边部分都是大于它的，因为按行按列单增。那么可以在四个边界上查找，依次旋转，每次进行的折半查找都能排除掉其右边的切割部分。不断进行直到最后区域只剩一个点为止。</p>
-<center>
-    <img src="https://i.loli.net/2019/08/28/MstYTVFXJxgBEfN.png" width="700">
-</center>
-
-
-
+<p><img src="1566483039647.png" alt="1566483039647"></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Find</span><span class="params">(<span class="keyword">int</span> target, <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; <span class="built_in">array</span>)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (<span class="built_in">array</span>.size()==<span class="number">0</span> || <span class="built_in">array</span>[<span class="number">0</span>].size()==<span class="number">0</span>)</span><br><span class="line">           <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">       <span class="keyword">else</span> &#123;</span><br><span class="line">           <span class="keyword">int</span> top = <span class="number">0</span>, bottom = <span class="built_in">array</span>.size()<span class="number">-1</span>;</span><br><span class="line">           <span class="keyword">int</span> left = <span class="number">0</span>, right = <span class="built_in">array</span>[<span class="number">0</span>].size()<span class="number">-1</span>;</span><br><span class="line">           <span class="keyword">int</span> sLeft = <span class="number">0</span>, sRight = <span class="number">0</span>;</span><br><span class="line">           <span class="keyword">int</span> sTop = <span class="number">0</span>, sBottom = <span class="number">0</span>;</span><br><span class="line">           <span class="keyword">int</span> mid = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">           <span class="keyword">for</span> (;left&lt;right || top&lt;bottom;) &#123;</span><br><span class="line">               <span class="comment">//对上边界进行折半，可以缩小右边界</span></span><br><span class="line">               sLeft = left, sRight = right;</span><br><span class="line">               <span class="keyword">for</span> (;sLeft&lt;=sRight;) &#123;</span><br><span class="line">                   mid = (sLeft + sRight) / <span class="number">2</span>;</span><br><span class="line">                   <span class="keyword">if</span> (<span class="built_in">array</span>[top][mid]==target) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">                   <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">array</span>[top][mid]&lt;target) sLeft = mid+<span class="number">1</span>;</span><br><span class="line">                   <span class="keyword">else</span> sRight = mid<span class="number">-1</span>;</span><br><span class="line">               &#125;</span><br><span class="line">               <span class="keyword">if</span> (mid&lt;right) right = mid; <span class="comment">//利用终止点缩小右边界</span></span><br><span class="line">               top++;</span><br><span class="line"></span><br><span class="line">               <span class="comment">//对右边界进行折半，可以缩小上边界</span></span><br><span class="line">               sTop = top, sBottom = bottom;</span><br><span class="line">               <span class="keyword">for</span> (;sTop&lt;=sBottom;) &#123;</span><br><span class="line">                   mid = (sTop + sBottom) / <span class="number">2</span>;</span><br><span class="line">                   <span class="keyword">if</span> (<span class="built_in">array</span>[mid][right]==target) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">                   <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">array</span>[mid][right]&lt;target) sTop = mid+<span class="number">1</span>;</span><br><span class="line">                   <span class="keyword">else</span> sBottom = mid<span class="number">-1</span>;</span><br><span class="line">               &#125;</span><br><span class="line">               <span class="keyword">if</span> (top&lt;mid) top = mid; <span class="comment">//利用终止点缩小上边界</span></span><br><span class="line">               right--;</span><br><span class="line"></span><br><span class="line">               <span class="comment">//对下边界进行折半，可以缩小左边界</span></span><br><span class="line">               sLeft = left, sRight = right;</span><br><span class="line">               <span class="keyword">for</span> (;sLeft&lt;=sRight;) &#123;</span><br><span class="line">                   mid = (sLeft + sRight) / <span class="number">2</span>;</span><br><span class="line">                   <span class="keyword">if</span> (<span class="built_in">array</span>[bottom][mid]==target) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">                   <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">array</span>[bottom][mid]&lt;target) sLeft = mid+<span class="number">1</span>;</span><br><span class="line">                   <span class="keyword">else</span> sRight = mid<span class="number">-1</span>;</span><br><span class="line">               &#125;</span><br><span class="line">               <span class="keyword">if</span> (left&lt;mid) left = mid; <span class="comment">//利用终止点缩小左边界</span></span><br><span class="line">               bottom--;</span><br><span class="line"></span><br><span class="line">               <span class="comment">//对左边界进行折半，可以缩小下边界</span></span><br><span class="line">               sTop = top, sBottom = bottom;</span><br><span class="line">               <span class="keyword">for</span> (;sTop&lt;=sBottom;) &#123;</span><br><span class="line">                   mid = (sTop + sBottom) / <span class="number">2</span>;</span><br><span class="line">                   <span class="keyword">if</span> (<span class="built_in">array</span>[mid][left]==target) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">                   <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">array</span>[mid][left]&lt;target) sTop = mid+<span class="number">1</span>;</span><br><span class="line">                   <span class="keyword">else</span> sBottom = mid<span class="number">-1</span>;</span><br><span class="line">               &#125;</span><br><span class="line">               <span class="keyword">if</span> (mid&lt;bottom) bottom = mid; <span class="comment">//利用终止点缩小下边界</span></span><br><span class="line">               left++;</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">if</span> (<span class="built_in">array</span>[top][left]==target) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">           <span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 <p><strong>法三：</strong> 十字分割</p>
 <p>&emsp;&emsp;若将该数组按中间某点分为四个区域，在其主对角线上的两个区域（也就是左上和右下）是比较有特点的，左上的全部小于该点，右下的全部大于该点。那么可在其主对角线上先搜索一遍，如果没找到，就可以排除这两个区域，再对左下和右上两个区域进行如此递归。显然用折半查找比较合适。但是当该数组不是方阵的时候效率很低。</p>
@@ -501,17 +496,35 @@ f(n) =& 2 \times f(n-1)\\
 <p>输入一个整数，输出该数二进制表示中1的个数。其中负数用补码表示。</p>
 <p>&emsp;&emsp;这题常规做法可以让n与1做与运算，再右移，如此迭代可计算1的个数。不过可以通过二进制减法的借位来实现一个快速算法。二进制数减1时，会向左边一直借位，直到有一个位是1可以让它借位为止。比如<code>10100-1 = 10011</code>，在找到第三位的1后便停止了。不会影响到更左边的1，而第三位后面的位全部反转成1，但将被减数与得到的结果相与之后就会变成0。因此每进行这样一个过程就会去掉原数中的一个 <code>1</code> 。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//C++ 3ms 472k</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">     <span class="function"><span class="keyword">int</span>  <span class="title">NumberOf1</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">         <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">         <span class="keyword">while</span>(n)&#123;</span><br><span class="line">             n = (n<span class="number">-1</span>)&amp;n;</span><br><span class="line">             count++;</span><br><span class="line">         &#125;</span><br><span class="line">         <span class="keyword">return</span> count;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h3 id="12-数值的整数次方"><a href="#12-数值的整数次方" class="headerlink" title="12. 数值的整数次方"></a>12. 数值的整数次方</h3><ul>
+<h3 id="12-前奇后偶"><a href="#12-前奇后偶" class="headerlink" title="12. 前奇后偶"></a>12. 前奇后偶</h3><ul>
 <li>题目描述</li>
 </ul>
-<p>给定一个double类型的浮点数base和int类型的整数exponent。求base的exponent次方。</p>
-<p>保证base和exponent不同时为0</p>
-<p>&emsp;&emsp;直接用快速幂就行了。当幂次较高时，需要做较多的乘积运算。比如求$b^{200}$，直接算需要199次乘积运算。幂次是整数，那么就一定可拆解，如$b^{100}\times b^{100}$ ，这样就能只计算100次。但这样还是比较多，如何拆解有最大收益呢。乘积的过程中会有很多中间值$b^2,b^3,\cdots,b^{100}$，为了尽可能让这些中间值利用起来，将其按幂的二进制中含1的位来进行拆解。</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-b^{200}= \;b^{11001000}=\; b^{2^7}\times b^{2^6}\times b^{2^3}
-\end{aligned}</script><p>&emsp;&emsp;以二进制拆解有一个好处，就是它们之间都是<strong>2次方</strong>的关系，比如$b^{2^7}=b^{2^6}\times b^{2^6}$ 。如此每一个前面计算过的数都能为下一个将要算的数作贡献。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//C++ 3ms 480k O(log(n)) </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">Power</span><span class="params">(<span class="keyword">double</span> base, <span class="keyword">int</span> exponent)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">double</span> ans = <span class="number">1.0</span>;</span><br><span class="line">        <span class="keyword">int</span> n;</span><br><span class="line">        n = <span class="built_in">abs</span>(exponent);</span><br><span class="line">        <span class="keyword">while</span>(n)&#123;</span><br><span class="line">            <span class="keyword">if</span>(n &amp; <span class="number">1</span>)</span><br><span class="line">                ans *= base;</span><br><span class="line">            base *= base;</span><br><span class="line">            n&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> exponent&gt;<span class="number">0</span>?ans:(<span class="number">1</span>/ans);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有的奇数位于数组的前半部分，所有的偶数位于数组的后半部分，并保证奇数和奇数，偶数和偶数之间的相对位置不变。</p>
+<p>&emsp;&emsp;要求保持相对位置不变，就是一种稳定排序的思想。不过这里更倾向与用空间换时间。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//C++ 3ms 500k  空间换时间</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">reOrderArray</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;<span class="built_in">array</span>)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; odd,even;</span><br><span class="line">        <span class="keyword">int</span> count1 = <span class="number">0</span>,count2 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="built_in">array</span>.size(); i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>( <span class="built_in">array</span>[i] % <span class="number">2</span> == <span class="number">1</span>)&#123;</span><br><span class="line">                odd.push_back(<span class="built_in">array</span>[i]);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                even.push_back(<span class="built_in">array</span>[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">         <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;odd.size(); i++)</span><br><span class="line">            <span class="built_in">array</span>[i] = odd[i];</span><br><span class="line">         <span class="keyword">for</span>(<span class="keyword">int</span> i=odd.size(),j=<span class="number">0</span>; i&lt;odd.size()+even.size(); i++,j++)</span><br><span class="line">             <span class="built_in">array</span>[i] = even[j];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="13-链表的倒数第k个节点"><a href="#13-链表的倒数第k个节点" class="headerlink" title="13. 链表的倒数第k个节点"></a>13. 链表的倒数第k个节点</h3><ul>
+<li>题目描述</li>
+</ul>
+<p>输入一个链表，输出该链表中倒数第k个结点。</p>
+<p>&emsp;&emsp;注意这个题返回的是节点，而不是节点的值。既然返回倒数的值，链表只能顺序遍历，那么肯定需要记录之前访问过的节点。倒数第k个只需要在访问到第k个的时候，使用另一个指针与最开始的指针同步遍历即可。开始以为返回节点值，还想用循环数组来保存k个值，看起来不太聪明的亚子。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//C++ 3ms 484k </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">FindKthToTail</span><span class="params">(ListNode* pListHead, <span class="keyword">unsigned</span> <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        ListNode* p = pListHead, *q = pListHead;</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(p)&#123;</span><br><span class="line">            p = p-&gt;next;</span><br><span class="line">            <span class="keyword">if</span>(count == k)&#123;</span><br><span class="line">                q = q-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(count&lt;k)</span><br><span class="line">                count++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(count &lt; k)</span><br><span class="line">            q = <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="keyword">return</span> q;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="14-反转链表"><a href="#14-反转链表" class="headerlink" title="14. 反转链表"></a>14. 反转链表</h3><ul>
+<li>题目描述</li>
+</ul>
+<p>输入一个链表，反转链表后，输出新链表的表头。</p>
+<p>方法一：头插法</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//C++ 4ms 480k</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">ReverseList</span><span class="params">(ListNode* pHead)</span> </span>&#123;</span><br><span class="line">        ListNode* head = <span class="literal">nullptr</span>, * curr = pHead, * t;</span><br><span class="line">        <span class="keyword">while</span>(curr)&#123;</span><br><span class="line">            t = curr-&gt;next;</span><br><span class="line">            curr-&gt;next = head;</span><br><span class="line">            head = curr;</span><br><span class="line">            curr = t;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> head;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>方法二：原地逆序</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//C++ 3ms 468k</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">ReverseList</span><span class="params">(ListNode* pHead)</span> </span>&#123;</span><br><span class="line">        ListNode *curr = pHead, *pre=<span class="literal">nullptr</span>, *next;</span><br><span class="line">        <span class="keyword">if</span>(!curr)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">nullptr</span>; <span class="comment">//注意是无头结点的链表，链表空不是判断curr-&gt;next==nullptr,而是curr == nullptr</span></span><br><span class="line">        <span class="keyword">while</span>(curr-&gt;next)&#123;</span><br><span class="line">            next = curr-&gt;next;</span><br><span class="line">            curr-&gt;next = pre;</span><br><span class="line">            pre = curr;</span><br><span class="line">            curr = next;</span><br><span class="line">        &#125;</span><br><span class="line">        curr-&gt;next = pre;</span><br><span class="line">        <span class="keyword">return</span> curr;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>注意这里的循环条件是curr-&gt;next != nullptr，因为返回的是curr，不过若返回pre就可以省掉这一步。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//C++ </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">ReverseList</span><span class="params">(ListNode* pHead)</span> </span>&#123;</span><br><span class="line">        ListNode *curr = pHead, *pre=<span class="literal">nullptr</span>, *next;</span><br><span class="line">        <span class="keyword">while</span>(curr)&#123;</span><br><span class="line">            next = curr-&gt;next;</span><br><span class="line">            curr-&gt;next = pre;</span><br><span class="line">            pre = curr;</span><br><span class="line">            curr = next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> pre;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;明明是两种思路写的代码，结果原地逆序和头插法代码写得一模一样了。。</p>
+<h3 id="15-合并链表"><a href="#15-合并链表" class="headerlink" title="15. 合并链表"></a>15. 合并链表</h3><ul>
+<li>题目描述</li>
+</ul>
+<p>输入两个单调递增的链表，输出两个链表合成后的链表，当然我们需要合成后的链表满足单调不减规则。</p>
+<p>&emsp;&emsp;很基础的题，注意需要新建一个表头来指第一个元素，返回前记得释放内存。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//C++ 3ms 484k</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">Merge</span><span class="params">(ListNode* pHead1, ListNode* pHead2)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        ListNode* p1=pHead1, *p2=pHead2;</span><br><span class="line">        ListNode* L = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">        ListNode* p3 = L;</span><br><span class="line">        <span class="keyword">while</span>(p1 &amp;&amp; p2)&#123;</span><br><span class="line">            <span class="keyword">if</span>(p1-&gt;val &lt;= p2-&gt;val)&#123;</span><br><span class="line">                p3-&gt;next = p1;</span><br><span class="line">                p1 = p1-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                p3-&gt;next = p2;</span><br><span class="line">                p2 = p2-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            p3 = p3-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(p1)</span><br><span class="line">            p3-&gt;next = p1;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            p3-&gt;next = p2;</span><br><span class="line">        p3 = L-&gt;next;</span><br><span class="line">        <span class="keyword">delete</span> L;</span><br><span class="line">        <span class="keyword">return</span> p3;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -531,6 +544,8 @@ b^{200}= \;b^{11001000}=\; b^{2^7}\times b^{2^6}\times b^{2^3}
           
             <a href="../../../../tags/剑指offer/" rel="tag"># 剑指offer</a>
           
+            <a href="../../../../tags/刷题/" rel="tag"># 刷题</a>
+          
         </div>
       
 
@@ -542,14 +557,18 @@ b^{200}= \;b^{11001000}=\; b^{2^7}\times b^{2^6}\times b^{2^3}
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="../../22/条件随机场/" rel="next" title="条件随机场">
+                <i class="fa fa-chevron-left"></i> 条件随机场
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="../../12/Hexo + github 博客搭建/" rel="prev" title="Hexo+github博客搭建">
-                Hexo+github博客搭建 <i class="fa fa-chevron-right"></i>
+              <a href="../../31/前缀树 (copy)/" rel="prev" title="LeetCode 208. 前缀树">
+                LeetCode 208. 前缀树 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -637,7 +656,7 @@ b^{200}= \;b^{11001000}=\; b^{2^7}\times b^{2^6}\times b^{2^3}
               
                 <a href="https://brezezee.github.io/archives">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -659,7 +678,7 @@ b^{200}= \;b^{11001000}=\; b^{2^7}\times b^{2^6}\times b^{2^3}
               
               <div class="site-state-item site-state-tags">
                 <a href="../../../../tags/index.html">
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -692,7 +711,7 @@ b^{200}= \;b^{11001000}=\; b^{2^7}\times b^{2^6}\times b^{2^3}
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-二维数组-vector-查找"><span class="nav-text">1. 二维数组(vector)查找</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-字符串空格替换"><span class="nav-text">2. 字符串空格替换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-链表逆序"><span class="nav-text">3. 链表逆序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-重建二叉树（前，中序）"><span class="nav-text">4. 重建二叉树（前，中序）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-双栈队列"><span class="nav-text">5. 双栈队列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-旋转数组的最小数字"><span class="nav-text">6. 旋转数组的最小数字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-斐波那契数列"><span class="nav-text">7. 斐波那契数列</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#7-1-矩阵快速幂留坑"><span class="nav-text">7.1 矩阵快速幂留坑</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-跳台阶"><span class="nav-text">8. 跳台阶</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-变态跳台阶"><span class="nav-text">9. 变态跳台阶</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-矩形覆盖"><span class="nav-text">10. 矩形覆盖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-二进制中1的个数"><span class="nav-text">11. 二进制中1的个数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-数值的整数次方"><span class="nav-text">12. 数值的整数次方</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-二维数组-vector-查找"><span class="nav-text">1. 二维数组(vector)查找</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-字符串空格替换"><span class="nav-text">2. 字符串空格替换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-链表逆序"><span class="nav-text">3. 链表逆序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-重建二叉树（前，中序）"><span class="nav-text">4. 重建二叉树（前，中序）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-双栈队列"><span class="nav-text">5. 双栈队列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-旋转数组的最小数字"><span class="nav-text">6. 旋转数组的最小数字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-斐波那契数列"><span class="nav-text">7. 斐波那契数列</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#7-1-矩阵快速幂留坑"><span class="nav-text">7.1 矩阵快速幂留坑</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-跳台阶"><span class="nav-text">8. 跳台阶</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-变态跳台阶"><span class="nav-text">9. 变态跳台阶</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-矩形覆盖"><span class="nav-text">10. 矩形覆盖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-二进制中1的个数"><span class="nav-text">11. 二进制中1的个数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-前奇后偶"><span class="nav-text">12. 前奇后偶</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-链表的倒数第k个节点"><span class="nav-text">13. 链表的倒数第k个节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-反转链表"><span class="nav-text">14. 反转链表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-合并链表"><span class="nav-text">15. 合并链表</span></a></li></ol></div>
             
 
           </div>
@@ -726,7 +745,7 @@ b^{200}= \;b^{11001000}=\; b^{2^7}\times b^{2^6}\times b^{2^3}
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">50.6k</span>
+    <span title="Site words total count">52.2k</span>
   
 </div>
 
@@ -871,8 +890,8 @@ b^{200}= \;b^{11001000}=\; b^{2^7}\times b^{2^6}\times b^{2^3}
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'https://brezezee.github.io/2019/07/11/剑指offer/';
-          this.page.identifier = '2019/07/11/剑指offer/';
+          this.page.url = 'https://brezezee.github.io/2019/08/23/剑指offer/';
+          this.page.identifier = '2019/08/23/剑指offer/';
           this.page.title = '剑指offer';
         };
         var d = document, s = d.createElement('script');
