@@ -89,7 +89,7 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://pic2.zhimg.com/v2-6d30cc48db3499c32f83843a9042a7c5_1200x500.jpg">
 <meta property="og:image" content="http://images.cnblogs.com/cnblogs_com/sleepy/201106/201106292138078313.png">
-<meta property="og:updated_time" content="2019-09-05T06:42:13.403Z">
+<meta property="og:updated_time" content="2019-09-05T07:44:32.351Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="傅里叶变换">
 <meta name="twitter:description" content="&amp;emsp;&amp;emsp;本文根据自己的理解以及借鉴前人的总结写下，有参考到的在文中下方给出链接。傅里叶本身具有较强的专业背景，其提出是为了解决热传导方程，不过由于其卓越的效果在众多领域有重要应用。本文仅从代数角度对其进行一些分析。 1. 三角函数的正交性1.1 向量正交&amp;emsp;&amp;emsp;正交是一个非常好的特性，两个向量正交，它们的内积就为0。在线性代数中，$R^n$里由一组含n个正交向量构成">
@@ -311,7 +311,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-09-05T14:42:13+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2019-09-05T15:44:32+08:00">
                 2019-09-05
               </time>
             
@@ -371,7 +371,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  3.4k
+                  3.5k
                 </span>
               
 
@@ -504,7 +504,7 @@ cosx=\frac {e^{ix}+e^{-ix}} 2</script><p>带入</p>
 f(x) =& \frac {a_0}2+\sum_{n=1}^\infty  \frac 1 2\left \{a_n[e^{iw_nx}+e^{-iw_nx}] -ib_n[e^{iw_nx}-e^{-iw_nx}] \right \}\\
 =&\frac {a_0}2+\sum_{n=1}^\infty \frac {a_n-ib_n}{2}e^{iw_nx}+\sum_{n=1}^\infty \frac{a_n+ib_n}{2}e^{-iw_nx}\\
 =&\sum_{n=0}^0\frac {a_0-ib_0}2 e^{i\cdot 0\cdot x}+\sum_{n=1}^\infty \frac {a_n-ib_n}{2}e^{iw_nx}+\sum_{n=-\infty}^{-1} \frac{a_{-n}+ib_{-n}}{2}e^{iw_nx}\\
-\end{aligned}</script><p>经过变换，将$n$的求和范围正好扩充到$(-\infty,\infty)$ 。 </p>
+\end{aligned}</script><p>&emsp;&emsp;经过变换，将$n$的求和范围正好扩充到$(-\infty,\infty)$ 。 注意在第三步中，为了使范围衔接，让频率取到了负值。但这只是为了公式推导，并无实际的物理意义。</p>
 <p>&emsp;&emsp;再对比上式三项的形式，复指数形式是一样的，其中$n\ge 0$时可归纳为相同的表达式。其中，$a_n,b_n$都是前面傅里叶系数中已计算过的，将其归纳为$C_n$，则</p>
 <script type="math/tex; mode=display">
 C_n=\begin{cases}
@@ -539,9 +539,9 @@ f(x) =\underset {T\rightarrow \infty}{lim}\sum_{n=-\infty}^\infty \Phi(w)\triang
 <script type="math/tex; mode=display">
 f(x) = \int_{-\infty}^\infty \frac {1}{2\pi} \int_{-\infty}^{ \infty}f(\delta)\cdot e^{-iw_n\delta}d\delta \cdot e^{iw_nx} dw</script><p>至此，便得到了傅里叶变换的公式，就藏在其中</p>
 <script type="math/tex; mode=display">
-F(w) =\frac {1}{2\pi} \int_{-\infty}^{\infty}f(x)\cdot e^{-iw_nx}dx</script><p>而</p>
+F(w) =\int_{-\infty}^{\infty}f(x)\cdot e^{-iw_nx}dx</script><p>而</p>
 <script type="math/tex; mode=display">
-f(x) = \int _{-\infty}^\infty F(w)\cdot e^{iw_nx}dw</script><p>称为傅里叶变换的逆变换。</p>
+f(x) = \frac {1}{2\pi} \int _{-\infty}^\infty F(w)\cdot e^{iw_nx}dw</script><p>称为傅里叶变换的逆变换。</p>
 <h3 id="Reference："><a href="#Reference：" class="headerlink" title="Reference："></a>Reference：</h3><p>[1] 复变函数与积分变换-焦红伟</p>
 <p>[2] <a href="https://blog.zmyme.com/archives/118" target="_blank" rel="noopener">正交性</a></p>
 <p>[3] <a href="https://www.bilibili.com/video/av62763042" target="_blank" rel="noopener">微分方程概论-第四章：但什么是傅立叶级数呢？</a></p>
@@ -767,7 +767,7 @@ f(x) = \int _{-\infty}^\infty F(w)\cdot e^{iw_nx}dw</script><p>称为傅里叶�
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">55.6k</span>
+    <span title="Site words total count">55.7k</span>
   
 </div>
 
