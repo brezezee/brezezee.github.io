@@ -89,7 +89,7 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://pic2.zhimg.com/v2-6d30cc48db3499c32f83843a9042a7c5_1200x500.jpg">
 <meta property="og:image" content="http://images.cnblogs.com/cnblogs_com/sleepy/201106/201106292138078313.png">
-<meta property="og:updated_time" content="2019-09-04T16:59:54.840Z">
+<meta property="og:updated_time" content="2019-09-05T06:42:13.403Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="傅里叶变换">
 <meta name="twitter:description" content="&amp;emsp;&amp;emsp;本文根据自己的理解以及借鉴前人的总结写下，有参考到的在文中下方给出链接。傅里叶本身具有较强的专业背景，其提出是为了解决热传导方程，不过由于其卓越的效果在众多领域有重要应用。本文仅从代数角度对其进行一些分析。 1. 三角函数的正交性1.1 向量正交&amp;emsp;&amp;emsp;正交是一个非常好的特性，两个向量正交，它们的内积就为0。在线性代数中，$R^n$里由一组含n个正交向量构成">
@@ -311,7 +311,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-09-05T00:59:54+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2019-09-05T14:42:13+08:00">
                 2019-09-05
               </time>
             
@@ -454,21 +454,21 @@ f(x) = \frac {f(x)-f(-x)} {2} + \frac { f(x)+f(-x)}{2} = f_{odd}+f_{even}</scrip
 <p>&emsp;&emsp;傅里叶提出猜测：任意周期函数都可表示为三角函数的组合。三角函数都是周期函数，且函数系既有奇函数又有偶函数。更关键的是三角函数系是有一个正交集，这为线性组合的系数计算，以及后面的傅里叶变换提供了极大便利。假设周期为$T$，因为正交三角系的周期是$2\pi$，因此以$w_n = \frac {2\pi n}{T}$表示正交函数系的周期频率，叫做角频率，它与频率之间只是多了个$2\pi$的关系。</p>
 <p>根据分析，可写出周期函数分解的大致表达式</p>
 <script type="math/tex; mode=display">
-f(x) = \sum_{n=0}^{\infin}a_ncos(w_n x) + \sum_{n=0}^\infin b_n sin(w_n x)</script><p>将$n=0$时的$a_n$单独提出来</p>
+f(x) = \sum_{n=0}^{\infty}a_ncos(w_n x) + \sum_{n=0}^\infty b_n sin(w_n x)</script><p>将$n=0$时的$a_n$单独提出来</p>
 <script type="math/tex; mode=display">
-f(x) = C + \sum_{n=1}^\infin a_ncos(w_n x) + \sum_{n=1}^{\infin} b_nsin(w_n x)</script><p>这就是我们常见的傅里叶级数形式。</p>
+f(x) = C + \sum_{n=1}^\infty a_ncos(w_n x) + \sum_{n=1}^{\infty} b_nsin(w_n x)</script><p>这就是我们常见的傅里叶级数形式。</p>
 <p>&emsp;&emsp;不过这并不完整，这只是给出了周期函数拆解的形式，这里面的系数还未确定。对于它系数的确定可以类比向量坐标的计算，因为三角函数系也是一个正交集，因此可通过计算内积的方式来确定其系数。</p>
 <p>&emsp;&emsp;为此，我们计算函数与函数系的内积来确定$C,a_n,b_n$，对于$C$其函数系是$cos0x=1$</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
-\int _{-\pi}^\pi f(x)\cdot 1 \;dx =& \int _{-\pi}^\pi Cdx+ \int _{-\pi}^\pi \sum_{n=1}^\infin a_ncos(w_n x)dx+\int _{-\pi}^\pi \sum_{n=1}^{\infin} b_nsin(w_n x)dx\\
+\int _{-\pi}^\pi f(x)\cdot 1 \;dx =& \int _{-\pi}^\pi Cdx+ \int _{-\pi}^\pi \sum_{n=1}^\infty a_ncos(w_n x)dx+\int _{-\pi}^\pi \sum_{n=1}^{\infty} b_nsin(w_n x)dx\\
 \int _{-\pi}^\pi f(x)dx =& 2\pi C+0+0\\
 C = \frac 1 {2\pi} \int _{-\pi}^\pi &f(x)dx
 \end{aligned}</script><p>对于$a_n$与$b_n$</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
-\int_{-\pi}^\pi f(x)\cdot cos(w_n x)dx =& \int_{-\pi}^\pi C\cdot cos(w_n x)dx+ \int _{-\pi}^\pi \sum_{n=1}^\infin a_ncos^2(w_n x)dx+\int _{-\pi}^\pi \sum_{n=1}^{\infin} b_nsin(w_n x)cos(w_n x)dx\\
-\int_{-\pi}^\pi f(x)\cdot cos(w_n x)dx =& \int _{-\pi}^\pi \sum_{n=1}^\infin a_ncos^2(w_n x)dx\\
+\int_{-\pi}^\pi f(x)\cdot cos(w_n x)dx =& \int_{-\pi}^\pi C\cdot cos(w_n x)dx+ \int _{-\pi}^\pi \sum_{n=1}^\infty a_ncos^2(w_n x)dx+\int _{-\pi}^\pi \sum_{n=1}^{\infty} b_nsin(w_n x)cos(w_n x)dx\\
+\int_{-\pi}^\pi f(x)\cdot cos(w_n x)dx =& \int _{-\pi}^\pi \sum_{n=1}^\infty a_ncos^2(w_n x)dx\\
 \int_{-\pi}^\pi f(x)\cdot cos(w_n x)dx =& \pi \cdot a_n\\
 \Rightarrow \;\;\;\;\;\;\;\;\;\;a_n =& \frac 1 \pi \int_{-\pi}^\pi f(x)\cdot cos(w_n x)dx
 \end{aligned}</script><p>同理</p>
@@ -477,10 +477,10 @@ b_n = \frac 1 \pi \int_{-\pi}^\pi f(x) \cdot sin(w_n x)dx</script><p>可见，$C
 <script type="math/tex; mode=display">
 C = \frac {a_0} 2</script><p>于是得到最终的傅里叶级数</p>
 <script type="math/tex; mode=display">
-f(x) = \frac {a_0} 2 + \sum_{n=1}^\infin a_ncos(w_n x) + \sum_{n=1}^{\infin} b_nsin(w_n x)</script><p>其中，</p>
+f(x) = \frac {a_0} 2 + \sum_{n=1}^\infty a_ncos(w_n x) + \sum_{n=1}^{\infty} b_nsin(w_n x)</script><p>其中，</p>
 <script type="math/tex; mode=display">
-a_n = \frac 1 \pi \int_{-\pi}^\pi f(x)\cdot cos(w_n x)dx,\;\;n=0,1,\cdots,\infin\\
-b_n = \frac 1 \pi \int_{-\pi}^\pi f(x)\cdot sin(w_n x)dx,\;\;n=1,\cdots,\infin\\</script><p>&emsp;&emsp;通过一些代数运算，得到了傅里叶级数的系数。我们将傅里叶级数的分解与向量的分解进行了类比，定义了函数内积。利用三角函数的正交性，计算其函数基的内积求得各函数基前的系数。以向量的角度来看，函数基就是欧式空间中的基向量，而函数基前的系数就是向量的坐标。</p>
+a_n = \frac 1 \pi \int_{-\pi}^\pi f(x)\cdot cos(w_n x)dx,\;\;n=0,1,\cdots,\infty\\
+b_n = \frac 1 \pi \int_{-\pi}^\pi f(x)\cdot sin(w_n x)dx,\;\;n=1,\cdots,\infty\\</script><p>&emsp;&emsp;通过一些代数运算，得到了傅里叶级数的系数。为了方便表达，这里的傅里叶级数是直接假设函数周期为$2\pi$的函数。我们将傅里叶级数的分解与向量的分解进行了类比，定义了函数内积。利用三角函数的正交性，计算其函数基的内积求得各函数基前的系数。以向量的角度来看，函数基就是欧式空间中的基向量，而函数基前的系数就是向量的坐标。</p>
 <h3 id="3-傅里叶变换"><a href="#3-傅里叶变换" class="headerlink" title="3.傅里叶变换"></a>3.傅里叶变换</h3><h4 id="3-1-扩展周期"><a href="#3-1-扩展周期" class="headerlink" title="3.1 扩展周期"></a>3.1 扩展周期</h4><p>&emsp;&emsp;经过代数分析可以发现一个周期函数的傅里叶级数可以通过无穷多个不同频率的正余弦函数叠加得到。下面是一个关于傅里叶级数和变换非常经典的一副图像。</p>
 <center>
     <img src="https://pic2.zhimg.com/v2-6d30cc48db3499c32f83843a9042a7c5_1200x500.jpg" width="900/">
@@ -501,10 +501,10 @@ sinx=\frac {e^{ix}-e^{-ix}}{2i}\\
 cosx=\frac {e^{ix}+e^{-ix}} 2</script><p>带入</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
-f(x) =& \frac {a_0}2+\sum_{n=1}^\infin  \frac 1 2\left \{a_n[e^{iw_nx}+e^{-iw_nx}] -ib_n[e^{iw_nx}-e^{-iw_nx}] \right \}\\
-=&\frac {a_0}2+\sum_{n=1}^\infin \frac {a_n-ib_n}{2}e^{iw_nx}+\sum_{n=1}^\infin \frac{a_n+ib_n}{2}e^{-iw_nx}\\
-=&\sum_{n=0}^0\frac {a_0-ib_0}2 e^{i\cdot 0\cdot x}+\sum_{n=1}^\infin \frac {a_n-ib_n}{2}e^{iw_nx}+\sum_{n=-\infin}^{-1} \frac{a_{-n}+ib_{-n}}{2}e^{iw_nx}\\
-\end{aligned}</script><p>经过变换，将$n$的求和范围正好扩充到$(-\infin,\infin)$ 。 </p>
+f(x) =& \frac {a_0}2+\sum_{n=1}^\infty  \frac 1 2\left \{a_n[e^{iw_nx}+e^{-iw_nx}] -ib_n[e^{iw_nx}-e^{-iw_nx}] \right \}\\
+=&\frac {a_0}2+\sum_{n=1}^\infty \frac {a_n-ib_n}{2}e^{iw_nx}+\sum_{n=1}^\infty \frac{a_n+ib_n}{2}e^{-iw_nx}\\
+=&\sum_{n=0}^0\frac {a_0-ib_0}2 e^{i\cdot 0\cdot x}+\sum_{n=1}^\infty \frac {a_n-ib_n}{2}e^{iw_nx}+\sum_{n=-\infty}^{-1} \frac{a_{-n}+ib_{-n}}{2}e^{iw_nx}\\
+\end{aligned}</script><p>经过变换，将$n$的求和范围正好扩充到$(-\infty,\infty)$ 。 </p>
 <p>&emsp;&emsp;再对比上式三项的形式，复指数形式是一样的，其中$n\ge 0$时可归纳为相同的表达式。其中，$a_n,b_n$都是前面傅里叶系数中已计算过的，将其归纳为$C_n$，则</p>
 <script type="math/tex; mode=display">
 C_n=\begin{cases}
@@ -526,22 +526,22 @@ C_n =& \frac 1 2 \cdot \frac 2 T\left [ \int_0^T f(x)\cdot cos(-w_n x)dx +i\int_
 <script type="math/tex; mode=display">
 C_n = \frac 1 T \int _0^T f(x) \cdot e^{-iw_nx}dx</script><p>得到傅里叶级数的复指数形式</p>
 <script type="math/tex; mode=display">
-f(x) = \sum_{-\infin}^{\infin} C_n\cdot e^{iw_nx}</script><p>就是这么简洁优雅。</p>
+f(x) = \sum_{-\infty}^{\infty} C_n\cdot e^{iw_nx}</script><p>就是这么简洁优雅。</p>
 <h4 id="3-3-计算傅里叶变换"><a href="#3-3-计算傅里叶变换" class="headerlink" title="3.3 计算傅里叶变换"></a>3.3 计算傅里叶变换</h4><p>而前面已经说过，对于无周期函数，将其看作周期无穷大的函数即可，将$C_n$带入，注意积分周期$T$，不能偷懒写了</p>
 <script type="math/tex; mode=display">
-f(x) = \underset {T\rightarrow \infin}{lim}\sum_{n=-\infin}^\infin \frac 1 T \int_{-\frac T 2}^{\frac T 2}f(\delta)\cdot e^{-iw_n\delta}d\delta \cdot e^{iw_nx}</script><p>注意$w_n=\frac {2\pi n}T$，则</p>
+f(x) = \underset {T\rightarrow \infty}{lim}\sum_{n=-\infty}^\infty \frac 1 T \int_{-\frac T 2}^{\frac T 2}f(\delta)\cdot e^{-iw_n\delta}d\delta \cdot e^{iw_nx}</script><p>注意$w_n=\frac {2\pi n}T$，则</p>
 <script type="math/tex; mode=display">
 \triangle w=w_{n+1}-w_n=\frac {2\pi} T</script><p>带入得</p>
 <script type="math/tex; mode=display">
-f(x) = \underset {T\rightarrow \infin}{lim}\sum_{n=-\infin}^\infin \frac {\triangle w}{2\pi} \int_{-\frac T 2}^{\frac T 2}f(\delta)\cdot e^{-iw_n\delta}d\delta \cdot e^{iw_nx}</script><p>当$x$固定时，$\frac {1}{2\pi} \int_{-\frac T 2}^{\frac T 2}f(\delta)\cdot e^{-iw_n\delta}d\delta \cdot e^{iw_nx}$ 是关于$w$的函数，记为$\Phi(w)$，则</p>
+f(x) = \underset {T\rightarrow \infty}{lim}\sum_{n=-\infty}^\infty \frac {\triangle w}{2\pi} \int_{-\frac T 2}^{\frac T 2}f(\delta)\cdot e^{-iw_n\delta}d\delta \cdot e^{iw_nx}</script><p>当$x$固定时，$\frac {1}{2\pi} \int_{-\frac T 2}^{\frac T 2}f(\delta)\cdot e^{-iw_n\delta}d\delta \cdot e^{iw_nx}$ 是关于$w$的函数，记为$\Phi(w)$，则</p>
 <script type="math/tex; mode=display">
-f(x) =\underset {T\rightarrow \infin}{lim}\sum_{n=-\infin}^\infin \Phi(w)\triangle w</script><p>显然，这是微积分的定义，将其写为积分形式</p>
+f(x) =\underset {T\rightarrow \infty}{lim}\sum_{n=-\infty}^\infty \Phi(w)\triangle w</script><p>显然，这是微积分的定义，将其写为积分形式</p>
 <script type="math/tex; mode=display">
-f(x) = \int_{-\infin}^\infin \frac {1}{2\pi} \int_{-\infin}^{ \infin}f(\delta)\cdot e^{-iw_n\delta}d\delta \cdot e^{iw_nx} dw</script><p>至此，便得到了傅里叶变换的公式，就藏在其中</p>
+f(x) = \int_{-\infty}^\infty \frac {1}{2\pi} \int_{-\infty}^{ \infty}f(\delta)\cdot e^{-iw_n\delta}d\delta \cdot e^{iw_nx} dw</script><p>至此，便得到了傅里叶变换的公式，就藏在其中</p>
 <script type="math/tex; mode=display">
-F(w) =\frac {1}{2\pi} \int_{-\infin}^{\infin}f(x)\cdot e^{-iw_nx}dx</script><p>而</p>
+F(w) =\frac {1}{2\pi} \int_{-\infty}^{\infty}f(x)\cdot e^{-iw_nx}dx</script><p>而</p>
 <script type="math/tex; mode=display">
-f(x) = \int _{-\infin}^\infin F(w)\cdot e^{iw_nx}dw</script><p>称为傅里叶变换的逆变换。</p>
+f(x) = \int _{-\infty}^\infty F(w)\cdot e^{iw_nx}dw</script><p>称为傅里叶变换的逆变换。</p>
 <h3 id="Reference："><a href="#Reference：" class="headerlink" title="Reference："></a>Reference：</h3><p>[1] 复变函数与积分变换-焦红伟</p>
 <p>[2] <a href="https://blog.zmyme.com/archives/118" target="_blank" rel="noopener">正交性</a></p>
 <p>[3] <a href="https://www.bilibili.com/video/av62763042" target="_blank" rel="noopener">微分方程概论-第四章：但什么是傅立叶级数呢？</a></p>
