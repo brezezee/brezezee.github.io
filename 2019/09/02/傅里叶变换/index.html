@@ -89,7 +89,7 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://pic2.zhimg.com/v2-6d30cc48db3499c32f83843a9042a7c5_1200x500.jpg">
 <meta property="og:image" content="http://images.cnblogs.com/cnblogs_com/sleepy/201106/201106292138078313.png">
-<meta property="og:updated_time" content="2019-09-05T07:44:32.351Z">
+<meta property="og:updated_time" content="2019-09-07T03:03:30.233Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="傅里叶变换">
 <meta name="twitter:description" content="&amp;emsp;&amp;emsp;本文根据自己的理解以及借鉴前人的总结写下，有参考到的在文中下方给出链接。傅里叶本身具有较强的专业背景，其提出是为了解决热传导方程，不过由于其卓越的效果在众多领域有重要应用。本文仅从代数角度对其进行一些分析。 1. 三角函数的正交性1.1 向量正交&amp;emsp;&amp;emsp;正交是一个非常好的特性，两个向量正交，它们的内积就为0。在线性代数中，$R^n$里由一组含n个正交向量构成">
@@ -311,8 +311,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-09-05T15:44:32+08:00">
-                2019-09-05
+              <time title="Post modified" itemprop="dateModified" datetime="2019-09-07T11:03:30+08:00">
+                2019-09-07
               </time>
             
           </span>
@@ -397,14 +397,14 @@
 
       
         <p>&emsp;&emsp;本文根据自己的理解以及借鉴前人的总结写下，有参考到的在文中下方给出链接。傅里叶本身具有较强的专业背景，其提出是为了解决热传导方程，不过由于其卓越的效果在众多领域有重要应用。本文仅从代数角度对其进行一些分析。</p>
-<h3 id="1-三角函数的正交性"><a href="#1-三角函数的正交性" class="headerlink" title="1. 三角函数的正交性"></a>1. 三角函数的正交性</h3><h4 id="1-1-向量正交"><a href="#1-1-向量正交" class="headerlink" title="1.1 向量正交"></a>1.1 向量正交</h4><p>&emsp;&emsp;正交是一个非常好的特性，两个向量正交，它们的内积就为0。在线性代数中，$R^n$里由一组含n个正交向量构成的集合是一个正交基，$R^n$中所有向量都可由这组正交基表示。其数学定义为</p>
+<h3 id="1-三角函数的正交性"><a href="#1-三角函数的正交性" class="headerlink" title="1. 三角函数的正交性"></a>1. 三角函数的正交性</h3><h4 id="1-1-向量正交"><a href="#1-1-向量正交" class="headerlink" title="1.1 向量正交"></a>1.1 向量正交</h4><p>&emsp;&emsp;正交是一个非常好的特性，两个向量正交，它们的内积就为0。在线性代数中，$R^n$里由一组含n个正交向量构成的一组基底是一个正交基，$R^n$中所有向量都可由这组正交基表示。其数学定义为</p>
 <blockquote>
-<p>令$\{ v_1, v_2,\cdots, v_n \}$ 为内积空间$V$中的非零向量，且当$i\neq j$ 时，$<v_i,v_j> = 0$，则称$\{ v_1, v_2,\cdots, v_n \}$为向量空间$V$的一组正交基。</v_i,v_j></p>
+<p>令$\{ v_1, v_2,\cdots, v_n \}$ 为内积空间$V$中的非零向量，且当$i\neq j$ 时，$ <v_i,v_j> = 0$，则称$ v_1, v_2,\cdots, v_n $为向量空间$V$的一组正交基。</v_i,v_j></p>
 </blockquote>
 <p>&emsp;&emsp;实际上$R^n$中任意一组线性无关的$\{ v_1,v_2,\cdots,v_n \}$都能表示该空间的所有向量，但是正交基相对于普通的无关组有两个巨大的<strong>优势</strong>。</p>
 <ul>
 <li>一是能够方便的求出向量在该基底下的坐标</li>
-<li>二是在向量相乘（内积）时只需要对应坐标相乘即可（$<v_i,v_j>=0 \;\; if\;\; i\neq j$），大大简化了计算。</v_i,v_j></li>
+<li>二是在向量相乘（内积）时只需要对应坐标相乘即可（$ <v_i,v_j>=0 \;\; if\;\; i\neq j$），大大简化了计算。</v_i,v_j></li>
 </ul>
 <p>详细地说，$R^n$空间中任意一个向量都可以被$R^n$中一组线性无关的$\{ v_1,v_2,\cdots,v_n \}$向量表示：</p>
 <script type="math/tex; mode=display">
@@ -678,7 +678,7 @@ f(x) = \frac {1}{2\pi} \int _{-\infty}^\infty F(w)\cdot e^{iw_nx}dw</script><p>�
               
                 <a href="https://brezezee.github.io/archives">
               
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -767,7 +767,7 @@ f(x) = \frac {1}{2\pi} \int _{-\infty}^\infty F(w)\cdot e^{iw_nx}dw</script><p>�
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">55.7k</span>
+    <span title="Site words total count">58.2k</span>
   
 </div>
 
