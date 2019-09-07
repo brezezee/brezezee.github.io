@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="../../../lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="../../../lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="../../../css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="../../../images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content=",,,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="序&amp;emsp;&amp;emsp;上一文讲的隐马尔可夫模型（HMM）是经典的有向图模型，同时也是一个生成模型，通过对$P(Y,X)$建模得到。HMM有两个重要假设，通过上文的推导过程也能体会到，这两个假设大大简化了计算过程。但是实际应用中，这两个假设往往不是很合理，后面出现了 最大熵马尔可夫模型（MEMM），它消除观测独立的假设，本文要讲的条件随机场则消除了齐次马尔可夫性。&amp;emsp;&amp;emsp;先来回顾">
+<meta name="keywords" content="条件随机场,机器学习,概率图模型">
+<meta property="og:type" content="website">
+<meta property="og:title" content="条件随机场">
+<meta property="og:url" content="https://brezezee.github.io/MD Notes/lihang/CRF/条件随机场.html">
+<meta property="og:site_name" content="brezezee">
+<meta property="og:description" content="序&amp;emsp;&amp;emsp;上一文讲的隐马尔可夫模型（HMM）是经典的有向图模型，同时也是一个生成模型，通过对$P(Y,X)$建模得到。HMM有两个重要假设，通过上文的推导过程也能体会到，这两个假设大大简化了计算过程。但是实际应用中，这两个假设往往不是很合理，后面出现了 最大熵马尔可夫模型（MEMM），它消除观测独立的假设，本文要讲的条件随机场则消除了齐次马尔可夫性。&amp;emsp;&amp;emsp;先来回顾">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190716111138198.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190716105557734.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1MTQ0Nzk1,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190718234906797.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190719003651960.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1MTQ0Nzk1,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190719101248366.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1MTQ0Nzk1,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190720105348989.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1MTQ0Nzk1,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-08-29T05:50:31.740Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="条件随机场">
+<meta name="twitter:description" content="序&amp;emsp;&amp;emsp;上一文讲的隐马尔可夫模型（HMM）是经典的有向图模型，同时也是一个生成模型，通过对$P(Y,X)$建模得到。HMM有两个重要假设，通过上文的推导过程也能体会到，这两个假设大大简化了计算过程。但是实际应用中，这两个假设往往不是很合理，后面出现了 最大熵马尔可夫模型（MEMM），它消除观测独立的假设，本文要讲的条件随机场则消除了齐次马尔可夫性。&amp;emsp;&amp;emsp;先来回顾">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190716111138198.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://brezezee.github.io/MD Notes/lihang/CRF/条件随机场.html">
+
+
+
+
+
+  <title>条件随机场 | brezezee</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">brezezee</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="https://brezezee.github.io" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="https://brezezee.github.io/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="https://brezezee.github.io/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-categories"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="https://brezezee.github.io/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="https://brezezee.github.io/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+    
+    
+    <div class="post-block page">
+      <header class="post-header">
+
+	<h1 class="post-title" itemprop="name headline">条件随机场</h1>
+
+
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+        
+        
+          <h3 id="序"><a href="#序" class="headerlink" title="序"></a>序</h3><p>&emsp;&emsp;上一文讲的隐马尔可夫模型（HMM）是经典的有向图模型，同时也是一个生成模型，通过对$P(Y,X)$建模得到。HMM有两个重要假设，通过上文的推导过程也能体会到，这两个假设大大简化了计算过程。但是实际应用中，这两个假设往往不是很合理，后面出现了 最大熵马尔可夫模型（MEMM），它消除观测独立的假设，本文要讲的条件随机场则消除了齐次马尔可夫性。<br>&emsp;&emsp;先来回顾下HMM，它的模型如下图所示，在HMM中 $0_2$只依赖于$i_2$，而$i_2$只依赖于$i_1$，在HMM的预测（标注）问题中，虽然维特比算法依据整个观测序列概率最大来计算的状态序列，但在计算中实际使用的仍是前向后向概率，它们都是由观测独立与齐次马尔可夫假设条件下简化过的。因此，可以认为并未考虑观测之间的影响因素。</p>
+<center>
+    <img src="https://img-blog.csdnimg.cn/20190716111138198.png" width="700">
+</center>
+
+
+
+
+<p>&emsp;&emsp;HMM作为有向图模型，箭头走向是从隐状态到观测值，根据这种关系，在求解隐变量时需根据箭头走向建立求解观测变量的概率模型，并且不能忽略过程中隐变量的作用，于是先建立$P(Y,X)$的概率模型，由于依赖之前的状态，根据概率乘法运算得到观测序列下隐状态的条件概率，同时，为了简化运算对独立性作假设，这便是生成模型的求解思路。</p>
+<center>
+    <img src="https://img-blog.csdnimg.cn/20190716105557734.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1MTQ0Nzk1,size_16,color_FFFFFF,t_70" width="700">
+</center>
+
+<p>&emsp;&emsp;而条件随机场属于概率无向图，概率无向图又称马尔可夫网络，它使用节点表示随机变量，节点间的连线表示节点之间直接的相互影响关系。它与无向图的主要作用都是将复杂的联合概率分解为多个乘积，不过有向图认为概率只依赖于前面的一个状态，若前面的状态确定，则后面的概率也就确定，因此很方便的用条件概率与概率乘法将联合分布表示出来。而马尔可夫网络则认为与之相邻的变量都有互相作用，将整个概率图以极大子团为单位分开表示，极大子团的概率能量则用势函数表示，这也决定了该图概率需要归一化。</p>
+<h3 id="1-概率无向图"><a href="#1-概率无向图" class="headerlink" title="1. 概率无向图"></a>1. 概率无向图</h3><center>
+    <img src="https://img-blog.csdnimg.cn/20190718234906797.png" width="700">
+</center>
+
+<p>&emsp;&emsp;上图是一个马尔可夫无向图，其中每个节点表示一个随机变量，连接它们的边表示它们之间有相互影响的关系。马尔可夫图也有关于概率独立性的假设，不过不是像有向图那样仅仅依赖箭头之前的变量。马尔可夫图假设随机变量之间存在成对马尔可夫性、局部马尔可夫性和全局马尔可夫性。虽说定义了三类，但实际上三类定义都是等价的，它们都表明，没有边使两节点或这极大团相连的话，那么这两个节点或极大团便是独立的。就像上图一样，w将 v 和 o 分开，若w给定，那么v 和o 两个代表的随机变量是独立的。假设以$Y_v$表示v 节点表示的随机变量，</p>
+<script type="math/tex; mode=display">
+P(Y_v,Y_o|Y_w) = P(Y_v|Y_w)P(Y_o|Y_w)</script><p>&emsp;&emsp;在$P(Y_o|Y_w)&gt;0$的情况下，该独立性可表述如下</p>
+<script type="math/tex; mode=display">
+P(Y_v|Y_w) = P(Y_v|Y_w,Y_o)</script><p>&emsp;&emsp;有无$Y_o$对$Y_v$的概率都无影响，这是局部马尔可夫性，将v ，o， w 可以是节点或极大团，便组成了三个马尔可夫性。下面给出概率无向图的完整定义。<br>&emsp;&emsp;<strong>定义</strong>：设有联合概率分布$P(Y)$，由无向图$G= (V,E)$表示，在图G中，节点表示随机变量，边表示随机变量之间的依赖关系。如果联合概率分布满足成对、局部或全局马尔可夫性，就称此联合概率分布为概率无向图，或马尔可夫随机场。</p>
+<ul>
+<li><strong>概率无向图的因子分解</strong></li>
+</ul>
+<p>&emsp;&emsp;同有向图，概率图模型的一大优点便是易于分解，简化概率的计算。有向图可以按照对上一节点的依赖，将联合概率逐步分解为条件概率的乘积。无向图中的随机变量与其相连的节点都会相互影响，所以用极大团来分解无向图也成为很自然的事。<br>&emsp;&emsp;<strong>团与极大团</strong>：无向图中，任何两个节点均有边相连的节点子集称为一个团。如果在这个团中，再添加该图中的任意一个节点，都会破坏团的定义，那么该团是极大团。</p>
+<center>
+    <img src="https://img-blog.csdnimg.cn/20190719003651960.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1MTQ0Nzk1,size_16,color_FFFFFF,t_70" width="700">
+</center>
+
+<p>&emsp;&emsp;该图有5个团，2个极大团，极大团是$\{A,B,C\},\{A,D\}$，那么该无向图的概率可拆解为两个极大团概率的乘积。如何表示每个极大团的概率呢？在马尔可夫网中使用势函数来完成这一目的，不用太纠结势函数是什么，这是引用了理论物理里的概念。只需要知道马尔可夫网中使用势函数定义一些特征函数来联系极大团之间的变量的相互影响，以此产生一个该团的非规范化概率，然后再将所有极大团的概率相加作为规范化因子，最终产生一个规范化概率。<br>&emsp;&emsp;设无向图为G，C为G上的极大团，$Y_c$表示C对应的随机变量，那么该概率无向图的联合概率$P(Y)$可写作图中所有极大团C上的势函数$\Psi_c(Y_c)$的乘积形式，即</p>
+<script type="math/tex; mode=display">
+P(Y) = \frac 1 Z \prod_c \Psi_c(Y_c)</script><p>其中，Z是规范化因子</p>
+<script type="math/tex; mode=display">
+Z = \sum_Y \prod_c \Psi_c(Y_c)</script><p>其中，势函数要求严格正，因此常定义为指数函数</p>
+<script type="math/tex; mode=display">
+\Psi_c(Y_c) = exp(-E(Y_c))</script><p>&emsp;&emsp;于是，概率无向图的计算是以势函数为单位的，前面讲过的HMM是以概率为单位，所以它不需要归一化，而无向图的计算需要归一化。目前我们明白了在概率无向图中的分解以极大团为单位，并且使用势函数来计算其非规范化概率，那么一个极大团中有多个随机变量节点，如何分配这些和计算其概率贡献是接下来的问题。</p>
+<h3 id="2-条件随机场"><a href="#2-条件随机场" class="headerlink" title="2. 条件随机场"></a>2. 条件随机场</h3><h4 id="2-1-定义"><a href="#2-1-定义" class="headerlink" title="2.1 定义"></a>2.1 定义</h4><p>&emsp;&emsp;<strong>条件随机场</strong>：设X与Y是随机变量，$P(Y|X)$是在给定X的条件下Y的条件概率分布。若随机变量Y构成一个由无向图$G=(V,E)$表示的<strong>马尔可夫随机场</strong>，即</p>
+<script type="math/tex; mode=display">
+P(Y_v|X,Y_w,w  \neq v)=P(Y_v|X,Y_w,w\sim v )</script><p>对任意节点v成立，则称$P(Y|X)$为条件随机场。式中$w \neq v$表示节点v 以外的所有节点，$w \sim v$表示在 G中与v 节点有边连接的所有 节点 w。<br>&emsp;&emsp;定义中两个节点集合表示的含义是，只要给定了与v 相连接的节点 w ，那么v 节点代表的随机变量便与其他节点相独立，式中$w \sim v$表示的便是包括了 w 在内的其他节点，但只要给定 与 v相连的w，再加其他的节点也不会影响概率，因为v 节点与它们独立。<br>&emsp;&emsp;统计学习方法中只讨论了图结构为线性链的情况，这一特殊情况应该较通用的无向图定义要简单一些，线性链中节点数量n和边的数量e满足 e = n - 1 。并且在CRF中常常假设X和Y具有相同的图结构，那么可以得到线性链条件随机场的结构如下 </p>
+<center>
+    <img src="https://img-blog.csdnimg.cn/20190719101248366.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1MTQ0Nzk1,size_16,color_FFFFFF,t_70" width="700">
+</center>
+
+
+<p>&emsp;&emsp;<strong>线性链条件随机场</strong>：设$X = (X_1,X_2,\cdots,X_n),Y＝ (Y_1,Y_2,\cdots,Y_n)$均为线性链表示的随机变量序列，若再给定随机变量序列X的条件下，随机变量序列Y的条件概率分布$P(Y|X)$构成条件随机场，即满足马尔可夫性</p>
+<script type="math/tex; mode=display">
+P(Y_i|X,Y_1,\cdots,Y_{i-1},Y_{i+1},\cdots,Y_n) = P(Y_i|Y_{i-1} ,Y_{i+1})\\
+i = 1,\cdots,n,（在i = 1和n时只考虑单边）</script><p>则称$P(Y|X)$为线性链条件随机场，即线性链与之相邻的只有左右两边（两端只有一边）。<br>&emsp;&emsp;下面讨论的都是线性链条件随机场，给出其定义后，现在考虑需要解决的问题，即如何分配和计算某个团中各个节点的概率。关于这个问题首先需要明白条件随机场是用来干嘛的——标注问题，其中的一个典型问题就是单词词性标注。对于一个单词序列，其前后词性的关系是比较密切的，这里词性就是标注序列Y，单词是观测序列X。那么为了得到单词序列的词性标注序列，首先我们可以从单词序列X获得一些信息，比如</p>
+<blockquote>
+<p>When the whole world is about to rain, let’s make it clear in our heart together.</p>
+</blockquote>
+<p>&emsp;&emsp;其中第三个单词 whole 有n. 整体 和 adj. 完整的 两个词性，那么当我们读取这个单词序列X的时候，我们可能就能从X中获取这两个词性可能较大。接下来需要进一步判断它到底是名词还是形容词，这时我们想到可以利用邻近的单词进行推断。它的前面是一个定冠词 the ，而定冠词后面常常接名词，因此这一步增大了 whole 判断为名词的概率。但是我们再看其后面，world 是一个名词，而名词前接形容词的概率较大。这又增大了 whole为形容词的概率，如果我们根据英语语法知识设定的规则比较恰当，那么给这两个判断依据设定的权重应该是能够正确区分 whole的正确词性的。这一过程其实已基本描述了条件随机场势函数定义的思想——为关联的变量设定特征函数。<br>&emsp;&emsp;下面给出由特征函数将条件随机场参数化的具体形式。</p>
+<h4 id="2-2-条件随机场的参数化形式"><a href="#2-2-条件随机场的参数化形式" class="headerlink" title="2.2 条件随机场的参数化形式"></a>2.2 条件随机场的参数化形式</h4><p>&emsp;&emsp;设$P(Y|X)$为线性链条件随机场，则在随机变量X取值为x的条件下，随机变量Y取值为y的条件概率具有如下形式：</p>
+<script type="math/tex; mode=display">
+P(y|x)= \frac 1 {Z(x)} exp \left (  \sum_{i,k} \lambda_k t_k(y_{i-1},y_i,x,i) +\sum_{i,l}\mu_l s_l (y_i,x,i) \right )</script><p>其中，</p>
+<script type="math/tex; mode=display">
+Z(x) = \sum_y exp \left (  \sum_{i,k} \lambda_k t_k(y_{i-1},y_i,x,i) +\sum_{i,l}\mu_l s_l (y_i,x,i) \right )</script><p>式中，$t_k,s_l$是特征函数，$\lambda_k和\mu_l$是对应的权值，Z(x) 是规范化因子。<br>&emsp;&emsp;上式是特征函数确定的线性链条件随机场的基本形式，其中，$t_k$是定义在边上的特征函数，用以表示<strong>转移特征</strong>，依赖于当前和前一个位置，即边相连的两个状态变量。$s_l$是定义在节点上的特征函数，用以表示<strong>状态特征</strong>，依赖于当前位置。结合上面的例子，$s_l$便是从单词序列X中得到特征的函数，它可以提取对于当前观测序列，有哪些可能的状态对应。而$t_k$便是联系状态之间依赖的特征函数，即上例中确定前后文的词性，在根据词性关系进一步确定其最有可能的词性。注意$t_k$定义在边上，那么每移动一步都会计算相邻两个变量之间的依赖关系。<br>&emsp;&emsp;由此可以看出，条件随机场完全由两个特征函数和其对应的权值确定。线性链条件随机场也是一个对数线性模型。</p>
+<ul>
+<li><strong>条件随机场的简化形式</strong>（内积）</li>
+</ul>
+<p>&emsp;&emsp;上面参数化形式中，指数函数内部全部是特征函数的权值与特征函数的乘积再求和的形式，很显然，可以将其表达为权值与特征函数的内积。<br>&emsp;&emsp;注意每个权值是对应与其特征函数的，先以特征函数为序合并两个特征函数，我们用K = K1 + K2 来同一表示这两个特征的数量，其中K1是转移特征，K2是状态特征</p>
+<script type="math/tex; mode=display">
+f_k(y_{i-1},y_i,x,i) = \left\{\begin{aligned}
+&t_k(y_{i-1},y_i,x,i),&k=1,2,\cdots,K_1\\ 
+&s_l(y_i,x,i),&k = K_1+l; l=1,2,\cdots,K_2
+\end{aligned}\right.</script><p>其中，每个特征函数可作用于多个节点之间，因此要对每个特征函数在各个位置i上求和</p>
+<script type="math/tex; mode=display">
+f_k(y,x) =\sum_{i=1} ^nf_k(y_{i-1},y_i,x,i) ,   k = 1,2,\cdots,K</script><p>同样，其权值也以特征函数为序组合，</p>
+<script type="math/tex; mode=display">
+w_k = \left\{\begin{aligned}
+&\lambda_k,&k=1,2,\cdots,K_1\\ 
+&\mu_k ,&k = K_1+l; l=1,2,\cdots,K_2
+\end{aligned}\right.</script><p>于是，条件随机场可表示为</p>
+<script type="math/tex; mode=display">
+P(y|x) = \frac 1 {Z(x)} exp\sum_{k=1}^Kw_kf_k(y,x)\\
+Z(x)  = \sum_y exp \sum_{k=1}^Kw_kf_k(y,x)</script><p>&emsp;&emsp;下面将其表示为向量形式，以 w 表示权值向量，</p>
+<script type="math/tex; mode=display">
+w = (w_1,w_2,\cdots,w_K)^T</script><p>以$F(y,x)$表示特征函数向量，</p>
+<script type="math/tex; mode=display">
+F(y,x) = (f_1(y,x),f_2(y,x) ,\cdots,f_K(y,x))^T</script><p>于是条件随机场可写为内积形式：</p>
+<script type="math/tex; mode=display">
+P_w(y|x) = \frac {exp(w\cdot F(y,x))} {Z_w(x)}</script><p>其中，</p>
+<script type="math/tex; mode=display">
+Z_w(x) = \sum_yexp(w\cdot F(y,x))</script><p>&emsp;&emsp;<strong>PS</strong>：这里对y求和指的是对所有可能的状态序列y求和。</p>
+<ul>
+<li><strong>条件随机场的矩阵形式</strong></li>
+</ul>
+<p>&emsp;&emsp;在前面的表达形式中，虽说达到了简化表达形式的目的，但在计算的过程中需要列出所有可能的y序列进行计算，不方便对算法进行优化。于是使用矩阵形式来表示该概率，可以实现对状态序列y 变化路径的模拟。这里引入了两个特殊的状态标记——起点和终点（$y_0 = strat,y_{n+1} = stop$)，为何引入这两个标记呢？前面提到过线性链条件随机场中两个端点比较特殊，只与一边有关联，若两边不人为引入特殊的状态标记，观测点在连接节点的边上，于是在观测第一个点的时候，其特征函数是$t_k = (y_1,y_2,x,1),s_l = (y_2,x,1)$，发现$y_1$的状态特征函数$s_l$被直接忽略了。而这种情况前面添加一个起点标记就能解决。添加终点标记是为什么呢？个人认为是为了最后将非规范化概率的求和能够以矩阵乘法的形式统一起来。添加了起点和终点的状态序列相当于将原来从m（状态的可能取值）个起点和终点的各种路线又添加了一个起点和终点将其汇合在一起，同时，这种操作并不影响原来可能的路径条数。在矩阵乘法时还能方便的将所有概率汇集到添加的终点。<br>&emsp;&emsp;添加了起点和终点的状态序列有n + 2 个位置，于是有 n + 1 个观测点，在每个观测点定义一个m阶的矩阵（m是状态变量Y可能的取值个数），那么每个观测点的状态转移路径可由矩阵位置保存，势函数可由定义其上的特征函数表示</p>
+<script type="math/tex; mode=display">
+M_i(x) = [M_i(y_{i-1},y_i|x)]\\
+M_i(y_{i-1},y_i|x) = exp(W_i(y_{i-1},y_i|x))\\
+W_i(y_{i-1},y_i|x) = \sum_{k=1}^Kw_kf_k(y_{i-1},y_i,x,i)</script><p>其中，$M_i(y_{i-1},y_i|x)$中的$(y_{i-1},y_i)$表示的该势函数在矩阵中的位置，$W_i(y_{i-1},y_i|x)$表示该段路径上状态特征和转移特征的势函数大小。<br>&emsp;&emsp;于是，给定观测序列x，状态（标记）序列y的非规范化概率可以通过这 n+1 个矩阵的乘积表示</p>
+<script type="math/tex; mode=display">
+\prod_{i=1}^{n+1} M_i(x)</script><p>其条件概率为</p>
+<script type="math/tex; mode=display">
+P_w(y|x) = \frac 1 {Z(x)} \prod_{i=1}^{n+1} M_i(x)</script><p>其中，Z(x)为规范化因子</p>
+<script type="math/tex; mode=display">
+Z(x) = (M_1(x)\cdot M_2(x)\cdots M_{n+1}(x))_{strat,stop}</script><p>正如前面叙述的添加的起点和终点的作用，它们将所有概率汇集到矩阵中的一个位置。下面由一个例子演示。</p>
+<center>
+    <img src="https://img-blog.csdnimg.cn/20190720105348989.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1MTQ0Nzk1,size_16,color_FFFFFF,t_70" width="700">
+</center>
+
+
+<p>&emsp;&emsp;上图描述了一个数量为3的状态序列 y ，并且状态 $y_i \in \{1,2\}，i  = 1,2,3$ ,在添加起点和终点标记后由矩阵表示的状态路径。若 $start和stop$ 定义在$\{1,2\}$ ，那么每个矩阵都是 2 阶矩阵，假设 $start=stop = 1$ 。则4个观测位置的随机矩阵分别为</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+M_1(x) = \begin{bmatrix}
+a_{01} &a_{02} \\ 
+ 0 & 0
+\end{bmatrix}  ,& M_2(x) =  \begin{bmatrix}
+b_{11} & b_{12} \\ 
+ b_{21}& b_{22}
+\end{bmatrix}\\
+M_3(x) = \begin{bmatrix}
+c_{11} & c_{12} \\ 
+ c_{21} & c_{22}
+\end{bmatrix}  ,&  M_4(x) =  \begin{bmatrix}
+1 & 0 \\ 
+1 & 0
+\end{bmatrix}
+\end{aligned}</script><p>&emsp;&emsp;该线性链条件随机场的规范化因子（所有路径的非规范化概率之和）可通过计算矩阵乘积</p>
+<script type="math/tex; mode=display">
+Z(x) = M_1(x)M_2(x)M_3(x)M_4(x)_{(start,stop)}</script><p>并取第 $start$ 行 $stop$ 列的元素得到。矩阵是如何将本该是各路径的和，分解为每个观测点得到的势函数的和呢？将这个乘积矩阵的第start行第stop列的元素展开</p>
+<script type="math/tex; mode=display">
+a_{01}b_{11}c_{11}+a_{02}b_{21}c_{11}+\cdots+a_{02}b_{22}c_{21}</script><p>实际上就是$2^3 = 8$条路径的和，<br>&emsp;&emsp;注意$(y_{i-1},y_i)$中，在下一个矩阵中的位置变为$(y_i,y_{i+1})$，上一个矩阵中的列位置与下一个矩阵中的行位置是对应的，在矩阵乘法的时候，它们正好按这种关系相乘，实际上就是将上一个观测点的状态值与下一个观测点的状态值联系起来，这便计算了当前路径的非规范化概率和，将其全部乘在一起时便计算出了总共的规范化因子。并且人为加入了终点标记，终点标记与起点表示都只有一个取值，那么最后便将其汇集在矩阵的一个元素，这个元素的位置是$(start,stop)$ 。<br>&emsp;&emsp;这个例子数据比较简单，可以手动算一下就清楚了。</p>
+<h4 id="2-3-条件随机场的概率计算"><a href="#2-3-条件随机场的概率计算" class="headerlink" title="2.3 条件随机场的概率计算"></a>2.3 条件随机场的概率计算</h4><p>&emsp;&emsp;通过定义矩阵，将非规范化的概率用一串矩阵的乘积表达了出来。其中每个矩阵表示从上一个位置到当前位置的路径上的特征函数大小，但是若要计算当前位置是某个状态$y_i$的条件概率，矩阵却不能方便的表达这一问题。于是使用类似HMM中的方法，定义前向，后向向量。个人觉得它的作用是将前面（后面）的非规范化概率归纳起来，并按状态变量的取值分为m条路径，对应向量中的某维数值。这样便能方便的计算当前位置取某一个状态的非规范化概率。</p>
+<ul>
+<li>前向-后向算法</li>
+</ul>
+<p>&emsp;&emsp;对每个位置 $i = 0,1,\cdots,n+1$，定义前向向量$\alpha_i(x):$</p>
+<script type="math/tex; mode=display">
+\alpha_0(y|x)= \left\{\begin{aligned}
+&1,&y_0=start\\ 
+&0,&else
+\end{aligned}\right.</script><p>由此得到递推公式</p>
+<script type="math/tex; mode=display">
+\alpha_i^T(y_i|x) = \alpha)_{i-1}^T(y_{i-1}|x)M_i(y_{i-1},y_i|x), i = 1,2,\cdots,n+1</script><p>简写为</p>
+<script type="math/tex; mode=display">
+\alpha_i^T(x)=\alpha_{i-1}^T(x)M_i(x)</script><p>其中$\alpha_i(y_i|x)$表示从初始位置到当前位置$i$，并且状态是$y_i$的非规范化概率，$y_i$有m个取值，因此$\alpha_i(x)$是m维列向量。</p>
+<blockquote>
+<p>对于这个递推式还是很好理解的，向量的每个元素代表了一个状态，向量乘矩阵就是将原来是上一个位置的m种状态到当前位置的m种状态的非规范化概率总结了一下，把它们到当前位置的同一个状态的归纳起来就从二维矩阵变成了一维向量。</p>
+</blockquote>
+<p>&emsp;&emsp;同样，对每个位置定义后向向量$\beta_i(x)$：</p>
+<script type="math/tex; mode=display">
+\beta_{n+1}(y_{n+1}|x) =  \left\{\begin{aligned}
+&1,&y_{n+1}=stop\\ 
+&0,&else
+\end{aligned}\right.</script><p>递推式</p>
+<script type="math/tex; mode=display">
+\beta_i(y_i|x) = M_i(y_i,y_{i+1}|x) \beta_{i+1}(y_{i+1}|x)</script><p>简化为</p>
+<script type="math/tex; mode=display">
+\beta_i(x) = M_{i+1}(x) \beta_{i+1}(x)</script><p>其中，$\beta_i(y_i|x)$表示从位置n 到 位置$i+1$，且位置$i$的状态为$y_i$的非规范化概率。<br>&emsp;&emsp;由前向-后向向量的定义可以得到：</p>
+<script type="math/tex; mode=display">
+Z(x) = \alpha_n^T(x) \cdot1 = 1^T\cdot \beta_1(x)</script><p>其中，1是元素均为1的m维列向量。</p>
+<ul>
+<li><strong>概率计算</strong></li>
+</ul>
+<p>&emsp;&emsp;由前面对从矩阵到向量的分析，可以很容易的表达状态序列在位置$i$是标记$y_i$的条件概率$P(Y_i=y_i|x)$以及在位置$i-1和i$是状态$y_{i-1}和y_i$的条件概率$P(Y_{i-1} = y_{i-1},Y_i = y_i|x)$。对于$P(Y_i=y_i|x)$，$y_i$有m种取值，在求解它的非规范化概率时，除了位置$i$的状态确定，其它位置都是不确定的，因此需要求解其它位置的所有状态的排列。这不正是定义的前向和后向向量吗，再除于$Z(x)$便得到了条件概率。</p>
+<script type="math/tex; mode=display">
+P(Y_i=y_i|x) = \frac {\alpha_iT(y_i|x)\beta_i(y_i|x)} {Z(x)}</script><p>另一个与它类似，只不过多确定了一个位置的状态，这样非规范化概率的组合又少了一些而已</p>
+<script type="math/tex; mode=display">
+P(Y_{i-1} = y_{i-1},Y_i = y_i|x)=\frac {\alpha_{i-1}T(y_{i-1}|x) M_i(y_{i-1},y_i|x)  \beta_i(y_i|x)} {Z(x)}</script><p>其中，</p>
+<script type="math/tex; mode=display">
+Z(x) =\alpha_n^T(x) \cdot 1</script><ul>
+<li><strong>期望值计算</strong></li>
+</ul>
+<p>&emsp;&emsp;除了可以方便的计算这两个条件概率外，利用前向-后向向量还可以方便的计算两个与特征函数相关的数学期望。线性链条件随机场的特征函数有个特点就是只与相邻的两个状态有关，那么求其期望时对所有状态变量y的组合求和时只需要求其相邻的状态变量的组合即可。这与前文HMM中一些概率的计算原理一样。<br>&emsp;&emsp;特征函数$f_k$关于$P(Y|X)$的期望是</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+E_{P(Y|X)}[f_k] =& \sum _{y_0}\cdots \sum_{y_{n+1}} P(y|x) f_k(y,x)\\ 
+=&  \sum _{i=1}^{n+1} \sum _{y_{i-1}y_i} f_k(y_{i-1},y_i,x,i) \frac {\alpha_{i-1}T(y_{i-1}|x) M_i(y_{i-1},y_i|x)  \beta_i(y_i|x)} {Z(x)}\\
+&  k=1,2,\cdots,K
+\end{aligned}</script><p>其中，</p>
+<script type="math/tex; mode=display">
+Z(x) = \alpha_n^T(x) \cdot 1</script><p>&emsp;&emsp;该式对相邻状态的概率求和，而相邻两个位置的条件概率在上面通过前向后向向量表示了，因此可以拆解为对相邻两个状态组合的求和。<br>&emsp;&emsp;而特征函数关于联合分布$P(Y,X)$的数学期望同样，为了利用已求得的条件分布$P(Y|X)$表达式，将联合分布用概率乘法拆解为X的经验分布和条件分布即可，假设经验分布$\widehat P(x)$</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+E_{P(X,Y)}[f_k] =& \sum_{X,Y}P(x,y)\sum_{i=1}^{n+1}f_k(y_{i-1},y_i,x,i)\\
+=&\sum_X \widehat P(x)\sum_YP(y|x)\sum_{i=1}^{n+1} f_k(y_{i-1},y_i,x,i)\\
+=&\sum_X \widehat P(x) \cdot E_{P(Y|X)}[f_k]
+\end{aligned}</script><p>&emsp;&emsp;于是，只要递归的计算出了所有的前向和后向向量，便可以容易的计算出所有的概率和特征的期望。</p>
+<hr>
+<p>未完…</p>
+
+        
+      </div>
+      
+      
+      
+    </div>
+    
+    
+    
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">brezezee</p>
+              <p class="site-description motion-element" itemprop="description">靡不有初，鲜克有终</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="https://brezezee.github.io/archives">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="../../../categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="../../../tags/index.html">
+                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#序"><span class="nav-text">序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-概率无向图"><span class="nav-text">1. 概率无向图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-条件随机场"><span class="nav-text">2. 条件随机场</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-定义"><span class="nav-text">2.1 定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-条件随机场的参数化形式"><span class="nav-text">2.2 条件随机场的参数化形式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-条件随机场的概率计算"><span class="nav-text">2.3 条件随机场的概率计算</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">brezezee</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">59.1k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="../../../lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="../../../js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="../../../js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="../../../js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="../../../js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="../../../js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://brezezee.github.io/MD Notes/lihang/CRF/条件随机场.html';
+          this.page.identifier = 'MD Notes/lihang/CRF/条件随机场.html';
+          this.page.title = '条件随机场';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

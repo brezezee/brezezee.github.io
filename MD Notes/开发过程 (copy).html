@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="../lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="../lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="../css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="../images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content=",,,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1. 虚拟机配置开发环境的网络需要满足三端连接，电脑、虚拟机、开发板，并且虚拟机能上网，所以使用桥接方式，编辑虚拟机linux网络设置，可用命令行vi /etc/network/interface，在该配置文件中填写虚拟机ip配置，注意除ip外，其他网络配置须与主机完全一致。也可使用ubuntu图形化界面配置，配置好后重启网络， 1234ifconfig eth0 down ifconfig et">
+<meta name="keywords" content="HI3559A,嵌入式,环境搭建">
+<meta property="og:type" content="website">
+<meta property="og:title" content="海思3559A系统移植">
+<meta property="og:url" content="https://brezezee.github.io/MD Notes/开发过程 (copy).html">
+<meta property="og:site_name" content="brezezee">
+<meta property="og:description" content="1. 虚拟机配置开发环境的网络需要满足三端连接，电脑、虚拟机、开发板，并且虚拟机能上网，所以使用桥接方式，编辑虚拟机linux网络设置，可用命令行vi /etc/network/interface，在该配置文件中填写虚拟机ip配置，注意除ip外，其他网络配置须与主机完全一致。也可使用ubuntu图形化界面配置，配置好后重启网络， 1234ifconfig eth0 down ifconfig et">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://i.loli.net/2019/08/29/insQrqXmEvh3R9l.png">
+<meta property="og:image" content="https://i.loli.net/2019/08/29/6eGAlcsJyxKfngT.png">
+<meta property="og:image" content="https://i.loli.net/2019/08/29/5qKLgGVRvhBCtIA.png">
+<meta property="og:image" content="https://i.loli.net/2019/08/29/2MLfDt8eCFcvQWO.png">
+<meta property="og:image" content="https://i.loli.net/2019/08/29/qLw9FOjVrWSbRCh.png">
+<meta property="og:image" content="https://i.loli.net/2019/08/29/GKtrXhZzyAWjSlI.png">
+<meta property="og:image" content="https://i.loli.net/2019/08/29/ZaGeAiNPh547m3C.png">
+<meta property="og:image" content="https://i.loli.net/2019/08/29/n1iCAR65V4qBOeM.png">
+<meta property="og:image" content="https://i.loli.net/2019/08/29/GZRjCbqun52hvaT.png">
+<meta property="og:updated_time" content="2019-09-07T03:18:20.936Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="海思3559A系统移植">
+<meta name="twitter:description" content="1. 虚拟机配置开发环境的网络需要满足三端连接，电脑、虚拟机、开发板，并且虚拟机能上网，所以使用桥接方式，编辑虚拟机linux网络设置，可用命令行vi /etc/network/interface，在该配置文件中填写虚拟机ip配置，注意除ip外，其他网络配置须与主机完全一致。也可使用ubuntu图形化界面配置，配置好后重启网络， 1234ifconfig eth0 down ifconfig et">
+<meta name="twitter:image" content="https://i.loli.net/2019/08/29/insQrqXmEvh3R9l.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://brezezee.github.io/MD Notes/开发过程 (copy).html">
+
+
+
+
+
+  <title>海思3559A系统移植 | brezezee</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">brezezee</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="https://brezezee.github.io" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="https://brezezee.github.io/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="https://brezezee.github.io/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-categories"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="https://brezezee.github.io/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="https://brezezee.github.io/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+    
+    
+    <div class="post-block page">
+      <header class="post-header">
+
+	<h1 class="post-title" itemprop="name headline">海思3559A系统移植</h1>
+
+
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+        
+        
+          <h3 id="1-虚拟机配置"><a href="#1-虚拟机配置" class="headerlink" title="1. 虚拟机配置"></a>1. 虚拟机配置</h3><p>开发环境的网络需要满足三端连接，电脑、虚拟机、开发板，并且虚拟机能上网，所以使用桥接方式，编辑虚拟机linux网络设置，可用命令行<code>vi /etc/network/interface</code>，在该配置文件中填写虚拟机ip配置，注意除ip外，其他网络配置须与主机完全一致。也可使用ubuntu图形化界面配置，配置好后重启网络，</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ifconfig eth0 down </span><br><span class="line">ifconfig eth0 up</span><br><span class="line"><span class="meta">#</span>or</span><br><span class="line">/etc/init.d/networking restart</span><br></pre></td></tr></table></figure>
+<p>正常情况应能连接，若不能，检查虚拟机网络设置。</p>
+<p>先ping主机ip，看是否连通，再ping 百度，看DNS是否可用，最后打开浏览器看是否能上网。若不能上网</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/nsswitch.conf</span><br></pre></td></tr></table></figure>
+<center>
+    <img src="https://i.loli.net/2019/08/29/insQrqXmEvh3R9l.png" width="700/">
+</center>
+
+
+
+<p>将红框删除。再次重启，查看是否能上网。若仍不能</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/resovconf/resolv.conf.d/base</span><br></pre></td></tr></table></figure>
+<p>添加</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">nameserver</span> <span class="number">223.5</span><span class="number">.5</span><span class="number">.5</span></span><br><span class="line"><span class="string">nameserver</span> <span class="number">8.8</span><span class="number">.8</span><span class="number">.8</span></span><br><span class="line"><span class="string">nameserver</span> <span class="number">192.168</span><span class="number">.50</span><span class="number">.1</span>  <span class="comment">#自己主机的DNS</span></span><br></pre></td></tr></table></figure>
+<p>更新<code>resolv.conf</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">resolvconf -u</span><br></pre></td></tr></table></figure>
+<p>如果还是不能，出现能ping通baidu.com，但是网页不能访问，检查浏览器代理！</p>
+<p>ps：开发板接路由器，电脑可连路由器wifi或网线，通过路由器转发通信。</p>
+<h3 id="2-tftp"><a href="#2-tftp" class="headerlink" title="2. tftp"></a>2. tftp</h3><ul>
+<li>安装tftp和xinetd</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install xinetd</span><br><span class="line">sudo apt-get install tftpd-hpa tftp-hpa</span><br><span class="line"><span class="meta">#</span>删除standalone启动方式</span><br><span class="line">update-rc.d -f tftpd-hpa remove</span><br><span class="line"><span class="meta">#</span>编辑/etc/inetd.conf，添加如下</span><br><span class="line">tftp dgram udp wait root /usr/sbin/tcpd /usr/sbin/in.tftpd -s /srv/tftpd</span><br></pre></td></tr></table></figure>
+<p>更改tftpd-hpa配置文件<code>vi /etc/default/tftpd-hpa</code></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">TFTP_USERNAME="tftp"</span></span><br><span class="line"><span class="string">TFTP_DIRECTORY="/srv/tftpd"</span></span><br><span class="line"><span class="string">TFTP_ADDRESS="0.0.0.0:69"</span></span><br><span class="line"><span class="string">TFTP_OPTIONS="-l</span> <span class="bullet">-c</span> <span class="bullet">-s"</span></span><br></pre></td></tr></table></figure>
+<p>其中TFTP_DIRECTORT是tftp服务器的工作目录，根据自己配置的更改。</p>
+<p>更改该目录的权限，方便客户端修改</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 777 /srv/tftpd -R</span><br></pre></td></tr></table></figure>
+<p>编辑/etc/xinetd.d/tftp，如果没有tftp文件就新建一个，写入以下内容</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">service</span> <span class="string">tftp</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">disable</span> <span class="string">=</span> <span class="literal">no</span></span><br><span class="line"><span class="string">socket_type</span> <span class="string">=</span> <span class="string">dgram</span></span><br><span class="line"><span class="string">protocol</span> <span class="string">=</span> <span class="string">udp</span></span><br><span class="line"><span class="string">wait</span> <span class="string">=</span> <span class="literal">yes</span></span><br><span class="line"><span class="string">user</span> <span class="string">=</span> <span class="string">root</span></span><br><span class="line"><span class="string">server</span> <span class="string">=</span> <span class="string">/usr/sbin/in.tftpd</span></span><br><span class="line"><span class="string">server_args</span> <span class="string">=</span> <span class="bullet">-s</span> <span class="string">/srv/tftpd</span> <span class="bullet">-c</span></span><br><span class="line"><span class="string">per_source</span> <span class="string">=</span> <span class="number">11</span></span><br><span class="line"><span class="string">cps</span> <span class="string">=</span> <span class="number">100</span> <span class="number">2</span></span><br><span class="line"><span class="string">flags</span> <span class="string">=IPv4</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>然后重新启动tftp和xinetd</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service tftpd-hpa restart</span><br><span class="line">service xinetd restart</span><br></pre></td></tr></table></figure>
+<p>测试tftp</p>
+<p>在/srv/tftpd目录（即tftp服务器目录）下新建一个文件，如<code>a.c</code>，在另一终端输入</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@:tftp localhost</span><br><span class="line"><span class="meta">tftp&gt;</span> get a.c</span><br><span class="line"><span class="meta">tftp&gt;</span></span><br></pre></td></tr></table></figure>
+<p>上述情况则为成功。</p>
+<ul>
+<li>连接编译服务器</li>
+</ul>
+<p>配置服务器端VPN，使用secureCRT软件，新建一个ssh2连接</p>
+<center>
+    <img src="https://i.loli.net/2019/08/29/6eGAlcsJyxKfngT.png" width="700/">
+</center>
+
+<p>所有编译任务都在 服务器上完成，节约时间。</p>
+<p>文件传输：</p>
+<p>服务器到本地</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -P 22 usr@serverip:serverfiledir localfiledir</span><br></pre></td></tr></table></figure>
+<h3 id="3-安装交叉编译链"><a href="#3-安装交叉编译链" class="headerlink" title="3. 安装交叉编译链"></a>3. 安装交叉编译链</h3><p>配置bash</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#查看是否是bash</span><br><span class="line">ls -l /bin/sh	</span><br><span class="line"></span><br><span class="line">sudo dpkg-reconfigure dash</span><br><span class="line">#选择not</span><br><span class="line">sudo apt-get install libc6:i386 libgcc1:i386 gcc-4.6-base:i386 libstdc++5:i386 libstdc++6:i386</span><br><span class="line">sudo apt-get install zlib1g-dev</span><br><span class="line">sudo apt-get install libncurses5-dev</span><br><span class="line">sudo apt-get install build-essential</span><br><span class="line">sudo apt-get install lib32z1</span><br><span class="line">sudo apt-get install libssl-dev</span><br></pre></td></tr></table></figure>
+<p>添加可能需要的依赖，没有这些库后面会有非常多BUG</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install ncurses-dev build-essential u-boot-tools libusb-1.0-0 libusb-1.0-0-dev git wget fakeroot kernel-package zlib1g-dev libncurses5-dev cvs automake autoconf libtool bison flex</span><br></pre></td></tr></table></figure>
+<p>进入SDK目录，解压安装arm-linux和aarch64-himix交叉编译链</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">tar -zxf gcc-arm-none-eabi-4_9-2015q3.tgz</span><br><span class="line">chomod +x gcc-arm-none-eabii-4_9-2015q3.install</span><br><span class="line">sudo ./gcc-arm-none-eabi-4_9-2015q3.install</span><br><span class="line">tar -zxf aarch64-himix100-linux.tgz</span><br><span class="line">chomod +x aarch64-himix100-linux.install</span><br><span class="line">sudo ./aarch64-himix100-linux.install</span><br><span class="line"><span class="meta">#</span>更新环境变量</span><br><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
+<h3 id="4-编译"><a href="#4-编译" class="headerlink" title="4. 编译"></a>4. 编译</h3><ul>
+<li>kernel编译</li>
+</ul>
+<p>先打补丁，方法如下(readme_cn.txt)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">1、从linux开源社区下载v4.9.37版本的内核：</span><br><span class="line">        1)进入网站：www.kernel.org</span><br><span class="line">        2)选择HTTP协议资源的https://www.kernel.org/pub/选项,进入子页面</span><br><span class="line">        3)选择linux/菜单项，进入子页面</span><br><span class="line">        4)选择kernel/菜单项，进入子页面</span><br><span class="line">        5)选择v4.x/菜单项，进入子页面</span><br><span class="line">        6)下载linux-4.9.37.tar.gz（或linux-4.9.37.tar.xz）</span><br><span class="line"></span><br><span class="line">2、打补丁</span><br><span class="line">        1)将下载的 linux-4.9.37.tar.gz 存放到 osdrv的opensource/kernel目录中</span><br><span class="line">                2)在linux服务器中进入 osdrv 的根目录,执行如下命令：</span><br><span class="line">                cd opensource/kernel</span><br><span class="line">                tar -zxf linux-4.9.37.tar.gz</span><br><span class="line">                mv linux-4.9.37 linux-4.9.y</span><br><span class="line">                cd linux-4.9.y</span><br><span class="line">                patch -p1 &lt; ../linux-4.9.37.patch</span><br><span class="line">                cd ../</span><br><span class="line">                tar -czf linux-4.9.y.tgz linux-4.9.y</span><br><span class="line">                cd ../../</span><br><span class="line">        或</span><br><span class="line">                1)将下载的 linux-4.9.37.tar.gz 存放到 osdrv的opensource/kernel目录中</span><br><span class="line">                2)在linux服务器中进入 osdrv 的根目录,执行如下命令：</span><br><span class="line">                make atf</span><br><span class="line"></span><br><span class="line">注意：</span><br><span class="line">        若下载的内核格式为linux-4.9.37.tar.xz，</span><br><span class="line">        第一步先用：</span><br><span class="line">                xz -d linux-4.9.37.tar.xz</span><br><span class="line">        命令将linux-4.9.37.tar.xz解压为linux-4.9.37.tar。</span><br><span class="line">        第二步再用：</span><br><span class="line">                tar -xvf linux-4.9.37.tar</span><br><span class="line">        解压linux-4.9.37.tar。</span><br></pre></td></tr></table></figure>
+<p>配置并编译</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>ZEUS/ZEUS_V2.1_SDK/osdrv/opensource/kernel/linux-4.9.y</span><br><span class="line">cp arch/arm64/configs/hi3559av100_arm64__big_little_defconfig .config</span><br><span class="line">make ARCH=arm64 CROSS_COMPILE=aarch64-himix100-linux- menuconfig</span><br><span class="line"></span><br><span class="line">make ARCH=arm64 CROSS_COMPILE=aarch64-himix100-linux- uImage -j 20</span><br><span class="line">cd osdrv/opensource/arm-trusted-firmware/arm-trusted-firmware</span><br><span class="line">./mk.sh</span><br></pre></td></tr></table></figure>
+<p>生成的uImage在<code>arch/arm64/boot</code>下，生成的fip.bin在<code>./build/hi3559av100/debug</code>下。</p>
+<ul>
+<li>编译时错误</li>
+</ul>
+<ol>
+<li>无法生成uImage</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/linux-4.9.y_multi-core/arch/arm64/boot/uImage: No such file or directory</span><br></pre></td></tr></table></figure>
+<p>原因是缺少mkimage工具，从<code>osdrv/tools/pc/mkimgage_tool</code>下将其拷贝至<code>/usr/bin</code>。<br>确认mkimage工具可用后，仍然有错，往上检查，发现另一个问题。</p>
+<ol>
+<li>头文件找不到路径</li>
+</ol>
+<p>先检查Makefile，发现Makefile中并没有与报错相关的路径，使用find找到头文件目录，检查该目录下和与之相关联目录下文件，发现问题出在hi3559av100.dtsi ，编辑<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ZEUSAI\ZEUSAISDK\ZEUS_V2.1_SDK\osdrv\opensource\kernel\linux-4.9.y\arch\arm64\boot\dts\hisilicon\hi3559av100.dtsi </span><br><span class="line"></span><br><span class="line">dt-bindings/clock/hi3559av100-clock.h</span><br></pre></td></tr></table></figure></p>
+<p>   更改头文件，相对路径写全即可。</p>
+<center>
+    <img src="https://i.loli.net/2019/08/29/5qKLgGVRvhBCtIA.png" width="800/">
+</center>
+
+<p>这是分开编译内核的结果。</p>
+<center>
+    <img src="https://i.loli.net/2019/08/29/2MLfDt8eCFcvQWO.png" width="900/">
+</center>
+
+<p>全部编译。</p>
+<ul>
+<li>制作根文件系统</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd /home/sysong/ZEUS/ZEUS_V2.1_SDK/osdrv/tools/pc/ext4_utils</span><br><span class="line">make clean</span><br><span class="line">make</span><br><span class="line">./bin/make_ext4fs -s -l 1024M rootfs_hi3559av100_1024M.ext4 /home/sysong/ZEUS/ZEUS_V2.1_SDK/osdrv/pub/rootfs_glibc_multi-core_arm64</span><br></pre></td></tr></table></figure>
+<p>privatefs.ext4配置目录如下，在该Makefile下可更改privatefs的生成大小。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/ZEUS/ZEUS_V2.1_SDK/references/db_reference/product/hi3559av100/rootfs/Makefile</span><br></pre></td></tr></table></figure>
+<h3 id="5-烧写"><a href="#5-烧写" class="headerlink" title="5. 烧写"></a>5. 烧写</h3><p>首先HiTool烧写uboot，烧写完毕后使用tftp烧写其他的。</p>
+<p>命令含义：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">mw.b 0x42000000 0xff 0x400000</span><br><span class="line"><span class="meta">#</span>mw.b 以字节为单位写内存</span><br><span class="line"><span class="meta">#</span>0x42000000 起始地址</span><br><span class="line"><span class="meta">#</span>0xff  写为ff，即置1</span><br><span class="line"><span class="meta">#</span>0x400000 长度</span><br><span class="line">tftp 0x42000000 uImage</span><br><span class="line"><span class="meta">#</span>tftp下载uImage到0x42000000</span><br><span class="line">mmc write 0 42000000 0x800 0x8000</span><br><span class="line"><span class="meta">#</span>42000000文件所在位置</span><br><span class="line"><span class="meta">#</span>800 起始位置，8000长度</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>起始地址和长度按块计算，一块=512B</span><br></pre></td></tr></table></figure>
+<p>开始烧写</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>u-boot</span><br><span class="line">mw.b 0x42000000 0xff 0x100000</span><br><span class="line">tftp 0x42000000 u-boot-hi3559av100.bin</span><br><span class="line">mmc write 0 0x42000000 0x0 0x800</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>kernel</span><br><span class="line">mw.b 0x42000000 0xff 0x400000</span><br><span class="line">tftp 0x42000000 uImage</span><br><span class="line">mmc write 0 0x42000000 0x800 0x8000</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>rootfs</span><br><span class="line">mw.b 0x42000000 0xff 0x4000000</span><br><span class="line">tftp 0x42000000 rootfs_hi3559av100_1024M.ext4</span><br><span class="line">mmc write.ext4sp 0 0x42000000 0x8800 0x200000 #1024M</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>privatefs</span><br><span class="line">mw.b 0x42000000 0xff 0x8000000</span><br><span class="line">tftp 0x42000000 privatefs.ext4</span><br><span class="line">mmc write.ext4sp 0 0x42000000 0x208800 0x200000 #1024</span><br></pre></td></tr></table></figure>
+<p>设置启动选项</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">setenv bootargs 'mem=512M lpj=599654 console=ttyAMA0 root=/dev/mmcblk0p3 rootfstype=ext4 rw rootwait blkdevparts=mmcblk0:1M(u-boot-hi3559av100.bin),16M(uImage_hi3559av100_multi-core),1024M(rootfs.ext4)'</span><br><span class="line">setenv bootcmd 'mmc read 0 45000000 0x800 0x8000;bootm 45000000'</span><br><span class="line">sav</span><br></pre></td></tr></table></figure>
+<ul>
+<li>启动报错</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/bin/sh: error while loading shared libraries: libm.so.6: cannot open shared object file: No such file or directory</span><br></pre></td></tr></table></figure>
+<p>大概是根文件系统出了问题，来到编译好的根文件目录，查看是否有<code>libm.so.6</code>。经检查发现是一个软链接文件，怀疑是编译时新增的文件，而链接未更正。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ln -sf libm.2-24.so libm.so.6</span><br><span class="line"><span class="meta">#</span>强制指过去</span><br></pre></td></tr></table></figure>
+<p>但是还是不行，再去看这个软链接<code>ls -al</code>，发现并没有指错。。。</p>
+<p>找了半天问题所在，突然想到会不会是读取的动态库目录不是/lib ，然后发现/usr/lib下没有文件，将/lib下的库文件拷贝过去，上电成功挂载文件系统。可能是原来配置的内核没有user。</p>
+<center>
+    <img src="https://i.loli.net/2019/08/29/qLw9FOjVrWSbRCh.png" width="700/">
+</center>
+
+
+
+<p>内核映射表</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">Virtual</span> <span class="string">kernel</span> <span class="string">memory</span> <span class="attr">layout:</span></span><br><span class="line">    <span class="string">modules</span> <span class="string">:</span> <span class="number">0xffffff8000000000</span> <span class="bullet">-</span> <span class="number">0xffffff8008000000</span>   <span class="string">(</span>   <span class="number">128</span> <span class="string">MB)</span></span><br><span class="line">    <span class="string">vmalloc</span> <span class="string">:</span> <span class="number">0xffffff8008000000</span> <span class="bullet">-</span> <span class="number">0xffffffbebfff0000</span>   <span class="string">(</span>   <span class="number">250</span> <span class="string">GB)</span></span><br><span class="line">      <span class="string">.text</span> <span class="string">:</span> <span class="number">0xffffff8008080000</span> <span class="bullet">-</span> <span class="number">0xffffff80086c0000</span>   <span class="string">(</span>  <span class="number">6400</span> <span class="string">KB)</span></span><br><span class="line">    <span class="string">.rodata</span> <span class="string">:</span> <span class="number">0xffffff80086c0000</span> <span class="bullet">-</span> <span class="number">0xffffff8008890000</span>   <span class="string">(</span>  <span class="number">1856</span> <span class="string">KB)</span></span><br><span class="line">      <span class="string">.init</span> <span class="string">:</span> <span class="number">0xffffff8008890000</span> <span class="bullet">-</span> <span class="number">0xffffff80088f0000</span>   <span class="string">(</span>   <span class="number">384</span> <span class="string">KB)</span></span><br><span class="line">      <span class="string">.data</span> <span class="string">:</span> <span class="number">0xffffff80088f0000</span> <span class="bullet">-</span> <span class="number">0xffffff8008947808</span>   <span class="string">(</span>   <span class="number">351</span> <span class="string">KB)</span></span><br><span class="line">       <span class="string">.bss</span> <span class="string">:</span> <span class="number">0xffffff8008947808</span> <span class="bullet">-</span> <span class="number">0xffffff8008997124</span>   <span class="string">(</span>   <span class="number">319</span> <span class="string">KB)</span></span><br><span class="line">    <span class="string">fixed</span>   <span class="string">:</span> <span class="number">0xffffffbefe7fb000</span> <span class="bullet">-</span> <span class="number">0xffffffbefec00000</span>   <span class="string">(</span>  <span class="number">4116</span> <span class="string">KB)</span></span><br><span class="line">    <span class="string">PCI</span> <span class="string">I/O</span> <span class="string">:</span> <span class="number">0xffffffbefee00000</span> <span class="bullet">-</span> <span class="number">0xffffffbeffe00000</span>   <span class="string">(</span>    <span class="number">16</span> <span class="string">MB)</span></span><br><span class="line">    <span class="string">vmemmap</span> <span class="string">:</span> <span class="number">0xffffffbf00000000</span> <span class="bullet">-</span> <span class="number">0xffffffc000000000</span>   <span class="string">(</span>     <span class="number">4</span> <span class="string">GB</span> <span class="string">maximum)</span></span><br><span class="line">              <span class="number">0xffffffbf00100000</span> <span class="bullet">-</span> <span class="number">0xffffffbf00900000</span>   <span class="string">(</span>     <span class="number">8</span> <span class="string">MB</span> <span class="string">actual)</span></span><br><span class="line">    <span class="string">memory</span>  <span class="string">:</span> <span class="number">0xffffffc004000000</span> <span class="bullet">-</span> <span class="number">0xffffffc024000000</span>   <span class="string">(</span>   <span class="number">512</span> <span class="string">MB)</span></span><br><span class="line"><span class="attr">SLUB:</span> <span class="string">HWalign=64,</span> <span class="string">Order=0-3,</span> <span class="string">MinObjects=0,</span> <span class="string">CPUs=4,</span> <span class="string">Nodes=1</span></span><br></pre></td></tr></table></figure>
+<h3 id="6-NFS"><a href="#6-NFS" class="headerlink" title="6. NFS"></a>6. NFS</h3><p>检查开发板网络，网络需要配置，修改<code>/etc/init.d/S80network</code>，添加如下代码</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line"><span class="string">ipaddr=192.168.51.11</span></span><br><span class="line"><span class="string">bootp=</span></span><br><span class="line"><span class="string">gateway=192.168.51.1</span></span><br><span class="line"><span class="string">netmask=255.255.255.0</span></span><br><span class="line"><span class="string">hostname=HI3559A</span></span><br><span class="line"><span class="string">netdev=eth0</span></span><br><span class="line"><span class="string">autoconf=true</span></span><br></pre></td></tr></table></figure>
+<p>配置NFS</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install nfs-kernel-server</span><br><span class="line">sudo apt-get install nfs-common</span><br><span class="line">sudo service nfs-kernel-server restart</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/exports</span><br><span class="line"><span class="meta">#</span>#添加</span><br><span class="line">/nfs *(rw,sync,no_root_squash)</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>#使其生效</span><br><span class="line">export -rf</span><br></pre></td></tr></table></figure>
+<p>启动NFS</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/nfs-kernel-server start</span><br><span class="line"><span class="meta">#</span>up on boot</span><br><span class="line">chkconfig nfs-kernel-server on</span><br></pre></td></tr></table></figure>
+<p>客户端挂载</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mount [-t nfs] -o nolock 192.168.51.22:/nfs /nfsroot</span><br><span class="line"><span class="meta">#</span>unmount /nfsroot</span><br><span class="line"><span class="meta">#</span>vi /etc/rc.local  添加命令可开机自动挂载</span><br></pre></td></tr></table></figure>
+<p>挂载NFS失败</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>erro1 Permission denied</span><br><span class="line">vi /etc/exports  </span><br><span class="line"><span class="meta">#</span>上面已更正，非允许用户</span><br><span class="line"><span class="meta">#</span>挂载时最好使用root用户</span><br><span class="line"><span class="meta">#</span>erro2  No route to host</span><br><span class="line">检查网关是否在同一网段</span><br></pre></td></tr></table></figure>
+<h3 id="7-验证sample"><a href="#7-验证sample" class="headerlink" title="7. 验证sample"></a>7. 验证sample</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cp  cfg.mak.multicore to cfg.mak</span><br><span class="line">cd sample</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
+<p>运行sample</p>
+<p>编译好后，将编译后的sample目录挂载到开发板上，选择一个不需要其他输入的例程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./sample_tde 1</span><br></pre></td></tr></table></figure>
+<p>报错</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">open sys: No such file or directory</span><br></pre></td></tr></table></figure>
+<center>
+    <img src="https://i.loli.net/2019/08/29/GKtrXhZzyAWjSlI.png" width="700/">
+</center>
+
+<p>查看了sys目录，应该没问题，发现需要加载模块文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd mmp/out/linux/ko</span><br><span class="line">cp -r * /lib/module/#uname -r#/</span><br><span class="line">depmod #生成依赖关系</span><br><span class="line">modprobe sys_config</span><br><span class="line">modprobe hi3559av100_tde</span><br></pre></td></tr></table></figure>
+<p>报错</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line">/nfsroot/sample/out/ko # modprobe hi3559av100_tde.ko </span><br><span class="line">hi3559av100_tde: Unknown symbol osal_deregisterdevice (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol CMPI_UnRegisterModule (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_spin_unlock_irqrestore (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol CMPI_Remap_Nocache (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_request_irq (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol CMPI_MmzMalloc (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_platform_driver_unregister (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_platform_get_resource_byname (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol hil_map_mmz_check_phys (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol CMPI_Unmap (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_kfree (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_atomic_set (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_atomic_init (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_wait_init (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_memset (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_memcpy (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_registerdevice (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_div_u64_rem (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_seq_printf (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_platform_get_irq_byname (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_wait_timeout_interruptible (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_createdev (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_spin_lock_init (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_in_interrupt (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_ioremap_nocache (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_kmalloc (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol HI_LOG (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_wakeup (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol CMPI_MmzFree (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_wait_destory (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_create_proc_entry (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol hil_is_phys_in_mmz (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_spin_lock_destory (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_free_irq (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_flush_dcache_area (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_atomic_destory (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_iounmap (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_atomic_inc_return (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_msecs_to_jiffies (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_atomic_read (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_spin_lock_irqsave (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol CMPI_RegisterModule (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_printk (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_dmb (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_platform_driver_register (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_remove_proc_entry (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_deregisterdevice (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol CMPI_UnRegisterModule (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_spin_unlock_irqrestore (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol CMPI_Remap_Nocache (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_request_irq (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol CMPI_MmzMalloc (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_platform_driver_unregister (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_platform_get_resource_byname (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol hil_map_mmz_check_phys (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol CMPI_Unmap (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_kfree (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_atomic_set (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_atomic_init (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_wait_init (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_memset (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_memcpy (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_registerdevice (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_div_u64_rem (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_seq_printf (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_platform_get_irq_byname (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_wait_timeout_interruptible (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_createdev (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_spin_lock_init (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_in_interrupt (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_ioremap_nocache (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_kmalloc (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol HI_LOG (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_wakeup (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol CMPI_MmzFree (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_wait_destory (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_create_proc_entry (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol hil_is_phys_in_mmz (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_spin_lock_destory (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_free_irq (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_flush_dcache_area (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_atomic_destory (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_iounmap (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_atomic_inc_return (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_msecs_to_jiffies (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_atomic_read (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_spin_lock_irqsave (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol CMPI_RegisterModule (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_printk (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_dmb (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_platform_driver_register (err 0)</span><br><span class="line">hi3559av100_tde: Unknown symbol osal_remove_proc_entry (err 0)</span><br><span class="line">modprobe: can't load module hi3559av100_tde.ko (hi3559av100_tde.ko): unknown symbol in module, or unknown parameter</span><br></pre></td></tr></table></figure>
+<p>显示内核没有这些符号表，先看看内核表是否真的没有这些符号</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cat -n opensource/kernel/linux-4.9.y/System.map | grep osal_dmb</span><br><span class="line"><span class="meta">#</span>开发板下</span><br><span class="line">cat /proc/kallsyms | grep osal_dmb</span><br></pre></td></tr></table></figure>
+<p>发现确实没有生成，可能是Makefile错了，也可能是编译时没有导出符号表。</p>
+<p>查找这些函数定义的位置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -r osal_dmb *</span><br></pre></td></tr></table></figure>
+<center>
+    <img src="https://i.loli.net/2019/08/29/ZaGeAiNPh547m3C.png" width="1000/">
+</center>
+
+
+
+<p>说明导出了符号表，那么就是没有被编译了，检查Makefile</p>
+<center>
+    <img src="https://i.loli.net/2019/08/29/n1iCAR65V4qBOeM.png" width="1000/">
+</center>
+
+<p>该目标文件是固定会编译的，并没有条件编译。查看其上级Makefile，看是在哪个地方被编译的。在mpp下的makefile中发现该路径，该路径被导出，那应该就是这个位置开始编译。而mpp并未编译进内核，说明该模块确实没编译进内核。</p>
+<center>
+    <img src="https://i.loli.net/2019/08/29/GZRjCbqun52hvaT.png" width="1000/">
+</center>
+
+
+
+<p>进入ko文件目录，仔细一看还有两个load文件，应该是要用这个文件手动导入模块。但是并没有在手册上看到。。。浪费好多时间。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./load3559av100_multicore -i -sensor0 imx327</span><br></pre></td></tr></table></figure>
+<p>至此成功运行sample。</p>
+<p><del>自动加载模块</del></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/moudles</span><br><span class="line">#add moudle name</span><br></pre></td></tr></table></figure>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p>[1] Hi3559A╱C V100 开发环境用户指南</p>
+<p>[2] ZEUSAI+智能计算平台-快速开发指南v2.4</p>
+<p>[3] HiBurn 工具使用指南</p>
+<p>@brezezee</p>
+
+        
+      </div>
+      
+      
+      
+    </div>
+    
+    
+    
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">brezezee</p>
+              <p class="site-description motion-element" itemprop="description">靡不有初，鲜克有终</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="https://brezezee.github.io/archives">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="../categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="../tags/index.html">
+                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-虚拟机配置"><span class="nav-text">1. 虚拟机配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-tftp"><span class="nav-text">2. tftp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-安装交叉编译链"><span class="nav-text">3. 安装交叉编译链</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-编译"><span class="nav-text">4. 编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-烧写"><span class="nav-text">5. 烧写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-NFS"><span class="nav-text">6. NFS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-验证sample"><span class="nav-text">7. 验证sample</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reference"><span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">brezezee</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">59.1k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="../lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="../js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="../js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="../js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="../js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="../js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://brezezee.github.io/MD Notes/开发过程 (copy).html';
+          this.page.identifier = 'MD Notes/开发过程 (copy).html';
+          this.page.title = '海思3559A系统移植';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
