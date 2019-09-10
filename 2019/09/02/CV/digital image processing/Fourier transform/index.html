@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="../../../../../../lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="../../../../../../lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="../../../../../../css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="../../../../../../images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../../../../images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="../../../../../../images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="../../../../../../images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="傅里叶,数字图像处理,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="&amp;emsp;&amp;emsp;本文根据自己的理解以及借鉴前人的总结写下，有参考到的在文中下方给出链接。傅里叶本身具有较强的专业背景，其提出是为了解决热传导方程，不过由于其卓越的效果在众多领域有重要应用。本文仅从代数角度对其进行一些分析。 1. 三角函数的正交性1.1 向量正交&amp;emsp;&amp;emsp;正交是一个非常好的特性，两个向量正交，它们的内积就为0。在线性代数中，$R^n$里由一组含n个正交向量构成">
+<meta name="keywords" content="傅里叶,数字图像处理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="傅里叶变换">
+<meta property="og:url" content="https://brezezee.github.io/2019/09/02/CV/digital image processing/Fourier transform/index.html">
+<meta property="og:site_name" content="brezezee">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;本文根据自己的理解以及借鉴前人的总结写下，有参考到的在文中下方给出链接。傅里叶本身具有较强的专业背景，其提出是为了解决热传导方程，不过由于其卓越的效果在众多领域有重要应用。本文仅从代数角度对其进行一些分析。 1. 三角函数的正交性1.1 向量正交&amp;emsp;&amp;emsp;正交是一个非常好的特性，两个向量正交，它们的内积就为0。在线性代数中，$R^n$里由一组含n个正交向量构成">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://pic2.zhimg.com/v2-6d30cc48db3499c32f83843a9042a7c5_1200x500.jpg">
+<meta property="og:image" content="http://images.cnblogs.com/cnblogs_com/sleepy/201106/201106292138078313.png">
+<meta property="og:updated_time" content="2019-09-10T07:23:29.474Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="傅里叶变换">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;本文根据自己的理解以及借鉴前人的总结写下，有参考到的在文中下方给出链接。傅里叶本身具有较强的专业背景，其提出是为了解决热传导方程，不过由于其卓越的效果在众多领域有重要应用。本文仅从代数角度对其进行一些分析。 1. 三角函数的正交性1.1 向量正交&amp;emsp;&amp;emsp;正交是一个非常好的特性，两个向量正交，它们的内积就为0。在线性代数中，$R^n$里由一组含n个正交向量构成">
+<meta name="twitter:image" content="https://pic2.zhimg.com/v2-6d30cc48db3499c32f83843a9042a7c5_1200x500.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://brezezee.github.io/2019/09/02/CV/digital image processing/Fourier transform/">
+
+
+
+
+
+  <title>傅里叶变换 | brezezee</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">brezezee</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="https://brezezee.github.io" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="https://brezezee.github.io/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="https://brezezee.github.io/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-categories"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="https://brezezee.github.io/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="https://brezezee.github.io/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://brezezee.github.io">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="brezezee">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="../../../../../../images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="brezezee">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">傅里叶变换</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-02T00:00:00+08:00">
+                2019-09-02
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2019-09-10T15:23:29+08:00">
+                2019-09-10
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="../../../../../../categories/digital-image-processing/" itemprop="url" rel="index">
+                    <span itemprop="name">数字图像处理</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/09/02/CV/digital image processing/Fourier transform/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  3.5k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&emsp;&emsp;本文根据自己的理解以及借鉴前人的总结写下，有参考到的在文中下方给出链接。傅里叶本身具有较强的专业背景，其提出是为了解决热传导方程，不过由于其卓越的效果在众多领域有重要应用。本文仅从代数角度对其进行一些分析。</p>
+<h3 id="1-三角函数的正交性"><a href="#1-三角函数的正交性" class="headerlink" title="1. 三角函数的正交性"></a>1. 三角函数的正交性</h3><h4 id="1-1-向量正交"><a href="#1-1-向量正交" class="headerlink" title="1.1 向量正交"></a>1.1 向量正交</h4><p>&emsp;&emsp;正交是一个非常好的特性，两个向量正交，它们的内积就为0。在线性代数中，$R^n$里由一组含n个正交向量构成的一组基底是一个正交基，$R^n$中所有向量都可由这组正交基表示。其数学定义为</p>
+<blockquote>
+<p>令$\{ v_1, v_2,\cdots, v_n \}$ 为内积空间$V$中的非零向量，且当$i\neq j$ 时，$v_i^T\cdot v_j = 0$，则称$ v_1, v_2,\cdots, v_n $为向量空间$V$的一组正交基。</p>
+</blockquote>
+<p>&emsp;&emsp;实际上$R^n$中任意一组线性无关的$\{ v_1,v_2,\cdots,v_n \}$都能表示该空间的所有向量，但是正交基相对于普通的无关组有两个巨大的<strong>优势</strong>。</p>
+<ul>
+<li>一是能够方便的求出向量在该基底下的坐标</li>
+<li>二是在向量相乘（内积）时只需要对应坐标相乘即可$ (v_i^T\cdot v_j=0 \;\; if\;\; i\neq j)$，大大简化了计算。</li>
+</ul>
+<p>详细地说，$R^n$空间中任意一个向量都可以被$R^n$中一组线性无关的$\{ v_1,v_2,\cdots,v_n \}$向量表示：</p>
+<script type="math/tex; mode=display">
+v = c_1v_1+c_2v_2+\cdots +c_nv_n</script><p>&emsp;&emsp;若以$\{ v_1,v_2,\cdots,v_n \}$为该空间的基底，那么$(c_1,c_2,\cdots,c_n)$就是该空间的坐标，求解该坐标时需要经过以下运算，以$c_1$为例，首先两边同乘$v_1$</p>
+<script type="math/tex; mode=display">
+v^T\cdot v_1 = c_1||v_1||+c_2v_2^Tv_1+\cdots +c_nv_n^Tv_1</script><p>再移项</p>
+<script type="math/tex; mode=display">
+c_1 = \frac {v^T\cdot v_1-(c_2v_2^Tv_1+\cdots +c_nv_n^Tv_1)} {||v_1||}</script><p>此时若$\{ v_1,v_2,\cdots,v_n \}$是一组正交基，这个式子就能变得较为简单</p>
+<script type="math/tex; mode=display">
+c_1 = \frac {v^T\cdot v_1} {||v_1||}</script><p>&emsp;&emsp;上述过程可归纳为矩阵运算，假设$v$为列向量</p>
+<script type="math/tex; mode=display">
+v^T = (c_1,c_2,\cdots,c_n)\cdot 
+\begin{bmatrix}
+v_1^T\\
+v_2^T\\
+\vdots\\
+v_n^T
+\end{bmatrix}</script><p>该矩阵的向量已经是正交向量，但不是单位正交向量，所以将其单位化，使得矩阵成为正交矩阵</p>
+<script type="math/tex; mode=display">
+v^T = (c_1,c_2,\cdots,c_n)\cdot 
+\begin{bmatrix}
+\frac {v_1^T}{||v_1||}\\
+\frac {v_2^T}{||v_2||}\\
+\vdots\\
+\frac {v_n^T}{||v_n||}
+\end{bmatrix}</script><p>因为该矩阵是正交矩阵，因此转置矩阵等于逆矩阵</p>
+<script type="math/tex; mode=display">
+(c_1,c_2,\cdots,c_n) = v^T\cdot \left [\frac {v_1}{||v_1||},\frac {v_2}{||v_2||},\cdots,\frac {v_n}{||v_n||} \right]</script><h4 id="1-1-函数正交"><a href="#1-1-函数正交" class="headerlink" title="1.1 函数正交"></a>1.1 函数正交</h4><p>&emsp;&emsp;傅里叶变换做的是函数基上的变换，因此它考虑的是函数的正交性。而它与向量的正交性含义是类似的，将函数看作向量。我们都知道向量正交时内积为0，那么可以看看函数之间的内积来理解函数的正交性。函数是一些函数值的组合，写成向量形式：</p>
+<script type="math/tex; mode=display">
+f(x) = [f(x_0),f(x_1),\cdots,f(x_n)]^T</script><p>那么两个函数的内积可表示为</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+f(x)\cdot g(x) =& [f(x_0),f(x_1),\cdots,f(x_n)]\cdot [g(x_0),g(x_1),\cdots,g(x_n)]^T\\
+ = & \sum_{i=0}^n f(x_i)\cdot g(x_i)
+\end{aligned}</script><p>对于连续函数，将求和替换为积分即可。</p>
+<p>&emsp;&emsp;于是得到<strong>函数内积</strong>的定义: $<f,g> = \int _a^b f\cdot \bar g\; dx$</f,g></p>
+<p>&emsp;&emsp;现在来看看三角函数的正交性，为了简化表达，假设函数的周期为$2\pi$。以此得到的三角函数系为</p>
+<script type="math/tex; mode=display">
+\left \{  0(sin0x), 1(cos0x),sinx,cosx,sin2x,cos2x\cdots,sinnx ,cosnx \right \}</script><p>根据正交的定义，该集中任意两个元素的内积为0，这里的内积是函数内积。</p>
+<script type="math/tex; mode=display">
+\int _{-\pi}^{\pi} sinix\cdot cosjx\; dx = \int _{-\pi}^\pi \frac 1 2 [sin(i+j)x+sin(i-j)x]\;dx=0 \;,\; i,j\in N \\
+\int _{-\pi}^{\pi} sinix\cdot sinjx\; dx = -\int _{-\pi}^\pi \frac 1 2 [cos(i+j)x - cos(i-j)x]\;dx=0 \;,\; i,j\in N，i\neq j\\
+\int _{-\pi}^{\pi} cosix\cdot cosjx\; dx = \int _{-\pi}^\pi \frac 1 2 [cos(i+j)x + cos(i-j)x]\;dx=0 \;,\; i,j\in N，i\neq j\\</script><p>&emsp;&emsp;它们都可以用积化和差公式化为整数倍周期的单个正余弦的积分，而整数倍周期的正余弦函数的周期也是$2\pi$ ，所以积分为0。双余弦函数也一样，所以该函数系是一个正交的函数系。</p>
+<h3 id="2-傅里叶级数"><a href="#2-傅里叶级数" class="headerlink" title="2. 傅里叶级数"></a>2. 傅里叶级数</h3><p>&emsp;&emsp;怎样分解一个周期函数？并且是线性组合。函数一般的性质有单调性、奇偶性、对称性和周期性。很明显这里单调性和对称性没什么考虑的价值。首先周期函数的线性组合仍是周期函数，因此最好选用一组周期函数来拼凑。奇偶性呢，任意一个函数都能拆分为奇函数和偶函数之和：</p>
+<script type="math/tex; mode=display">
+f(x) = \frac {f(x)-f(-x)} {2} + \frac { f(x)+f(-x)}{2} = f_{odd}+f_{even}</script><p>因此最好由一组既有奇函数又有偶函数的函数系来组成原函数，什么函数满足这些性质呢？</p>
+<p>&emsp;&emsp;傅里叶提出猜测：任意周期函数都可表示为三角函数的组合。三角函数都是周期函数，且函数系既有奇函数又有偶函数。更关键的是三角函数系是有一个正交集，这为线性组合的系数计算，以及后面的傅里叶变换提供了极大便利。假设周期为$T$，因为正交三角系的周期是$2\pi$，因此以$w_n = \frac {2\pi n}{T}$表示正交函数系的周期频率，叫做角频率，它与频率之间只是多了个$2\pi$的关系。</p>
+<p>根据分析，可写出周期函数分解的大致表达式</p>
+<script type="math/tex; mode=display">
+f(x) = \sum_{n=0}^{\infty}a_ncos(w_n x) + \sum_{n=0}^\infty b_n sin(w_n x)</script><p>将$n=0$时的$a_n$单独提出来</p>
+<script type="math/tex; mode=display">
+f(x) = C + \sum_{n=1}^\infty a_ncos(w_n x) + \sum_{n=1}^{\infty} b_nsin(w_n x)</script><p>这就是我们常见的傅里叶级数形式。</p>
+<p>&emsp;&emsp;不过这并不完整，这只是给出了周期函数拆解的形式，这里面的系数还未确定。对于它系数的确定可以类比向量坐标的计算，因为三角函数系也是一个正交集，因此可通过计算内积的方式来确定其系数。</p>
+<p>&emsp;&emsp;为此，我们计算函数与函数系的内积来确定$C,a_n,b_n$，对于$C$其函数系是$cos0x=1$</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\int _{-\pi}^\pi f(x)\cdot 1 \;dx =& \int _{-\pi}^\pi Cdx+ \int _{-\pi}^\pi \sum_{n=1}^\infty a_ncos(w_n x)dx+\int _{-\pi}^\pi \sum_{n=1}^{\infty} b_nsin(w_n x)dx\\
+\int _{-\pi}^\pi f(x)dx =& 2\pi C+0+0\\
+C = \frac 1 {2\pi} \int _{-\pi}^\pi &f(x)dx
+\end{aligned}</script><p>对于$a_n$与$b_n$</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\int_{-\pi}^\pi f(x)\cdot cos(w_n x)dx =& \int_{-\pi}^\pi C\cdot cos(w_n x)dx+ \int _{-\pi}^\pi \sum_{n=1}^\infty a_ncos^2(w_n x)dx+\int _{-\pi}^\pi \sum_{n=1}^{\infty} b_nsin(w_n x)cos(w_n x)dx\\
+\int_{-\pi}^\pi f(x)\cdot cos(w_n x)dx =& \int _{-\pi}^\pi \sum_{n=1}^\infty a_ncos^2(w_n x)dx\\
+\int_{-\pi}^\pi f(x)\cdot cos(w_n x)dx =& \pi \cdot a_n\\
+\Rightarrow \;\;\;\;\;\;\;\;\;\;a_n =& \frac 1 \pi \int_{-\pi}^\pi f(x)\cdot cos(w_n x)dx
+\end{aligned}</script><p>同理</p>
+<script type="math/tex; mode=display">
+b_n = \frac 1 \pi \int_{-\pi}^\pi f(x) \cdot sin(w_n x)dx</script><p>可见，$C$可以归纳为$a_0=2C$，实际上$C$本就是原$a_n$中分离出来的</p>
+<script type="math/tex; mode=display">
+C = \frac {a_0} 2</script><p>于是得到最终的傅里叶级数</p>
+<script type="math/tex; mode=display">
+f(x) = \frac {a_0} 2 + \sum_{n=1}^\infty a_ncos(w_n x) + \sum_{n=1}^{\infty} b_nsin(w_n x)</script><p>其中，</p>
+<script type="math/tex; mode=display">
+a_n = \frac 1 \pi \int_{-\pi}^\pi f(x)\cdot cos(w_n x)dx,\;\;n=0,1,\cdots,\infty\\
+b_n = \frac 1 \pi \int_{-\pi}^\pi f(x)\cdot sin(w_n x)dx,\;\;n=1,\cdots,\infty\\</script><p>&emsp;&emsp;通过一些代数运算，得到了傅里叶级数的系数。为了方便表达，这里的傅里叶级数是直接假设函数周期为$2\pi$的函数。我们将傅里叶级数的分解与向量的分解进行了类比，定义了函数内积。利用三角函数的正交性，计算其函数基的内积求得各函数基前的系数。以向量的角度来看，函数基就是欧式空间中的基向量，而函数基前的系数就是向量的坐标。</p>
+<h3 id="3-傅里叶变换"><a href="#3-傅里叶变换" class="headerlink" title="3.傅里叶变换"></a>3.傅里叶变换</h3><h4 id="3-1-扩展周期"><a href="#3-1-扩展周期" class="headerlink" title="3.1 扩展周期"></a>3.1 扩展周期</h4><p>&emsp;&emsp;经过代数分析可以发现一个周期函数的傅里叶级数可以通过无穷多个不同频率的正余弦函数叠加得到。下面是一个关于傅里叶级数和变换非常经典的一副图像。</p>
+<center>
+    <img src="https://pic2.zhimg.com/v2-6d30cc48db3499c32f83843a9042a7c5_1200x500.jpg" width="900/">
+</center>
+
+<p>&emsp;&emsp;图中是一个矩形波的分解，从时间轴角度看，不同周期和幅值的正余弦波形叠加形成了该矩形波。而从频率轴看，仅仅是不同的频率信号的不同幅值构成了该波形。当然不同频率的基波越多，可模拟的的信号复杂度也就越高，并且能够更好的拟合该波形。 至此，傅里叶级数能够通过使用相同周期的正余弦基函数来叠加生成对应的周期函数。但现实生活中更多的是非周期函数，傅里叶级数能分解它们吗。</p>
+<p>&emsp;&emsp;实际上，如果一个函数没有周期，可以将其看作是周期为无穷的周期函数。对于一个周期为$T$的函数，其频率取值间隔$w_n = \frac {2\pi n} T$随着$T$的增大而减小。</p>
+<center>
+    <img src="http://images.cnblogs.com/cnblogs_com/sleepy/201106/201106292138078313.png" width="800/">
+</center>
+
+<p>&emsp;&emsp;可见，当周期为无穷大时，其频率会由离散的频率谱变成连续的频率函数$F(w)$，也叫幅度谱。而这个关于频率$w$的函数$F(w)$就是连续傅里叶变换要求的函数。函数值是频率分量$w$上的幅值大小。这里有个问题，这个幅值是如何计算呢？是否和傅里叶级数中的$a_n,b_n$相同？答案当然是“否”。对于傅里叶级数，同一个频率同时对应有正弦和余弦函数，这种情况它们之间如何分配呢？</p>
+<h4 id="3-2-复指数形式"><a href="#3-2-复指数形式" class="headerlink" title="3.2 复指数形式"></a>3.2 复指数形式</h4><p>&emsp;&emsp;如果继续在这种离散情况下讨论正余弦函数之间的关系，可能会非常困难，好在欧拉给出了一个“上帝公式”</p>
+<script type="math/tex; mode=display">
+e^{ix}=cosx+isinx</script><p>其中，$i$ 是虚数单位，$x$ 以弧度为单位。这一公式将三角函数与复指数函数关联起来，使得我们可以在复平面对三角函数进行分析。其证明有多种方法，比如泰勒、求导等。将由欧拉公式推导出来的正余弦函数的复指数表达带入傅里叶级数中</p>
+<script type="math/tex; mode=display">
+sinx=\frac {e^{ix}-e^{-ix}}{2i}\\
+cosx=\frac {e^{ix}+e^{-ix}} 2</script><p>带入</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+f(x) =& \frac {a_0}2+\sum_{n=1}^\infty  \frac 1 2\left \{a_n[e^{iw_nx}+e^{-iw_nx}] -ib_n[e^{iw_nx}-e^{-iw_nx}] \right \}\\
+=&\frac {a_0}2+\sum_{n=1}^\infty \frac {a_n-ib_n}{2}e^{iw_nx}+\sum_{n=1}^\infty \frac{a_n+ib_n}{2}e^{-iw_nx}\\
+=&\sum_{n=0}^0\frac {a_0-ib_0}2 e^{i\cdot 0\cdot x}+\sum_{n=1}^\infty \frac {a_n-ib_n}{2}e^{iw_nx}+\sum_{n=-\infty}^{-1} \frac{a_{-n}+ib_{-n}}{2}e^{iw_nx}\\
+\end{aligned}</script><p>&emsp;&emsp;经过变换，将$n$的求和范围正好扩充到$(-\infty,\infty)$ 。 注意在第三步中，为了使范围衔接，让频率取到了负值。但这只是为了公式推导，并无实际的物理意义。</p>
+<p>&emsp;&emsp;再对比上式三项的形式，复指数形式是一样的，其中$n\ge 0$时可归纳为相同的表达式。其中，$a_n,b_n$都是前面傅里叶系数中已计算过的，将其归纳为$C_n$，则</p>
+<script type="math/tex; mode=display">
+C_n=\begin{cases}
+\frac {a_n-ib_n}2, \;\;n=0,1,2,\cdots\\
+\frac {a_{-n}+ib_{-n}}2, \;\; n=-1,-2,-3,\cdots
+\end{cases}</script><p>$n\ge 0$时带入原$a_n,b_n$得</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+C_n =& \frac 1 2 \cdot \frac 2 T\left [ \int_0^T f(x)\cdot cos(w_n x)dx -i\int_0^Tf(x)\cdot sin(w_nx)dx \right]\\
+=&\frac 1 T \int _0^T f(x)\cdot [cos(w_nx)-isin(w_nx)]dx\\
+=&\frac 1 T \int _0^T f(x) \cdot e^{-iw_nx}dx
+\end{aligned}</script><p>$n&lt;0$时带入原$a_n,b_n$得</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+C_n =& \frac 1 2 \cdot \frac 2 T\left [ \int_0^T f(x)\cdot cos(-w_n x)dx +i\int_0^Tf(x)\cdot sin(-w_nx)dx \right]\\
+=&\frac 1 T \int _0^T f(x)\cdot [cos(w_nx)-isin(w_nx)]dx\\
+=&\frac 1 T \int _0^T f(x) \cdot e^{-iw_nx}dx
+\end{aligned}</script><p>居然是一样的！因此，</p>
+<script type="math/tex; mode=display">
+C_n = \frac 1 T \int _0^T f(x) \cdot e^{-iw_nx}dx</script><p>得到傅里叶级数的复指数形式</p>
+<script type="math/tex; mode=display">
+f(x) = \sum_{-\infty}^{\infty} C_n\cdot e^{iw_nx}</script><p>就是这么简洁优雅。</p>
+<h4 id="3-3-计算傅里叶变换"><a href="#3-3-计算傅里叶变换" class="headerlink" title="3.3 计算傅里叶变换"></a>3.3 计算傅里叶变换</h4><p>而前面已经说过，对于无周期函数，将其看作周期无穷大的函数即可，将$C_n$带入，注意积分周期$T$，不能偷懒写了</p>
+<script type="math/tex; mode=display">
+f(x) = \underset {T\rightarrow \infty}{lim}\sum_{n=-\infty}^\infty \frac 1 T \int_{-\frac T 2}^{\frac T 2}f(\delta)\cdot e^{-iw_n\delta}d\delta \cdot e^{iw_nx}</script><p>注意$w_n=\frac {2\pi n}T$，则</p>
+<script type="math/tex; mode=display">
+\triangle w=w_{n+1}-w_n=\frac {2\pi} T</script><p>带入得</p>
+<script type="math/tex; mode=display">
+f(x) = \underset {T\rightarrow \infty}{lim}\sum_{n=-\infty}^\infty \frac {\triangle w}{2\pi} \int_{-\frac T 2}^{\frac T 2}f(\delta)\cdot e^{-iw_n\delta}d\delta \cdot e^{iw_nx}</script><p>当$x$固定时，$\frac {1}{2\pi} \int_{-\frac T 2}^{\frac T 2}f(\delta)\cdot e^{-iw_n\delta}d\delta \cdot e^{iw_nx}$ 是关于$w$的函数，记为$\Phi(w)$，则</p>
+<script type="math/tex; mode=display">
+f(x) =\underset {T\rightarrow \infty}{lim}\sum_{n=-\infty}^\infty \Phi(w)\triangle w</script><p>显然，这是微积分的定义，将其写为积分形式</p>
+<script type="math/tex; mode=display">
+f(x) = \int_{-\infty}^\infty \frac {1}{2\pi} \int_{-\infty}^{ \infty}f(\delta)\cdot e^{-iw_n\delta}d\delta \cdot e^{iw_nx} dw</script><p>至此，便得到了傅里叶变换的公式，就藏在其中</p>
+<script type="math/tex; mode=display">
+F(w) =\int_{-\infty}^{\infty}f(x)\cdot e^{-iw_nx}dx</script><p>而</p>
+<script type="math/tex; mode=display">
+f(x) = \frac {1}{2\pi} \int _{-\infty}^\infty F(w)\cdot e^{iw_nx}dw</script><p>称为傅里叶变换的逆变换。</p>
+<h3 id="Reference："><a href="#Reference：" class="headerlink" title="Reference："></a>Reference：</h3><p>[1] 复变函数与积分变换-焦红伟</p>
+<p>[2] <a href="https://blog.zmyme.com/archives/118" target="_blank" rel="noopener">正交性</a></p>
+<p>[3] <a href="https://www.bilibili.com/video/av62763042" target="_blank" rel="noopener">微分方程概论-第四章：但什么是傅立叶级数呢？</a></p>
+<p>[4] <a href="https://www.matongxue.com/madocs/619/" target="_blank" rel="noopener">如何理解傅立叶级数公式？</a></p>
+<p>[5] <a href="https://tracholar.github.io/math/2017/03/12/fourier-transform.html" target="_blank" rel="noopener">深入理解傅里叶变换</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="../../../../../../tags/傅里叶/" rel="tag"># 傅里叶</a>
+          
+            <a href="../../../../../../tags/数字图像处理/" rel="tag"># 数字图像处理</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="../../../../01/Leetcode/数据结构/前缀树 (copy)/" rel="next" title="LeetCode 208. 前缀树">
+                <i class="fa fa-chevron-left"></i> LeetCode 208. 前缀树
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="../../../../03/剑指offer/腾讯面试题 (copy)/" rel="prev" title="腾讯面试题-64马8跑道">
+                腾讯面试题-64马8跑道 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">brezezee</p>
+              <p class="site-description motion-element" itemprop="description">靡不有初，鲜克有终</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="https://brezezee.github.io/archives">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="../../../../../../categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="../../../../../../tags/index.html">
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-三角函数的正交性"><span class="nav-text">1. 三角函数的正交性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-向量正交"><span class="nav-text">1.1 向量正交</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-函数正交"><span class="nav-text">1.1 函数正交</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-傅里叶级数"><span class="nav-text">2. 傅里叶级数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-傅里叶变换"><span class="nav-text">3.傅里叶变换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-扩展周期"><span class="nav-text">3.1 扩展周期</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-复指数形式"><span class="nav-text">3.2 复指数形式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-计算傅里叶变换"><span class="nav-text">3.3 计算傅里叶变换</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reference："><span class="nav-text">Reference：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">brezezee</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">59.1k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../../../js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="../../../../../../js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="../../../../../../js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="../../../../../../js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../../../js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://brezezee.github.io/2019/09/02/CV/digital image processing/Fourier transform/';
+          this.page.identifier = '2019/09/02/CV/digital image processing/Fourier transform/';
+          this.page.title = '傅里叶变换';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
