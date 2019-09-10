@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="brezezee">
 <meta property="og:description" content="1. logistic回归模型&amp;emsp;&amp;emsp;logistic回归是一种广义线性回归（generalized linear model），因此与多重线性回归分析有很多相同之处。它们的模型形式基本上相同，都具有wx+b，其中w和b是待求参数，其区别在于他们的因变量不同，多重线性回归直接将wx+b作为因变量，即y =wx+b，而logistic回归则通过函数g(wx+b)让其对应一个隐状态p，">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-09-10T10:32:19.765Z">
+<meta property="og:updated_time" content="2019-09-10T10:41:04.569Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="logistic回归和最大熵模型">
 <meta name="twitter:description" content="1. logistic回归模型&amp;emsp;&amp;emsp;logistic回归是一种广义线性回归（generalized linear model），因此与多重线性回归分析有很多相同之处。它们的模型形式基本上相同，都具有wx+b，其中w和b是待求参数，其区别在于他们的因变量不同，多重线性回归直接将wx+b作为因变量，即y =wx+b，而logistic回归则通过函数g(wx+b)让其对应一个隐状态p，">
@@ -308,7 +308,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-09-10T18:32:19+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2019-09-10T18:41:04+08:00">
                 2019-09-10
               </time>
             
@@ -441,7 +441,9 @@ L(w) = & \sum_{i=1}^N[y_ilog\pi(x_i)+(1-y_i)log(1-\pi(x_i))]\\
 <li><strong>迭代过程向量化</strong></li>
 </ul>
 <p>&emsp;&emsp;在$NumPy$中，对矩阵和向量的运算做了优化，其运行效率远远高于使用$Python$的for循环计算。因此对于经常有较大矩阵与向量计算的机器学习算法，将计算公式向量化（矩阵化）是非常有必要的。</p>
-<p>&emsp;&emsp;假设默认的向量都是列向量，观察原迭代方程。有两个需要使用for循环的地方，一是对$n$个样本求梯度均值，二是求$w$系数的所有维度。对于一，将$n$个样本以列向量组合在一起，计算内积即可。对于二，数据以向量形式组合后，可以直接计算返回一个列向量得到$w$的所有维度。以$X$表示样本组合成的矩阵</p>
+<p>&emsp;&emsp;假设默认的向量都是列向量，观察原迭代方程。有两个需要使用for循环的地方，一是对$n$个样本求梯度均值，二是求$w$系数的所有维度。对于一，将$n$个样本以列向量组合在一起，计算内积即可。对于二，数据以向量形式组合后，可以直接计算返回一个列向量得到$w$的所有维度。其中，</p>
+<script type="math/tex; mode=display">
+y = [y_1,y_2,\cdots,y_n]^T</script><p>以$X$表示样本组合成的矩阵</p>
 <script type="math/tex; mode=display">
 X=
 \begin{bmatrix}
@@ -801,7 +803,7 @@ P(y=1|x) = &\frac {exp(w\cdot f(x,1))} {exp(w\cdot f(x,0))+exp(w\cdot f(x,1))}\\
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">59.4k</span>
+    <span title="Site words total count">59.5k</span>
   
 </div>
 

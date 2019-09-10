@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="brezezee">
 <meta property="og:description" content="1. 熵1.1 信息量&amp;emsp;&amp;emsp;信息量：最初的定义是信号取值数量m的对数为信息量$I$,即 $I=log_2m$。这是与比特数相关的，比如一个信号只有两个取值，那么用1个bit便能将其表示。后来著名的香农指出，得到的信号取值结果是随机的，因此其信息量应该也是关于概率的函数，于是得到随机变量$X$的信息量">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-08-28T04:34:27.513Z">
+<meta property="og:updated_time" content="2019-09-10T11:01:46.372Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="熵、交叉熵及似然函数的关系">
 <meta name="twitter:description" content="1. 熵1.1 信息量&amp;emsp;&amp;emsp;信息量：最初的定义是信号取值数量m的对数为信息量$I$,即 $I=log_2m$。这是与比特数相关的，比如一个信号只有两个取值，那么用1个bit便能将其表示。后来著名的香农指出，得到的信号取值结果是随机的，因此其信息量应该也是关于概率的函数，于是得到随机变量$X$的信息量">
@@ -308,8 +308,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-08-28T12:34:27+08:00">
-                2019-08-28
+              <time title="Post modified" itemprop="dateModified" datetime="2019-09-10T19:01:46+08:00">
+                2019-09-10
               </time>
             
           </span>
@@ -397,12 +397,12 @@
 <h2 id="1-熵"><a href="#1-熵" class="headerlink" title="1. 熵"></a>1. 熵</h2><h3 id="1-1-信息量"><a href="#1-1-信息量" class="headerlink" title="1.1 信息量"></a>1.1 信息量</h3><p>&emsp;&emsp;<strong>信息量</strong>：最初的定义是信号取值数量m的对数为信息量$I$,即 $I=log_2m$。这是与比特数相关的，比如一个信号只有两个取值，那么用1个bit便能将其表示。后来著名的香农指出，得到的信号取值结果是随机的，因此其信息量应该也是关于概率的函数，于是得到随机变量$X$的信息量</p>
 <a id="more"></a>
 <script type="math/tex; mode=display">
-I(X=x_i) = -logP(x_i)</script><p>&emsp;&emsp;在机器学习中，熵是描述一个变量发生的不确定性的度量，不确定性越大，这里面包含的信息量就越大。比如有的学生常年不及格，让你预测他这次考试是否能及格，你肯定会说十有八九不会及格，也就是能否及格的确定性很大了，这时我们不会太关心其结果，因为其发生的结果太容易预料了，所以其信息量比较小。若该学生有时候能及格，有时候不能及格，这就有点捉摸不定了，我们很难猜中他能不能及格，这时他能否及格的信息量比较大。</p>
-<h3 id="1-3-熵"><a href="#1-3-熵" class="headerlink" title="1.3 熵"></a>1.3 熵</h3><p>&emsp;&emsp;既然熵是反应变量（信号）总体不确定性的大小（信息量大小）的度量，那么如何确定熵的大小也就很明显了——对所有可能的取值计算其平均信息量，也就是求信息量关于概率P的期望。这样就表达了该信号（随机变量）的不确定性大小。</p>
+I(X=x_i) = -logP(x_i)</script><p>&emsp;&emsp;在机器学习中，熵是描述一个变量发生的不确定性的度量，不确定性越大，这里面包含的信息量就越大。比如有的学生常年不及格，让你预测他这次考试是否能及格，你肯定会说十有八九不会及格，也就是能否及格的确定性很大了，这时我们不会太关心其结果，其发生的结果太容易预料，所以其信息量比较小。若该学生有时候能及格，有时候不能及格，这就有点捉摸不定了，我们很难猜中他能不能及格，这时他能否及格的信息量比较大。</p>
+<h3 id="1-3-熵"><a href="#1-3-熵" class="headerlink" title="1.3 熵"></a>1.3 熵</h3><p>&emsp;&emsp;既然熵是反应变量（信号）总体不确定性的大小（信息量大小）的度量，那么如何确定熵的大小也就比较明显了——对所有可能的取值计算其平均信息量，也就是求信息量关于概率P的期望。这样就表达了该信号（随机变量）的不确定性大小。</p>
 <script type="math/tex; mode=display">
 H(X)=E_P[-logP(x)]=-\sum_xp(x_i)logp(x_i)</script><p>&emsp;&emsp;当X服从均匀分布时，X的熵的结果与最原始的信息量的定义相同，n为信号的取值数量</p>
 <script type="math/tex; mode=display">
-H(x) = -\sum_n \frac 1 n log \frac 1 n= logn</script><p>实际上只有当所有事件的概率相等时，熵取最大值$logn$。<br>&emsp;&emsp;于是得出我个人的猜测：信息量是描述变量取某个值时的信息量，熵则描述其所有可能取值的平均信息量，也就是该信号到底取哪个值的不确定性。</p>
+H(x) = -\sum_n \frac 1 n log \frac 1 n= logn</script><p>实际上只有当所有事件的概率相等时，熵取最大值$logn$。<br>&emsp;&emsp;于是得出我个人的猜测：信息量是描述变量取某个值时的信息量，熵则描述其所有可能取值的平均信息量，也就是该信号到底取哪个值的不确定性。一个常年不及格的同学及格了，这时信息量较大。而若该班级所有人的及格与否都比较稳定，那么这个班级及格事件的熵较小（不确定性 小）。</p>
 <h2 id="2-最大熵中的极大似然函数"><a href="#2-最大熵中的极大似然函数" class="headerlink" title="2. 最大熵中的极大似然函数"></a>2. 最大熵中的极大似然函数</h2><p>&emsp;&emsp;按理说熵后面应该接着说交叉熵的，但是我发现极大似然函数的对数形式与熵的定义十分相近，于是先介绍它们的来路与区别。这种形式的似然函数在最大熵模型中用到过。</p>
 <p>&emsp;&emsp;首先我先给出在最大熵模型中用到的似然函数</p>
 <script type="math/tex; mode=display">
@@ -697,7 +697,7 @@ CrossEntropy=-\sum_{i=1}^n (y_i\cdot log (h(x_i)) +(1-y_i) \cdot log (1-(h(x_i))
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">59.4k</span>
+    <span title="Site words total count">59.5k</span>
   
 </div>
 
