@@ -93,7 +93,7 @@
 <meta property="og:image" content="https://i.loli.net/2019/08/14/h8HJUOzANEdFcDe.png">
 <meta property="og:image" content="https://i.loli.net/2019/08/14/Rjc2Nl3XLP1AwDo.jpg">
 <meta property="og:image" content="https://i.loli.net/2019/08/14/Rjc2Nl3XLP1AwDo.jpg">
-<meta property="og:updated_time" content="2019-08-29T06:01:50.451Z">
+<meta property="og:updated_time" content="2019-09-13T09:13:56.626Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SVM推导">
 <meta name="twitter:description" content="&amp;emsp;&amp;emsp;支持向量机是一种二分类模型，它以间隔最大作为优化目标，因此它比感知机仅仅以误分类推动的模型要优胜不少。数据线性可分时，SVM直接以间隔最大训练出一个线性分类模型。当数据线性不可分时，SVM通过软间隔最大化解决这种问题。此时的模型仍是一个线性模型，若采用核方法和软间隔最大化，则得到一个非线性模型。可以看到SVM在解决变复杂的情况时是逐步改进的。 1. 定义&amp;emsp;&amp;ems">
@@ -315,8 +315,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-08-29T14:01:50+08:00">
-                2019-08-29
+              <time title="Post modified" itemprop="dateModified" datetime="2019-09-13T17:13:56+08:00">
+                2019-09-13
               </time>
             
           </span>
@@ -375,7 +375,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  7.9k
+                  8.1k
                 </span>
               
 
@@ -430,14 +430,15 @@ y = sign(\boldsymbol{w^{\ast} \cdot x} + b^{\ast})</script><p>所定义的分类
 \begin{aligned}
 \gamma_i &= \frac {\widehat \gamma_i} {||\boldsymbol{w}||}\\
 \gamma &= \frac {\widehat \gamma} {||\boldsymbol{w}||}
-\end{aligned}</script><h3 id="1-2-间隔最大化"><a href="#1-2-间隔最大化" class="headerlink" title="1.2 间隔最大化"></a>1.2 间隔最大化</h3><p>&emsp;&emsp;定义了几何间隔后，就能通过最大化支持向量到超平面的几何间隔得到一个最优的分类超平面。在感知机中，学习的方法是最小化误差距离。这种方法只要超平面能够正确分类已知的数据，学习过程便结束。而对SVM中最大化几何间隔来说，当还未能正确分类所有样本点时，数据集中几何间隔最小的样本点是负的，此时的最大化过程是找到一个能够正确分割数据集的超平面。当几何间隔学习到大于0的时侯，超平面已能将数据集正确分割，但学习过程不会停止，SVM希望让最靠近超平面的样本点的分类结果仍有较大的确信度，这就是最大化几何间隔的目的。</p>
+\end{aligned}</script><h3 id="1-2-间隔最大化"><a href="#1-2-间隔最大化" class="headerlink" title="1.2 间隔最大化"></a>1.2 间隔最大化</h3><p>&emsp;&emsp;定义了几何间隔后，就能通过最大化支持向量到超平面的几何间隔得到一个最优的分类超平面。在感知机中，学习的方法是最小化误差距离。这种方法只要超平面能够正确分类已知的数据，学习过程便结束。而对SVM中最大化几何间隔来说，当还未能正确分类所有样本点时，数据集中几何间隔最小的样本点是负的，此时的最大化过程是找到一个能够正确分割数据集的超平面。当几何间隔学习到大于0的时侯，超平面已能将数据集正确分割，但学习过程不会停止，SVM希望让<strong>最靠近</strong>超平面的样本点的分类结果仍有较大的确信度，这就是最大化几何间隔的目的。</p>
 <p>&emsp;&emsp;现在导出其数学表达，目的是求解关于参数$\boldsymbol{w},b$的超平面，使超平面到数据集中几何间隔最小的的点关于它的几何间隔最大</p>
 <script type="math/tex; mode=display">
 arg \underset {w,b} {max}\;\underset {i} {min} \;\gamma_i \tag{1.2-a}</script><p>若对该式直接计算，难度非常大，因为$\gamma$ 的分子和分母都包含了变量$\boldsymbol{w},b$，因此先将其等价替换为函数间隔，问题变为</p>
 <script type="math/tex; mode=display">
 arg  \underset {w,b} {max}\;\underset {i} {min} \;\frac {\widehat \gamma_i}{||\boldsymbol{w}||} \tag{1.2-b}</script><p>因为$||\boldsymbol{w}||$与 $i$无关，可以直接将其提出来</p>
 <script type="math/tex; mode=display">
-arg  \underset {w,b} {max}\;\left \{  \frac {1}{||\boldsymbol{w}||}  \underset {i} {min} \; \widehat \gamma_i  \right \} \tag{1.2-c} \\</script><p>为了简化计算，需要利用函数间隔的性质：函数间隔的大小随$\boldsymbol{w},b$的放缩而放缩，对于同一组$\boldsymbol{w},b$ 所有样本的函数间隔的相对间隔也是按相同比例放缩。所以我们可以用函数间隔最小的点作为基准点，将其函数间隔令为1。那么其他点的函数间隔只是按$1/\gamma$的比例进行放缩，并不影响其相对超平面的位置，也不会影响超平面的位置。直接将其令为1后就不能这样写作一个式子了，需要将其他点函数间隔大于1的约束单独写出来，则问题变为解一个规划问题</p>
+arg  \underset {w,b} {max}\;\left \{  \frac {1}{||\boldsymbol{w}||}  \underset {i} {min} \; \widehat \gamma_i  \right \} \tag{1.2-c} \\</script><p>&emsp;&emsp;为了简化计算，需要利用函数间隔的性质：函数间隔的大小随$\boldsymbol{w},b$的放缩而放缩，对于同一组$\boldsymbol{w},b$ 所有样本的函数间隔的相对间隔也是按相同比例放缩。所以我们可以用函数间隔最小的点作为基准点，将其函数间隔令为1。那么其他点的函数间隔只是按$1/\gamma$的比例进行放缩，并不影响其相对超平面的位置，也不会影响超平面的位置。</p>
+<p>&emsp;&emsp;其实几何间隔就是规范化后的函数间隔，$w$作为变量，几何间隔的大小只与$w$的方向有关，与其模长无关。直接将其令为1后就不能这样写作一个式子了，数据集的函数间隔为1，那么所有样本都必须满足函数间隔大于等于1的条件。于是将其他点函数间隔大于1的<strong>约束条件</strong>单独写出来，问题变为解一个规划问题</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
 \underset {w,b} {max} \;\; &\frac {1} {||\boldsymbol{w}||}\\
@@ -486,7 +487,7 @@ s.t.\;\;& \sum_i^n \lambda_i y_i = 0 \\
  \underset \lambda {min} \;\; & \frac 1 2 \sum_i^n\sum_j^n \lambda_i\lambda_jy_iy_j (\boldsymbol{x_i^T\cdot x_j}) - \sum_i^n \lambda_i\\
 s.t.\;\;& \sum_i^n \lambda_i y_i = 0 \\
 & \lambda_i \ge 0, \;\; i=1,\cdots,n
-\end{aligned}</script><p>其中，只有$\lambda$是未知变量，当未知变量个数较少时，可以较轻松的算出来，比如李航书中给出一个$\lambda$数量为3的例题，可以直接将下面约束中的等式将其中一个变量带换掉，然后对两个未知变量求偏导。依据不等式约束判断是否符合，不符合则在边界取得极值，两个变量尝试边界也较简单，分别带入比较大小即可。可是该对偶问题的未知变量$\lambda$的数量与样本数成正比，机器学习中成千上万的样本量使得计算变得非常复杂，很多变量不能轻易消去，且带边界的时候有很多组合。于是下面介绍简化这个问题的优化算法——SMO。</p>
+\end{aligned}</script><p>&emsp;&emsp;其中，只有$\lambda$是未知变量，当未知变量个数较少时，可以较轻松的算出来，比如李航书中给出一个$\lambda$数量为3的例题，可以直接将下面约束中的等式将其中一个变量带换掉，然后对两个未知变量求偏导。依据不等式约束判断是否符合，不符合则在边界取得极值，两个变量尝试边界也较简单，分别带入比较大小即可。可是该对偶问题的未知变量$\lambda$的数量与样本数成正比，机器学习中成千上万的样本量使得计算变得非常复杂，很多变量不能轻易消去，且带边界的时候有很多组合。于是下面介绍简化这个问题的优化算法——SMO。</p>
 <h3 id="2-2-序列最小最优算法（SMO）"><a href="#2-2-序列最小最优算法（SMO）" class="headerlink" title="2.2 序列最小最优算法（SMO）"></a>2.2 序列最小最优算法（SMO）</h3><p>&emsp;&emsp;SMO算法由Microsoft Research的John C. Platt在1998年提出，并成为最快的二次规划优化算法，特别针对线性SVM和数据稀疏时性能更优。关于SMO最好的资料就是他本人写的《Sequential Minimal Optimization A Fast Algorithm for Training Support Vector Machines》。</p>
 <h4 id="2-2-1-坐标下降法"><a href="#2-2-1-坐标下降法" class="headerlink" title="2.2.1 坐标下降法"></a>2.2.1 坐标下降法</h4><p>&emsp;&emsp;SMO算法的思想与坐标下降法十分类似，因此先介绍下坐标下降法。它是一种非梯度优化算法，梯度优化算法是每次选择梯度最大的方向进行优化，当然这使得每次优化的程度较大。不过计算量较多，尤其是变量较多的情况。而坐标下降法每次只对一个坐标方向进行优化，如此循环，对每个坐标轴依次优化。这样的做法可能会使得优化过程显得较为”曲折“，不过中间每步对单个坐标轴的计算比整个梯度的计算小得多。可以由下图表示</p>
 <center>
@@ -500,8 +501,8 @@ s.t.\;\;& \sum_i^n \lambda_i y_i = 0 \\
  \underset \lambda {min} \;\; & \frac 1 2 \sum_i^n\sum_j^n \lambda_i\lambda_jy_iy_j (\boldsymbol{x_i^T\cdot x_j}) - \sum_i^n \lambda_i\\
 s.t.\;\;& \sum_i^n \lambda_i y_i = 0 \\
 & \lambda_i \ge 0, \;\; i=1,\cdots,n
-\end{aligned}</script><p>由于$\boldsymbol\lambda$数量等于样本$(\boldsymbol{x_i},y_i)$数量，使得这个二次规划问题计算量较大，因此选择其中两个作为变量，其他看做常数，对这两个变量解二次规划问题，并且这时两个变量满足约束$\sum_i^n \lambda_i y_i = 0$ ，所以这个问题有解析解，求解速度非常快。</p>
-<p><strong>Q:</strong>那么为什么选两个变量呢？</p>
+\end{aligned}</script><p>由于$\boldsymbol\lambda$数量等于样本$(\boldsymbol{x_i},y_i)$数量，使得这个二次规划问题计算量较大，因此选择其中两个作为变量，其他看做常数，对这两个变量解二次规划问题，并且这时两个变量也满足约束$\sum_i^n \lambda_i y_i = 0$ ，所以这个问题有解析解，求解速度非常快。</p>
+<p><strong>Q:</strong>为什么选两个变量呢？</p>
 <p>&emsp;&emsp;同样是因为约束条件$\sum_i^n \lambda_i y_i = 0$ ，$\lambda_i$在更新后需要满足它们之间的等式，所以需要同时更新两个变量。</p>
 <h4 id="2-2-2-SMO求解方法"><a href="#2-2-2-SMO求解方法" class="headerlink" title="2.2.2 SMO求解方法"></a>2.2.2 SMO求解方法</h4><p>&emsp;&emsp;不失一般性，假设选择的两个变量为$\lambda_1,\lambda_2$ ，其他变量看作常数，则原二次规划问题变为</p>
 <script type="math/tex; mode=display">
@@ -584,7 +585,7 @@ H = min(C, \lambda_2^{old} - \lambda_1^{old} +C )</script><p>&emsp;&emsp;当$y_1
 <script type="math/tex; mode=display">
 L = max(0,\lambda_1^{old}+ \lambda_2^{old} - C),\\
 H = min(C,\lambda_1^{old} + \lambda_2^{old} )</script><p>得到其不等式约束后，便可对前面求得的未修剪的$\lambda_2^{new,unc}$ 进行修剪，修剪后的数据代入SMO优化问题继续迭代，直到达到迭代误差要求。</p>
-<h5 id="2-2-2-3-变量的选择方法"><a href="#2-2-2-3-变量的选择方法" class="headerlink" title="2.2.2.3 变量的选择方法"></a>2.2.2.3 变量的选择方法</h5><p>留坑</p>
+<h5 id="2-2-2-3-变量的选择方法"><a href="#2-2-2-3-变量的选择方法" class="headerlink" title="2.2.2.3 变量的选择方法"></a>2.2.2.3 变量的选择方法</h5><p>&emsp;&emsp;在二次规划问题中，最后优化得到的解一定是满足KKT条件的。换句话说，只要变量不满足KKT条件，迭代过程就会继续。因此在变量的选择中，只要选择了一个不满足KKT条件的变量，那么迭代过程就会得到增益。而对第二个变量的选择，可采用启发式方法，选择让两个变量对应的样本之间间隔最大的变量。因为相较与对两个相似的变量相比，两个差别很大的变量更新可能会给优化函数带来较大增益。</p>
 <p>&emsp;&emsp;最终，我们得到了分离超平面</p>
 <script type="math/tex; mode=display">
 \sum_i^n \lambda_i^* y_i (x^Tx_i)+ b^{\ast} = 0</script><p>分类决策函数</p>
@@ -924,7 +925,7 @@ K(x,z) = (x\cdot z)^2</script><p>它是关于输入向量的内积的平方函�
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">59.5k</span>
+    <span title="Site words total count">59.7k</span>
   
 </div>
 
