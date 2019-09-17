@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="brezezee">
 <meta property="og:description" content="1. 从原始问题到对偶问题&amp;emsp;对偶性是优化理论中一个重要的部分，带约束的优化问题是机器学习中经常遇到的问题，这类问题都可以用如下形式表达  \begin{aligned} min \;\; &amp;f(x) \\ s.t.\;\; &amp; g_i(x) \le 0 ,\;\; i=1,\cdots, m\\ &amp; h_i(x) = 0,\;\; i=1,\cdots,n\\ \end{aligned}">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-09-07T03:38:25.161Z">
+<meta property="og:updated_time" content="2019-09-17T08:02:31.498Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="拉格朗日对偶性(Lagrange duality)">
 <meta name="twitter:description" content="1. 从原始问题到对偶问题&amp;emsp;对偶性是优化理论中一个重要的部分，带约束的优化问题是机器学习中经常遇到的问题，这类问题都可以用如下形式表达  \begin{aligned} min \;\; &amp;f(x) \\ s.t.\;\; &amp; g_i(x) \le 0 ,\;\; i=1,\cdots, m\\ &amp; h_i(x) = 0,\;\; i=1,\cdots,n\\ \end{aligned}">
@@ -308,8 +308,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-09-07T11:38:25+08:00">
-                2019-09-07
+              <time title="Post modified" itemprop="dateModified" datetime="2019-09-17T16:02:31+08:00">
+                2019-09-17
               </time>
             
           </span>
@@ -368,7 +368,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  2.1k
+                  2.2k
                 </span>
               
 
@@ -420,24 +420,24 @@ s.t. \lambda_i \ge 0,\;\; i= 1,2,\cdots,k</script><p>&emsp;&emsp;可以看出两
 <script type="math/tex; mode=display">
 \theta_D(\lambda,\eta) \le \theta_P(x)</script><p>其中，$\theta_d(\lambda,\eta)$看作其他国家乒乓球运动员，$\theta_P(x)$看作中国乒乓球运动员，那么其他国家最厉害的也不一定比得上中国最差的。即</p>
 <script type="math/tex; mode=display">
-d^* =\underset {\lambda ,\eta} {max} \; \theta_D(\lambda,\eta)\le \underset x {min} \;\theta_P(x)=p^* \tag{2-b}</script><p>这个性质便是<strong>弱对偶性（ weak duality ）</strong>。弱对偶性对任何优化问题都成立，这似乎是显然的，因为这个下界并不严格，有时候甚至取到非常小，对近似原问题的解没多大帮助。既有弱对偶性，那么便有强对偶性，<strong>强对偶性</strong>是指</p>
+d^{\ast} =\underset {\lambda ,\eta} {max} \; \theta_D(\lambda,\eta)\le \underset x {min} \;\theta_P(x)=p^{\ast} \tag{2-b}</script><p>这个性质便是<strong>弱对偶性（ weak duality ）</strong>。弱对偶性对任何优化问题都成立，这似乎是显然的，因为这个下界并不严格，有时候甚至取到非常小，对近似原问题的解没多大帮助。既有弱对偶性，那么便有强对偶性，<strong>强对偶性</strong>是指</p>
 <script type="math/tex; mode=display">
-d^* = p^*</script><p>显然这是一个令人惊喜的性质，这意味着可以通过求解较简单的对偶问题（因为对偶问题总是一个凸优化问题）来得到原问题的解。不过强对偶性在优化问题中是一个非常高深的问题，对我来说更是如此。因此我只能介绍关于强对偶的两个条件：严格条件和KKT条件。</p>
+d^{\ast} = p^{\ast}</script><p>显然这是一个令人惊喜的性质，这意味着可以通过求解较简单的对偶问题（因为对偶问题总是一个凸优化问题）来得到原问题的解。不过强对偶性在优化问题中是一个非常高深的问题，对我来说更是如此。因此我只能介绍关于强对偶的两个条件：严格条件和KKT条件。</p>
 <h2 id="3-KKT条件"><a href="#3-KKT条件" class="headerlink" title="3. KKT条件"></a>3. KKT条件</h2><p>&emsp;&emsp;<strong>严格条件</strong>是指原始问题是凸函数，约束条件是仿射函数，若此时不等式约束满足严格条件，即不等号是严格不等号，不能取等号，则强对偶性成立。这个条件在SVM中即变成了对任意一个点，都存在超平面能对其正确划分，也就是数据集是线性可分的。严格条件是强对偶性的充分条件，但并不是必要条件。有些不满足严格条件的可能也有强对偶性。</p>
-<p>&emsp;&emsp;<strong>KKT条件</strong>是在满足严格条件的情况下，推导出的变量取值的关系，假设原始问题和对偶问题的极值点分别是$x^{<em>}$和$\lambda^</em>,\eta^<em>$ ，对应的极值分别是$p^</em>$和$d^<em>$ 。由于满足强对偶性，有$p^</em>=d^*$  。将极值点带入得到</p>
+<p>&emsp;&emsp;<strong>KKT条件</strong>是在满足严格条件的情况下，推导出的变量取值的关系，假设原始问题和对偶问题的极值点分别是$x^$和$\lambda^{\ast},\eta^{\ast}$ ，对应的极值分别是$p^{\ast}$和$d^{\ast}$ 。由于满足强对偶性，有$p^{\ast}=d^{\ast}$  。将极值点带入得到</p>
 <script type="math/tex; mode=display">
-d^* = \theta_D(\lambda^*,\eta^*) =\underset x {min} L(x,\lambda^*,\eta^*) \tag{3-a}</script><p>这说明$x^<em> $是$L(x,\lambda^</em>,\eta^<em>)$的一个极值点，那么$L(x,\lambda^</em>,\eta^<em>)$在$x^</em>$处的梯度为0，即</p>
+d^{\ast} = \theta_D(\lambda^{\ast},\eta^{\ast}) =\underset x {min} L(x,\lambda^{\ast},\eta^{\ast}) \tag{3-a}</script><p>这说明$x^{\ast} $是$L(x,\lambda^{\ast},\eta^{\ast})$的一个极值点，那么$L(x,\lambda^{\ast},\eta^{\ast})$在$x^{\ast}$处的梯度为0，即</p>
 <script type="math/tex; mode=display">
-\triangledown f(x^*)+\sum_i^m\lambda_i g_i(x^*) + \sum_i^n \eta_i h_i(x^*) = 0 \tag{3-b}</script><p>由式$(2-a)$ ，</p>
+\triangledown f(x^{\ast})+\sum_i^m\lambda_i g_i(x^{\ast}) + \sum_i^n \eta_i h_i(x^{\ast}) = 0 \tag{3-b}</script><p>由式$(2-a)$ ，</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
-d^* =& \underset x {min} L(x,\lambda^*,\eta^*) \\ 
-    \le &L(x^*,\lambda^*,\eta^*)\\
-    =& f(x^*) + \sum_i^m \lambda_i g_i(x^*) + \sum_i^n \eta_i h_i(x^*)\\
-    \le & p^* = f(x^*) 
-\end{aligned} \tag{3-c}</script><p>由于$p^<em>=d^</em>$，因此上式不等号应取到等号，再与式$(3-b)$ 得</p>
+d^{\ast} =& \underset x {min} L(x,\lambda^{\ast},\eta^{\ast}) \\ 
+    \le &L(x^{\ast},\lambda^{\ast},\eta^{\ast})\\
+    =& f(x^{\ast}) + \sum_i^m \lambda_i g_i(x^{\ast}) + \sum_i^n \eta_i h_i(x^{\ast})\\
+    \le & p^{\ast} = f(x^{\ast}) 
+\end{aligned} \tag{3-c}</script><p>由于$p^{\ast}=d^{\ast}$，因此上式不等号应取到等号，再与式$(3-b)$ 得</p>
 <script type="math/tex; mode=display">
-\sum_i^m \lambda_i g_i(x^*) + \sum_i^n \eta_i h_i(x^*) = 0  \tag{3-d}</script><p>由于注意$x^<em>$作为该问题的解，是一定满足$h(x^</em>) = 0$的，因此</p>
+\sum_i^m \lambda_i g_i(x^{\ast}) + \sum_i^n \eta_i h_i(x^{\ast}) = 0  \tag{3-d}</script><p>由于注意$x^{\ast}$作为该问题的解，是一定满足$h(x^{\ast}) = 0$的，因此</p>
 <script type="math/tex; mode=display">
 \lambda_i g_i(x) = 0,\;\;\;i=1,2,\cdots,m</script><p>这个条件叫做互补松弛性（complementary slackness）。</p>
 <p>&emsp;&emsp;其中，$\lambda \ge 0$称为对偶可行性。并且它似乎可以从原始问题到对偶问题的极小极大问题中总结出。不过这里可以有另一种解释，简化一下，考虑只有不等式约束的问题</p>
@@ -445,26 +445,26 @@ d^* =& \underset x {min} L(x,\lambda^*,\eta^*) \\
 \begin{aligned}
 min \;\; &f(x) \\
 s.t.\;\; & g(x) \le 0 \\
-\end{aligned}</script><p>其中$g(x) \le 0$称为原始可行性，由它确定的区间称为可行域。假设$x^*$为该问题的解，那么其位置有两种情况</p>
+\end{aligned}</script><p>其中$g(x) \le 0$称为原始可行性，由它确定的区间称为可行域。假设$x^{\ast}$为该问题的解，那么其位置有两种情况</p>
 <ul>
-<li><p>(1) $g(x^*)&lt;0$时，解在可行域中取得。这时解称为内部解，约束条件无效，原问题变为无约束问题。</p>
+<li><p>(1) $g(x^{\ast})&lt;0$时，解在可行域中取得。这时解称为内部解，约束条件无效，原问题变为无约束问题。</p>
 </li>
-<li><p>(2) $g(x^*)=0$时，解在边界上取得， 这时解称为边界解，约束条件有效。</p>
+<li><p>(2) $g(x^{\ast})=0$时，解在边界上取得， 这时解称为边界解，约束条件有效。</p>
 </li>
 </ul>
 <p>内部解直接由梯度为0即可解得，这里主要讨论边界解。</p>
 <p>&emsp;&emsp;对于$g(x)=0$的约束问题，建立拉格朗日函数</p>
 <script type="math/tex; mode=display">
-L(x,\lambda) = f(x) + \lambda g(x)</script><p>因为驻点$x^<em>$在其上取得，那么该函数在$x^</em>$处的梯度为0，即</p>
+L(x,\lambda) = f(x) + \lambda g(x)</script><p>因为驻点$x^{\ast}$在其上取得，那么该函数在$x^{\ast}$处的梯度为0，即</p>
 <script type="math/tex; mode=display">
-\triangledown f(x^*) + \lambda \triangledown g(x^*) = 0</script><p>这里两个梯度的方向应该是可以确定的，$f(x)$的极小值在边界取到，那么可行域内部的$f(x)$应该都是大于这个极小值的，因此$\triangledown f$的方向是可行域内部。而$\triangledown g$的方向是可行域外部，因为约束条件是$g(x)\le 0$，也就是可行域外部都是$g(x)&gt;0$，所以梯度方向指向函数增加的方向。这说明两个函数的梯度方向相反，那上面这个等式要成立，$\lambda$只能是大于等于0。这就是对偶可行性。</p>
+\triangledown f(x^{\ast}) + \lambda \triangledown g(x^{\ast}) = 0</script><p>这里两个梯度的方向应该是可以确定的，$f(x)$的极小值在边界取到，那么可行域内部的$f(x)$应该都是大于这个极小值的，因此$\triangledown f$的方向是可行域内部。而$\triangledown g$的方向是可行域外部，因为约束条件是$g(x)\le 0$，也就是可行域外部都是$g(x)&gt;0$，所以梯度方向指向函数增加的方向。这说明两个函数的梯度方向相反，那上面这个等式要成立，$\lambda$只能是大于等于0。这就是对偶可行性。</p>
 <p>&emsp;&emsp;再将其他的条件组合起来，便得到了KKT条件：</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
-\triangledown _x L(x^*,\lambda^*,\eta^*) =0 \\
-g_i(x^*) \le 0\\
+\triangledown _x L(x^{\ast},\lambda^{\ast},\eta^{\ast}) =0 \\
+g_i(x^{\ast}) \le 0\\
 \lambda_i \ge 0\\
-\lambda_i g_i(x^*) =0
+\lambda_i g_i(x^{\ast}) =0
 \end{aligned}</script><h2 id="Reference："><a href="#Reference：" class="headerlink" title="Reference："></a>Reference：</h2><p>[1] <a href="https://web.stanford.edu/~boyd/cvxbook/" target="_blank" rel="noopener">Convex Optimization</a></p>
 <p>[2] Pattern Recognition and Machine Learning.</p>
 <p>[3] 统计学习方法</p>
@@ -504,8 +504,8 @@ g_i(x^*) \le 0\\
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="../../../../01/enviroment install/Hexo+github博客优化/" rel="next" title="Hexo+github博客优化">
-                <i class="fa fa-chevron-left"></i> Hexo+github博客优化
+              <a href="../../../../01/Language/c++/基本结构/" rel="next" title="C++基本结构">
+                <i class="fa fa-chevron-left"></i> C++基本结构
               </a>
             
           </div>
@@ -603,7 +603,7 @@ g_i(x^*) \le 0\\
               
                 <a href="https://brezezee.github.io/archives">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -692,7 +692,7 @@ g_i(x^*) \le 0\\
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">59.7k</span>
+    <span title="Site words total count">61.5k</span>
   
 </div>
 
