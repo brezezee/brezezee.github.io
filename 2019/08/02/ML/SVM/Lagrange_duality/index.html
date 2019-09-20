@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="brezezee">
 <meta property="og:description" content="1. 从原始问题到对偶问题&amp;emsp;对偶性是优化理论中一个重要的部分，带约束的优化问题是机器学习中经常遇到的问题，这类问题都可以用如下形式表达  \begin{aligned} min \;\; &amp;f(x) \\ s.t.\;\; &amp; g_i(x) \le 0 ,\;\; i=1,\cdots, m\\ &amp; h_i(x) = 0,\;\; i=1,\cdots,n\\ \end{aligned}">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-09-17T08:02:31.498Z">
+<meta property="og:updated_time" content="2019-09-17T08:20:07.294Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="拉格朗日对偶性(Lagrange duality)">
 <meta name="twitter:description" content="1. 从原始问题到对偶问题&amp;emsp;对偶性是优化理论中一个重要的部分，带约束的优化问题是机器学习中经常遇到的问题，这类问题都可以用如下形式表达  \begin{aligned} min \;\; &amp;f(x) \\ s.t.\;\; &amp; g_i(x) \le 0 ,\;\; i=1,\cdots, m\\ &amp; h_i(x) = 0,\;\; i=1,\cdots,n\\ \end{aligned}">
@@ -308,7 +308,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-09-17T16:02:31+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2019-09-17T16:20:07+08:00">
                 2019-09-17
               </time>
             
@@ -393,7 +393,7 @@
       
 
       
-        <h2 id="1-从原始问题到对偶问题"><a href="#1-从原始问题到对偶问题" class="headerlink" title="1. 从原始问题到对偶问题"></a>1. 从原始问题到对偶问题</h2><p>&emsp;对偶性是优化理论中一个重要的部分，带约束的优化问题是机器学习中经常遇到的问题，这类问题都可以用如下形式表达</p>
+        <h3 id="1-从原始问题到对偶问题"><a href="#1-从原始问题到对偶问题" class="headerlink" title="1. 从原始问题到对偶问题"></a>1. 从原始问题到对偶问题</h3><p>&emsp;对偶性是优化理论中一个重要的部分，带约束的优化问题是机器学习中经常遇到的问题，这类问题都可以用如下形式表达</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
 min \;\; &f(x) \\
@@ -414,7 +414,7 @@ L(x,\lambda,\eta) = f(x)+\sum_i^m \lambda_i g_i(x) + \sum_i^n \eta_i h_i(x)</scr
 <script type="math/tex; mode=display">
 \underset {\lambda ,\eta} {max} \; \theta_D(\lambda,\eta)= \underset {\lambda ,\eta} {max} \;\underset {x} {min} L(x,\lambda,\eta)\\
 s.t. \lambda_i \ge 0,\;\; i= 1,2,\cdots,k</script><p>&emsp;&emsp;可以看出两个函数的变量并不相同，对于原始问题，它的变量是$x$，而对于对偶问题，它的变量是$\lambda,\;\eta$ 。并且，这两个问题并不等价，有时候甚至差的有点多。可以理解为其他国家最厉害的乒乓球队员，也没有中国最菜的乒乓球队员厉害，当然这比喻并不准确。</p>
-<h2 id="2-弱对偶与强对偶"><a href="#2-弱对偶与强对偶" class="headerlink" title="2. 弱对偶与强对偶"></a>2. 弱对偶与强对偶</h2><p>&emsp;&emsp;对偶函数可以理解为给原始函数找了一个下界，在原始函数计算困难的时候，可以通过解对偶函数来得到一个近似的值。并且在函数满足一定条件的时候，对偶函数的解与原始函数的解是等价的。具体来说，对偶 函数$\theta_D(\lambda,\eta)=\underset {x} {min} L(x,\lambda,\eta)$ 确定了原始问题的一个下界，即</p>
+<h3 id="2-弱对偶与强对偶"><a href="#2-弱对偶与强对偶" class="headerlink" title="2. 弱对偶与强对偶"></a>2. 弱对偶与强对偶</h3><p>&emsp;&emsp;对偶函数可以理解为给原始函数找了一个下界，在原始函数计算困难的时候，可以通过解对偶函数来得到一个近似的值。并且在函数满足一定条件的时候，对偶函数的解与原始函数的解是等价的。具体来说，对偶 函数$\theta_D(\lambda,\eta)=\underset {x} {min} L(x,\lambda,\eta)$ 确定了原始问题的一个下界，即</p>
 <script type="math/tex; mode=display">
 \theta_D(\lambda,\eta) =\underset {x} {min} L(x,\lambda,\eta)\le L(x,\lambda,\eta)\le \underset {\lambda \ge 0,\eta} {max}\;L(x,\lambda,\eta)=\theta_P(x) \tag{2-a}</script><p>即</p>
 <script type="math/tex; mode=display">
@@ -423,8 +423,8 @@ s.t. \lambda_i \ge 0,\;\; i= 1,2,\cdots,k</script><p>&emsp;&emsp;可以看出两
 d^{\ast} =\underset {\lambda ,\eta} {max} \; \theta_D(\lambda,\eta)\le \underset x {min} \;\theta_P(x)=p^{\ast} \tag{2-b}</script><p>这个性质便是<strong>弱对偶性（ weak duality ）</strong>。弱对偶性对任何优化问题都成立，这似乎是显然的，因为这个下界并不严格，有时候甚至取到非常小，对近似原问题的解没多大帮助。既有弱对偶性，那么便有强对偶性，<strong>强对偶性</strong>是指</p>
 <script type="math/tex; mode=display">
 d^{\ast} = p^{\ast}</script><p>显然这是一个令人惊喜的性质，这意味着可以通过求解较简单的对偶问题（因为对偶问题总是一个凸优化问题）来得到原问题的解。不过强对偶性在优化问题中是一个非常高深的问题，对我来说更是如此。因此我只能介绍关于强对偶的两个条件：严格条件和KKT条件。</p>
-<h2 id="3-KKT条件"><a href="#3-KKT条件" class="headerlink" title="3. KKT条件"></a>3. KKT条件</h2><p>&emsp;&emsp;<strong>严格条件</strong>是指原始问题是凸函数，约束条件是仿射函数，若此时不等式约束满足严格条件，即不等号是严格不等号，不能取等号，则强对偶性成立。这个条件在SVM中即变成了对任意一个点，都存在超平面能对其正确划分，也就是数据集是线性可分的。严格条件是强对偶性的充分条件，但并不是必要条件。有些不满足严格条件的可能也有强对偶性。</p>
-<p>&emsp;&emsp;<strong>KKT条件</strong>是在满足严格条件的情况下，推导出的变量取值的关系，假设原始问题和对偶问题的极值点分别是$x^$和$\lambda^{\ast},\eta^{\ast}$ ，对应的极值分别是$p^{\ast}$和$d^{\ast}$ 。由于满足强对偶性，有$p^{\ast}=d^{\ast}$  。将极值点带入得到</p>
+<h3 id="3-KKT条件"><a href="#3-KKT条件" class="headerlink" title="3. KKT条件"></a>3. KKT条件</h3><p>&emsp;&emsp;<strong>严格条件</strong>是指原始问题是凸函数，约束条件是仿射函数，若此时不等式约束满足严格条件，即不等号是严格不等号，不能取等号，则强对偶性成立。这个条件在SVM中即变成了对任意一个点，都存在超平面能对其正确划分，也就是数据集是线性可分的。严格条件是强对偶性的充分条件，但并不是必要条件。有些不满足严格条件的可能也有强对偶性。</p>
+<p>&emsp;&emsp;<strong>KKT条件</strong>是在满足严格条件的情况下，推导出的变量取值的关系，假设原始问题和对偶问题的极值点分别是$x^{\ast} $和$\lambda^{\ast},\eta^{\ast}$ ，对应的极值分别是$p^{\ast}$和$d^{\ast}$ 。由于满足强对偶性，有$p^{\ast}=d^{\ast}$  。将极值点带入得到</p>
 <script type="math/tex; mode=display">
 d^{\ast} = \theta_D(\lambda^{\ast},\eta^{\ast}) =\underset x {min} L(x,\lambda^{\ast},\eta^{\ast}) \tag{3-a}</script><p>这说明$x^{\ast} $是$L(x,\lambda^{\ast},\eta^{\ast})$的一个极值点，那么$L(x,\lambda^{\ast},\eta^{\ast})$在$x^{\ast}$处的梯度为0，即</p>
 <script type="math/tex; mode=display">
@@ -465,7 +465,7 @@ L(x,\lambda) = f(x) + \lambda g(x)</script><p>因为驻点$x^{\ast}$在其上取
 g_i(x^{\ast}) \le 0\\
 \lambda_i \ge 0\\
 \lambda_i g_i(x^{\ast}) =0
-\end{aligned}</script><h2 id="Reference："><a href="#Reference：" class="headerlink" title="Reference："></a>Reference：</h2><p>[1] <a href="https://web.stanford.edu/~boyd/cvxbook/" target="_blank" rel="noopener">Convex Optimization</a></p>
+\end{aligned}</script><h3 id="Reference："><a href="#Reference：" class="headerlink" title="Reference："></a>Reference：</h3><p>[1] <a href="https://web.stanford.edu/~boyd/cvxbook/" target="_blank" rel="noopener">Convex Optimization</a></p>
 <p>[2] Pattern Recognition and Machine Learning.</p>
 <p>[3] 统计学习方法</p>
 <p>[4] <a href="http://blog.pluskid.org/?p=702&amp;cpage=1#comment-7347" target="_blank" rel="noopener">支持向量机：Duality</a></p>
@@ -603,7 +603,7 @@ g_i(x^{\ast}) \le 0\\
               
                 <a href="https://brezezee.github.io/archives">
               
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -625,7 +625,7 @@ g_i(x^{\ast}) \le 0\\
               
               <div class="site-state-item site-state-tags">
                 <a href="../../../../../../tags/index.html">
-                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-count">34</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -658,7 +658,7 @@ g_i(x^{\ast}) \le 0\\
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-从原始问题到对偶问题"><span class="nav-text">1. 从原始问题到对偶问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-弱对偶与强对偶"><span class="nav-text">2. 弱对偶与强对偶</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-KKT条件"><span class="nav-text">3. KKT条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference："><span class="nav-text">Reference：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-从原始问题到对偶问题"><span class="nav-text">1. 从原始问题到对偶问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-弱对偶与强对偶"><span class="nav-text">2. 弱对偶与强对偶</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-KKT条件"><span class="nav-text">3. KKT条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reference："><span class="nav-text">Reference：</span></a></li></ol></div>
             
 
           </div>
@@ -692,7 +692,7 @@ g_i(x^{\ast}) \le 0\\
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">61.5k</span>
+    <span title="Site words total count">65.1k</span>
   
 </div>
 
