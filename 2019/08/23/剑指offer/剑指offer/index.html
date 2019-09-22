@@ -88,7 +88,7 @@
 <meta property="og:description" content="1. 二维数组(vector)查找 题目描述  在一个二维数组中（每个一维数组的长度相同），每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。 法一： 左下/右上查找 &amp;emsp;&amp;emsp;该题给出的数组单看行或者列都是单增的，但是中间某点只能确定其左上的区域是小于它的，并不能确定在其余三个区域中的">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://brezezee.github.io/2019/08/23/剑指offer/剑指offer/1566483039647.png">
-<meta property="og:updated_time" content="2019-09-20T03:39:30.295Z">
+<meta property="og:updated_time" content="2019-09-20T12:33:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="剑指offer">
 <meta name="twitter:description" content="1. 二维数组(vector)查找 题目描述  在一个二维数组中（每个一维数组的长度相同），每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。 法一： 左下/右上查找 &amp;emsp;&amp;emsp;该题给出的数组单看行或者列都是单增的，但是中间某点只能确定其左上的区域是小于它的，并不能确定在其余三个区域中的">
@@ -310,7 +310,7 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-09-20T11:39:30+08:00">
+              <time title="Post modified" itemprop="dateModified" datetime="2019-09-20T20:33:01+08:00">
                 2019-09-20
               </time>
             
@@ -578,7 +578,7 @@ f(n) =& 2 \times f(n-1)\\
 <p>从树的根结点开始往下一直到叶结点所经过的结点形成一条路径。</p>
 <p>例：</p>
 </blockquote>
- <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">给出二叉树如下所示，并给出num=<span class="number">22</span>。</span><br><span class="line">      <span class="number">5</span></span><br><span class="line">     / \</span><br><span class="line">    <span class="number">4</span>   <span class="number">6</span></span><br><span class="line">   /   / \</span><br><span class="line">  <span class="number">12</span>  <span class="number">13</span>  <span class="number">6</span></span><br><span class="line"> /  \    / \</span><br><span class="line"><span class="number">9</span>    <span class="number">1</span>  <span class="number">5</span>   <span class="number">1</span></span><br><span class="line"></span><br><span class="line">输出：[[<span class="number">5</span>,<span class="number">4</span>,<span class="number">12</span>,<span class="number">1</span>],[<span class="number">5</span>,<span class="number">6</span>,<span class="number">6</span>,<span class="number">5</span>]]</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">给出二叉树如下所示，并给出num=<span class="number">22</span>。</span><br><span class="line">      <span class="number">5</span></span><br><span class="line">     / \</span><br><span class="line">    <span class="number">4</span>   <span class="number">6</span></span><br><span class="line">   /   / \</span><br><span class="line">  <span class="number">12</span>  <span class="number">13</span>  <span class="number">6</span></span><br><span class="line"> /  \    / \</span><br><span class="line"><span class="number">9</span>    <span class="number">1</span>  <span class="number">5</span>   <span class="number">1</span></span><br><span class="line"></span><br><span class="line">输出：[[<span class="number">5</span>,<span class="number">4</span>,<span class="number">12</span>,<span class="number">1</span>],[<span class="number">5</span>,<span class="number">6</span>,<span class="number">6</span>,<span class="number">5</span>]]</span><br></pre></td></tr></table></figure>
 <p>&emsp;&emsp;本题在遍历二叉树的基础上，添加了要求——计算到各个叶子结点的路径和，判断与输入整数是否相同，同时需要保存这些满足条件的路径。因为路径是从上到下的，所以使用普通的深度遍历，利用$dfs$的回溯特性，我们只需使用一个$path$向量来存储当前走过的路径，遍历过程中若满足是叶结点且路径和为$num$则将$path$添加进$res$列表。遇到叶节点时开始返回，返回前弹出$path$保存的当前结点。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt; <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; res;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; path;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; FindPath(TreeNode* root,<span class="keyword">int</span> num) &#123;</span><br><span class="line">        dfs(root, num);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(TreeNode* root, <span class="keyword">int</span> num)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!root) <span class="keyword">return</span> ;</span><br><span class="line">        path.push_back(root-&gt;val);</span><br><span class="line">        num -= root-&gt;val;</span><br><span class="line">        <span class="keyword">if</span>(!root-&gt;left &amp;&amp; !root-&gt;right &amp;&amp; !num) res.push_back(path);</span><br><span class="line">        dfs(root-&gt;left,num);</span><br><span class="line">        dfs(root-&gt;right,num);</span><br><span class="line">        path.pop_back();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <h3 id="30-丑数"><a href="#30-丑数" class="headerlink" title="30. 丑数"></a>30. 丑数</h3><ul>
@@ -725,7 +725,7 @@ f(n) =& 2 \times f(n-1)\\
               
                 <a href="https://brezezee.github.io/archives">
               
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -747,7 +747,7 @@ f(n) =& 2 \times f(n-1)\\
               
               <div class="site-state-item site-state-tags">
                 <a href="../../../../../tags/index.html">
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -814,7 +814,7 @@ f(n) =& 2 \times f(n-1)\\
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">65.1k</span>
+    <span title="Site words total count">66.3k</span>
   
 </div>
 

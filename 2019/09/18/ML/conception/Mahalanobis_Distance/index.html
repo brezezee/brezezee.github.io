@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="机器学习,马氏距离,">
+  <meta name="keywords" content="马氏距离,协方差矩阵,机器学习,">
 
 
 
@@ -80,14 +80,14 @@
 
 
 <meta name="description" content="协方差与协方差矩阵&amp;emsp;&amp;emsp;协方差计算的是两个随机变量之间线性相关程度。变量之间越相关，协方差越大。变量之间越无关，协方差越小。随机变量$X,Y$之间的协方差定义为  COV(X,Y) = E[(X-EX)(Y-EY)]显然，计算同一个变量的协方差时等同于计算其方差。 &amp;emsp;&amp;emsp;通过样本来统计其协方差时，假设单个样本为$m$维列向量$x_i$，将$n$个样本组合为一个$">
-<meta name="keywords" content="机器学习,马氏距离">
+<meta name="keywords" content="马氏距离,协方差矩阵,机器学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="马氏距离">
 <meta property="og:url" content="https://brezezee.github.io/2019/09/18/ML/conception/Mahalanobis_Distance/index.html">
 <meta property="og:site_name" content="brezezee">
 <meta property="og:description" content="协方差与协方差矩阵&amp;emsp;&amp;emsp;协方差计算的是两个随机变量之间线性相关程度。变量之间越相关，协方差越大。变量之间越无关，协方差越小。随机变量$X,Y$之间的协方差定义为  COV(X,Y) = E[(X-EX)(Y-EY)]显然，计算同一个变量的协方差时等同于计算其方差。 &amp;emsp;&amp;emsp;通过样本来统计其协方差时，假设单个样本为$m$维列向量$x_i$，将$n$个样本组合为一个$">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-09-20T03:40:19.553Z">
+<meta property="og:updated_time" content="2019-09-22T04:48:43.441Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="马氏距离">
 <meta name="twitter:description" content="协方差与协方差矩阵&amp;emsp;&amp;emsp;协方差计算的是两个随机变量之间线性相关程度。变量之间越相关，协方差越大。变量之间越无关，协方差越小。随机变量$X,Y$之间的协方差定义为  COV(X,Y) = E[(X-EX)(Y-EY)]显然，计算同一个变量的协方差时等同于计算其方差。 &amp;emsp;&amp;emsp;通过样本来统计其协方差时，假设单个样本为$m$维列向量$x_i$，将$n$个样本组合为一个$">
@@ -308,8 +308,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-09-20T11:40:19+08:00">
-                2019-09-20
+              <time title="Post modified" itemprop="dateModified" datetime="2019-09-22T12:48:43+08:00">
+                2019-09-22
               </time>
             
           </span>
@@ -368,7 +368,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1.3k
+                  1.4k
                 </span>
               
 
@@ -427,7 +427,7 @@ COV(Xm,X1) & \cdots  & COV(Xm,Xm)\\
 <script type="math/tex; mode=display">
 \begin{aligned}
 \Sigma_X =& E[(X-\mu^{(x)})(X-\mu^{(x)})^T]\\
-=& \frac 1 {n-1} \sum_{i=1}^n (x_i -\mu^{(x)}) (x_i-\mu^{(x)})
+=& \frac 1 {n-1} \sum_{i=1}^n (x_i -\mu^{(x)}) (x_i-\mu^{(x)})^T
 \end{aligned}</script><p>对一组数据，可通过主成分分析等方法，确定其特征向量，按照特征向量进行坐标变换就能得到一个新坐标系下的样本，虽还是同一组样本，但这组样本的各个维度在变换后的坐标系下相互独立。用$F$来表示$X$旋转后的向量组成的矩阵（它们是相同的，不过坐标系不同），$U$表示变换矩阵。于是有</p>
 <script type="math/tex; mode=display">
 F=(f_1,f_2,\cdots , f_m)^T=U^TX</script><p>旋转后的均值为</p>
@@ -447,28 +447,29 @@ E[(F-\mu^{(f)}) (F-\mu^{(f)})^T]=&
 
 =&E\;\left [ U^T(X-\mu^{(x)})(X-\mu^{(x)})^TU \right] \\
 =& U^T \Sigma_X U
-\end{aligned}</script><p>&emsp;&emsp;对于两个样本之间的马氏距离的情况，假设每个样本的维度是$m$ ，样本$x_i,x_j$是$m$维的列向量，其具体形式可表示如下</p>
+\end{aligned}</script><p>经过变换后的$F$是维度无关的，此时它的马氏距离相当于欧式距离。不过在求取欧式距离时，其变量的方差也会影响结果，所以要求标准化后的欧式距离。</p>
 <script type="math/tex; mode=display">
-x_i = 
+\begin{aligned}
+D_F=& \frac {(f_1-\mu^{(f)}_1)} {\lambda_1} +\frac {(f_2-\mu^{(f)}_2)} { \lambda_2} +\cdots +\frac {(f_m-\mu^{(f)}_m)} { \lambda_m} \\
+=& (f_1-\mu^{(f)}_1,f_2-\mu^{(f)}_2,\cdots,(f_m-\mu^{(f)}_m)
 \begin{bmatrix}
-x_{1i}\\
-x_{2i}\\
-\vdots\\
-x_{mi}
-\end{bmatrix}</script><p>这样表示的目的主要是为了方便的扩展到多个样本的情况。</p>
-<p>&emsp;&emsp;可通过$x_i ,x_j$经过正交变换得到两个维度之间线性无关的向量$f_i,f_j$，</p>
-<script type="math/tex; mode=display">
-f_i^T = (f_{1i},f_{2i},\cdots,f_{mi})^T = U^T\cdot x_i</script><p>得到</p>
-<script type="math/tex; mode=display">
-(f_i - f_j)^T = U^T(x_i - x_j)</script><p>因为$f_i,f_j$的维度之间线性无关，因此其各维度之间的的乘积可通过一个对角矩阵来表示</p>
-<script type="math/tex; mode=display">
-(f_i-f_j)^T(f_i-f_j) = 
-\begin{bmatrix}
-(f_{1i}-f_{1j})^2& \\
-& (f_{2i}-f_{2j})^2&\\
-&& \cdots\\
-&&& (f_{mi}-f_{mj})^2
-\end{bmatrix}</script>
+\frac 1 {\lambda_1}&\\
+&\frac 1 {\lambda_2}&\\
+&& \ddots&\\
+&&&\frac 1  {\lambda_m}\\
+\end{bmatrix}
+\begin{pmatrix}
+f_1-\mu^{(f)}_1\\
+f_2-\mu^{(f)}_2\\
+\cdots\\
+(f_m-\mu^{(f)}_m
+\end{pmatrix}\\
+=&(F-\mu^{(f)})^T(U^T\Sigma_XU)^{-1}(F-\mu^{(f)})\\
+=&(X-\mu^{(x)})^TU(U^T\Sigma_X^{-1}U)U^T(X-\mu^{(x)})\\
+=&(X-\mu^{(x)})\Sigma_X^{-1}(X-\mu^{(x)})\\
+
+\end{aligned}</script><p>&emsp;&emsp;通过推导过程可以发现，马氏距离计算中用到协方差矩阵的逆与计算欧氏距离中的标准化有某种关系。事实上马氏距离确实是尺度无关的一种度量，它通过对原数据进行线性变换，得到维度无关的数据之后，再计算其标准化后（去除方差影响）的欧式距离。进行线性变换的目的是去除维度之间相关性的影响。</p>
+
       
     </div>
     
@@ -485,9 +486,11 @@ f_i^T = (f_{1i},f_{2i},\cdots,f_{mi})^T = U^T\cdot x_i</script><p>得到</p>
       
         <div class="post-tags">
           
-            <a href="../../../../../../tags/机器学习/" rel="tag"># 机器学习</a>
-          
             <a href="../../../../../../tags/马氏距离/" rel="tag"># 马氏距离</a>
+          
+            <a href="../../../../../../tags/协方差矩阵/" rel="tag"># 协方差矩阵</a>
+          
+            <a href="../../../../../../tags/机器学习/" rel="tag"># 机器学习</a>
           
         </div>
       
@@ -500,8 +503,8 @@ f_i^T = (f_{1i},f_{2i},\cdots,f_{mi})^T = U^T\cdot x_i</script><p>得到</p>
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="../../../../17/ML/conception/Mahalanobis_Distance-breeze/" rel="next" title="马氏距离">
-                <i class="fa fa-chevron-left"></i> 马氏距离
+              <a href="../../../../03/剑指offer/腾讯面试题 (copy)/" rel="next" title="腾讯面试题-64马8跑道">
+                <i class="fa fa-chevron-left"></i> 腾讯面试题-64马8跑道
               </a>
             
           </div>
@@ -595,7 +598,7 @@ f_i^T = (f_{1i},f_{2i},\cdots,f_{mi})^T = U^T\cdot x_i</script><p>得到</p>
               
                 <a href="https://brezezee.github.io/archives">
               
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -617,7 +620,7 @@ f_i^T = (f_{1i},f_{2i},\cdots,f_{mi})^T = U^T\cdot x_i</script><p>得到</p>
               
               <div class="site-state-item site-state-tags">
                 <a href="../../../../../../tags/index.html">
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -684,7 +687,7 @@ f_i^T = (f_{1i},f_{2i},\cdots,f_{mi})^T = U^T\cdot x_i</script><p>得到</p>
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">65.1k</span>
+    <span title="Site words total count">66.3k</span>
   
 </div>
 
