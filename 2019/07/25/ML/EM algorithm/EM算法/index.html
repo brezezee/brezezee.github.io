@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="../../../../../../lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="../../../../../../lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="../../../../../../css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="../../../../../../images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../../../../images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="../../../../../../images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="../../../../../../images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="机器学习,EM算法,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="&amp;emsp;&amp;emsp;EM算法是一种迭代算法，是一种用于计算包含隐变量概率模型的最大似然估计方法，或极大后验概率。EM即expectation maximization，期望最大化算法。 1. 极大似然估计&amp;emsp;&amp;emsp;在概率模型中，若已知事件服从的分布或者其他概率模型的参数，那么我们可以通过计算得到某事件发生的概率。而在估计中，这些变成了方向过程：已知一组数据发生的结果，相当于获得了">
+<meta name="keywords" content="机器学习,EM算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EM算法">
+<meta property="og:url" content="https://brezezee.github.io/2019/07/25/ML/EM algorithm/EM算法/index.html">
+<meta property="og:site_name" content="brezezee">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;EM算法是一种迭代算法，是一种用于计算包含隐变量概率模型的最大似然估计方法，或极大后验概率。EM即expectation maximization，期望最大化算法。 1. 极大似然估计&amp;emsp;&amp;emsp;在概率模型中，若已知事件服从的分布或者其他概率模型的参数，那么我们可以通过计算得到某事件发生的概率。而在估计中，这些变成了方向过程：已知一组数据发生的结果，相当于获得了">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy83NDkwNTU0LTI2ZmUxNmE3NmJmOTU0YjkucG5n">
+<meta property="og:updated_time" content="2019-09-14T08:53:53.786Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="EM算法">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;EM算法是一种迭代算法，是一种用于计算包含隐变量概率模型的最大似然估计方法，或极大后验概率。EM即expectation maximization，期望最大化算法。 1. 极大似然估计&amp;emsp;&amp;emsp;在概率模型中，若已知事件服从的分布或者其他概率模型的参数，那么我们可以通过计算得到某事件发生的概率。而在估计中，这些变成了方向过程：已知一组数据发生的结果，相当于获得了">
+<meta name="twitter:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy83NDkwNTU0LTI2ZmUxNmE3NmJmOTU0YjkucG5n">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://brezezee.github.io/2019/07/25/ML/EM algorithm/EM算法/">
+
+
+
+
+
+  <title>EM算法 | brezezee</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">brezezee</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="https://brezezee.github.io" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="https://brezezee.github.io/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="https://brezezee.github.io/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-categories"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="https://brezezee.github.io/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="https://brezezee.github.io/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://brezezee.github.io">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="brezezee">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="../../../../../../images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="brezezee">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">EM算法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-25T14:12:12+08:00">
+                2019-07-25
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2019-09-14T16:53:53+08:00">
+                2019-09-14
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="../../../../../../categories/meachine-learning/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/07/25/ML/EM algorithm/EM算法/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  3.2k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&emsp;&emsp;EM算法是一种迭代算法，是一种用于计算包含隐变量概率模型的最大似然估计方法，或极大后验概率。EM即expectation maximization，期望最大化算法。</p>
+<h3 id="1-极大似然估计"><a href="#1-极大似然估计" class="headerlink" title="1. 极大似然估计"></a>1. 极大似然估计</h3><p>&emsp;&emsp;在概率模型中，若已知事件服从的分布或者其他概率模型的参数，那么我们可以通过计算得到某事件发生的概率。而在估计中，这些变成了方向过程：已知一组数据发生的结果，相当于获得了经验概率，通过这组数据假设模型服从什么分布，再通过经验概率求解模型参数。<br>&emsp;&emsp;比如统计学校学生身高服从的概率分布，抽样1000人得到他们的身高数据，再假设身高服从正态分布，于是只需要求解$u,\sigma$即可。剩下的问题就是如何确定这两个参数，极大似然估计的思想就是求解在这两个参数下，得到的 <strong>这组样本</strong>发生的概率最大的情况便是这两个参数最有可能的取值。而抽取每个人的身高都是独立的，让每个p最大化就是让其乘积最大化，于是得到最大似然函数</p>
+<script type="math/tex; mode=display">
+L(\theta) = \prod _xp(x | \theta)</script><p>&emsp;&emsp;再求解其关于$\theta$的极大化问题便能得到一个对$\theta$的估计</p>
+<script type="math/tex; mode=display">
+\widehat \theta = argmaxL(\theta)</script><h3 id="2-EM算法"><a href="#2-EM算法" class="headerlink" title="2.EM算法"></a>2.EM算法</h3><p>&emsp;&emsp;上面是模型变量都是可观测的情况，这种情况可以直接根据观测到的样本数据，使用极大似然估计对模型参数进行估计。但若模型中含有隐变量的时候，就不能简单的使用极大似然估计进行计算。EM算法就是针对含有隐变量的概率模型参数的极大似然估计方法。<br>例子：<br>&emsp;&emsp;假设三枚硬币，记为A、B、C，它们正面向上的概率分别为n、p、q。实验如下：先抛A，根据A的结果选择B或者C再次抛，将这次正面向上的结果记为1，反面记为0，其中A正面向上则选择B，反面则选择C。经过n次实验后得到n个观测值，根据这n个观测值估计n、p、q的参数值。实验过程中只能观测到最后结果，并不能观察实验过程，也就是A的结果是未知的。该模型可以表示如下</p>
+<script type="math/tex; mode=display">
+P(y|\theta) = \sum_zP(y,z|\theta) = \sum_zP(z|\theta)P(y|z,\theta)</script><p>&emsp;&emsp;其中y是随机变量Y的观测值，表示该次结果是1或0。z代表隐变量，表示模型中未能观测到的A的结果，$\theta=（n,p,q)$是模型参数。其中Y是不完全数据，Y+Z是完全数据。<br>&emsp;&emsp;若是没有隐变量Z，那么可直接使用对数极大似然函数估计</p>
+<script type="math/tex; mode=display">
+\widehat \theta=arg\underset \theta {max}L(\theta)=arg\underset \theta {max}\sum_y logP(y|\theta)</script><p>&emsp;&emsp;加入隐变量后，对数极大似然函数变为</p>
+<script type="math/tex; mode=display">
+L(\theta,z)=\sum_ylog\sum_zP(y,z|\theta)</script><p>&emsp;&emsp;求解</p>
+<script type="math/tex; mode=display">
+\widehat \theta,z=arg\underset {\theta,z} {max}L(\theta,z)</script><p>&emsp;&emsp;按照极大似然估计中的方法，似乎应该对$\theta,z$求导然后令其为0解方程组，然后注意此时的$L(\theta,z)$函数，log内含有求和运算，若是直接求导计算十分困难，因此退而求其次，既然要极大化$L(\theta,z)$，就先找到一个它的下界，再想办法提高这个下界，同样能达到极大化L的效果。使用$Jensen$不等式对似然函数进行放缩。</p>
+<ul>
+<li>$Jense$不等式（琴生不等式）</li>
+</ul>
+<p>&emsp;&emsp;凸函数：是定义在实数域上的函数，如果对于任意的实数，都有：</p>
+<script type="math/tex; mode=display">
+f''\geqslant 0</script><p>&emsp;&emsp; 则该函数是凸函数。<br>&emsp;&emsp;当函数是凸函数的时候，$Jense$不等式的含义是函数的期望大于等于期望的函数（凹函数相反）。图下图所示</p>
+<center>
+    <img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy83NDkwNTU0LTI2ZmUxNmE3NmJmOTU0YjkucG5n" width="500">
+</center>
+
+<p>&emsp;&emsp;二维情况下可用凸函数定义来解释，当一个函数是凸函数的时候，它满足</p>
+<script type="math/tex; mode=display">
+f(\frac {a+b} 2)\leqslant \frac {f(a)+f(b)} 2</script><p>&emsp;&emsp;左边其实相当于其变量x先求期望后带入函数，右边是先求函数值再计算函数值的期望，也就是</p>
+<script type="math/tex; mode=display">
+f(E(x))\leqslant E(f(x))</script><p>&emsp;&emsp;再回到$L(\theta,z)$中来，目的是为了将对数函数中的和项去掉，便可利用$jense$不等式的性质，将期望的函数变为函数的期望。先进行放缩</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+L(\theta,z)&=\sum_ylog\sum_zP(y,z|\theta)\\
+&=\sum_ylog\sum_zQ_i(z)\frac {P(y,z|\theta)} {Q_i(z)}\\
+&\geqslant \sum_y \sum_zQ_i(z)log\frac {P(y,z|\theta)} {Q_i(z)}\\
+\end{aligned}</script><p>&emsp;&emsp;其中最后一步用到了$jense$不等式，因为对数函数是凹函数，所以不等号反了过来，$f(E(x))\geqslant E(f(x))$,此处</p>
+<script type="math/tex; mode=display">
+f(x) = log(x), x=\frac {P(y,z|\theta)} {Q_i(z)} ，</script><p>&emsp;&emsp;并且所添加的$Q_i(x)$满足<script type="math/tex">\sum_zQ_i(z) = 1</script>&emsp;&emsp;这是根据第三类$jense$不等式的条件设定的，不同系数的加权求和期望只要满足系数之和为1就能使用$jense$不等式。<br>&emsp;&emsp;所以得到结论，$log\frac {P(y,z|\theta)} {Q_i(z)}$的加权平均就是$L(\theta,z)$的一个下界。这便是EM算法中E（期望）的来由。<br>&emsp;&emsp;目前$Q(z)$还是未知的，需要根据一些条件来选择一个合适的函数，再次强调最终目的是极大化似然函数，现在我们得到了似然函数的一个下界，一个想法就是让这个下界去更好的逼近似然函数的真实值，下界是根据不等式放缩后得到的，那么当不等式取等号的时候便是最接近原函数的时候。回忆$jense$不等式$f(E(x)) \leqslant E(f(x))$，显然当$x$为常数的时候不等式成立。即</p>
+<script type="math/tex; mode=display">
+x =\frac {P(y,z|\theta)} {Q_i(z)}=c</script><p>&emsp;&emsp;既然要确定的是$Q_i(z)$，不妨设$\theta$为常数，事实上，EM是一种迭代算法，也就是我们是先给出$\theta$的假设值后再进行迭代计算的，设上一次为第i次迭代，$\theta  ^{(i)}$为第i次的参数值，由上式得</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+P(y,z|\theta ^{(i)}) &=cQ_i(z) \\
+\sum_zP(y,z|\theta ^{(i)})&=\sum_zcQ_i(z) \\
+\sum_zP(y,z|\theta ^{(i)})&=c
+\end{aligned}</script><p>&emsp;&emsp;将c带入x</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+Q_i(z) &= \frac {P(y,z|\theta ^{(i)})} {\sum_zP(y,z|\theta ^{(i)})} \\
+&=\frac {P(y,z|\theta ^{(i)})} {P(y|\theta ^{(i)})} \\
+&= P(z|y,\theta ^{(i)})
+\end{aligned}</script><p>&emsp;&emsp;第二步用到边缘概率，第三步条件概率。至此，我们得出了$Q(z)$的表达式，$Q(z)$是已知样本观测和模型参数下的隐变量的分布。将$Q_i(z)$视作常数去掉后，得到下面表达式</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+L(\theta,z)&=\sum_y \sum_zQ_i(z)log\frac {P(y,z|\theta)} {Q(z)}\\
+&=\sum_y \sum_zQ_i(z)logP(y,z|\theta)\\
+&=\sum_y\sum_zP(z| y,\theta ^{(i)} )logP(y,z|\theta)
+\end{aligned}</script><p>&emsp;&emsp;到这儿已经完成了E步，对对数似然函数下界的期望的表示，这个期望是$logP(y,z|\theta)$关于$Q_i(z)=P(z|y,\theta^{(i)})$的期望，接下来需要做的便是极大化这个期望，也就是M步。极大化的方法就是我们常见的优化问题，使用拉格朗日乘数法即可，添加约束条件$\sum_zP(z|y,\theta ^{(i)})=1$后对$\theta,z,\lambda$求偏导令为0。求解</p>
+<script type="math/tex; mode=display">
+\widehat \theta = arg\underset \theta {max}L(\theta,z)</script><p>&emsp;&emsp;迭代的停止条件常常为$||\theta^{(i+1)}-\theta^{(i)}|| \leqslant \varepsilon ,or,||L(\theta^{(i+1)})-L(\theta^{(i)}|| \leqslant \varepsilon$</p>
+<h3 id="3-EM算法的收敛性"><a href="#3-EM算法的收敛性" class="headerlink" title="3.EM算法的收敛性"></a>3.EM算法的收敛性</h3><p>&emsp;&emsp;观测数据的似然函数是$L(\theta)=P(y|\theta)$，我们先证明似然函数关于每次迭代后的$\theta$是单调递增的<br><strong>proof：</strong></p>
+<script type="math/tex; mode=display">
+P(Y|\theta) = \frac {P(Y,Z|\theta)} {P(Z|Y,\theta)}</script><p>取对数</p>
+<script type="math/tex; mode=display">
+logP(Y|\theta) = logP(Y,Z|\theta)-logP(Z|Y,\theta)</script><p>由前面结论</p>
+<script type="math/tex; mode=display">
+L(\theta,z) =\sum_zP(Z|Y,\theta^{(i)})logP(Y,Z|\theta)</script><p>令</p>
+<script type="math/tex; mode=display">
+H(\theta,z) = \sum_zP(Z|Y,\theta^{(i)})logP(Z|Y,\theta)</script><p>于是，对数似然函数可写作</p>
+<script type="math/tex; mode=display">
+logP(Y|\theta) = L(\theta,z) - H(\theta,z)</script><p>那么</p>
+<script type="math/tex; mode=display">
+logP(Y|\theta^{(i+1)})-logP(Y|\theta^{(i)}=[L(\theta^{(i+1)},z)-L(\theta^{(i)},z)]-[H(\theta^{(i+1)},z)-H(\theta^{(i)},z)]</script><p>只需证右边非负，因$\theta^{(i+1)}$使原似然函数$L(\theta^{(i+1)},z)$达到极大，所以</p>
+<script type="math/tex; mode=display">
+L(\theta^{(i+1)},z)-L(\theta^{(i)},z) \geqslant 0</script><p>对于第二项</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&H(\theta^{(i+1)},z)-H(\theta^{(i)},z)\\
+&=\sum_zP(Z|y,\theta^{(i)})log \frac {P(Z|Y,\theta^{(i+1)})} {P(Z|Y,\theta^{(i)})}\\
+(Jensen 不等式)  &\leqslant log\left ( \sum_zP(Z|Y,\theta^{(i)})\frac {P(Z|Y,\theta^{(i+1)})} {P(Z|Y,\theta^{(i)})} \right )\\
+&=log\sum_zP(Z|Y,\theta^{(i+1)})\\
+&=log1=0
+\end{aligned}</script><p>&emsp;&emsp;因此$logP(Y|\theta)$关于迭代的$\theta$单调递增，那么如果$P(Y|\theta)$有上界，经过$\theta$的单增迭代一定会收敛到某一值，还有一个定理是EM算法得到的$\theta$收敛值是似然函数的稳定点，人生苦短，证明就免了吧。</p>
+<h3 id="4-EM算法在高斯混合模型中的参数估计"><a href="#4-EM算法在高斯混合模型中的参数估计" class="headerlink" title="4.EM算法在高斯混合模型中的参数估计"></a>4.EM算法在高斯混合模型中的参数估计</h3><p>&emsp;&emsp;通过前面的介绍已经知道EM算法用于解决含隐变量的概率模型，EM算法可以认为是一种解决问题的思想，在不知道隐变量发生情况的条件下，我们通过计算已知观测数据，求出不同数据在隐变量的某个事件下发生的期望，再通过这个期望去最大化该期望下的似然函数，如此迭代下去便能得到一个局部极大的结果。<br>&emsp;&emsp;高斯混合模型也是这样的一个概率模型，它由多个正态分布加权组合而成。也就是可以观测到混合模型产生的样本的分布，但是不知道这每一个样本是由其中哪个高斯模型产生的。因此，隐变量就是哪个样本选择了哪个模型。</p>
+<ul>
+<li>高斯混合模型</li>
+</ul>
+<p>&emsp;&emsp;假设观测数据$y_1,y_2,…,y_n$由高斯混合模型产生</p>
+<script type="math/tex; mode=display">
+P(y|\theta) = \sum_{k=1} ^K \alpha_k \Phi(y|\theta_k)</script><p>&emsp;&emsp;其中$\theta = (\alpha_1,…,\alpha_k;\theta_1,…,\theta_k)$，由前分析得隐变量是每个样本来自哪个模型，j个样本和k个模型，隐变量$\gamma_{jk}$表示如下</p>
+<script type="math/tex; mode=display">
+\gamma_{jk}＝
+\left\{\begin{aligned}
+&1,&第j个观测来自第k个分模型
+\\& 0,&否则
+\end{aligned}\right.</script><p>&emsp;&emsp;于是有$j$个观测数据$j<em>k$个位观测数据，总共$(j+1)</em>k$个数据便组成了完全数据，完全数据的似然函数为</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+P(y,\gamma|\theta)&=\prod_j^NP(y_j,\gamma_{j1},\gamma_{j2},...,\gamma_{jk}|\theta)\\
+&=\prod_k \prod_j[\alpha_k \Phi(y_j|\theta_k)]^{\gamma_{jk}}\\
+&=\prod_k \alpha_k^{n_k} \prod_j[\Phi(y_j|\theta_k)]^{\gamma_{jk}}\\
+\end{aligned}</script><p>&emsp;&emsp;其中$n_k = \sum_{j=1}^N\gamma_{jk},\sum_{k=1}^Kn_k = N$,</p>
+<script type="math/tex; mode=display">
+\Phi(y_j|\theta_k) = \frac {1} {\sqrt{2\pi}\delta_k}exp\left ( \frac {(y_i-u_k)^2} {2{\delta_k} ^2}\right )</script><p>&emsp;&emsp;显然$n_k$表示的是第k个模型出现的样本数量，因此所有模型出现的样本数量和就是N，完全数据的对数似然函数为</p>
+<script type="math/tex; mode=display">
+logP(y,\gamma|\theta) = \sum_k \left \{  n_klog\alpha_k +\sum_j \gamma_{jk}[log(\frac 1 {\sqrt{2\pi} }  -log\delta_k-\frac {(y_j-u_k)^2} {2{\delta_k}^2})] \right \}</script><p>&emsp;&emsp;确定好完全数据的对数似然函数后就可以直接套用EM算法的框架了，首先是E-step，求解对数似然函数关于隐变量的后验概率的期望</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+L(\theta,\gamma) &=E[logP(y,\gamma|\theta);y,\theta^{(i)}]\\
+&=E\left \{ \sum_k \left \{  n_klog\alpha_k +\sum_j \gamma_{jk}[log(\frac 1 {\sqrt{2\pi} }  -log\delta_k-\frac {(y_j-u_k)^2} {2{\delta_k}^2})] \right \} \right \}\\
+&=\sum_k \left \{  \sum_jE (\gamma _{jk})log\alpha_k +\sum_j E\gamma_{jk}[log(\frac 1 {\sqrt{2\pi} }  -log\delta_k-\frac {(y_j-u_k)^2} {2{\delta_k}^2})] \right \}
+\end{aligned}</script><p>&emsp;&emsp;注意其中的$n_k$是关于$\gamma_{jk}$的函数$n_k=\sum_j\gamma_{jk}$，注意上面两步的化简中，并没有直接计算期望，而是根据期望的性质对式子进行化简，将除了$\gamma$的式子看作常数，由$E(aX)=aE(x)$等期望的运算法则化简到只需要求$E(\gamma_{jk})$。<br>&emsp;&emsp;计算$E(\gamma_{jk})$,记为$\widehat \gamma$，注意这个期望是对$P(\gamma_{jk}|y,\theta)$的期望。</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\widehat \gamma &= E(\gamma_{jk}|y,\theta)\\
+&= \frac {P(\gamma_{jk} = 1,y_j | \theta)} {\sum_kP(\gamma_{jk}=1,y_j |\theta)}\\
+&=  \frac {P(\gamma_{jk} = 1,y_j | \theta) P(\gamma_{jk}=1|\theta)} {\sum_kP(\gamma_{jk}=1,y_j |\theta)P(\gamma_{jk}=1|\theta)}\\
+& = \frac {\alpha_k \Phi(y_j|\theta_k)} {\sum_k \alpha_k \Phi(y_j|\theta_k)}
+\end{aligned}</script><p>&emsp;&emsp;带入$L(\theta,\gamma)$得</p>
+<script type="math/tex; mode=display">
+L(\theta,\gamma) = \sum_k \left \{  n_klog\alpha_k +\sum_j \widehat \gamma_{jk}[log(\frac 1 {\sqrt{2\pi} }  -log\delta_k-\frac {(y_j-u_k)^2} {2{\delta_k}^2})] \right \}</script><p>&emsp;&emsp;接下就是M步，只需最大化这个L即可</p>
+<script type="math/tex; mode=display">
+\theta^{(i+1)} = arg \underset \theta {max} L(\theta,\gamma)</script><p>&emsp;&emsp;求解方式同样是拉格朗日，约束条件$\sum_k\alpha_k = 1$</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="../../../../../../tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="../../../../../../tags/EM算法/" rel="tag"># EM算法</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="../../../../24/ML/logistic regression/6.logistic回归和最大熵模型/" rel="next" title="logistic回归和最大熵模型">
+                <i class="fa fa-chevron-left"></i> logistic回归和最大熵模型
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="../../../../../08/01/Language/c++/基本结构/" rel="prev" title="C++基本结构">
+                C++基本结构 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">brezezee</p>
+              <p class="site-description motion-element" itemprop="description">靡不有初，鲜克有终</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="https://brezezee.github.io/archives">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="../../../../../../categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="../../../../../../tags/index.html">
+                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-极大似然估计"><span class="nav-text">1. 极大似然估计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-EM算法"><span class="nav-text">2.EM算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-EM算法的收敛性"><span class="nav-text">3.EM算法的收敛性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-EM算法在高斯混合模型中的参数估计"><span class="nav-text">4.EM算法在高斯混合模型中的参数估计</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">brezezee</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">66.7k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../../../js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="../../../../../../js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="../../../../../../js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="../../../../../../js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../../../js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://brezezee.github.io/2019/07/25/ML/EM algorithm/EM算法/';
+          this.page.identifier = '2019/07/25/ML/EM algorithm/EM算法/';
+          this.page.title = 'EM算法';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

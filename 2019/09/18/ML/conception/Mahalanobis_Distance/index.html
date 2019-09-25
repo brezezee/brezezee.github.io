@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="../../../../../../lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="../../../../../../lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="../../../../../../css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="../../../../../../images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../../../../images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="../../../../../../images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="../../../../../../images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="马氏距离,协方差矩阵,机器学习,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="协方差与协方差矩阵&amp;emsp;&amp;emsp;协方差计算的是两个随机变量之间线性相关程度。变量之间越相关，协方差越大。变量之间越无关，协方差越小。随机变量$X,Y$之间的协方差定义为  cov(X,Y) = E[(X-EX)(Y-EY)]显然，计算同一个变量的协方差时等同于计算其方差。 &amp;emsp;&amp;emsp;通过样本来统计其协方差时，假设单个样本为$m$维列向量$x_i$，将$n$个样本组合为一个$">
+<meta name="keywords" content="马氏距离,协方差矩阵,机器学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="马氏距离">
+<meta property="og:url" content="https://brezezee.github.io/2019/09/18/ML/conception/Mahalanobis_Distance/index.html">
+<meta property="og:site_name" content="brezezee">
+<meta property="og:description" content="协方差与协方差矩阵&amp;emsp;&amp;emsp;协方差计算的是两个随机变量之间线性相关程度。变量之间越相关，协方差越大。变量之间越无关，协方差越小。随机变量$X,Y$之间的协方差定义为  cov(X,Y) = E[(X-EX)(Y-EY)]显然，计算同一个变量的协方差时等同于计算其方差。 &amp;emsp;&amp;emsp;通过样本来统计其协方差时，假设单个样本为$m$维列向量$x_i$，将$n$个样本组合为一个$">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-09-25T13:21:37.352Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="马氏距离">
+<meta name="twitter:description" content="协方差与协方差矩阵&amp;emsp;&amp;emsp;协方差计算的是两个随机变量之间线性相关程度。变量之间越相关，协方差越大。变量之间越无关，协方差越小。随机变量$X,Y$之间的协方差定义为  cov(X,Y) = E[(X-EX)(Y-EY)]显然，计算同一个变量的协方差时等同于计算其方差。 &amp;emsp;&amp;emsp;通过样本来统计其协方差时，假设单个样本为$m$维列向量$x_i$，将$n$个样本组合为一个$">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://brezezee.github.io/2019/09/18/ML/conception/Mahalanobis_Distance/">
+
+
+
+
+
+  <title>马氏距离 | brezezee</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">brezezee</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="https://brezezee.github.io" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="https://brezezee.github.io/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="https://brezezee.github.io/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-categories"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="https://brezezee.github.io/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="https://brezezee.github.io/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://brezezee.github.io">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="brezezee">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="../../../../../../images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="brezezee">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">马氏距离</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-18T00:00:00+08:00">
+                2019-09-18
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2019-09-25T21:21:37+08:00">
+                2019-09-25
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="../../../../../../categories/meachine-learning/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/09/18/ML/conception/Mahalanobis_Distance/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1.4k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="协方差与协方差矩阵"><a href="#协方差与协方差矩阵" class="headerlink" title="协方差与协方差矩阵"></a>协方差与协方差矩阵</h3><p>&emsp;&emsp;协方差计算的是两个随机变量之间线性相关程度。变量之间越相关，协方差越大。变量之间越无关，协方差越小。随机变量$X,Y$之间的协方差定义为</p>
+<script type="math/tex; mode=display">
+cov(X,Y) = E[(X-EX)(Y-EY)]</script><p>显然，计算同一个变量的协方差时等同于计算其方差。</p>
+<p>&emsp;&emsp;通过样本来统计其协方差时，假设单个样本为$m$维列向量$x_i$，将$n$个样本组合为一个$m \times n$的矩阵$X = (x_1,x_2,\cdots,x_n)$ 。$X$的数据可示例如下</p>
+<script type="math/tex; mode=display">
+\begin{bmatrix} x_{11}& x_{12}& \cdots & x_{1n}\\  x_{21}& x_{22}& \cdots & x_{2n}\\   \vdots &\vdots &&\vdots\\ x_{m1} &x_{m2}& \cdots & x_{mn}\end{bmatrix}</script><p>&emsp;&emsp;注意这里求取的协方差是关于不同维度之间的，也就是一个维度（属性）可看作一个随机变量。比如维度1与维度2之间样本协方差的无偏估计可计算如下</p>
+<script type="math/tex; mode=display">
+cov(X1,X2) = \frac 1 {n-1} \sum_{i=1}^n (x_{1i}-\bar x_1)(x_{2i}-\bar x_1)</script><p>&emsp;&emsp;两个变量时，它们的相关程度可以方便的用协方差表示。但在机器学习任务中，常常会处理具有多个属性的问题。每个属性都可看作一个随机变量，如果要考虑这些变量两两之间的关系，再挨个列出协方差太过麻烦。因此使用矩阵的形式将其组合起来，这就是协方差矩阵。</p>
+<script type="math/tex; mode=display">
+\Sigma = 
+\begin{bmatrix}
+cov(X1,X1) & \cdots  &cov(X1,Xm)\\
+\vdots  &  \ddots  &\vdots\\
+cov(Xm,X1) & \cdots  & cov(Xm,Xm)\\
+\end{bmatrix}</script><p>&emsp;&emsp;对于$m$维数据的样本集合，相当于有$m$个随机变量来描述其属性特点。计算这$m$维数据两两之间的协方差便得到了一个$m\times m$的协方差矩阵。因此，协方差的具体含义可以理解为计算一组数据各个维度之间的相关性。</p>
+<p>&emsp;&emsp;协方差矩阵是实对称矩阵，实对称矩阵有一个重要性质是可以正交对角化，即存在一个正交矩阵U，对$X$作一个正交变换$Y=U^TX$后，使得协方差矩阵$\Sigma$满足</p>
+<script type="math/tex; mode=display">
+\Lambda = U^T\Sigma U</script><p>这意味着，只要对一组样本数据作一个正交变换，就能使得它变成维度之间两两无关的数据。这使得它在很多工程中成为了重要的理论基础。在下文马氏距离的推导中，就先根据这个原理讲数据变换到一个维度无关的线性空间。</p>
+<p>&emsp;&emsp;同时，协方差矩阵还是半正定矩阵，因此$\Sigma$还可做$Cholesky$分解，即</p>
+<script type="math/tex; mode=display">
+\Sigma = L \cdot L^T</script><p>其中，$L$ 是下三角矩阵，$L^T$ 是它的转置。</p>
+<h3 id="马氏距离"><a href="#马氏距离" class="headerlink" title="马氏距离"></a>马氏距离</h3><p>&emsp;&emsp;假设单个样本为m维列向量$x_i$，将$n$个样本组合为一个$m \times n$的矩阵$X = (x_1,x_2,\cdots,x_n)$ 。$X$的数据可示例如下</p>
+<script type="math/tex; mode=display">
+\begin{bmatrix}
+ x_{11}& x_{12}& \cdots & x_{1n}\\ 
+ x_{21}& x_{22}& \cdots & x_{2n}\\  
+ \vdots &\vdots &&\vdots\\
+ x_{m1} &x_{m2}& \cdots & x_{mn}
+\end{bmatrix}</script><p>对于$X$第$i$个维度的样本均值可表示为$\mu ^{(x)}_i$ 。$\mu^{(x)}$ 是$X$的样本均值向量</p>
+<script type="math/tex; mode=display">
+\mu^{(x)} = (\mu_1^{(x)},\mu_2^{(x)},\cdots,\mu_m^{(x)})^T</script><p>&emsp;&emsp;则其协方差矩阵可表示为</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\Sigma_X =& E[(X-\mu^{(x)})(X-\mu^{(x)})^T]\\
+=& \frac 1 {n-1} \sum_{i=1}^n (x_i -\mu^{(x)}) (x_i-\mu^{(x)})^T
+\end{aligned}</script><p>对一组数据，可通过主成分分析等方法，确定其特征向量，按照特征向量进行坐标变换就能得到一个新坐标系下的样本，虽还是同一组样本，但这组样本的各个维度在变换后的坐标系下相互独立。用$F$来表示$X$旋转后的向量组成的矩阵（它们是相同的，不过坐标系不同），$U$表示变换矩阵。于是有</p>
+<script type="math/tex; mode=display">
+F=(f_1,f_2,\cdots , f_m)^T=U^TX</script><p>旋转后的均值为</p>
+<script type="math/tex; mode=display">
+\mu^{(f)} =(\mu_1^{(f)},\mu_2^{(f)},\cdots,\mu_m^{(f)})^T=U^T\mu^{(x)}</script><p>得到</p>
+<script type="math/tex; mode=display">
+F-\mu^{(f)}=U^T(X-\mu^{(x)})</script><p>&emsp;&emsp;由于$F$经过正交变换后维度无关，因此其协方差矩阵是一个由其方差组成的对角矩阵</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+E[(F-\mu^{(f)}) (F-\mu^{(f)})^T]=&
+\begin{bmatrix}
+\lambda_1& \\
+&\lambda_2&\\
+&& \ddots&\\
+&&&& \lambda_m\\
+\end{bmatrix}\\
+
+=&E\;\left [ U^T(X-\mu^{(x)})(X-\mu^{(x)})^TU \right] \\
+=& U^T \Sigma_X U
+\end{aligned}</script><p>经过变换后的$F$是维度无关的，此时它的马氏距离相当于欧式距离。不过在求取欧式距离时，其变量的方差也会影响结果，所以要求标准化后的欧式距离。</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+D_F=& \frac {(f_1-\mu^{(f)}_1)} {\lambda_1} +\frac {(f_2-\mu^{(f)}_2)} { \lambda_2} +\cdots +\frac {(f_m-\mu^{(f)}_m)} { \lambda_m} \\
+=& (f_1-\mu^{(f)}_1,f_2-\mu^{(f)}_2,\cdots,(f_m-\mu^{(f)}_m)
+\begin{bmatrix}
+\frac 1 {\lambda_1}&\\
+&\frac 1 {\lambda_2}&\\
+&& \ddots&\\
+&&&\frac 1  {\lambda_m}\\
+\end{bmatrix}
+\begin{pmatrix}
+f_1-\mu^{(f)}_1\\
+f_2-\mu^{(f)}_2\\
+\cdots\\
+(f_m-\mu^{(f)}_m
+\end{pmatrix}\\
+=&(F-\mu^{(f)})^T(U^T\Sigma_XU)^{-1}(F-\mu^{(f)})\\
+=&(X-\mu^{(x)})^TU(U^T\Sigma_X^{-1}U)U^T(X-\mu^{(x)})\\
+=&(X-\mu^{(x)})\Sigma_X^{-1}(X-\mu^{(x)})\\
+
+\end{aligned}</script><p>&emsp;&emsp;通过推导过程可以发现，马氏距离计算中用到协方差矩阵的逆与计算欧氏距离中的标准化有某种关系。事实上马氏距离确实是尺度无关的一种度量，它通过对原数据进行线性变换，得到维度无关的数据之后，再计算其标准化后（去除方差影响）的欧式距离。进行线性变换的目的是去除维度之间相关性的影响。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="../../../../../../tags/马氏距离/" rel="tag"># 马氏距离</a>
+          
+            <a href="../../../../../../tags/协方差矩阵/" rel="tag"># 协方差矩阵</a>
+          
+            <a href="../../../../../../tags/机器学习/" rel="tag"># 机器学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="../../../../03/剑指offer/腾讯面试题 (copy)/" rel="next" title="腾讯面试题-64马8跑道">
+                <i class="fa fa-chevron-left"></i> 腾讯面试题-64马8跑道
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">brezezee</p>
+              <p class="site-description motion-element" itemprop="description">靡不有初，鲜克有终</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="https://brezezee.github.io/archives">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="../../../../../../categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="../../../../../../tags/index.html">
+                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#协方差与协方差矩阵"><span class="nav-text">协方差与协方差矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#马氏距离"><span class="nav-text">马氏距离</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">brezezee</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">66.7k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../../../js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="../../../../../../js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="../../../../../../js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="../../../../../../js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../../../js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://brezezee.github.io/2019/09/18/ML/conception/Mahalanobis_Distance/';
+          this.page.identifier = '2019/09/18/ML/conception/Mahalanobis_Distance/';
+          this.page.title = '马氏距离';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
