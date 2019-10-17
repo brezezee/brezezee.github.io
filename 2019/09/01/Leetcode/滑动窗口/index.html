@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="brezezee">
 <meta property="og:description" content="3. 最大无重复子串 题目描述  给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。 示例 1: 123输入: &amp;quot;abcabcbb&amp;quot;输出: 3 解释: 因为无重复字符的最长子串是 &amp;quot;abc&amp;quot;，所以其长度为 3。 示例 2: 123输入: &amp;quot;bbbbb&amp;quot;输出: 1解释: 因为无重复字符的最长子串是 &amp;quot;b&amp;quot;，">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-09-07T03:30:39.902Z">
+<meta property="og:updated_time" content="2019-10-16T02:29:04.823Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="滑动窗口">
 <meta name="twitter:description" content="3. 最大无重复子串 题目描述  给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。 示例 1: 123输入: &amp;quot;abcabcbb&amp;quot;输出: 3 解释: 因为无重复字符的最长子串是 &amp;quot;abc&amp;quot;，所以其长度为 3。 示例 2: 123输入: &amp;quot;bbbbb&amp;quot;输出: 1解释: 因为无重复字符的最长子串是 &amp;quot;b&amp;quot;，">
@@ -308,8 +308,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-09-07T11:30:39+08:00">
-                2019-09-07
+              <time title="Post modified" itemprop="dateModified" datetime="2019-10-16T10:29:04+08:00">
+                2019-10-16
               </time>
             
           </span>
@@ -368,7 +368,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  711
+                  840
                 </span>
               
 
@@ -413,7 +413,9 @@
 </li>
 </ul>
 <p><strong>PS：</strong>还需注意的是边界的下标选择问题，因为数组与字符串地址从0开始，所以读取第一个字符是从0开始，那么左边界与当前所指位置（或者说右边界）重合的话也有一个字符，显然不合理。因此应选择一个边界挪动一个位置，为了直观，我选择左边界left指着真实窗口的前面一位。这时可将left与hash表都初始化为-1，代表当前位置没有内容。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> hash[<span class="number">256</span>] ;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">256</span>;i++)&#123;</span><br><span class="line">        hash[i] = <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> left=<span class="number">-1</span>,subsize = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;s.length(); i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(hash[s[i]] == <span class="number">-1</span> || left &gt; hash[s[i]] ) <span class="comment">//当某字符还未出现过，或出现位置在子串外部</span></span><br><span class="line">        &#123;</span><br><span class="line">            subsize = max(subsize , i-left);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;   <span class="comment">//出现过，且在子串内部</span></span><br><span class="line">            left = hash[s[i]];</span><br><span class="line">        &#125;</span><br><span class="line">        hash[s[i]] = i;  </span><br><span class="line">    &#125;</span><br><span class="line">	<span class="keyword">return</span> subsize;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> hash[<span class="number">256</span>] ;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">256</span>;i++)&#123;</span><br><span class="line">        hash[i] = <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> left=<span class="number">-1</span>,subsize = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;s.length(); i++)&#123;</span><br><span class="line">        <span class="comment">//当某字符还未出现过，或出现位置在左边界外(左)，更新最大子串长度</span></span><br><span class="line">        <span class="keyword">if</span>(hash[s[i]] == <span class="number">-1</span> || left &gt; hash[s[i]] )</span><br><span class="line">            subsize = max(subsize , i-left);</span><br><span class="line">        <span class="keyword">else</span>   <span class="comment">//出现过，且在左边界内(右)，更新左边界</span></span><br><span class="line">            left = hash[s[i]];  </span><br><span class="line">        hash[s[i]] = i; <span class="comment">//更新最近出现位置</span></span><br><span class="line">    &#125;</span><br><span class="line">	<span class="keyword">return</span> subsize;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;上面策略是保存最近出现的位置，与左边界比较，也可保存子串内各个字符出现的次数，维护次数为1。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">        h[a[i]]++; <span class="comment">//子串添加i位置的数字</span></span><br><span class="line">        <span class="keyword">while</span>( h[a[i]] &gt; <span class="number">1</span> )</span><br><span class="line">            h[a[j++]]--; <span class="comment">//左边界位置的数字去掉，并右移左边界，直到子串无重复</span></span><br><span class="line">        count = max(count, i-j+<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <h2 id="子串"><a href="#子串" class="headerlink" title="子串"></a>子串</h2>
       
     </div>
@@ -567,7 +569,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="../../../../../tags/index.html">
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -634,7 +636,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">68.4k</span>
+    <span title="Site words total count">70.3k</span>
   
 </div>
 
