@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="马氏距离,协方差矩阵,机器学习,">
+  <meta name="keywords" content="刷题,滑动窗口,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="协方差与协方差矩阵&amp;emsp;&amp;emsp;协方差计算的是两个随机变量之间线性相关程度。变量之间越相关，协方差越大。变量之间越无关，协方差越小。随机变量$X,Y$之间的协方差定义为  cov(X,Y) = E[(X-EX)(Y-EY)]显然，计算同一个变量的协方差时等同于计算其方差。 &amp;emsp;&amp;emsp;通过样本来统计其协方差时，假设单个样本为$m$维列向量$x_i$，将$n$个样本组合为一个$">
-<meta name="keywords" content="马氏距离,协方差矩阵,机器学习">
+<meta name="description" content="3. 最大无重复子串 题目描述  给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。 示例 1: 123输入: &amp;quot;abcabcbb&amp;quot;输出: 3 解释: 因为无重复字符的最长子串是 &amp;quot;abc&amp;quot;，所以其长度为 3。 示例 2: 123输入: &amp;quot;bbbbb&amp;quot;输出: 1解释: 因为无重复字符的最长子串是 &amp;quot;b&amp;quot;，">
+<meta name="keywords" content="刷题,滑动窗口">
 <meta property="og:type" content="article">
-<meta property="og:title" content="马氏距离">
-<meta property="og:url" content="https://brezezee.github.io/2019/09/18/ML/conception/Mahalanobis_Distance/index.html">
+<meta property="og:title" content="滑动窗口">
+<meta property="og:url" content="https://brezezee.github.io/2019/09/01/algorithm/Leetcode/滑动窗口/index.html">
 <meta property="og:site_name" content="brezezee">
-<meta property="og:description" content="协方差与协方差矩阵&amp;emsp;&amp;emsp;协方差计算的是两个随机变量之间线性相关程度。变量之间越相关，协方差越大。变量之间越无关，协方差越小。随机变量$X,Y$之间的协方差定义为  cov(X,Y) = E[(X-EX)(Y-EY)]显然，计算同一个变量的协方差时等同于计算其方差。 &amp;emsp;&amp;emsp;通过样本来统计其协方差时，假设单个样本为$m$维列向量$x_i$，将$n$个样本组合为一个$">
+<meta property="og:description" content="3. 最大无重复子串 题目描述  给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。 示例 1: 123输入: &amp;quot;abcabcbb&amp;quot;输出: 3 解释: 因为无重复字符的最长子串是 &amp;quot;abc&amp;quot;，所以其长度为 3。 示例 2: 123输入: &amp;quot;bbbbb&amp;quot;输出: 1解释: 因为无重复字符的最长子串是 &amp;quot;b&amp;quot;，">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-09-25T13:22:07.112Z">
+<meta property="og:updated_time" content="2019-10-16T02:29:04.823Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="马氏距离">
-<meta name="twitter:description" content="协方差与协方差矩阵&amp;emsp;&amp;emsp;协方差计算的是两个随机变量之间线性相关程度。变量之间越相关，协方差越大。变量之间越无关，协方差越小。随机变量$X,Y$之间的协方差定义为  cov(X,Y) = E[(X-EX)(Y-EY)]显然，计算同一个变量的协方差时等同于计算其方差。 &amp;emsp;&amp;emsp;通过样本来统计其协方差时，假设单个样本为$m$维列向量$x_i$，将$n$个样本组合为一个$">
+<meta name="twitter:title" content="滑动窗口">
+<meta name="twitter:description" content="3. 最大无重复子串 题目描述  给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。 示例 1: 123输入: &amp;quot;abcabcbb&amp;quot;输出: 3 解释: 因为无重复字符的最长子串是 &amp;quot;abc&amp;quot;，所以其长度为 3。 示例 2: 123输入: &amp;quot;bbbbb&amp;quot;输出: 1解释: 因为无重复字符的最长子串是 &amp;quot;b&amp;quot;，">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://brezezee.github.io/2019/09/18/ML/conception/Mahalanobis_Distance/">
+  <link rel="canonical" href="https://brezezee.github.io/2019/09/01/algorithm/Leetcode/滑动窗口/">
 
 
 
 
 
-  <title>马氏距离 | brezezee</title>
+  <title>滑动窗口 | brezezee</title>
   
 
 
@@ -280,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">马氏距离</h1>
+          <h1 class="post-title" itemprop="name headline">滑动窗口</h1>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-18T00:00:00+08:00">
-                2019-09-18
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-01T00:00:00+08:00">
+                2019-09-01
               </time>
             
 
@@ -308,8 +308,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-09-25T21:22:07+08:00">
-                2019-09-25
+              <time title="Post modified" itemprop="dateModified" datetime="2019-10-16T10:29:04+08:00">
+                2019-10-16
               </time>
             
           </span>
@@ -327,8 +327,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="../../../../../../categories/meachine-learning/" itemprop="url" rel="index">
-                    <span itemprop="name">机器学习</span>
+                  <a href="../../../../../../categories/code-practice/" itemprop="url" rel="index">
+                    <span itemprop="name">刷题</span>
                   </a>
                 </span>
 
@@ -346,7 +346,7 @@
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/09/18/ML/conception/Mahalanobis_Distance/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/09/01/algorithm/Leetcode/滑动窗口/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -368,7 +368,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1.4k
+                  840
                 </span>
               
 
@@ -393,83 +393,30 @@
       
 
       
-        <h3 id="协方差与协方差矩阵"><a href="#协方差与协方差矩阵" class="headerlink" title="协方差与协方差矩阵"></a>协方差与协方差矩阵</h3><p>&emsp;&emsp;协方差计算的是两个随机变量之间线性相关程度。变量之间越相关，协方差越大。变量之间越无关，协方差越小。随机变量$X,Y$之间的协方差定义为</p>
-<script type="math/tex; mode=display">
-cov(X,Y) = E[(X-EX)(Y-EY)]</script><p>显然，计算同一个变量的协方差时等同于计算其方差。</p>
-<p>&emsp;&emsp;通过样本来统计其协方差时，假设单个样本为$m$维列向量$x_i$，将$n$个样本组合为一个$m \times n$的矩阵$X = (x_1,x_2,\cdots,x_n)$ 。$X$的数据可示例如下</p>
-<script type="math/tex; mode=display">
-\begin{bmatrix} x_{11}& x_{12}& \cdots & x_{1n}\\  x_{21}& x_{22}& \cdots & x_{2n}\\   \vdots &\vdots &&\vdots\\ x_{m1} &x_{m2}& \cdots & x_{mn}\end{bmatrix}</script><p>&emsp;&emsp;注意这里求取的协方差是关于不同维度之间的，也就是一个维度（属性）可看作一个随机变量。比如维度1与维度2之间样本协方差的无偏估计可计算如下</p>
-<script type="math/tex; mode=display">
-cov(X1,X2) = \frac 1 {n-1} \sum_{i=1}^n (x_{1i}-\bar x_1)(x_{2i}-\bar x_1)</script><p>&emsp;&emsp;两个变量时，它们的相关程度可以方便的用协方差表示。但在机器学习任务中，常常会处理具有多个属性的问题。每个属性都可看作一个随机变量，如果要考虑这些变量两两之间的关系，再挨个列出协方差太过麻烦。因此使用矩阵的形式将其组合起来，这就是协方差矩阵。</p>
-<script type="math/tex; mode=display">
-\Sigma = 
-\begin{bmatrix}
-cov(X1,X1) & \cdots  &cov(X1,Xm)\\
-\vdots  &  \ddots  &\vdots\\
-cov(Xm,X1) & \cdots  & cov(Xm,Xm)\\
-\end{bmatrix}</script><p>&emsp;&emsp;对于$m$维数据的样本集合，相当于有$m$个随机变量来描述其属性特点。计算这$m$维数据两两之间的协方差便得到了一个$m\times m$的协方差矩阵。因此，协方差的具体含义可以理解为计算一组数据各个维度之间的相关性。</p>
-<p>&emsp;&emsp;协方差矩阵是实对称矩阵，实对称矩阵有一个重要性质是可以正交对角化，即存在一个正交矩阵U，对$X$作一个正交变换$Y=U^TX$后，使得协方差矩阵$\Sigma$满足</p>
-<script type="math/tex; mode=display">
-\Lambda = U^T\Sigma U</script><p>这意味着，只要对一组样本数据作一个正交变换，就能使得它变成维度之间两两无关的数据。这使得它在很多工程中成为了重要的理论基础。在下文马氏距离的推导中，就先根据这个原理讲数据变换到一个维度无关的线性空间。</p>
-<p>&emsp;&emsp;同时，协方差矩阵还是半正定矩阵，因此$\Sigma$还可做$Cholesky$分解，即</p>
-<script type="math/tex; mode=display">
-\Sigma = L \cdot L^T</script><p>其中，$L$ 是下三角矩阵，$L^T$ 是它的转置。</p>
-<h3 id="马氏距离"><a href="#马氏距离" class="headerlink" title="马氏距离"></a>马氏距离</h3><p>&emsp;&emsp;假设单个样本为m维列向量$x_i$，将$n$个样本组合为一个$m \times n$的矩阵$X = (x_1,x_2,\cdots,x_n)$ 。$X$的数据可示例如下</p>
-<script type="math/tex; mode=display">
-\begin{bmatrix}
- x_{11}& x_{12}& \cdots & x_{1n}\\ 
- x_{21}& x_{22}& \cdots & x_{2n}\\  
- \vdots &\vdots &&\vdots\\
- x_{m1} &x_{m2}& \cdots & x_{mn}
-\end{bmatrix}</script><p>对于$X$第$i$个维度的样本均值可表示为$\mu ^{(x)}_i$ 。$\mu^{(x)}$ 是$X$的样本均值向量</p>
-<script type="math/tex; mode=display">
-\mu^{(x)} = (\mu_1^{(x)},\mu_2^{(x)},\cdots,\mu_m^{(x)})^T</script><p>&emsp;&emsp;则其协方差矩阵可表示为</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-\Sigma_X =& E[(X-\mu^{(x)})(X-\mu^{(x)})^T]\\
-=& \frac 1 {n-1} \sum_{i=1}^n (x_i -\mu^{(x)}) (x_i-\mu^{(x)})^T
-\end{aligned}</script><p>对一组数据，可通过主成分分析等方法，确定其特征向量，按照特征向量进行坐标变换就能得到一个新坐标系下的样本，虽还是同一组样本，但这组样本的各个维度在变换后的坐标系下相互独立。用$F$来表示$X$旋转后的向量组成的矩阵（它们是相同的，不过坐标系不同），$U$表示变换矩阵。于是有</p>
-<script type="math/tex; mode=display">
-F=(f_1,f_2,\cdots , f_m)^T=U^TX</script><p>旋转后的均值为</p>
-<script type="math/tex; mode=display">
-\mu^{(f)} =(\mu_1^{(f)},\mu_2^{(f)},\cdots,\mu_m^{(f)})^T=U^T\mu^{(x)}</script><p>得到</p>
-<script type="math/tex; mode=display">
-F-\mu^{(f)}=U^T(X-\mu^{(x)})</script><p>&emsp;&emsp;由于$F$经过正交变换后维度无关，因此其协方差矩阵是一个由其方差组成的对角矩阵</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-E[(F-\mu^{(f)}) (F-\mu^{(f)})^T]=&
-\begin{bmatrix}
-\lambda_1& \\
-&\lambda_2&\\
-&& \ddots&\\
-&&&& \lambda_m\\
-\end{bmatrix}\\
-
-=&E\;\left [ U^T(X-\mu^{(x)})(X-\mu^{(x)})^TU \right] \\
-=& U^T \Sigma_X U
-\end{aligned}</script><p>经过变换后的$F$是维度无关的，此时它的马氏距离相当于欧式距离。不过在求取欧式距离时，其变量的方差也会影响结果，所以要求标准化后的欧式距离。</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-D_F=& \frac {(f_1-\mu^{(f)}_1)} {\lambda_1} +\frac {(f_2-\mu^{(f)}_2)} { \lambda_2} +\cdots +\frac {(f_m-\mu^{(f)}_m)} { \lambda_m} \\
-=& (f_1-\mu^{(f)}_1,f_2-\mu^{(f)}_2,\cdots,(f_m-\mu^{(f)}_m)
-\begin{bmatrix}
-\frac 1 {\lambda_1}&\\
-&\frac 1 {\lambda_2}&\\
-&& \ddots&\\
-&&&\frac 1  {\lambda_m}\\
-\end{bmatrix}
-\begin{pmatrix}
-f_1-\mu^{(f)}_1\\
-f_2-\mu^{(f)}_2\\
-\cdots\\
-(f_m-\mu^{(f)}_m
-\end{pmatrix}\\
-=&(F-\mu^{(f)})^T(U^T\Sigma_XU)^{-1}(F-\mu^{(f)})\\
-=&(X-\mu^{(x)})^TU(U^T\Sigma_X^{-1}U)U^T(X-\mu^{(x)})\\
-=&(X-\mu^{(x)})\Sigma_X^{-1}(X-\mu^{(x)})\\
-
-\end{aligned}</script><p>&emsp;&emsp;通过推导过程可以发现，马氏距离计算中用到协方差矩阵的逆与计算欧氏距离中的标准化有某种关系。事实上马氏距离确实是尺度无关的一种度量，它通过对原数据进行线性变换，得到维度无关的数据之后，再计算其标准化后（去除方差影响）的欧式距离。进行线性变换的目的是去除维度之间相关性的影响。</p>
-
+        <h2 id="3-最大无重复子串"><a href="#3-最大无重复子串" class="headerlink" title="3. 最大无重复子串"></a>3. 最大无重复子串</h2><ul>
+<li><strong>题目描述</strong></li>
+</ul>
+<p>给定一个字符串，请你找出其中不含有重复字符的 <strong>最长子串</strong> 的长度。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;abcabcbb&quot;</span><br><span class="line">输出: 3 </span><br><span class="line">解释: 因为无重复字符的最长子串是 &quot;abc&quot;，所以其长度为 3。</span><br></pre></td></tr></table></figure>
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;bbbbb&quot;</span><br><span class="line">输出: 1</span><br><span class="line">解释: 因为无重复字符的最长子串是 &quot;b&quot;，所以其长度为 1。</span><br></pre></td></tr></table></figure>
+<p><strong>示例 3:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;pwwkew&quot;</span><br><span class="line">输出: 3</span><br><span class="line">解释: 因为无重复字符的最长子串是 &quot;wke&quot;，所以其长度为 3。</span><br><span class="line">     请注意，你的答案必须是 子串 的长度，&quot;pwke&quot; 是一个子序列，不是子串。</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;寻找无重复子串，很适合用滑动窗口的方法。需要维护的是窗口的大小（包括起始位置）。在维护窗口大小的过程中，需要在子串中查找是否有与新来的字符相同的字符，若直接采用线性扫描，复杂度较高。而字符只有256个ASCII码，因此可以建立一个关于字符的hash表，对每次滑动得到的新字符，可以在hash表中快速查看是否存在，还需注意查找是在子串范围内查找，所以即使hash表中有，还应判断是否在子串范围内。现在分情况讨论，什么情况应更新什么：</p>
+<ul>
+<li><p><strong>1.</strong> 若无重复字符，子串长度会增长，此时新的最大子串长度应是增长后的长度与记录的最大子串的长度中最大的那个。</p>
+</li>
+<li><p><strong>2.</strong> 若有重复字符，无需更新最大长度，此时应更新滑动窗口的左边界。</p>
+</li>
+<li><p><strong>3. </strong>注意，每次滑动都需要更新右边界，所以这是个固定操作，写在这两种情况外。</p>
+</li>
+</ul>
+<p><strong>PS：</strong>还需注意的是边界的下标选择问题，因为数组与字符串地址从0开始，所以读取第一个字符是从0开始，那么左边界与当前所指位置（或者说右边界）重合的话也有一个字符，显然不合理。因此应选择一个边界挪动一个位置，为了直观，我选择左边界left指着真实窗口的前面一位。这时可将left与hash表都初始化为-1，代表当前位置没有内容。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> hash[<span class="number">256</span>] ;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">256</span>;i++)&#123;</span><br><span class="line">        hash[i] = <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> left=<span class="number">-1</span>,subsize = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;s.length(); i++)&#123;</span><br><span class="line">        <span class="comment">//当某字符还未出现过，或出现位置在左边界外(左)，更新最大子串长度</span></span><br><span class="line">        <span class="keyword">if</span>(hash[s[i]] == <span class="number">-1</span> || left &gt; hash[s[i]] )</span><br><span class="line">            subsize = max(subsize , i-left);</span><br><span class="line">        <span class="keyword">else</span>   <span class="comment">//出现过，且在左边界内(右)，更新左边界</span></span><br><span class="line">            left = hash[s[i]];  </span><br><span class="line">        hash[s[i]] = i; <span class="comment">//更新最近出现位置</span></span><br><span class="line">    &#125;</span><br><span class="line">	<span class="keyword">return</span> subsize;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;上面策略是保存最近出现的位置，与左边界比较，也可保存子串内各个字符出现的次数，维护次数为1。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">        h[a[i]]++; <span class="comment">//子串添加i位置的数字</span></span><br><span class="line">        <span class="keyword">while</span>( h[a[i]] &gt; <span class="number">1</span> )</span><br><span class="line">            h[a[j++]]--; <span class="comment">//左边界位置的数字去掉，并右移左边界，直到子串无重复</span></span><br><span class="line">        count = max(count, i-j+<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="子串"><a href="#子串" class="headerlink" title="子串"></a>子串</h2>
       
     </div>
     
@@ -486,11 +433,9 @@ f_2-\mu^{(f)}_2\\
       
         <div class="post-tags">
           
-            <a href="../../../../../../tags/马氏距离/" rel="tag"># 马氏距离</a>
+            <a href="../../../../../../tags/刷题/" rel="tag"># 刷题</a>
           
-            <a href="../../../../../../tags/协方差矩阵/" rel="tag"># 协方差矩阵</a>
-          
-            <a href="../../../../../../tags/机器学习/" rel="tag"># 机器学习</a>
+            <a href="../../../../../../tags/滑动窗口/" rel="tag"># 滑动窗口</a>
           
         </div>
       
@@ -503,8 +448,8 @@ f_2-\mu^{(f)}_2\\
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="../../../../03/algorithm/interview/腾讯面试题/" rel="next" title="腾讯面试题-64马8跑道">
-                <i class="fa fa-chevron-left"></i> 腾讯面试题-64马8跑道
+              <a href="../../数据结构/前缀树/" rel="next" title="LeetCode 208. 前缀树">
+                <i class="fa fa-chevron-left"></i> LeetCode 208. 前缀树
               </a>
             
           </div>
@@ -513,8 +458,8 @@ f_2-\mu^{(f)}_2\\
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="../../../../30/algorithm/template/基础模板/" rel="prev" title="基础模版">
-                基础模版 <i class="fa fa-chevron-right"></i>
+              <a href="../../../../02/CV/digital image processing/Fourier transform/" rel="prev" title="傅里叶变换">
+                傅里叶变换 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -657,7 +602,7 @@ f_2-\mu^{(f)}_2\\
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#协方差与协方差矩阵"><span class="nav-text">协方差与协方差矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#马氏距离"><span class="nav-text">马氏距离</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-最大无重复子串"><span class="nav-text">3. 最大无重复子串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#子串"><span class="nav-text">子串</span></a></li></ol></div>
             
 
           </div>
@@ -829,9 +774,9 @@ f_2-\mu^{(f)}_2\\
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'https://brezezee.github.io/2019/09/18/ML/conception/Mahalanobis_Distance/';
-          this.page.identifier = '2019/09/18/ML/conception/Mahalanobis_Distance/';
-          this.page.title = '马氏距离';
+          this.page.url = 'https://brezezee.github.io/2019/09/01/algorithm/Leetcode/滑动窗口/';
+          this.page.identifier = '2019/09/01/algorithm/Leetcode/滑动窗口/';
+          this.page.title = '滑动窗口';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://.disqus.com/embed.js';
