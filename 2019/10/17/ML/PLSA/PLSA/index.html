@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="brezezee">
 <meta property="og:description" content="&amp;emsp;&amp;emsp;单词集合为$W=\{w_1,w_2,\cdots,w_M \}$，文本集合为$D=\{ d_1,d_2,\cdots,d_N \}$ ，话题集合为$Z=\{ z_1,z_2,\cdots,z_K \}$。给定单词-文本共现数据$T=\{ n(w_i,d_j) \},\;i=1,2,\cdots,M,j=1,2,\cdots,N$ 。若用极大似然估计$PLSA$的生成模型，其">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-10-18T13:08:04.426Z">
+<meta property="og:updated_time" content="2019-10-19T07:30:17.747Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="概率潜在语义分析(PLSA)">
 <meta name="twitter:description" content="&amp;emsp;&amp;emsp;单词集合为$W=\{w_1,w_2,\cdots,w_M \}$，文本集合为$D=\{ d_1,d_2,\cdots,d_N \}$ ，话题集合为$Z=\{ z_1,z_2,\cdots,z_K \}$。给定单词-文本共现数据$T=\{ n(w_i,d_j) \},\;i=1,2,\cdots,M,j=1,2,\cdots,N$ 。若用极大似然估计$PLSA$的生成模型，其">
@@ -308,8 +308,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-10-18T21:08:04+08:00">
-                2019-10-18
+              <time title="Post modified" itemprop="dateModified" datetime="2019-10-19T15:30:17+08:00">
+                2019-10-19
               </time>
             
           </span>
@@ -368,7 +368,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  613
+                  622
                 </span>
               
 
@@ -409,12 +409,12 @@ Q(\theta,\theta^{(i)}) = E_Z[logP(Y,Z|\theta)|Y,\theta^{(i)}]</script><p>对比�
 <script type="math/tex; mode=display">
 \begin{aligned}
 Q &= E_{P(Z|W,D)}\left[ \sum _{i=1}^M \sum_{j=1}^N n(w_i,d_j)log P(w_i,z_k,d_j) \right]\\
-&=\sum _{i=1}^M \sum_{j=1}^N n(w_i,d_j) \sum_{k=1}^K log[P(d_j)P(w_i,z_k|d_j) ]P(z_k|w_i,d_j) \\
-&=\sum _{i=1}^M \sum_{j=1}^N n(w_i,d_j) \sum_{k=1}^K log[P(d_j)P(w_i|z_k)P(z_k|d_j) ] P(z_k|w_i,d_j) \\
+&=\sum _{i=1}^M \sum_{j=1}^N n(w_i,d_j) \sum_{k=1}^K P(z_k|w_i,d_j;\theta^{(i)})\cdot log[P(d_j)P(w_i,z_k|d_j) ] \\
+&=\sum _{i=1}^M \sum_{j=1}^N n(w_i,d_j) \sum_{k=1}^K  P(z_k|w_i,d_j;\theta^{(i)})\cdot log[P(d_j)P(w_i|z_k)P(z_k|d_j) ] \\
 \end{aligned}</script><p>由于$n(w_i,d_j)logP(d_j)$为常数，对优化并无影响，因此不再加入计算。</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
-Q &=\sum _{i=1}^M \sum_{j=1}^N n(w_i,d_j) \sum_{k=1}^K log[P(w_i|z_k)P(z_k|d_j) ]P(z_k|w_i,d_j) \\
+Q &=\sum _{i=1}^M \sum_{j=1}^N n(w_i,d_j) \sum_{k=1}^K P(z_k|w_i,d_j;\theta^{(i)})\cdot log[P(w_i|z_k)P(z_k|d_j) ]\\
 \end{aligned}</script><p>&emsp;&emsp;事实上$E$步也可以直接通过$Jense$不等式得到，在求两个观测变量$W,D$的似然函数时，通过边缘概率求和加入了隐变量$Z$。这导致对数函数中出现了求和运算，通过$Jense$将求和号提到对数函数外面。于是里面变成了三个变量$W,D,Z$的联合分布，外面是对隐变量$Z$的求和，这与条件期望的形式相同。</p>
 
       
@@ -450,8 +450,8 @@ Q &=\sum _{i=1}^M \sum_{j=1}^N n(w_i,d_j) \sum_{k=1}^K log[P(w_i|z_k)P(z_k|d_j) 
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="../../../../../09/30/algorithm/template/基础模板/" rel="next" title="基础模版">
-                <i class="fa fa-chevron-left"></i> 基础模版
+              <a href="../../../../15/algorithm/template/数据结构/" rel="next" title="模板(数据结构)">
+                <i class="fa fa-chevron-left"></i> 模板(数据结构)
               </a>
             
           </div>
@@ -459,6 +459,10 @@ Q &=\sum _{i=1}^M \sum_{j=1}^N n(w_i,d_j) \sum_{k=1}^K log[P(w_i|z_k)P(z_k|d_j) 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="../../../../22/hobby/苏幕遮/" rel="prev" title="苏幕遮">
+                苏幕遮 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -536,7 +540,7 @@ Q &=\sum _{i=1}^M \sum_{j=1}^N n(w_i,d_j) \sum_{k=1}^K log[P(w_i|z_k)P(z_k|d_j) 
               
                 <a href="https://brezezee.github.io/archives">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -558,7 +562,7 @@ Q &=\sum _{i=1}^M \sum_{j=1}^N n(w_i,d_j) \sum_{k=1}^K log[P(w_i|z_k)P(z_k|d_j) 
               
               <div class="site-state-item site-state-tags">
                 <a href="../../../../../../tags/index.html">
-                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -609,7 +613,7 @@ Q &=\sum _{i=1}^M \sum_{j=1}^N n(w_i,d_j) \sum_{k=1}^K log[P(w_i|z_k)P(z_k|d_j) 
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">71k</span>
+    <span title="Site words total count">71.8k</span>
   
 </div>
 

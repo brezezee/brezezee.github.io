@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="前缀树,LeetCode,">
+  <meta name="keywords" content="算法模板,数据结构,">
 
 
 
@@ -79,20 +79,18 @@
 
 
 
-<meta name="description" content="实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。  示例:  Trie trie = new Trie();  trie.insert(“apple”);  trie.search(“apple”);   // 返回 true  trie.search(“app”);     // 返回 false  trie.startsWith">
-<meta name="keywords" content="前缀树,LeetCode">
+<meta name="description" content="&amp;emsp;&amp;emsp;用数组模拟单链表，可以免去new占用的时间，加快算法执行速度。不过删除节点时会造成内存泄漏，但这一般是工程中考虑的问题，算法题跑时间就行了。">
+<meta name="keywords" content="算法模板,数据结构">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LeetCode 208. 前缀树">
-<meta property="og:url" content="https://brezezee.github.io/2019/09/01/algorithm/数据结构/前缀树/index.html">
+<meta property="og:title" content="模板(数据结构)">
+<meta property="og:url" content="https://brezezee.github.io/2019/10/15/algorithm/template/数据结构/index.html">
 <meta property="og:site_name" content="brezezee">
-<meta property="og:description" content="实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。  示例:  Trie trie = new Trie();  trie.insert(“apple”);  trie.search(“apple”);   // 返回 true  trie.search(“app”);     // 返回 false  trie.startsWith">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;用数组模拟单链表，可以免去new占用的时间，加快算法执行速度。不过删除节点时会造成内存泄漏，但这一般是工程中考虑的问题，算法题跑时间就行了。">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://i.loli.net/2019/08/31/e17YTnUQxEJrLKi.png">
-<meta property="og:updated_time" content="2019-09-28T13:48:55.614Z">
+<meta property="og:updated_time" content="2019-11-02T11:13:57.267Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LeetCode 208. 前缀树">
-<meta name="twitter:description" content="实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。  示例:  Trie trie = new Trie();  trie.insert(“apple”);  trie.search(“apple”);   // 返回 true  trie.search(“app”);     // 返回 false  trie.startsWith">
-<meta name="twitter:image" content="https://i.loli.net/2019/08/31/e17YTnUQxEJrLKi.png">
+<meta name="twitter:title" content="模板(数据结构)">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;用数组模拟单链表，可以免去new占用的时间，加快算法执行速度。不过删除节点时会造成内存泄漏，但这一般是工程中考虑的问题，算法题跑时间就行了。">
 
 
 
@@ -122,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://brezezee.github.io/2019/09/01/algorithm/数据结构/前缀树/">
+  <link rel="canonical" href="https://brezezee.github.io/2019/10/15/algorithm/template/数据结构/">
 
 
 
 
 
-  <title>LeetCode 208. 前缀树 | brezezee</title>
+  <title>模板(数据结构) | brezezee</title>
   
 
 
@@ -282,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">LeetCode 208. 前缀树</h1>
+          <h1 class="post-title" itemprop="name headline">模板(数据结构)</h1>
         
 
         <div class="post-meta">
@@ -294,8 +292,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-01T00:00:00+08:00">
-                2019-09-01
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-15T00:00:00+08:00">
+                2019-10-15
               </time>
             
 
@@ -310,8 +308,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-09-28T21:48:55+08:00">
-                2019-09-28
+              <time title="Post modified" itemprop="dateModified" datetime="2019-11-02T19:13:57+08:00">
+                2019-11-02
               </time>
             
           </span>
@@ -348,7 +346,7 @@
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/09/01/algorithm/数据结构/前缀树/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/10/15/algorithm/template/数据结构/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -370,7 +368,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  738
+                  64
                 </span>
               
 
@@ -395,24 +393,7 @@
       
 
       
-        <blockquote>
-<p>  实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。<br>  示例:<br>  Trie trie = new Trie();<br>  trie.insert(“apple”);<br>  trie.search(“apple”);   // 返回 true<br>  trie.search(“app”);     // 返回 false<br>  trie.startsWith(“app”); // 返回 true<br>  trie.insert(“app”);<br>  trie.search(“app”);     // 返回 true<br>  说明:<br>  你可以假设所有的输入都是由小写字母 a-z 构成的。<br>  保证所有输入均为非空字符串。</p>
-</blockquote>
-<p>&emsp;&emsp;前缀树是一种比较简单的数据结构，又名字典树。就像这个名字一样，它将输入的词汇按从前到后的字符进行索引，就像查单词时挨个输入的字符的情形。每个位置有26个可能（假设都为小写字母），因此它是一个26叉树。比如对<code>abc,abd,ac,bc</code>建立一个字典树</p>
-<center>
-    <img src="https://i.loli.net/2019/08/31/e17YTnUQxEJrLKi.png" width="650/">
-</center>
-
-<p>&emsp;&emsp;可见，当数据的前缀有较多重复的时候，字典树可以节约较多内存。但是若杂乱无章的话可能反而增加内存消耗，因为字典树需要开辟空间来保存节点信息。图中可以看出字典树的两个特点</p>
-<ul>
-<li>根节点不含字符信息</li>
-<li>从根节点到某个节点途径的节点连接起来就是该节点的字符串组成</li>
-</ul>
-<p>&emsp;&emsp;再来看看一个基本的字典树节点需要包含哪些信息。首先需要26个指针来指向下一个节点，可以使用指针数组来方便管理，并且字典树中的数据是有确定范围的，就是26个字母，因此数组的下标就能表示下一节点的字母是什么。还需要一个标志位来表示某节点是否是一个字符串的结尾，这样才能在查询时确认是否是原始输入字符串或是该字符串的子串。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//C++ 70ms 44MB</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">26</span>;  <span class="comment">//假设字符为26个小写字母</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Trie</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">bool</span> is_end_str; <span class="comment">// 标识当前结点是否是一个字符串的末尾</span></span><br><span class="line">    Trie *next[MAXN]; <span class="comment">// 下一个结点的指针数组，数组下标表示字母</span></span><br><span class="line">    Trie() &#123;</span><br><span class="line">        is_end_str = <span class="literal">false</span>;</span><br><span class="line">        <span class="built_in">memset</span>(next, <span class="number">0</span>, <span class="keyword">sizeof</span>(next));</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/** Inserts a word into the trie. */</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="built_in">string</span> word)</span> </span>&#123;</span><br><span class="line">        Trie *curr = <span class="keyword">this</span>; <span class="comment">//使用curr来索引树</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> ch : word)&#123;</span><br><span class="line">            <span class="keyword">if</span>(curr-&gt;next[ch-<span class="string">'a'</span>] == <span class="literal">NULL</span>)&#123;</span><br><span class="line">                Trie *new_node = <span class="keyword">new</span> Trie();</span><br><span class="line">                curr-&gt;next[ch-<span class="string">'a'</span>] = new_node;</span><br><span class="line">            &#125;</span><br><span class="line">            curr = curr-&gt;next[ch-<span class="string">'a'</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        curr-&gt;is_end_str = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/** Returns if the word is in the trie. */</span></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">search</span><span class="params">(<span class="built_in">string</span> word)</span> </span>&#123;</span><br><span class="line">        Trie *curr = <span class="keyword">this</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> ch : word)&#123;</span><br><span class="line">            <span class="keyword">if</span>(curr-&gt;next[ch-<span class="string">'a'</span>] == <span class="literal">NULL</span>)</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            curr = curr-&gt;next[ch-<span class="string">'a'</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> (curr-&gt;is_end_str);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/** Returns if there is any word in the trie that starts with the given prefix. */</span></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">startsWith</span><span class="params">(<span class="built_in">string</span> prefix)</span> </span>&#123;</span><br><span class="line">        Trie *curr = <span class="keyword">this</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> ch : prefix)&#123;</span><br><span class="line">            <span class="keyword">if</span>(curr-&gt;next[ch-<span class="string">'a'</span>] == <span class="literal">NULL</span>)</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            curr = curr-&gt;next[ch-<span class="string">'a'</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;这里直接为指针数组开辟了26个单位的空间，还是挺占内存的，在参考2中有一个双数组的优化方法。</p>
-<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference:"></a>Reference:</h3><p>[1] <a href="https://leetcode-cn.com/problems/implement-trie-prefix-tree/" target="_blank" rel="noopener">LeetCode-208</a></p>
-<p>[2] <a href="https://linux.thai.net/~thep/datrie/datrie.html" target="_blank" rel="noopener">An Implementation of Double-Array Trie</a></p>
+        <p>&emsp;&emsp;用数组模拟单链表，可以免去new占用的时间，加快算法执行速度。不过删除节点时会造成内存泄漏，但这一般是工程中考虑的问题，算法题跑时间就行了。</p>
 
       
     </div>
@@ -430,9 +411,9 @@
       
         <div class="post-tags">
           
-            <a href="../../../../../../tags/前缀树/" rel="tag"># 前缀树</a>
+            <a href="../../../../../../tags/算法模板/" rel="tag"># 算法模板</a>
           
-            <a href="../../../../../../tags/LeetCode/" rel="tag"># LeetCode</a>
+            <a href="../../../../../../tags/数据结构/" rel="tag"># 数据结构</a>
           
         </div>
       
@@ -445,8 +426,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="../../../../../08/30/Language/python/NumPy基础/" rel="next" title="NumPy基础">
-                <i class="fa fa-chevron-left"></i> NumPy基础
+              <a href="../../../../../09/30/algorithm/template/基础模板/" rel="next" title="模板(基础模版)">
+                <i class="fa fa-chevron-left"></i> 模板(基础模版)
               </a>
             
           </div>
@@ -455,8 +436,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="../../Leetcode/滑动窗口/" rel="prev" title="滑动窗口">
-                滑动窗口 <i class="fa fa-chevron-right"></i>
+              <a href="../../../../17/ML/PLSA/PLSA/" rel="prev" title="概率潜在语义分析(PLSA)">
+                概率潜在语义分析(PLSA) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -519,17 +500,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -589,22 +561,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Reference"><span class="nav-text">Reference:</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -771,9 +727,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'https://brezezee.github.io/2019/09/01/algorithm/数据结构/前缀树/';
-          this.page.identifier = '2019/09/01/algorithm/数据结构/前缀树/';
-          this.page.title = 'LeetCode 208. 前缀树';
+          this.page.url = 'https://brezezee.github.io/2019/10/15/algorithm/template/数据结构/';
+          this.page.identifier = '2019/10/15/algorithm/template/数据结构/';
+          this.page.title = '模板(数据结构)';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://.disqus.com/embed.js';
