@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="../../../../../lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="../../../../../lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="../../../../../css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="../../../../../images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../../../images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="../../../../../images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="../../../../../images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="工具相关1、万能键：F1 / Ctrl + Shift + P， 或Ctrl + P 后输入 &amp;gt;  输入  CTRL + K + S 进入快捷键配置。  选择当前整行：CTRL + L / mac + L 选中行的每行插入光标编辑： SHIFT + ALT + L 选择当前选择的所有出现位置：CTRL + SHIFT + L 选择当前单词的所有出现位置：CTRL + F2 参数提示：CTRL">
+<meta name="keywords" content="ml,dl,cv,ai">
+<meta property="og:type" content="article">
+<meta property="og:title" content="brezezee">
+<meta property="og:url" content="https://brezezee.github.io/2021/02/23/tricks and tools/vscode快捷键/index.html">
+<meta property="og:site_name" content="brezezee">
+<meta property="og:description" content="工具相关1、万能键：F1 / Ctrl + Shift + P， 或Ctrl + P 后输入 &amp;gt;  输入  CTRL + K + S 进入快捷键配置。  选择当前整行：CTRL + L / mac + L 选中行的每行插入光标编辑： SHIFT + ALT + L 选择当前选择的所有出现位置：CTRL + SHIFT + L 选择当前单词的所有出现位置：CTRL + F2 参数提示：CTRL">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2021-06-19T04:30:04.311Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="brezezee">
+<meta name="twitter:description" content="工具相关1、万能键：F1 / Ctrl + Shift + P， 或Ctrl + P 后输入 &amp;gt;  输入  CTRL + K + S 进入快捷键配置。  选择当前整行：CTRL + L / mac + L 选中行的每行插入光标编辑： SHIFT + ALT + L 选择当前选择的所有出现位置：CTRL + SHIFT + L 选择当前单词的所有出现位置：CTRL + F2 参数提示：CTRL">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://brezezee.github.io/2021/02/23/tricks and tools/vscode快捷键/">
+
+
+
+
+
+  <title> | brezezee</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">brezezee</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="https://brezezee.github.io" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="https://brezezee.github.io/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="https://brezezee.github.io/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-categories"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="https://brezezee.github.io/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="https://brezezee.github.io/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://brezezee.github.io">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="brezezee">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="../../../../../images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="brezezee">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-02-23T21:03:44+08:00">
+                2021-02-23
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2021-06-19T12:30:04+08:00">
+                2021-06-19
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/02/23/tricks and tools/vscode快捷键/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2.1k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="工具相关"><a href="#工具相关" class="headerlink" title="工具相关"></a>工具相关</h3><p><strong>1、万能键</strong>：F1 / Ctrl + Shift + P， 或Ctrl + P 后输入 &gt; </p>
+<p>输入  <code>CTRL + K + S</code> 进入快捷键配置。</p>
+<blockquote>
+<p>选择当前整行：CTRL + L / mac + L</p>
+<p>选中行的每行插入光标编辑： SHIFT + ALT + L</p>
+<p>选择当前选择的所有出现位置：CTRL + SHIFT + L</p>
+<p>选择当前单词的所有出现位置：CTRL + F2</p>
+<p>参数提示：CTRL + SHIFT + SPACE</p>
+<p>查看定义：ALT + F12</p>
+<p>重命名变量：F2</p>
+</blockquote>
+<p>配置跳转</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CTRL + K + S </span><br><span class="line">editor.action.revealDefinition  绑定为F12</span><br></pre></td></tr></table></figure>
+<h3 id="1、工作区快捷键"><a href="#1、工作区快捷键" class="headerlink" title="1、工作区快捷键"></a>1、工作区快捷键</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Mac 快捷键</th>
+<th>Win 快捷键</th>
+<th>作用</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Cmd + Shift + P</strong></td>
+<td><strong>Ctrl + Shift + P</strong>，F1</td>
+<td>显示命令面板</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Cmd + B</strong></td>
+<td><strong>Ctrl + B</strong></td>
+<td>显示/隐藏侧边栏</td>
+<td>很实用</td>
+</tr>
+<tr>
+<td><code>Cmd + \</code></td>
+<td><code>Ctrl + \</code></td>
+<td><strong>创建多个编辑器</strong></td>
+<td>【重要】抄代码利器</td>
+</tr>
+<tr>
+<td><strong>Cmd + 1、2</strong></td>
+<td><strong>Ctrl + 1、2</strong></td>
+<td>聚焦到第 1、第 2 个编辑器</td>
+<td>同上重要</td>
+</tr>
+<tr>
+<td><strong>cmd +/-</strong></td>
+<td><strong>ctrl +/-</strong></td>
+<td>将工作区放大/缩小（包括代码字体、左侧导航栏）</td>
+<td>在投影仪场景经常用到</td>
+</tr>
+<tr>
+<td>Cmd + J</td>
+<td>Ctrl + J</td>
+<td>显示/隐藏控制台</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Cmd + Shift + N</strong></td>
+<td><strong>Ctrl + Shift + N</strong></td>
+<td>重新开一个软件的窗口</td>
+<td>很常用</td>
+</tr>
+<tr>
+<td>Cmd + Shift + W</td>
+<td>Ctrl + Shift + W</td>
+<td>关闭软件的当前窗口</td>
+<td></td>
+</tr>
+<tr>
+<td>Cmd + N</td>
+<td>Ctrl + N</td>
+<td>新建文件</td>
+<td></td>
+</tr>
+<tr>
+<td>Cmd + W</td>
+<td>Ctrl + W</td>
+<td>关闭当前文件</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="2、跳转操作"><a href="#2、跳转操作" class="headerlink" title="2、跳转操作"></a>2、跳转操作</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Mac 快捷键</th>
+<th>Win 快捷键</th>
+<th>作用</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cmd + `</td>
+<td>没有</td>
+<td>在同一个软件的<strong>多个工作区</strong>之间切换</td>
+<td>使用很频繁</td>
+</tr>
+<tr>
+<td><strong>Cmd + Option + 左右方向键</strong></td>
+<td>Ctrl + Pagedown/Pageup</td>
+<td>在已经打开的<strong>多个文件</strong>之间进行切换</td>
+<td>非常实用</td>
+</tr>
+<tr>
+<td>Ctrl + Tab</td>
+<td>Ctrl + Tab</td>
+<td>在已经打开的多个文件之间进行跳转</td>
+<td>不如上面的快捷键快</td>
+</tr>
+<tr>
+<td>Cmd + Shift + O</td>
+<td>Ctrl + shift + O</td>
+<td>在当前文件的各种<strong>方法之间</strong>进行跳转</td>
+<td></td>
+</tr>
+<tr>
+<td>Ctrl + G</td>
+<td>Ctrl + G</td>
+<td>跳转到指定行</td>
+<td></td>
+</tr>
+<tr>
+<td><code>Cmd+Shift+\</code></td>
+<td><code>Ctrl+Shift+\</code></td>
+<td>跳转到匹配的括号</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="3、移动光标"><a href="#3、移动光标" class="headerlink" title="3、移动光标"></a>3、移动光标</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Mac 快捷键</th>
+<th>Win 快捷键</th>
+<th>作用</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>方向键</td>
+<td>方向键</td>
+<td>在<strong>单个字符</strong>之间移动光标</td>
+<td>大家都知道</td>
+</tr>
+<tr>
+<td><strong>option + 左右方向键</strong></td>
+<td><strong>Ctrl + 左右方向键</strong></td>
+<td>在<strong>单词</strong>之间移动光标</td>
+<td>很常用</td>
+</tr>
+<tr>
+<td><strong>Cmd + 左右方向键</strong></td>
+<td><strong>Fn + 左右方向键</strong></td>
+<td>在<strong>整行</strong>之间移动光标</td>
+<td>很常用</td>
+</tr>
+<tr>
+<td>Cmd + ←</td>
+<td>Fn + ←（或 Win + ←）</td>
+<td>将光标定位到当前行的最左侧</td>
+<td>很常用</td>
+</tr>
+<tr>
+<td>Cmd + →</td>
+<td>Fn + →（或 Win + →）</td>
+<td>将光标定位到当前行的最右侧</td>
+<td>很常用</td>
+</tr>
+<tr>
+<td>Cmd + ↑</td>
+<td>Ctrl + Home</td>
+<td>将光标定位到文章的第一行</td>
+<td></td>
+</tr>
+<tr>
+<td>Cmd + ↓</td>
+<td>Ctrl + End</td>
+<td>将光标定位到文章的最后一行</td>
+<td></td>
+</tr>
+<tr>
+<td>Cmd + Shift + \</td>
+<td></td>
+<td>在<strong>代码块</strong>之间移动光标</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="4、编辑操作"><a href="#4、编辑操作" class="headerlink" title="4、编辑操作"></a>4、编辑操作</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Mac 快捷键</th>
+<th>Win 快捷键</th>
+<th>作用</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Cmd + Enter</strong></td>
+<td><strong>Ctrl + Enter</strong></td>
+<td>在当前行的下方新增一行，然后跳至该行</td>
+<td>即使光标不在行尾，也能快速向下插入一行</td>
+</tr>
+<tr>
+<td>Cmd+Shift+Enter</td>
+<td>Ctrl+Shift+Enter</td>
+<td>在当前行的上方新增一行，然后跳至该行</td>
+<td>即使光标不在行尾，也能快速向上插入一行</td>
+</tr>
+<tr>
+<td><strong>Option + ↑</strong></td>
+<td><strong>Alt + ↑</strong></td>
+<td>将代码向上移动</td>
+<td>很常用</td>
+</tr>
+<tr>
+<td><strong>Option + ↓</strong></td>
+<td><strong>Alt + ↓</strong></td>
+<td>将代码向下移动</td>
+<td>很常用</td>
+</tr>
+<tr>
+<td>Option + Shift + ↑</td>
+<td>Alt + Shift + ↑</td>
+<td>将代码向上复制</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Option + Shift + ↓</strong></td>
+<td><strong>Alt + Shift + ↓</strong></td>
+<td>将代码向下复制</td>
+<td>写重复代码的利器</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="5、多光标编辑"><a href="#5、多光标编辑" class="headerlink" title="5、多光标编辑"></a>5、多光标编辑</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Mac 快捷键</th>
+<th>Win 快捷键</th>
+<th>作用</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Cmd + Option + 上下键</strong></td>
+<td><strong>Ctrl + Alt + 上下键</strong></td>
+<td>在连续的多列上，同时出现光标</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Option + 鼠标点击任意位置</strong></td>
+<td><strong>Alt + 鼠标点击任意位置</strong></td>
+<td>在任意位置，同时出现光标</td>
+<td></td>
+</tr>
+<tr>
+<td>Option + Shift + 鼠标拖动</td>
+<td>Alt + Shift + 鼠标拖动</td>
+<td>在选中区域的每一行末尾，出现光标</td>
+<td></td>
+</tr>
+<tr>
+<td>Cmd + Shift + L</td>
+<td>Ctrl + Shift + L</td>
+<td>在选中文本的所有相同内容处，出现光标</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>其他的多光标编辑操作：（很重要）</p>
+<ul>
+<li>选中某个文本，然后反复按住快捷键「 <strong>Cmd + D</strong> 」键（windows 用户是按住「<strong>Ctrl + D</strong>」键）， 即可将全文中相同的词逐一加入选择。</li>
+<li>选中一堆文本后，按住「<strong>Option + Shift + i</strong>」键（windows 用户是按住「<strong>Alt + Shift + I</strong>」键），既可在<strong>每一行的末尾</strong>都创建一个光标。</li>
+</ul>
+<h3 id="6、删除操作"><a href="#6、删除操作" class="headerlink" title="6、删除操作"></a>6、删除操作</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Mac 快捷键</th>
+<th>Win 快捷键</th>
+<th>作用</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cmd + shift + K</td>
+<td>Ctrl + Shift + K</td>
+<td>删除整行</td>
+<td>「Cmd + X」的作用是剪切，但也可以删除整行</td>
+</tr>
+<tr>
+<td><strong>option + Backspace</strong></td>
+<td><strong>Ctrl + Backspace</strong></td>
+<td>删除光标之前的一个单词</td>
+<td>英文有效，很常用</td>
+</tr>
+<tr>
+<td>option + delete</td>
+<td>Ctrl + delete</td>
+<td>删除光标之后的一个单词</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Cmd + Backspace</strong></td>
+<td></td>
+<td>删除光标之前的整行内容</td>
+<td>很常用</td>
+</tr>
+<tr>
+<td>Cmd + delete</td>
+<td></td>
+<td>删除光标之后的整行内容</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>备注：上面所讲到的移动光标、编辑操作、删除操作的快捷键，在其他编辑器里，大部分都适用。</p>
+<h3 id="7、编程语言相关"><a href="#7、编程语言相关" class="headerlink" title="7、编程语言相关"></a>7、编程语言相关</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Mac 快捷键</th>
+<th>Win 快捷键</th>
+<th>作用</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cmd + /</td>
+<td>Ctrl + /</td>
+<td>添加单行注释</td>
+<td>很常用</td>
+</tr>
+<tr>
+<td><strong>Option + Shift + F</strong></td>
+<td>Alt + shift + F</td>
+<td>代码格式化</td>
+<td>很常用</td>
+</tr>
+<tr>
+<td>F2</td>
+<td>F2</td>
+<td>以重构的方式进行<strong>重命名</strong></td>
+<td>改代码备</td>
+</tr>
+<tr>
+<td>Ctrl + J</td>
+<td></td>
+<td>将多行代码合并为一行</td>
+<td>Win 用户可在命令面板搜索”合并行“</td>
+</tr>
+<tr>
+<td>Cmd +</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Cmd + U</td>
+<td>Ctrl + U</td>
+<td>将光标的移动回退到上一个位置</td>
+<td>撤销光标的移动和选择</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="8、搜索相关"><a href="#8、搜索相关" class="headerlink" title="8、搜索相关"></a>8、搜索相关</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Mac 快捷键</th>
+<th>Win 快捷键</th>
+<th>作用</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Cmd + Shift + F</strong></td>
+<td><strong>Ctrl + Shift +F</strong></td>
+<td>全局搜索代码</td>
+<td>很常用</td>
+</tr>
+<tr>
+<td><strong>Cmd + P</strong></td>
+<td><strong>Ctrl + P</strong></td>
+<td>在当前的项目工程里，<strong>全局</strong>搜索文件名</td>
+<td></td>
+</tr>
+<tr>
+<td>Cmd + F</td>
+<td>Ctrl + F</td>
+<td>在当前文件中搜索代码，光标在搜索框里</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Cmd + G</strong></td>
+<td><strong>F3</strong></td>
+<td>在当前文件中搜索代码，光标仍停留在编辑器里</td>
+<td>很巧妙</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="9、自定义快捷键"><a href="#9、自定义快捷键" class="headerlink" title="9、自定义快捷键"></a>9、自定义快捷键</h3><p>按住快捷键「Cmd + Shift + P」，弹出命令面板，在命令面板中输入“快捷键”，可以进入快捷键的设置。</p>
+<p>当然，你也可以选择菜单栏「偏好设置 —&gt; 键盘快捷方式」，进入快捷键的设置：</p>
+<h3 id="代码编辑相关"><a href="#代码编辑相关" class="headerlink" title="代码编辑相关"></a>代码编辑相关</h3><p><strong>1、注释</strong>：</p>
+<p>　　a) 单行注释：[ctrl+k,ctrl+c] 或 ctrl+/</p>
+<p>　　b) 取消单行注释：[ctrl+k,ctrl+u] (按下ctrl不放，再按k + u)</p>
+<p>　　c) 多行注释：[alt+shift+A]</p>
+<p>　　d) 多行注释：/**</p>
+<p><strong>2、移动行</strong>：alt+up/down</p>
+<p><strong>3、显示/隐藏左侧目录栏</strong> ctrl + b</p>
+<p><strong>4、复制当前行</strong>：shift + alt +up/down</p>
+<p><strong>5、删除当前行</strong>：shift + ctrl + k</p>
+<p><strong>6、控制台终端显示与隐藏</strong>：ctrl + ~</p>
+<p><strong>7、查找文件/安装vs code</strong> <strong>插件地址</strong>：ctrl + p</p>
+<p><strong>8、代码格式化</strong>：shift + alt +f</p>
+<p><strong>9、新建一个窗口</strong> : ctrl + shift + n</p>
+<p><strong>10、行增加缩进:</strong> ctrl + [</p>
+<p><strong>11、行减少缩进:</strong> ctrl + ]</p>
+<p><strong>12、裁剪尾随空格(去掉一行的末尾那些没用的空格)</strong> : ctrl + shift + x</p>
+<p><strong>13、字体放大/缩小:</strong> ctrl + ( + 或 - )</p>
+<p><strong>14、拆分编辑器 :</strong> ctrl + 1/2/3</p>
+<p><strong>15、切换窗口</strong> : ctrl + shift + left/right</p>
+<p><strong>16、关闭编辑器窗口</strong> : ctrl + w</p>
+<p><strong>17、关闭所有窗口 :</strong> ctrl + k + w</p>
+<p><strong>18、切换全屏 :</strong> F11</p>
+<p><strong>19、自动换行</strong> : alt + z</p>
+<p><strong>20、显示git</strong> : ctrl + shift + g</p>
+<p><strong>21、全局查找文件：</strong>ctrl + shift + f</p>
+<p><strong>22、显示相关插件的命令(如：git log)</strong>：ctrl + shift + p</p>
+<p><strong>23、选中文字</strong>：shift + left / right / up / down</p>
+<p><strong>24、折叠代码</strong>： ctrl + k + 0-9 (0是完全折叠)</p>
+<p><strong>25、展开代码</strong>： ctrl + k + j (完全展开代码)</p>
+<p><strong>26、删除行</strong> ： ctrl + shift + k</p>
+<p><strong>27、快速切换主题</strong>：ctrl + k / ctrl + t</p>
+<p><strong>28、快速回到顶部</strong> ： ctrl + home</p>
+<p><strong>29、快速回到底部</strong> : ctrl + end</p>
+<p><strong>30、格式化选定代码</strong> ：ctrl + k / ctrl +f</p>
+<p><strong>31、选中代码 ：</strong> shift + 鼠标左键</p>
+<p><strong>32、多行同时添加内容（光标） ：</strong>ctrl + alt + up/down</p>
+<p><strong>33、全局替换：</strong>ctrl + shift + h</p>
+<p><strong>34、当前文件替换：</strong>ctrl + h</p>
+<p><strong>35、打开最近打开的文件：</strong>ctrl + r</p>
+<p><strong>36、打开新的命令窗：</strong>ctrl + shift + c</p>
+<h4 id="格式调整"><a href="#格式调整" class="headerlink" title="格式调整"></a>格式调整</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">代码行向左或向右缩进:   Ctrl+[ 、 Ctrl+]</span><br><span class="line"></span><br><span class="line">复制或剪切当前行/当前选中内容:   Ctrl+C 、 Ctrl+V</span><br><span class="line"></span><br><span class="line">代码格式化:   Shift+Alt+F</span><br><span class="line"></span><br><span class="line">向上或向下移动一行:   Alt+Up 或 Alt+Down</span><br><span class="line"></span><br><span class="line">向上或向下复制一行:   Shift+Alt+Up 或 Shift+Alt+Down</span><br><span class="line"></span><br><span class="line">在当前行下方插入一行:   Ctrl+Enter</span><br><span class="line"></span><br><span class="line">在当前行上方插入一行:   Ctrl+Shift+Enter</span><br></pre></td></tr></table></figure>
+<h4 id="光标控制"><a href="#光标控制" class="headerlink" title="光标控制"></a>光标控制</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">移动到行首:   Home</span><br><span class="line"></span><br><span class="line">移动到行尾:   End</span><br><span class="line"></span><br><span class="line">移动到文件结尾:   Ctrl+End</span><br><span class="line"></span><br><span class="line">移动到文件开头:   Ctrl+Home</span><br><span class="line"></span><br><span class="line">移动到定义处:   F12</span><br><span class="line"></span><br><span class="line">查看定义处缩略图(只看一眼而不跳转过去):    Alt+F12</span><br><span class="line"></span><br><span class="line">选择从光标到行尾的内容:   Shift+End</span><br><span class="line"></span><br><span class="line">选择从光标到行首的内容： Shift+Home</span><br><span class="line"></span><br><span class="line">删除光标右侧的所有内容(当前行):   Ctrl+Delete</span><br><span class="line"></span><br><span class="line">扩展/缩小选取范围： Shift+Alt+Right 和 Shift+Alt+Left</span><br><span class="line"></span><br><span class="line">多行编辑(列编辑):   Alt+Shift+鼠标左键 或 Ctrl+Alt+Down/Up</span><br><span class="line"></span><br><span class="line">同时选中所有匹配编辑(与当前行或选定内容匹配):   Ctrl+Shift+L</span><br><span class="line"></span><br><span class="line">下一个匹配的也被选中:   Ctrl+D</span><br><span class="line"></span><br><span class="line">回退上一个光标操作:   Ctrl+U</span><br><span class="line"></span><br><span class="line">撤销上一步操作: Ctrl+Z</span><br><span class="line"></span><br><span class="line">手动保存:   Ctrl+S</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="../../../22/algorithm/小技巧/unordered_map邻接表/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="../../../24/服务器/epoll/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">brezezee</p>
+              <p class="site-description motion-element" itemprop="description">靡不有初，鲜克有终</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="https://brezezee.github.io/archives">
+              
+                  <span class="site-state-item-count">139</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="../../../../../categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="../../../../../tags/index.html">
+                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#工具相关"><span class="nav-text">工具相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1、工作区快捷键"><span class="nav-text">1、工作区快捷键</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、跳转操作"><span class="nav-text">2、跳转操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、移动光标"><span class="nav-text">3、移动光标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、编辑操作"><span class="nav-text">4、编辑操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、多光标编辑"><span class="nav-text">5、多光标编辑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6、删除操作"><span class="nav-text">6、删除操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7、编程语言相关"><span class="nav-text">7、编程语言相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8、搜索相关"><span class="nav-text">8、搜索相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9、自定义快捷键"><span class="nav-text">9、自定义快捷键</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码编辑相关"><span class="nav-text">代码编辑相关</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#格式调整"><span class="nav-text">格式调整</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#光标控制"><span class="nav-text">光标控制</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">brezezee</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">180.7k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../../js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="../../../../../js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="../../../../../js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="../../../../../js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../../js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://brezezee.github.io/2021/02/23/tricks and tools/vscode快捷键/';
+          this.page.identifier = '2021/02/23/tricks and tools/vscode快捷键/';
+          this.page.title = '';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

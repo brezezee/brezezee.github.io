@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="../../../../../lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="../../../../../lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="../../../../../css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="../../../../../images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../../../images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="../../../../../images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="../../../../../images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="马尔可夫奖励过程的Bellman方程如下：  \begin{aligned} v(s) =&amp; E[R_{t+1} + \gamma v(S_{t+1})| S_t = s] \\  =&amp; R_s + \gamma \sum_{s&apos; \in S}P_{ss&apos;}v(s&apos;)    \end{aligned}这个方程可用矩阵形式简单表达：  v = R + \gamma P v对于$n$ 个状态的价值函数">
+<meta name="keywords" content="ml,dl,cv,ai">
+<meta property="og:type" content="article">
+<meta property="og:title" content="brezezee">
+<meta property="og:url" content="https://brezezee.github.io/2020/09/09/Reinforcement Learning/MDP/index.html">
+<meta property="og:site_name" content="brezezee">
+<meta property="og:description" content="马尔可夫奖励过程的Bellman方程如下：  \begin{aligned} v(s) =&amp; E[R_{t+1} + \gamma v(S_{t+1})| S_t = s] \\  =&amp; R_s + \gamma \sum_{s&apos; \in S}P_{ss&apos;}v(s&apos;)    \end{aligned}这个方程可用矩阵形式简单表达：  v = R + \gamma P v对于$n$ 个状态的价值函数">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://brezezee.github.io/2020/09/09/Reinforcement%20Learning/MDP/1587283461629.png">
+<meta property="og:image" content="https://brezezee.github.io/2020/09/09/Reinforcement%20Learning/MDP/1587283525297.png">
+<meta property="og:image" content="https://brezezee.github.io/2020/09/09/Reinforcement%20Learning/MDP/1587283595711.png">
+<meta property="og:image" content="https://brezezee.github.io/2020/09/09/Reinforcement%20Learning/MDP/1587283783916.png">
+<meta property="og:image" content="https://brezezee.github.io/2020/09/09/Reinforcement%20Learning/MDP/1587303832994.png">
+<meta property="og:image" content="https://brezezee.github.io/2020/09/09/Reinforcement%20Learning/MDP/1587391230337.png">
+<meta property="og:image" content="https://brezezee.github.io/2020/09/09/Reinforcement%20Learning/MDP/1587401561816.png">
+<meta property="og:updated_time" content="2020-10-19T13:43:13.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="brezezee">
+<meta name="twitter:description" content="马尔可夫奖励过程的Bellman方程如下：  \begin{aligned} v(s) =&amp; E[R_{t+1} + \gamma v(S_{t+1})| S_t = s] \\  =&amp; R_s + \gamma \sum_{s&apos; \in S}P_{ss&apos;}v(s&apos;)    \end{aligned}这个方程可用矩阵形式简单表达：  v = R + \gamma P v对于$n$ 个状态的价值函数">
+<meta name="twitter:image" content="https://brezezee.github.io/2020/09/09/Reinforcement%20Learning/MDP/1587283461629.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://brezezee.github.io/2020/09/09/Reinforcement Learning/MDP/">
+
+
+
+
+
+  <title> | brezezee</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">brezezee</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="https://brezezee.github.io" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="https://brezezee.github.io/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="https://brezezee.github.io/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-categories"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="https://brezezee.github.io/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="https://brezezee.github.io/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://brezezee.github.io">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="brezezee">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="../../../../../images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="brezezee">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-09T11:35:58+08:00">
+                2020-09-09
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2020-10-19T21:43:13+08:00">
+                2020-10-19
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/09/09/Reinforcement Learning/MDP/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2.7k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>马尔可夫奖励过程的Bellman方程如下：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+v(s) =& E[R_{t+1} + \gamma v(S_{t+1})| S_t = s] \\
+ =& R_s + \gamma \sum_{s' \in S}P_{ss'}v(s')  
+
+\end{aligned}</script><p>这个方程可用矩阵形式简单表达：</p>
+<script type="math/tex; mode=display">
+v = R + \gamma P v</script><p>对于$n$ 个状态的价值函数，也可以通过解矩阵方程得到：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+v =& R + \gamma P v\\
+(1-\gamma P ) v  =& R\\
+v =& (1-\gamma P v)^{-1} R
+\end{aligned}</script><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">compute_value</span><span class="params">(Pss, rewards, gamma = <span class="number">0.5</span>)</span>:</span></span><br><span class="line">    rewards = np.array(rewards).reshape((<span class="number">-1</span>, <span class="number">1</span>)) <span class="comment">#转化成列向量</span></span><br><span class="line">    values = np.dot(np.linalg.inv(np.eye(<span class="number">7</span>,<span class="number">7</span>) - gamma * Pss), rewards)</span><br><span class="line">    <span class="keyword">return</span> values</span><br><span class="line"><span class="comment"># 学生上课问题，状态较少(7个)，可以通过求逆矩阵来解贝尔曼</span></span><br></pre></td></tr></table></figure>
+<h3 id="网格问题-policy-evaluation"><a href="#网格问题-policy-evaluation" class="headerlink" title="网格问题(policy evaluation)"></a>网格问题(policy evaluation)</h3><p><img src="1587283461629.png" alt="1587283461629"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np </span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt </span><br><span class="line"><span class="keyword">from</span> matplotlib.table <span class="keyword">import</span> Table</span><br><span class="line"></span><br><span class="line"><span class="comment"># const</span></span><br><span class="line">WORLD_SIZE = <span class="number">5</span></span><br><span class="line">A_POS = [<span class="number">0</span>, <span class="number">1</span>]</span><br><span class="line">A_NEXT_POS = [<span class="number">4</span>, <span class="number">1</span>]</span><br><span class="line">B_POS = [<span class="number">0</span>, <span class="number">3</span>]</span><br><span class="line">B_NEXT_POS = [<span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">gamma = <span class="number">0.9</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># action list</span></span><br><span class="line">ACTIONS = np.array([[<span class="number">0</span>, <span class="number">-1</span>],</span><br><span class="line">                    [<span class="number">-1</span>, <span class="number">0</span>],</span><br><span class="line">                    [<span class="number">0</span>, <span class="number">1</span>],</span><br><span class="line">                    [<span class="number">1</span>, <span class="number">0</span>]])</span><br><span class="line">PI_prob = <span class="number">1</span>/<span class="number">4.</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">next</span><span class="params">(state, action)</span>:</span>  <span class="comment">#模拟动作</span></span><br><span class="line">    <span class="keyword">if</span> state == A_POS:</span><br><span class="line">        <span class="keyword">return</span> A_NEXT_POS, <span class="number">10</span></span><br><span class="line">    <span class="keyword">if</span> state == B_POS:</span><br><span class="line">        <span class="keyword">return</span> B_NEXT_POS, <span class="number">5</span></span><br><span class="line">    </span><br><span class="line">    next_state = (np.array(state) + action).tolist()</span><br><span class="line">    x, y = next_state</span><br><span class="line">    <span class="keyword">if</span> x &lt; <span class="number">0</span> <span class="keyword">or</span> x &gt;= WORLD_SIZE <span class="keyword">or</span> y &lt; <span class="number">0</span> <span class="keyword">or</span> y &gt;= WORLD_SIZE:</span><br><span class="line">        next_state = state</span><br><span class="line">        reward = - <span class="number">1.</span> </span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        reward = <span class="number">0</span></span><br><span class="line">    <span class="keyword">return</span> next_state, reward</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">draw_tab</span><span class="params">(data)</span>:</span>   <span class="comment">#表格数据打印函数</span></span><br><span class="line">    fig, ax = plt.subplots()</span><br><span class="line">    ax.set_axis_off()</span><br><span class="line">    tb = Table(ax, bbox=[<span class="number">0</span>,<span class="number">0</span>, <span class="number">1</span>,<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">    width, height = <span class="number">1</span>, <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i, j), val <span class="keyword">in</span> np.ndenumerate(data):</span><br><span class="line">        tb.add_cell(i, j, width, height, text = val, loc=<span class="string">'center'</span>)</span><br><span class="line"></span><br><span class="line">    ax.add_table(tb)</span><br><span class="line">    plt.show()</span><br><span class="line">    plt.close()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bellman_val</span><span class="params">()</span>:</span>    <span class="comment">##迭代求解贝尔曼方程</span></span><br><span class="line">    value = np.zeros((WORLD_SIZE, WORLD_SIZE))</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        new_value = np.zeros_like(value) <span class="comment">#拷贝一个原价值函数维度的空数组</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(WORLD_SIZE):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(WORLD_SIZE):  <span class="comment">#遍历每个状态</span></span><br><span class="line">                <span class="keyword">for</span> action <span class="keyword">in</span> ACTIONS:   <span class="comment">#执行状态的每个动作</span></span><br><span class="line">                    (ne_i, ne_j), reward = next([i, j], action)</span><br><span class="line">                    new_value[i, j] += PI_prob * (reward + gamma * value[ne_i, ne_j]) <span class="comment">#期望</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> np.sum(np.abs(value - new_value)) &lt; <span class="number">1e-5</span>:   <span class="comment">#判断收敛</span></span><br><span class="line">            draw_tab(np.round(new_value, decimals=<span class="number">2</span>))  <span class="comment">#打印输出</span></span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        value = new_value    <span class="comment">#未收敛继续迭代</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">optimal_bellman_val</span><span class="params">()</span>:</span>   <span class="comment">#最优贝尔曼</span></span><br><span class="line">    value = np.zeros((WORLD_SIZE, WORLD_SIZE))</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        new_value = np.zeros_like(value)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(WORLD_SIZE):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(WORLD_SIZE):</span><br><span class="line">                values = []</span><br><span class="line">                <span class="keyword">for</span> action <span class="keyword">in</span> ACTIONS:</span><br><span class="line">                    (ne_i, ne_j), reward = next([i, j], action)</span><br><span class="line">                    values.append(reward + gamma * value[ne_i, ne_j])</span><br><span class="line">                new_value[i, j] = np.max(values)  <span class="comment">#选择价值最大的</span></span><br><span class="line">        <span class="keyword">if</span> np.sum(np.abs(value - new_value)) &lt; <span class="number">1e-5</span>: </span><br><span class="line">            draw_tab(np.round(new_value, decimals = <span class="number">2</span>))</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        value = new_value</span><br><span class="line"></span><br><span class="line"><span class="comment">#未使用就地更新(in_place)方式</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    bellman_val()</span><br><span class="line">    optimal_bellman_val()</span><br></pre></td></tr></table></figure>
+<p>求解随机选择策略下的贝尔曼方程得到的价值函数</p>
+<p><img src="1587283525297.png" alt="1587283525297"></p>
+<p>求解最优贝尔曼方程得到的价值函数</p>
+<p><img src="1587283595711.png" alt="1587283595711"></p>
+<h3 id="4-4方格游走问题-PE"><a href="#4-4方格游走问题-PE" class="headerlink" title="4*4方格游走问题(PE)"></a>4*4方格游走问题(PE)</h3><p><img src="1587283783916.png" alt="1587283783916"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> matplotlib.table <span class="keyword">import</span> Table</span><br><span class="line"></span><br><span class="line">WORLD_SIZE = <span class="number">4</span></span><br><span class="line"></span><br><span class="line">ACTIONS = np.array([[<span class="number">0</span>, <span class="number">-1</span>],</span><br><span class="line">                   [<span class="number">-1</span>, <span class="number">0</span>], </span><br><span class="line">                   [<span class="number">0</span>, <span class="number">1</span>], </span><br><span class="line">                   [<span class="number">1</span>, <span class="number">0</span>]])</span><br><span class="line">PI_prob = <span class="number">0.25</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_terminal</span><span class="params">(state)</span>:</span></span><br><span class="line">    x, y = state</span><br><span class="line">    <span class="keyword">return</span> (x == <span class="number">0</span> <span class="keyword">and</span> y == <span class="number">0</span>) <span class="keyword">or</span> (x == WORLD_SIZE <span class="number">-1</span> <span class="keyword">and</span> y == WORLD_SIZE <span class="number">-1</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">next</span><span class="params">(state, action)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> is_terminal(state):</span><br><span class="line">        <span class="keyword">return</span> state, <span class="number">0</span></span><br><span class="line">    next_state = (np.array(state) + action).tolist()</span><br><span class="line">    x, y  = next_state</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> x &lt; <span class="number">0</span> <span class="keyword">or</span> x &gt;= WORLD_SIZE <span class="keyword">or</span> y &lt; <span class="number">0</span> <span class="keyword">or</span> y &gt;= WORLD_SIZE:</span><br><span class="line">        next_state = state</span><br><span class="line">    </span><br><span class="line">    reward = <span class="number">-1</span> </span><br><span class="line">    <span class="keyword">return</span> next_state, reward</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">draw_tab</span><span class="params">(data)</span>:</span></span><br><span class="line">    fig, ax = plt.subplots()</span><br><span class="line">    ax.set_axis_off()</span><br><span class="line">    tb = Table(ax, bbox=[<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>])</span><br><span class="line">    </span><br><span class="line">    width, height = <span class="number">1</span>,<span class="number">1</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">#add cells</span></span><br><span class="line">    <span class="keyword">for</span> (i, j), val <span class="keyword">in</span> np.ndenumerate(data):</span><br><span class="line">        tb.add_cell(i, j, width, height, text = val, loc = <span class="string">'center'</span>, facecolor = <span class="string">'white'</span>)</span><br><span class="line">    </span><br><span class="line">    ax.add_table(tb)</span><br><span class="line">    plt.show()</span><br><span class="line">    plt.close()</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">compute_Svalue</span><span class="params">(in_place = True, gamma = <span class="number">1</span>)</span>:</span></span><br><span class="line">    new_value = np.zeros((WORLD_SIZE, WORLD_SIZE))</span><br><span class="line">    iteration = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">if</span> in_place: <span class="comment">#是否就地更新</span></span><br><span class="line">            state_value = new_value</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            state_value = new_value.copy()</span><br><span class="line">        old_value = state_value.copy() <span class="comment">#保存之前的价值函数，以便比较误差</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(WORLD_SIZE):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(WORLD_SIZE):</span><br><span class="line">                value = <span class="number">0</span></span><br><span class="line">                <span class="keyword">for</span> action <span class="keyword">in</span> ACTIONS:</span><br><span class="line">                    (ne_i, ne_j), reward = next([i, j], action)</span><br><span class="line">                    value += PI_prob * (reward + gamma * state_value[ne_i, ne_j])</span><br><span class="line">                new_value[i, j] = value</span><br><span class="line">            </span><br><span class="line">        delta = abs(old_value - new_value).max()</span><br><span class="line">        <span class="keyword">if</span> delta &lt; <span class="number">1e-4</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        iteration += <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> new_value, iteration</span><br><span class="line"></span><br><span class="line">_, async_it = compute_Svalue()</span><br><span class="line">values, sync_it = compute_Svalue(in_place = <span class="literal">False</span>)</span><br><span class="line">draw_tab(np.round(values, decimals = <span class="number">2</span>))</span><br><span class="line">print(<span class="string">'in_place:&#123;&#125; iter'</span>.format(async_it))</span><br><span class="line">print(<span class="string">'sync:&#123;&#125;iter'</span>.format(sync_it))</span><br><span class="line">plt.show()</span><br><span class="line">plt.close()</span><br></pre></td></tr></table></figure>
+<p>结果如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">In-place: 113 iterations</span><br><span class="line">Synchronous: 172 iterations</span><br></pre></td></tr></table></figure>
+<p><img src="1587303832994.png" alt="1587303832994"></p>
+<p>&emsp;&emsp;这个网格问题和上一个用的是同样的方法，都是策略评估，只是环境有些细微区别。</p>
+<h3 id="4-4方格问题（两种方法）"><a href="#4-4方格问题（两种方法）" class="headerlink" title="4*4方格问题（两种方法）"></a>4*4方格问题（两种方法）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 4*4方格问题  策略迭代和价值迭代，策略迭代包括随机策略和贪心策略</span></span><br><span class="line">S = [i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">16</span>)] <span class="comment"># 状态空间</span></span><br><span class="line">A = [<span class="string">"n"</span>, <span class="string">"e"</span>, <span class="string">"s"</span>, <span class="string">"w"</span>] <span class="comment"># 行为空间</span></span><br><span class="line"></span><br><span class="line">ds_actions = &#123;<span class="string">"n"</span>: <span class="number">-4</span>, <span class="string">"e"</span>: <span class="number">1</span>, <span class="string">"s"</span>: <span class="number">4</span>, <span class="string">"w"</span>: <span class="number">-1</span>&#125; <span class="comment"># 行为对状态的改变</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dynamics</span><span class="params">(s, a)</span>:</span> <span class="comment"># 生成  下一步状态  和  即时收益</span></span><br><span class="line">    s_next = s</span><br><span class="line">    <span class="keyword">if</span> (s%<span class="number">4</span> == <span class="number">0</span> <span class="keyword">and</span> a == <span class="string">"w"</span>) <span class="keyword">or</span> (s&lt;<span class="number">4</span> <span class="keyword">and</span> a == <span class="string">"n"</span>) \</span><br><span class="line">        <span class="keyword">or</span> ((s+<span class="number">1</span>)%<span class="number">4</span> == <span class="number">0</span> <span class="keyword">and</span> a == <span class="string">"e"</span>) <span class="keyword">or</span> (s &gt; <span class="number">11</span> <span class="keyword">and</span> a == <span class="string">"s"</span>)\</span><br><span class="line">        <span class="keyword">or</span> s <span class="keyword">in</span> [<span class="number">0</span>, <span class="number">15</span>]:  <span class="comment">#非法操作 或 已终止</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        ds = ds_actions[a]</span><br><span class="line">        s_next = s + ds</span><br><span class="line">    reward = <span class="number">0</span> <span class="keyword">if</span> s <span class="keyword">in</span> [<span class="number">0</span>, <span class="number">15</span>] <span class="keyword">else</span> <span class="number">-1</span> <span class="comment">#除了终止状态0和15，其他都是-1</span></span><br><span class="line">    <span class="keyword">return</span> s_next, reward</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">P</span><span class="params">(s, a, s1)</span>:</span> <span class="comment"># 状态转移概率函数,实际上动作确定，下一个状态就是确定的，所以非0即1</span></span><br><span class="line">    s_next, _ = dynamics(s, a)</span><br><span class="line">    <span class="keyword">return</span> s1 == s_next</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">R</span><span class="params">(s, a)</span>:</span> <span class="comment"># 奖励函数</span></span><br><span class="line">    _, r = dynamics(s, a) </span><br><span class="line">    <span class="keyword">return</span> r</span><br><span class="line"></span><br><span class="line">gamma = <span class="number">1.00</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">uniform_random_pi</span><span class="params">( V = None, s = None, a = None)</span>:</span> <span class="comment">#随机动作策略</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1.0</span>/<span class="number">4</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">greedy_pi</span><span class="params">( V, s, a)</span>:</span> <span class="comment"># 贪婪策略</span></span><br><span class="line">    max_v, a_max_v = -float(<span class="string">'inf'</span>), []  </span><br><span class="line">    <span class="keyword">for</span> a_opt <span class="keyword">in</span> A:   <span class="comment"># 统计后续状态的最大价值以及到达到达该状态的行为(可能多个最大)</span></span><br><span class="line">        s_next, _ = dynamics(s, a_opt) </span><br><span class="line">        v_s_next = V[s_next]  <span class="comment"># </span></span><br><span class="line">        <span class="keyword">if</span> v_s_next &gt; max_v:</span><br><span class="line">            max_v = v_s_next</span><br><span class="line">            a_max_v = [a_opt]</span><br><span class="line">        <span class="keyword">elif</span>(v_s_next == max_v):</span><br><span class="line">            a_max_v.append(a_opt)</span><br><span class="line">    n = len(a_max_v)</span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">0</span>: <span class="keyword">return</span> <span class="number">0.0</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1.0</span>/n <span class="keyword">if</span> a <span class="keyword">in</span> a_max_v <span class="keyword">else</span> <span class="number">0.0</span>  <span class="comment">#等概率选择价值最大的动作</span></span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_pi</span><span class="params">(Pi, s, a, V = None)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> Pi( V, s, a)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">display_V</span><span class="params">(V)</span>:</span> <span class="comment"># 显示状态价值</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">16</span>):</span><br><span class="line">        print(<span class="string">'&#123;0:&gt;6.2f&#125;'</span>.format(V[i]),end = <span class="string">" "</span>)</span><br><span class="line">        <span class="keyword">if</span> (i+<span class="number">1</span>) % <span class="number">4</span> == <span class="number">0</span>:</span><br><span class="line">            print(<span class="string">""</span>)</span><br><span class="line">    print()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">compute_q</span><span class="params">( V, s, a)</span>:</span></span><br><span class="line">    <span class="string">'''根据给定的MDP，价值函数V，计算状态行为对s,a的价值qsa</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    q_sa = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> s_next <span class="keyword">in</span> S:  <span class="comment">## q(s,a) = R + gamma * (P(s',r|s,a) * V[s']) </span></span><br><span class="line">        q_sa += P(s, a, s_next) * ( R(s, a) + gamma * V[s_next] )</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">return</span> q_sa</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">compute_v</span><span class="params">( V, Pi, s)</span>:</span></span><br><span class="line">    <span class="string">'''给定MDP下依据某一策略Pi和当前状态价值函数V计算某状态s的价值</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    v_s = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> a <span class="keyword">in</span> A:  <span class="comment">## 根据动作选择策略，对价值求关于可选动作的期望\sum (pi * q(s,a)) </span></span><br><span class="line">        v_s += get_pi(Pi, s, a,  V) * compute_q( V, s, a)</span><br><span class="line">    <span class="keyword">return</span> v_s</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">update_V</span><span class="params">( V, Pi)</span>:</span></span><br><span class="line">    <span class="string">'''给定一个MDP和一个策略，更新该策略下的价值函数V</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    V_prime = V.copy()  <span class="comment">#保存之前的价值函数</span></span><br><span class="line">    <span class="keyword">for</span> s <span class="keyword">in</span> S:</span><br><span class="line">        V_prime[s] = compute_v(V, Pi, s) <span class="comment">#(V_prime, s, compute_v( V_prime, Pi, s))  #</span></span><br><span class="line">    <span class="keyword">return</span> V_prime</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">policy_evaluate</span><span class="params">( V, Pi, n)</span>:</span></span><br><span class="line">    <span class="string">'''使用n次迭代计算来评估一个MDP在给定策略Pi下的状态价值，初始时价值为V</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> range(n):  <span class="comment">#迭代次数 </span></span><br><span class="line">        V = update_V( V, Pi)</span><br><span class="line">    <span class="keyword">return</span> V</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 价值迭代得到最优状态价值过程</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">compute_v_from_max_q</span><span class="params">( V, s)</span>:</span> </span><br><span class="line">    <span class="string">'''根据一个状态的下所有可能的行为价值中最大一个来确定当前状态价值</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    v_s = -float(<span class="string">'inf'</span>)</span><br><span class="line">    <span class="keyword">for</span> a <span class="keyword">in</span> A:</span><br><span class="line">        qsa = compute_q( V, s, a)</span><br><span class="line">        <span class="keyword">if</span> qsa &gt;= v_s:</span><br><span class="line">            v_s = qsa</span><br><span class="line">    <span class="keyword">return</span> v_s</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">update_V_without_pi</span><span class="params">( V)</span>:</span></span><br><span class="line">    <span class="string">'''在不依赖策略的情况下直接通过后续状态的价值来更新状态价值</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    V_prime = V.copy()</span><br><span class="line">    <span class="keyword">for</span> s <span class="keyword">in</span> S:</span><br><span class="line">        V_prime[s] = compute_v_from_max_q(V, s)  <span class="comment">#set_value(V_prime, s, compute_v_from_max_q( V_prime, s))</span></span><br><span class="line">    <span class="keyword">return</span> V_prime</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">value_iterate</span><span class="params">( V, n)</span>:</span></span><br><span class="line">    <span class="string">'''价值迭代</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> range(n):</span><br><span class="line">        V = update_V_without_pi( V)</span><br><span class="line">    <span class="keyword">return</span> V</span><br><span class="line"></span><br><span class="line">V = [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">16</span>)] <span class="comment"># 初始化一个价值</span></span><br><span class="line"></span><br><span class="line">V_pi = policy_evaluate( V, uniform_random_pi, <span class="number">160</span>) <span class="comment">#随机动作策略</span></span><br><span class="line">display_V(V_pi)</span><br><span class="line"></span><br><span class="line">V = [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">16</span>)] </span><br><span class="line">V_pi = policy_evaluate( V, greedy_pi, <span class="number">100</span>)  <span class="comment"># 贪心动作策略</span></span><br><span class="line">display_V(V_pi)</span><br><span class="line"></span><br><span class="line">V = [<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">16</span>)] </span><br><span class="line">V_star = value_iterate( V, <span class="number">4</span>)  <span class="comment">#价值迭代</span></span><br><span class="line">display_V(V_star)</span><br></pre></td></tr></table></figure>
+<h3 id="杰克租车问题-策略迭代"><a href="#杰克租车问题-策略迭代" class="headerlink" title="杰克租车问题(策略迭代)"></a>杰克租车问题(策略迭代)</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"><span class="keyword">from</span> scipy.stats <span class="keyword">import</span> poisson</span><br><span class="line"></span><br><span class="line"><span class="comment">## 租车问题的宏变量定义</span></span><br><span class="line">MAX_CARS = <span class="number">20</span></span><br><span class="line">MAX_MOVE = <span class="number">5</span></span><br><span class="line">LAMBDA_RENT_A = <span class="number">3</span></span><br><span class="line">LAMBDA_RENT_B = <span class="number">4</span></span><br><span class="line">LAMBDA_RETURN_A = <span class="number">3</span></span><br><span class="line">LAMBDA_RETURN_B = <span class="number">2</span></span><br><span class="line"></span><br><span class="line">gamma = <span class="number">0.9</span></span><br><span class="line"></span><br><span class="line">RENTAL_EARNED = <span class="number">10</span></span><br><span class="line">MOVE_COST = <span class="number">2</span></span><br><span class="line"><span class="comment">#action 的值代表从A移动到B的车数</span></span><br><span class="line">ACTIONS = np.arange(-MAX_MOVE, MAX_MOVE+<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#poisson distribution 的上界</span></span><br><span class="line">POISSON_UPPER_BOUND = <span class="number">11</span></span><br><span class="line"><span class="comment">#保存泊松分布概率值的字典</span></span><br><span class="line">poisson_cache = dict()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">poisson_probability</span><span class="params">(n, lamb)</span>:</span></span><br><span class="line">    <span class="keyword">global</span> poisson_cache</span><br><span class="line">    key = n * <span class="number">10</span> + lamb <span class="comment">#hash</span></span><br><span class="line">    <span class="keyword">if</span> key <span class="keyword">not</span> <span class="keyword">in</span> poisson_cache:</span><br><span class="line">        poisson_cache[key] = poisson.pmf(n, lamb)</span><br><span class="line">    <span class="keyword">return</span> poisson_cache[key]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">expected_return</span><span class="params">(state, action, state_value, constant_returned_cars)</span>:</span></span><br><span class="line"></span><br><span class="line">    returns = <span class="number">0.0</span></span><br><span class="line">    <span class="comment">#先减去移动动作的花费</span></span><br><span class="line">    returns -= MOVE_COST * abs(action)</span><br><span class="line">    <span class="comment">#根据动作移动后的车数</span></span><br><span class="line">    NUM_CAR_A = min(state[<span class="number">0</span>] - action, MAX_CARS)</span><br><span class="line">    NUM_CAR_B = min(state[<span class="number">1</span>] + action, MAX_CARS)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">#遍历所有可能的租车需求，计算执行action后得到状态的期望收益</span></span><br><span class="line">    <span class="keyword">for</span> request_A <span class="keyword">in</span> range(POISSON_UPPER_BOUND):</span><br><span class="line">        <span class="keyword">for</span> request_B <span class="keyword">in</span> range(POISSON_UPPER_BOUND):</span><br><span class="line">            prob = poisson_probability(request_A, LAMBDA_RENT_A) * poisson_probability(request_B, LAMBDA_RENT_B)</span><br><span class="line"></span><br><span class="line">            num_car_A = NUM_CAR_A</span><br><span class="line">            num_car_B = NUM_CAR_B</span><br><span class="line"></span><br><span class="line">            <span class="comment">#确认实际租出去的数量</span></span><br><span class="line">            actual_rental_A = min(num_car_A, request_A)</span><br><span class="line">            actual_rental_B = min(num_car_B, request_B)</span><br><span class="line"></span><br><span class="line">            <span class="comment">#租车收益</span></span><br><span class="line">            reward = (actual_rental_A + actual_rental_B) * RENTAL_EARNED</span><br><span class="line">            num_car_A -= actual_rental_A</span><br><span class="line">            num_car_B -= actual_rental_B</span><br><span class="line"></span><br><span class="line">            <span class="comment">#计算还车数量，归还的车第二天便能租赁，因此用于近似的价值函数中状态的车数需加上它的数量</span></span><br><span class="line">            <span class="keyword">if</span> constant_returned_cars:</span><br><span class="line">                <span class="comment">#假设归还为常数（不使用泊松分布）</span></span><br><span class="line">                num_car_A = min(LAMBDA_RETURN_A + num_car_A, MAX_CARS)</span><br><span class="line">                num_car_B = min(LAMBDA_RETURN_B + num_car_B, MAX_CARS)</span><br><span class="line">                <span class="comment">#公式</span></span><br><span class="line">                returns += prob * (reward + gamma * state_value[num_car_A, num_car_B])</span><br><span class="line">                </span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="comment">#使用泊松分布</span></span><br><span class="line">                <span class="keyword">for</span> returned_car_A <span class="keyword">in</span> range(POISSON_UPPER_BOUND):</span><br><span class="line">                    <span class="keyword">for</span> returned_car_B <span class="keyword">in</span> range(POISSON_UPPER_BOUND):</span><br><span class="line">                        prob_return = poisson_probability(returned_car_A, LAMBDA_RETURN_A) * poisson_probability(returned_car_B, LAMBDA_RETURN_B)</span><br><span class="line">                        num_car_A = min(num_car_A + returned_car_A, MAX_CARS)</span><br><span class="line">                        num_car_B = min(num_car_B + returned_car_B, MAX_CARS)</span><br><span class="line">                        prob_ = prob * prob_return</span><br><span class="line">                        returns += prob_ * (reward + gamma * state_value[num_car_A, num_car_B])</span><br><span class="line">    <span class="keyword">return</span> returns</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">figure</span><span class="params">(constant_returned_cars = True)</span>:</span></span><br><span class="line">    value = np.zeros((MAX_CARS+<span class="number">1</span>, MAX_CARS+<span class="number">1</span>))</span><br><span class="line">    <span class="comment">#后面会用计算得到的浮点数数量进行索引，必须强制类型为int，不然不能索引</span></span><br><span class="line">    policy = np.zeros_like(value, dtype = np.int)  </span><br><span class="line">    <span class="comment">#policy = np.zeros(value.shape, dtype = np.int)</span></span><br><span class="line"></span><br><span class="line">    iterations = <span class="number">0</span></span><br><span class="line">    _, ax = plt.subplots(<span class="number">2</span>, <span class="number">3</span>, figsize= (<span class="number">40</span>, <span class="number">20</span>))</span><br><span class="line">    plt.subplots_adjust(wspace = <span class="number">0.1</span>, hspace = <span class="number">0.2</span>)</span><br><span class="line">    ax = ax.flatten()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        fig = sns.heatmap(np.flipud(policy), cmap = <span class="string">"YlGnBu"</span>, ax = ax[iterations])</span><br><span class="line">        fig.set_ylabel(<span class="string">"# cars at A"</span>, fontsize = <span class="number">20</span>)</span><br><span class="line">        fig.set_xlabel(<span class="string">"# cars at B"</span>, fontsize = <span class="number">20</span>)</span><br><span class="line">        fig.set_yticks(list(reversed(range(MAX_CARS + <span class="number">1</span>))))</span><br><span class="line">        fig.set_title(<span class="string">'policy &#123;&#125;'</span>.format(iterations), fontsize = <span class="number">30</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># policy evaluation (in_place)</span></span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            old_value = value.copy()</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(MAX_CARS + <span class="number">1</span>):</span><br><span class="line">                <span class="keyword">for</span> j <span class="keyword">in</span> range(MAX_CARS + <span class="number">1</span>):</span><br><span class="line">                    new_value = expected_return([i, j], policy[i, j], value, constant_returned_cars)</span><br><span class="line">                    value[i, j] = new_value</span><br><span class="line">            delta = abs(old_value - value).max()</span><br><span class="line">            print(<span class="string">'delta &#123;&#125;'</span>.format(delta))</span><br><span class="line">            <span class="keyword">if</span> delta &lt; <span class="number">1e-4</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># policy improvement</span></span><br><span class="line">        policy_stable = <span class="literal">True</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(MAX_CARS + <span class="number">1</span>):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(MAX_CARS + <span class="number">1</span>):</span><br><span class="line">                old_action = policy[i, j] </span><br><span class="line">                action_returns = []</span><br><span class="line">                <span class="comment">#遍历该状态可执行的所有动作</span></span><br><span class="line">                <span class="keyword">for</span> action <span class="keyword">in</span> ACTIONS:</span><br><span class="line">                    <span class="keyword">if</span> (-j &lt;= action &lt;= i):</span><br><span class="line">                        action_returns.append(expected_return([i, j], action, value, constant_returned_cars))</span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        action_returns.append(-np.inf)</span><br><span class="line">                new_action = ACTIONS[np.argmax(action_returns)]</span><br><span class="line">                policy[i, j] = new_action</span><br><span class="line">                <span class="keyword">if</span> policy_stable <span class="keyword">and</span> old_action != new_action: </span><br><span class="line">                    policy_stable = <span class="literal">False</span></span><br><span class="line">        print(<span class="string">'policy stale &#123;&#125;'</span>.format(policy_stable))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> policy_stable:</span><br><span class="line">             fig = sns.heatmap(np.flipud(value), cmap=<span class="string">'YlGnBu'</span>, ax = ax[<span class="number">-1</span>])</span><br><span class="line">             fig.set_ylabel(<span class="string">'# cars at A'</span>, fontsize = <span class="number">30</span>)</span><br><span class="line">             fig.set_yticks(list(reversed(range(MAX_CARS + <span class="number">1</span>))))</span><br><span class="line">             fig.set_xlabel(<span class="string">'# cars at B'</span>, fontsize = <span class="number">30</span>)</span><br><span class="line">             fig.set_title(<span class="string">'optimal value'</span>, fontsize = <span class="number">30</span>)</span><br><span class="line">             <span class="keyword">break</span></span><br><span class="line">        iterations += <span class="number">1</span></span><br><span class="line">    </span><br><span class="line">    plt.show()</span><br><span class="line">    plt.close()</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    figure()</span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+<p><img src="1587391230337.png" alt="1587391230337"></p>
+<p>显示在迭代计算4次之后收敛到了最佳策略。</p>
+<h3 id="赌徒问题"><a href="#赌徒问题" class="headerlink" title="赌徒问题"></a>赌徒问题</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">GOAL = <span class="number">100</span></span><br><span class="line"></span><br><span class="line">STATES = np.arange(GOAL + <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">PROB = <span class="number">0.4</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">slove</span><span class="params">()</span>:</span></span><br><span class="line">    state_value = np.zeros(GOAL + <span class="number">1</span>)</span><br><span class="line">    state_value[GOAL] = <span class="number">1.0</span></span><br><span class="line">    policy = np.zeros(GOAL + <span class="number">1</span>)</span><br><span class="line">    sweeps_history = []</span><br><span class="line"></span><br><span class="line">    <span class="comment">#价值迭代 value iteration</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        old_state_value = state_value.copy()</span><br><span class="line">        sweeps_history.append(old_state_value)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> state <span class="keyword">in</span> STATES[<span class="number">1</span>:GOAL]:</span><br><span class="line">            <span class="comment">#计算当前可操作得赌注（可行动作）</span></span><br><span class="line">            actions = np.arange(<span class="number">1</span>, min(state, GOAL - state) + <span class="number">1</span>)</span><br><span class="line">            action_returns = []</span><br><span class="line">            <span class="keyword">for</span> action <span class="keyword">in</span> actions:</span><br><span class="line">                action_returns.append(<span class="number">0</span> + PROB * state_value[state + action] + (<span class="number">1</span> - PROB) * state_value[state - action])</span><br><span class="line">            max_vaLue = np.max(action_returns)</span><br><span class="line">            <span class="comment">#在选择价值最大动作的时候它们的价值进行了四舍五入，这是由于可能存在非常接近的两个价值，</span></span><br><span class="line">            <span class="comment">#而它们对应的动作一个较大，一个较小</span></span><br><span class="line">            <span class="comment">#为了得到与书上相同的结果，倾向于选择较小的那个，而argmax在遇到相同的值时返回前面的那个，</span></span><br><span class="line">            <span class="comment">#因此可以四舍五入让非常接近的价值相等再返回</span></span><br><span class="line">            max_action = np.argmax(np.round(action_returns,<span class="number">9</span>))  </span><br><span class="line">            state_value[state] = max_vaLue   <span class="comment">#直接选取价值最大的动作</span></span><br><span class="line">            policy[state] = actions[max_action]  <span class="comment">#同时更新当前最佳策略</span></span><br><span class="line">        delta = abs(state_value - old_state_value).max()</span><br><span class="line">        <span class="keyword">if</span> delta &lt; <span class="number">1e-9</span>:</span><br><span class="line">            sweeps_history.append(state_value)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    </span><br><span class="line">    plt.figure(figsize = (<span class="number">10</span>, <span class="number">20</span>))</span><br><span class="line">    plt.subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">for</span> sweep, state_value <span class="keyword">in</span> enumerate(sweeps_history):</span><br><span class="line">        plt.plot(state_value, label = <span class="string">'sweep &#123;&#125;'</span>.format(sweep))</span><br><span class="line">    plt.xlabel(<span class="string">'capital'</span>)</span><br><span class="line">    plt.ylabel(<span class="string">'Value estimates'</span>)</span><br><span class="line">    plt.legend(loc = <span class="string">'best'</span>)</span><br><span class="line"></span><br><span class="line">    plt.subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">    plt.scatter(STATES, policy)</span><br><span class="line">    plt.xlabel(<span class="string">'Capital'</span>)</span><br><span class="line">    plt.ylabel(<span class="string">'Final policy'</span>)</span><br><span class="line">    plt.show()</span><br><span class="line">    plt.close()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    slove()</span><br></pre></td></tr></table></figure>
+<p><img src="1587401561816.png" alt="1587401561816"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="../函数逼近离轨11/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="../Sutton/C9_tile_coding/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">brezezee</p>
+              <p class="site-description motion-element" itemprop="description">靡不有初，鲜克有终</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="https://brezezee.github.io/archives">
+              
+                  <span class="site-state-item-count">139</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="../../../../../categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="../../../../../tags/index.html">
+                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#网格问题-policy-evaluation"><span class="nav-text">网格问题(policy evaluation)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4方格游走问题-PE"><span class="nav-text">4*4方格游走问题(PE)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4方格问题（两种方法）"><span class="nav-text">4*4方格问题（两种方法）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#杰克租车问题-策略迭代"><span class="nav-text">杰克租车问题(策略迭代)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#赌徒问题"><span class="nav-text">赌徒问题</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">brezezee</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">180.7k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../../js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="../../../../../js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="../../../../../js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="../../../../../js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../../js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://brezezee.github.io/2020/09/09/Reinforcement Learning/MDP/';
+          this.page.identifier = '2020/09/09/Reinforcement Learning/MDP/';
+          this.page.title = '';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

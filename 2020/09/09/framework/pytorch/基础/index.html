@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="../../../../../../lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="../../../../../../lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="../../../../../../css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="../../../../../../images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../../../../images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="../../../../../../images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="../../../../../../images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="pytorch包含的组件&amp;emsp;&amp;emsp;PyTorch的核心是提供多维数组的库，在PyTorch术语中这些多维数组称为张量（tensor），而torch模块则提供了可对其进行扩展操作的库。张量和相关操作都可以在CPU或GPU上运行。PyTorch提供的第二个核心功能是允许张量跟踪对其所执行的操作，并通过反向传播来计算输出相对于其任何输入的导数。此功能由张量自身提供，并通过torch.aut">
+<meta name="keywords" content="ml,dl,cv,ai">
+<meta property="og:type" content="article">
+<meta property="og:title" content="brezezee">
+<meta property="og:url" content="https://brezezee.github.io/2020/09/09/framework/pytorch/基础/index.html">
+<meta property="og:site_name" content="brezezee">
+<meta property="og:description" content="pytorch包含的组件&amp;emsp;&amp;emsp;PyTorch的核心是提供多维数组的库，在PyTorch术语中这些多维数组称为张量（tensor），而torch模块则提供了可对其进行扩展操作的库。张量和相关操作都可以在CPU或GPU上运行。PyTorch提供的第二个核心功能是允许张量跟踪对其所执行的操作，并通过反向传播来计算输出相对于其任何输入的导数。此功能由张量自身提供，并通过torch.aut">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://brezezee.github.io/2020/09/09/framework/pytorch/基础/2.2.png">
+<meta property="og:image" content="https://tangshusen.me/Deep-Learning-with-PyTorch-Chinese/img/chapter2/2.3.png">
+<meta property="og:image" content="https://tangshusen.me/Deep-Learning-with-PyTorch-Chinese/img/chapter2/2.4.png">
+<meta property="og:updated_time" content="2020-04-09T04:01:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="brezezee">
+<meta name="twitter:description" content="pytorch包含的组件&amp;emsp;&amp;emsp;PyTorch的核心是提供多维数组的库，在PyTorch术语中这些多维数组称为张量（tensor），而torch模块则提供了可对其进行扩展操作的库。张量和相关操作都可以在CPU或GPU上运行。PyTorch提供的第二个核心功能是允许张量跟踪对其所执行的操作，并通过反向传播来计算输出相对于其任何输入的导数。此功能由张量自身提供，并通过torch.aut">
+<meta name="twitter:image" content="https://brezezee.github.io/2020/09/09/framework/pytorch/基础/2.2.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://brezezee.github.io/2020/09/09/framework/pytorch/基础/">
+
+
+
+
+
+  <title> | brezezee</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">brezezee</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="https://brezezee.github.io" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="https://brezezee.github.io/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="https://brezezee.github.io/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-categories"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="https://brezezee.github.io/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="https://brezezee.github.io/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://brezezee.github.io">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="brezezee">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="../../../../../../images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="brezezee">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-09T11:35:58+08:00">
+                2020-09-09
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2020-04-09T12:01:12+08:00">
+                2020-04-09
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/09/09/framework/pytorch/基础/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  3.5k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="pytorch包含的组件"><a href="#pytorch包含的组件" class="headerlink" title="pytorch包含的组件"></a>pytorch包含的组件</h3><p>&emsp;&emsp;PyTorch的核心是提供多维数组的库，在PyTorch术语中这些多维数组称为张量（tensor），而<code>torch</code>模块则提供了可对其进行扩展操作的库。张量和相关操作都可以在CPU或GPU上运行。PyTorch提供的第二个核心功能是允许张量跟踪对其所执行的操作，并通过反向传播来计算输出相对于其任何输入的导数。此功能由张量自身提供，并通过<code>torch.autograd</code>进一步扩展完善。</p>
+<p>&emsp;&emsp;PyTorch中用于构建神经网络的核心模块位于<code>torch.nn</code>中，该模块提供了常见的神经网络层和其他架构组件。全连接层、卷积层、激活函数和损失函数都能在该模块找到。为了训练该模型，你需要以下几点（除了循环本身以外，循环可直接采用标准的Python for循环）：训练数据的资源、使模型能够适应训练数据的优化器以及将模型和数据导入硬件中的方法，该硬件将执行训练模型所需的计算。</p>
+<p>&emsp;&emsp;<code>torch.util.data</code>模块能够找到适用于数据加载和处理的工具。需要用到的两个主要的类是<code>Dataset</code>和<code>DataLoader</code>。<code>Dataset</code>承担了你的自定义的数据（可以是任何一种格式）与标准PyTorch张量之间的转换任务。<code>DataLoader</code>可以在后台生成子进程来从<code>Dataset</code>中加载数据，使数据准备就绪并在循环可以使用后立即等待训练循环。</p>
+<p>在最简单的情况下，模型将在本地CPU或单个GPU上运行所需的计算。因此，当训练循环获取到数据时就能够立即开始运算。然而更常见的情形是使用专用的硬件（例如多个GPU）或利用多台计算机的资源来训练模型。在这些情况下，可以通过<code>torch.nn.DataParallel</code>和<code>torch.distributed</code>来使用其他的可用硬件。</p>
+<p>当模型根据训练数据得到输出结果后，<code>torch.optim</code>提供了更新模型的标准方法，从而使输出更接近于训练数据中的标签。</p>
+<h3 id="张量-Tensor"><a href="#张量-Tensor" class="headerlink" title="张量(Tensor)"></a>张量(Tensor)</h3><p>&emsp;&emsp;PyTorch引入了一个基本的数据结构：张量（tensor）。张量是指将向量（vector）和矩阵（matrix）推广到任意维度，如下图所示。与张量相同概念的另一个名称是多维数组（multidimensional array）。</p>
+<p><img src="2.2.png" alt="2.2"></p>
+<p>PyTorch并不是唯一能处理多维数组的库。NumPy是迄今为止最受欢迎的多维数组处理库，以至于它可以被当做数据科学的通用语言。事实上，PyTorch可以与NumPy无缝衔接，从而使得PyTorch能够与Python中的其他科学库（如<a href="https://www.scipy.org/" target="_blank" rel="noopener">SciPy</a>、<a href="https://scikit-learn.org/stable" target="_blank" rel="noopener">Scikit-learn</a>和<a href="https://pandas.pydata.org/" target="_blank" rel="noopener">Pandas</a>）进行高度的整合。与NumPy数组相比，PyTorch的张量具有一些更强大功能，例如能够在GPU进行快速运算、在多个设备或机器上进行分布式操作以及跟踪所创建的计算图。所有这些功能对于实现现代深度学习库都很重要。</p>
+<p>在Python中可用list来存储和处理向量，但是效率很低：</p>
+<ol>
+<li><p>Python中的数是完整（ full-fledged）的对象。* 浮点数只需要32位就可以在计算机上表示，而Python将它们封装（boxes）在具有引用计数等功能的完整Python对象中。如果只需要存储少量数字，这种做法就没问题，但是要想分配数百万个这样的数字效率就太低了。</p>
+</li>
+<li><p>Python中的列表用于对象的有序集合。* 没有定义高效计算两个向量点积或向量求和的操作。此外，Python列表无法优化其在内存中的布局，因为它们是指向Python对象（任何类型，而不仅仅是数字）的可索引指针集合。最后，Python列表是一维的，尽管我们可以创建列表的列表，但这种做法仍然效率很低。</p>
+</li>
+<li><p>与经过优化和编译的代码相比，Python解释器速度较慢。* 使用可编译的低层语言（例如C）编写的优化代码可以更快地对大量数据进行数学运算。</p>
+</li>
+</ol>
+<p>由于这些原因，数据科学库依赖于NumPy或引入专用数据结构（例如PyTorch张量），这些结构提供了高效的数值数据结构的底层实现以及相关运算，并被封装成高级API。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = torch.ones(<span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">tensor([<span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[<span class="number">1</span>]</span><br><span class="line">tensor(<span class="number">1.</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>float(a[<span class="number">1</span>])</span><br><span class="line"><span class="number">1.0</span></span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;看起来这和python列表区别不大，但实际完全不同。python列表和元组是在内存中单独分配的python对象的集合，而pytorch张量和numpy数组(通常）是连续内存上的视图（view）。</p>
+<p><img src="https://tangshusen.me/Deep-Learning-with-PyTorch-Chinese/img/chapter2/2.3.png" alt="2.3"></p>
+<ul>
+<li>二维张量</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; p = torch.zeros(3,2)</span><br><span class="line">&gt;&gt;&gt; p.shape</span><br><span class="line">torch.Size([3, 2])</span><br><span class="line">&gt;&gt;&gt; p = torch.tensor([[1,2],[3,4],[5,6]])</span><br><span class="line">&gt;&gt;&gt; p</span><br><span class="line"></span><br><span class="line">tensor([[1, 2],</span><br><span class="line">        [3, 4],</span><br><span class="line">        [5, 6]])</span><br><span class="line">&gt;&gt;&gt; p = torch.FloatTensor([[1,2],[3,4],[5,6]])</span><br><span class="line">&gt;&gt;&gt; p</span><br><span class="line">tensor([[1., 2.],</span><br><span class="line">        [3., 4.],</span><br><span class="line">        [5., 6.]])</span><br><span class="line">&gt;&gt;&gt; p[0]</span><br><span class="line">tensor([1., 2.])</span><br><span class="line">&gt;&gt;&gt; p.storage()   #获取存储</span><br><span class="line"> 1.0</span><br><span class="line"> 2.0</span><br><span class="line"> 3.0</span><br><span class="line"> 4.0</span><br><span class="line"> 5.0</span><br><span class="line"> 6.0</span><br><span class="line">[torch.FloatStorage of size 6]</span><br></pre></td></tr></table></figure>
+<h3 id="张量存储"><a href="#张量存储" class="headerlink" title="张量存储"></a>张量存储</h3><p>&emsp;&emsp;它的使用方法和numpy数组类似。数值分配在连续的内存块中，由<code>torch.Storage</code>实例管理。存储（<code>Storage</code>）是一个一维的数值数据数组，例如一块包含了指定类型（可能是float或int32）数字的连续内存块。多个张量可以索引同一存储，比如一个$2\times 3$的张量和$3\times 2$的张量。</p>
+<p><img src="https://tangshusen.me/Deep-Learning-with-PyTorch-Chinese/img/chapter2/2.4.png" alt="2.4"></p>
+<p>如图，storage始终是一维的，张量根据不同的张量维度来查找其数据。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>p[<span class="number">2</span>].storage_offset()</span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>p[<span class="number">2</span>,<span class="number">1</span>].storage_offset()</span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>p.stride()</span><br><span class="line">(<span class="number">2</span>, <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;张量的偏移指的是在存储中相对于第一个点的位移量，索引正是这样找到其在storage中的地址。stride是步长，步长是一个元组，表示当索引在每个维度上增加1时必须跳过的存储中元素的数量。上面第一维数据每维有两个元素，因此步长是2.</p>
+<p>&emsp;&emsp;张量和存储之间的间接操作会使得某些操作（如转置或提取子张量）的代价很小，因为它不需要重新分配内存，只需分配一个具有不同尺寸、偏移和步长的新张量。例如p[2] 是一个新的张量，它的shape是$2\times 1$ ，偏移是 4，步长是$(1,\;)$。它的维度减少了一个，同时可以看到索引在原来的存储上，因此改变子张量也会改变原始张量。</p>
+<p>如果不希望改变原始张量的话，可以通过克隆的方式</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">p_copy = p[<span class="number">2</span>].clone()</span><br></pre></td></tr></table></figure>
+<p>下面是转置的效果</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>p</span><br><span class="line">tensor([[<span class="number">1.</span>, <span class="number">2.</span>],</span><br><span class="line">        [<span class="number">3.</span>, <span class="number">4.</span>],</span><br><span class="line">        [<span class="number">5.</span>, <span class="number">6.</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>p_t = p.t()   <span class="comment">#二维情况可以直接用t(),这是transpose(input,dim0,dim1)的缩写</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>p_t</span><br><span class="line">tensor([[<span class="number">1.</span>, <span class="number">3.</span>, <span class="number">5.</span>],</span><br><span class="line">        [<span class="number">2.</span>, <span class="number">4.</span>, <span class="number">6.</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>id(p.storage()) ==id( p_t.storage())</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>p_t.shape</span><br><span class="line">torch.Size([<span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>p_t.stride()</span><br><span class="line">(<span class="number">1</span>, <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<p>它们不同的仅仅是尺寸和步长而已。这理解起来也比较显然，原始张量在对应维度上按步长增加就能访问到该维度下一个元素。因此转置的时候，只需将对应维度的尺寸和步长交换即可。</p>
+<p>对于更高的维度</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = torch.ones(<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.shape, s.stride()</span><br><span class="line">(torch.Size([<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]), (<span class="number">20</span>, <span class="number">5</span>, <span class="number">1</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>st = s.transpose(<span class="number">0</span>,<span class="number">1</span>)  <span class="comment">#交换第一维和第二维</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>st.shape, st.stride()</span><br><span class="line">(torch.Size([<span class="number">4</span>, <span class="number">3</span>, <span class="number">5</span>]), (<span class="number">5</span>, <span class="number">20</span>, <span class="number">1</span>))   <span class="comment">#对应的形状和步长也交换</span></span><br></pre></td></tr></table></figure>
+<h3 id="连续存储"><a href="#连续存储" class="headerlink" title="连续存储"></a>连续存储</h3><p>在上面的例子中，原张量是连续的(contiguous)，但是转置不是，它只改变了形状和步长参数，但用的是原来的存储。可用contiguous()将非连续张量连续化，它对storage进行了重排。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; p</span><br><span class="line">tensor([[1., 2.],</span><br><span class="line">        [3., 4.],</span><br><span class="line">        [5., 6.]])</span><br><span class="line">&gt;&gt;&gt; pt = p.t()</span><br><span class="line">&gt;&gt;&gt; p.is_contiguous(), pt.is_contiguous()</span><br><span class="line">(True, False)</span><br><span class="line">&gt;&gt;&gt; pt.storage()</span><br><span class="line"> 1.0</span><br><span class="line"> 2.0</span><br><span class="line"> 3.0</span><br><span class="line"> 4.0</span><br><span class="line"> 5.0</span><br><span class="line"> 6.0</span><br><span class="line">[torch.FloatStorage of size 6]</span><br><span class="line">&gt;&gt;&gt; pt.stride()</span><br><span class="line">(1, 2)</span><br><span class="line">&gt;&gt;&gt; pt_con = pt.contiguous()</span><br><span class="line">&gt;&gt;&gt; pt_con</span><br><span class="line">tensor([[1., 3., 5.],</span><br><span class="line">        [2., 4., 6.]])</span><br><span class="line">&gt;&gt;&gt; pt_con.stride()</span><br><span class="line">(3, 1)</span><br><span class="line">&gt;&gt;&gt; pt_con.storage()</span><br><span class="line"> 1.0</span><br><span class="line"> 3.0</span><br><span class="line"> 5.0</span><br><span class="line"> 2.0</span><br><span class="line"> 4.0</span><br><span class="line"> 6.0</span><br><span class="line">[torch.FloatStorage of size 6]</span><br></pre></td></tr></table></figure>
+<h3 id="类型转化与索引"><a href="#类型转化与索引" class="headerlink" title="类型转化与索引"></a>类型转化与索引</h3><ul>
+<li>pytorch的数据类型与Numpy兼容，可使用多种方法创建确定类型的张量，也可以通过type方法将一种类型的张量转换为另一种类型。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">p = torch.ones(<span class="number">10</span>,<span class="number">2</span>, dtype = torch.double)</span><br><span class="line">p = torch.ones(<span class="number">10</span>,<span class="number">2</span>).double()</span><br><span class="line">p = torch.ones(<span class="number">10</span>,<span class="number">2</span>).to(torch.double)</span><br><span class="line"></span><br><span class="line">s = p.type(torch.short)</span><br><span class="line">s = p.short()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>pytorch的索引方法与Numpy基本相同，可通过切片来进行区间索引。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">some_list[:]     # 所有元素</span><br><span class="line">some_list[1:4]   # 第1（含）到第4（不含）个元素</span><br><span class="line">some_list[1:]    # 第1（含）个之后所有元素</span><br><span class="line">some_list[:4]    # 第4（不含）个之前所有元素</span><br><span class="line">some_list[:-1]   # 最末尾（不含）元素之前所有元素</span><br><span class="line">some_list[1:4:2] # 范围1（含）到4（不含），步长为2的元素</span><br><span class="line"></span><br><span class="line">#多维（这里用二维举例）</span><br><span class="line">points[1:]    # 第1行及之后所有行，（默认）所有列</span><br><span class="line">points[1:, :] # 第1行及之后所有行，所有列</span><br><span class="line">points[1:, 0] # 第1行及之后所有行，仅第0列</span><br></pre></td></tr></table></figure>
+<ul>
+<li>pytorch的张量与numpy的数组可以互相转换。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#从张量p创建numpy数组</span><br><span class="line">&gt;&gt;&gt; p =torch.ones(3,2)</span><br><span class="line">&gt;&gt;&gt; np = p.numpy()</span><br><span class="line">&gt;&gt;&gt; np</span><br><span class="line">array([[1., 1.],</span><br><span class="line">       [1., 1.],</span><br><span class="line">       [1., 1.]], dtype=float32)</span><br></pre></td></tr></table></figure>
+<p>它返回尺寸、形状和数值类型正确的NumPy多维数组。有趣的是，返回的数组与张量存储共享一个基础缓冲区。因此，只要数据位于CPU RAM中，<code>numpy</code>方法就可以几乎零花费地高效执行，并且修改得到的NumPy数组会导致原始张量发生变化。</p>
+<p>如果在GPU上分配了张量，（调用<code>numpy</code>方法时）PyTorch会将张量的内容复制到在CPU上分配的NumPy数组中。</p>
+<p>相反，你可以通过以下方式从NumPy数组创建PyTorch张量：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">points = torch.from_numpy(points_np)</span><br></pre></td></tr></table></figure>
+<p><code>from_numpy</code>使用相同的缓冲共享策略。</p>
+<h3 id="模型张量的保存"><a href="#模型张量的保存" class="headerlink" title="模型张量的保存"></a>模型张量的保存</h3><p>PyTorch内部使用<code>pickle</code>来序列化张量对象和实现用于存储的专用序列化代码。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">torch.save(points, <span class="string">'../../data/chapter2/ourpoints.t'</span>)</span><br></pre></td></tr></table></figure>
+<p>或者，你也可以传递文件描述符代替文件名：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">'../../data/chapter2/ourpoints.t'</span>,<span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    torch.save(points, f)</span><br></pre></td></tr></table></figure>
+<p>将<code>points</code>加载回来也是一行类似代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">points = torch.load(<span class="string">'../../data/chapter2/ourpoints.t'</span>)</span><br></pre></td></tr></table></figure>
+<p>等价于</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">'../../data/chapter2/ourpoints.t'</span>,<span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    points = torch.load(f)</span><br></pre></td></tr></table></figure>
+<p>这个文件是pytorch特有的，用其他软件无法打开，如果想与其他库或环境使用，可以用HDF5格式和库，它以Numpy数组的形式接收和返货数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install h5py</span><br></pre></td></tr></table></figure>
+<p>使用h5py保存前需要将张量转换为numpy数组</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 保存</span></span><br><span class="line">f = h5py.File(<span class="string">'../../data/chapter2/ourpoints.hdf5'</span>, <span class="string">'w'</span>)</span><br><span class="line">dset = f.create_dataset(<span class="string">'coords'</span>, data=points.numpy())</span><br><span class="line">f.close()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提取</span></span><br><span class="line">f = h5py.File(<span class="string">'../../data/chapter2/ourpoints.hdf5'</span>, <span class="string">'r'</span>)</span><br><span class="line">dset = f[<span class="string">'coords'</span>]</span><br><span class="line"><span class="comment"># coords是传入HDF5文件的键值。你还可以有其他键值，甚至是嵌套键值。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#可以将返回的对象传递给torch.from_numpy函数以直接获取张量。需要注意的是，在这种情况下，数据将复制到张量存储中：</span></span><br><span class="line">last_points = torch.from_numpy(dset)</span><br><span class="line">f.close()</span><br><span class="line"><span class="comment"># 记得关闭文件</span></span><br></pre></td></tr></table></figure>
+<h3 id="张量转移到GPU运行"><a href="#张量转移到GPU运行" class="headerlink" title="张量转移到GPU运行"></a>张量转移到GPU运行</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">points_gpu = torch.tensor([[1.0, 4.0], [2.0, 1.0], [3.0, 4.0]], device=&apos;cuda&apos;) #直接在GPU创建</span><br><span class="line">points_gpu = points.to(device=&apos;cuda&apos;) #从cpu复制到GPU</span><br><span class="line">points_gpu = points.to(device=&apos;cuda:0&apos;)  #指定GPU</span><br><span class="line"></span><br><span class="line">points_cpu = points_gpu.to(device=&apos;cpu&apos;) #移回cpu</span><br><span class="line"></span><br><span class="line"># 简写</span><br><span class="line">points_gpu = points.cuda() # 默认为GPU0</span><br><span class="line">points_gpu = points.cuda(0)</span><br><span class="line">points_cpu = points_gpu.cpu()</span><br><span class="line"></span><br><span class="line">#to方法的优势是可以指定数据类型和更改位置</span><br></pre></td></tr></table></figure>
+<h3 id="相关API"><a href="#相关API" class="headerlink" title="相关API"></a>相关API</h3><p>首先，在<code>torch</code>模块下可进行张量上和张量之间的绝大多数操作，这些操作也可以作为张量对象的方法进行调用。例如，你可以通过<code>torch</code>模块使用先前遇到的<code>transpose</code>函数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = torch.ones(<span class="number">3</span>, <span class="number">2</span>)</span><br><span class="line">a_t = torch.transpose(a, <span class="number">0</span>, <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p>或者调用<code>a</code>张量的方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = torch.ones(3, 2)</span><br><span class="line">a_t = a.transpose(0, 1)</span><br></pre></td></tr></table></figure>
+<p>以上两种形式之间没有区别，可以互换使用。需要注意的是：有少量的操作仅作为张量对象的方法存在。你可以通过名称中的下划线来识别它们，例如<code>zero_</code>，下划线标识表明该方法是就地（inplace）运行的，即直接修改输入而不是创建新的输出并返回。例如，<code>zero_</code>方法会将输入的所有元素清零。任何不带下划线的方法都将保持源张量不变并返回新的张量：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = torch.ones(<span class="number">3</span>, <span class="number">2</span>)</span><br><span class="line">a.zero_()</span><br></pre></td></tr></table></figure>
+<p>输出:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tensor([[0., 0.],</span><br><span class="line">        [0., 0.],</span><br><span class="line">        [0., 0.]])</span><br></pre></td></tr></table></figure>
+<ul>
+<li>创建操作 —— 构造张量的函数，例如<code>ones</code>和<code>from_numpy</code>；</li>
+<li>索引、切片、联接和变异操作 —— 更改形状、步长或张量内容，例如<code>transpose</code>；</li>
+<li>数学操作 —— 通过计算来操纵张量内容的函数：<ul>
+<li>按点（pointwise）操作 —— 将函数分别应用于每个元素（例如<code>abs</code>和<code>cos</code>）的函数</li>
+<li>简化（reduction）操作 —— 通过张量迭代计算合计值的函数，例如<code>mean</code>、<code>std</code>和<code>norm</code>；</li>
+<li>比较操作 —— 用于比较张量的函数，例如<code>equal</code>和<code>max</code>；</li>
+<li>频谱操作 —— 在频域中转换和运行的函数，例如<code>stft</code>和<code>hamming_window</code>；</li>
+<li>其他操作 —— 一些特殊函数，例如对于向量的<code>cross</code>，对于矩阵的<code>trace</code>；</li>
+<li>BLAS和LAPACK操作 —— 遵循BLAS（Basic Linear Algebra Subprograms）规范的函数，用于标量、向量与向量、矩阵与向量和矩阵与矩阵的运算。</li>
+</ul>
+</li>
+<li>随机采样操作 —— 从概率分布中随机采样值的函数，例如<code>randn</code>和<code>normal</code>;</li>
+<li>序列化操作 —— 用于保存和加载张量的函数，例如<code>save</code>和<code>load</code>；</li>
+<li>并行操作 —— 控制并行CPU执行的线程数的函数，例如<code>set_num_threads</code>；</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="../../../Language/python/Untitled/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="../各类数据表示/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">brezezee</p>
+              <p class="site-description motion-element" itemprop="description">靡不有初，鲜克有终</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="https://brezezee.github.io/archives">
+              
+                  <span class="site-state-item-count">139</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="../../../../../../categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="../../../../../../tags/index.html">
+                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#pytorch包含的组件"><span class="nav-text">pytorch包含的组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#张量-Tensor"><span class="nav-text">张量(Tensor)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#张量存储"><span class="nav-text">张量存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连续存储"><span class="nav-text">连续存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类型转化与索引"><span class="nav-text">类型转化与索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模型张量的保存"><span class="nav-text">模型张量的保存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#张量转移到GPU运行"><span class="nav-text">张量转移到GPU运行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相关API"><span class="nav-text">相关API</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">brezezee</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">180.7k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../../../js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="../../../../../../js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="../../../../../../js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="../../../../../../js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../../../js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://brezezee.github.io/2020/09/09/framework/pytorch/基础/';
+          this.page.identifier = '2020/09/09/framework/pytorch/基础/';
+          this.page.title = '';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

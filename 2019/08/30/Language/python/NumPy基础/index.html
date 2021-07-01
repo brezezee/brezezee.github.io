@@ -87,10 +87,12 @@
 <meta property="og:site_name" content="brezezee">
 <meta property="og:description" content="1.1 NumPy的特点与数据类型&amp;emsp;&amp;emsp;$NumPy$能提供类似于C的数组的结构ndarray，一维的常称为向量$vector$，多维的称之为矩阵$matrix$。$NumPy$的数组(向量、矩阵)的各类运算要比$Python$里类似结构类型list列表运算处理速度要快很多！$NumPy$提供大量的数学计算函数尤其是对向量、矩阵的运算函数相当的多和丰富。快速的基于内存映射和处理的">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-09-22T04:35:05.000Z">
+<meta property="og:image" content="https://brezezee.github.io/2019/08/30/Language/python/NumPy基础/1592893946560.png">
+<meta property="og:updated_time" content="2020-06-23T06:32:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NumPy基础">
 <meta name="twitter:description" content="1.1 NumPy的特点与数据类型&amp;emsp;&amp;emsp;$NumPy$能提供类似于C的数组的结构ndarray，一维的常称为向量$vector$，多维的称之为矩阵$matrix$。$NumPy$的数组(向量、矩阵)的各类运算要比$Python$里类似结构类型list列表运算处理速度要快很多！$NumPy$提供大量的数学计算函数尤其是对向量、矩阵的运算函数相当的多和丰富。快速的基于内存映射和处理的">
+<meta name="twitter:image" content="https://brezezee.github.io/2019/08/30/Language/python/NumPy基础/1592893946560.png">
 
 
 
@@ -308,8 +310,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-09-22T12:35:05+08:00">
-                2019-09-22
+              <time title="Post modified" itemprop="dateModified" datetime="2020-06-23T14:32:30+08:00">
+                2020-06-23
               </time>
             
           </span>
@@ -368,7 +370,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  3k
+                  3.5k
                 </span>
               
 
@@ -587,6 +589,16 @@
 <p>&emsp;&emsp;在每个维度中进行切片时，参数使用与一维切片基本相同，每个维度可使用不同的默认参数。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a   <span class="comment">#三维array</span></span><br><span class="line">array([[[ <span class="number">0</span>,  <span class="number">1</span>,  <span class="number">2</span>,  <span class="number">3</span>],</span><br><span class="line">        [ <span class="number">4</span>,  <span class="number">5</span>,  <span class="number">6</span>,  <span class="number">7</span>],</span><br><span class="line">        [ <span class="number">8</span>,  <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">12</span>, <span class="number">13</span>, <span class="number">14</span>, <span class="number">15</span>],</span><br><span class="line">        [<span class="number">16</span>, <span class="number">17</span>, <span class="number">18</span>, <span class="number">19</span>],</span><br><span class="line">        [<span class="number">20</span>, <span class="number">21</span>, <span class="number">22</span>, <span class="number">23</span>]]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[<span class="number">0</span>, <span class="number">1</span>]</span><br><span class="line">array([<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[<span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>]   <span class="comment">#触发字段访问</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[<span class="number">0</span>, <span class="number">0</span>:<span class="number">3</span>:<span class="number">1</span>]</span><br><span class="line">array([[ <span class="number">0</span>,  <span class="number">1</span>,  <span class="number">2</span>,  <span class="number">3</span>],</span><br><span class="line">       [ <span class="number">4</span>,  <span class="number">5</span>,  <span class="number">6</span>,  <span class="number">7</span>],</span><br><span class="line">       [ <span class="number">8</span>,  <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[<span class="number">0</span>, <span class="number">0</span>:<span class="number">3</span>:<span class="number">1</span>, <span class="number">0</span>:<span class="number">2</span>]</span><br><span class="line">array([[<span class="number">0</span>, <span class="number">1</span>],</span><br><span class="line">       [<span class="number">4</span>, <span class="number">5</span>],</span><br><span class="line">       [<span class="number">8</span>, <span class="number">9</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[<span class="number">0</span>:, <span class="number">0</span>:<span class="number">3</span>:<span class="number">1</span>, <span class="number">0</span>:<span class="number">2</span>]</span><br><span class="line">array([[[ <span class="number">0</span>,  <span class="number">1</span>],</span><br><span class="line">        [ <span class="number">4</span>,  <span class="number">5</span>],</span><br><span class="line">        [ <span class="number">8</span>,  <span class="number">9</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">12</span>, <span class="number">13</span>],</span><br><span class="line">        [<span class="number">16</span>, <span class="number">17</span>],</span><br><span class="line">        [<span class="number">20</span>, <span class="number">21</span>]]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[<span class="number">0</span>, <span class="number">0</span>:<span class="number">1</span>, <span class="number">0</span>:<span class="number">1</span>]</span><br><span class="line">array([[<span class="number">0</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a[<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>:<span class="number">1</span>]   <span class="comment">#注意未使用冒号则会直接选择而不是切片</span></span><br><span class="line">array([<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
 <p>&emsp;&emsp;在一维$list$中，像$list[i]$这种仅给出一个确定索引，未添加冒号约束范围的，会直接返回一个字段访问结果，而不是$list$。多维中也是如此，比如二维数组中，$array[i,\;j]$会访问该位置的元素，也可沿用$C$中习惯，使用$array[i][j]$来访问。使用冒号给出范围之后，即使只有一个元素也会返回一个数组格式的数据。</p>
+<p><img src="1592893946560.png" alt="1592893946560"></p>
+<h3 id="1-3-高级索引"><a href="#1-3-高级索引" class="headerlink" title="1.3 高级索引"></a>1.3 高级索引</h3><p>Advanced indexing is triggered when the selection object, <em>obj</em>, is a non-tuple sequence object, an <code>ndarray</code>(of data type integer or bool), or a tuple with at least one sequence object or ndarray (of data type integer or bool). There are two types of advanced indexing: integer and Boolean.</p>
+<p>Advanced indexing always returns a <em>copy</em> of the data (contrast with basic slicing that returns a view</p>
+<p>在索引不是一个元组或单纯由整数组成，使用其他序列如列表或多个元组时，会触发高级索引。分为整数数组索引和布尔数组索引，一维情况下，整数数组索引就是选出给出的索引数组在被索引数组对应位置上的数：（注意高级索引得到的是原数组的copy，而不是视图）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; r = np.array(range(4))</span><br><span class="line">&gt;&gt;&gt; #r[(1,2)]  #会报错，这种情况普通索引是访问二维数组中元素的方法</span><br><span class="line">&gt;&gt;&gt; r[[1, 2]]  #访问一维中位置为1， 2的数</span><br><span class="line">array([1, 2])</span><br></pre></td></tr></table></figure>
+<p>高维的实际上都是这样方式的推广</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; x = np.array([[1, 2], [3, 4], [5, 6]])</span><br><span class="line">&gt;&gt;&gt; x[[0, 1, 2], [0, 1, 0]]</span><br><span class="line">array([1, 4, 5])</span><br></pre></td></tr></table></figure>
+<p>在这个索引中，第一个列表代表选取第一维中[0, 1, 2] 位置上的元素，第二个列表代表选择从刚刚第一维中选出的元素分别在[0, 1, 0]位置上的元素。这两个索引列表都是[1 <em> 3] 的维度，因此得到的便是[1 </em> 3 * 选出的元素的维度]， 广播方式对高级索引同样适用：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x[ [[<span class="number">0</span>], [<span class="number">1</span>]], [<span class="number">0</span>, <span class="number">1</span>]]</span><br><span class="line">array([[<span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">       [<span class="number">3</span>, <span class="number">4</span>]])</span><br></pre></td></tr></table></figure>
+<p>在这个索引中，第一个是[2 <em> 1]的数组，第二个是[1 </em> 2] 因此广播为[2 * 2] 的索引。</p>
 <h3 id="Reference："><a href="#Reference：" class="headerlink" title="Reference："></a>Reference：</h3><p>[1] <a href="https://numpy.org/doc/1.17/reference/index.html" target="_blank" rel="noopener">NumPy Reference</a></p>
 <p>[2] <a href="https://numpy.org/doc/1.17/user/index.html" target="_blank" rel="noopener">NumPy User Guide</a></p>
 <p>[3] <a href="numpy.org.cn">NumPy 中文文档</a></p>
@@ -634,8 +646,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="../../../../../09/01/algorithm/Leetcode/滑动窗口/" rel="prev" title="滑动窗口">
-                滑动窗口 <i class="fa fa-chevron-right"></i>
+              <a href="../../../../../09/01/algorithm/数据结构/前缀树/" rel="prev" title="LeetCode 208. 前缀树">
+                LeetCode 208. 前缀树 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -723,7 +735,7 @@
               
                 <a href="https://brezezee.github.io/archives">
               
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">139</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -778,7 +790,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-NumPy的特点与数据类型"><span class="nav-text">1.1 NumPy的特点与数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-数组Array"><span class="nav-text">1.2 数组Array</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-1-数组属性"><span class="nav-text">1.2.1 数组属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-2-数组方法"><span class="nav-text">1.2.2 数组方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-3-NumPy-索引和切片"><span class="nav-text">1.2.3 $NumPy$索引和切片</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reference："><span class="nav-text">Reference：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-NumPy的特点与数据类型"><span class="nav-text">1.1 NumPy的特点与数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-数组Array"><span class="nav-text">1.2 数组Array</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-1-数组属性"><span class="nav-text">1.2.1 数组属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-2-数组方法"><span class="nav-text">1.2.2 数组方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-3-NumPy-索引和切片"><span class="nav-text">1.2.3 $NumPy$索引和切片</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-高级索引"><span class="nav-text">1.3 高级索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reference："><span class="nav-text">Reference：</span></a></li></ol></div>
             
 
           </div>
@@ -798,7 +810,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -812,7 +824,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">72k</span>
+    <span title="Site words total count">180.7k</span>
   
 </div>
 

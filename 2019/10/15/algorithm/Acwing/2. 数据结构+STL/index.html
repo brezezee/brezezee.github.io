@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="../../../../../../lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="../../../../../../lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="../../../../../../css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="../../../../../../images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../../../../images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="../../../../../../images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="../../../../../../images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="算法模板,数据结构,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="STL  数组模拟单链表&amp;emsp;&amp;emsp;用数组模拟单链表，可以免去new占用的时间，加快算法执行速度。不过删除节点时会造成内存泄漏，但这一般是工程中考虑的问题，算法题跑时间就行了。 1234567891011121314// head 指向头节点， index 表示当前可用数组下标(只增)int head = -1, v[N], next[N], index = 0;//插入到头结点后（">
+<meta name="keywords" content="算法模板,数据结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="模板(数据结构)">
+<meta property="og:url" content="https://brezezee.github.io/2019/10/15/algorithm/Acwing/2. 数据结构+STL/index.html">
+<meta property="og:site_name" content="brezezee">
+<meta property="og:description" content="STL  数组模拟单链表&amp;emsp;&amp;emsp;用数组模拟单链表，可以免去new占用的时间，加快算法执行速度。不过删除节点时会造成内存泄漏，但这一般是工程中考虑的问题，算法题跑时间就行了。 1234567891011121314// head 指向头节点， index 表示当前可用数组下标(只增)int head = -1, v[N], next[N], index = 0;//插入到头结点后（">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://brezezee.github.io/2019/10/15/algorithm/Acwing/2.%20数据结构+STL/assets/1619358192132.png">
+<meta property="og:updated_time" content="2021-04-25T14:33:26.520Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="模板(数据结构)">
+<meta name="twitter:description" content="STL  数组模拟单链表&amp;emsp;&amp;emsp;用数组模拟单链表，可以免去new占用的时间，加快算法执行速度。不过删除节点时会造成内存泄漏，但这一般是工程中考虑的问题，算法题跑时间就行了。 1234567891011121314// head 指向头节点， index 表示当前可用数组下标(只增)int head = -1, v[N], next[N], index = 0;//插入到头结点后（">
+<meta name="twitter:image" content="https://brezezee.github.io/2019/10/15/algorithm/Acwing/2.%20数据结构+STL/assets/1619358192132.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://brezezee.github.io/2019/10/15/algorithm/Acwing/2. 数据结构+STL/">
+
+
+
+
+
+  <title>模板(数据结构) | brezezee</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">brezezee</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="https://brezezee.github.io" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="https://brezezee.github.io/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="https://brezezee.github.io/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-categories"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="https://brezezee.github.io/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="https://brezezee.github.io/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://brezezee.github.io">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="brezezee">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="../../../../../../images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="brezezee">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">模板(数据结构)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-15T00:00:00+08:00">
+                2019-10-15
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2021-04-25T22:33:26+08:00">
+                2021-04-25
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="../../../../../../categories/code-practice/" itemprop="url" rel="index">
+                    <span itemprop="name">刷题</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/10/15/algorithm/Acwing/2. 数据结构+STL/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1.9k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ul>
+<li>STL</li>
+</ul>
+<h3 id="数组模拟单链表"><a href="#数组模拟单链表" class="headerlink" title="数组模拟单链表"></a>数组模拟单链表</h3><p>&emsp;&emsp;用数组模拟单链表，可以免去new占用的时间，加快算法执行速度。不过删除节点时会造成内存泄漏，但这一般是工程中考虑的问题，算法题跑时间就行了。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// head 指向头节点， index 表示当前可用数组下标(只增)</span></span><br><span class="line"><span class="keyword">int</span> head = <span class="number">-1</span>, v[N], next[N], index = <span class="number">0</span>;</span><br><span class="line"><span class="comment">//插入到头结点后（头插法），头节点是递增的</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add2head</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    v[index] = x, ne[index] = head, head = index++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//插入到下标k后</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> k, <span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    v[index] = x, ne[index] = ne[k], ne[k] = index++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//删除下标k后一个节点</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">remove</span><span class="params">(<span class="keyword">int</span> k)</span></span>&#123;</span><br><span class="line">    ne[k] = ne[ne[k]];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="模拟栈和队列"><a href="#模拟栈和队列" class="headerlink" title="模拟栈和队列"></a>模拟栈和队列</h3><p>栈只需要一个top指针，队列需要一个头指针一个尾指针。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//*********************//栈</span></span><br><span class="line"><span class="keyword">int</span> stk[N], top = <span class="number">0</span>;</span><br><span class="line"><span class="comment">//p指向栈顶，插入时先+p再赋值</span></span><br><span class="line">stk[++top] = x;</span><br><span class="line"><span class="comment">//弹出</span></span><br><span class="line">top--;</span><br><span class="line"><span class="comment">//判断空</span></span><br><span class="line"><span class="keyword">if</span>(top &gt; <span class="number">0</span>) ;</span><br><span class="line"><span class="comment">//栈顶</span></span><br><span class="line">stk[top];</span><br><span class="line"></span><br><span class="line"><span class="comment">//**********************//队列</span></span><br><span class="line"><span class="comment">//队尾插入，队首弹出</span></span><br><span class="line"><span class="keyword">int</span> q[N], head = <span class="number">0</span>, tail = <span class="number">-1</span>;</span><br><span class="line"><span class="comment">//插入</span></span><br><span class="line">q[++tail] = x;</span><br><span class="line"><span class="comment">//弹出</span></span><br><span class="line">head ++;</span><br><span class="line"><span class="comment">// 判空</span></span><br><span class="line"><span class="keyword">if</span>(head &lt;= tail);</span><br><span class="line"><span class="comment">// 取队头</span></span><br><span class="line">q[head];</span><br><span class="line"></span><br><span class="line"><span class="comment">//*********************// 循环队列，hh和tt相等时为空，会损失一个容量</span></span><br><span class="line"><span class="comment">// hh 表示队头，tt表示队尾的后一个位置</span></span><br><span class="line"><span class="keyword">int</span> q[N], hh = <span class="number">0</span>, tt = <span class="number">0</span>;</span><br><span class="line"><span class="comment">// 向队尾插入一个数</span></span><br><span class="line">q[tt ++ ] = x;</span><br><span class="line"><span class="keyword">if</span> (tt == N) tt = <span class="number">0</span>;</span><br><span class="line"><span class="comment">// 从队头弹出一个数</span></span><br><span class="line">hh ++ ;</span><br><span class="line"><span class="keyword">if</span> (hh == N) hh = <span class="number">0</span>;</span><br><span class="line"><span class="comment">// 队头的值</span></span><br><span class="line">q[hh];</span><br><span class="line"><span class="comment">// 判断队列是否为空</span></span><br><span class="line"><span class="keyword">if</span> (hh != tt)</span><br></pre></td></tr></table></figure>
+<h3 id="单调栈"><a href="#单调栈" class="headerlink" title="单调栈"></a>单调栈</h3><p>给定一个数列，输出每个数左边离它最近的比它小的数，不存在输出-1.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1e5</span>+<span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n ;</span><br><span class="line"><span class="keyword">int</span> stk[N], tt=<span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)                          </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> x;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; x;</span><br><span class="line">        <span class="keyword">while</span>( tt &amp;&amp; stk[tt] &gt;= x) tt--; <span class="comment">//每次入栈前保证栈中之前的节点数值小于当前入栈值</span></span><br><span class="line">        <span class="keyword">if</span>(tt) <span class="built_in">cout</span> &lt;&lt; stk[tt] &lt;&lt; <span class="string">' '</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">cout</span> &lt;&lt; <span class="number">-1</span> &lt;&lt; <span class="string">' '</span>;</span><br><span class="line">        </span><br><span class="line">        stk[ ++tt ] = x;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="堆（以小根堆为例）"><a href="#堆（以小根堆为例）" class="headerlink" title="堆（以小根堆为例）"></a>堆（以小根堆为例）</h3><p>定义：完全二叉树，且父节点小于等于左右子节点。</p>
+<p>特性：左节点下标（2x），右节点下标（2x+1）。</p>
+<p>操作：down(x) : x变大了，那么需要往下调整。up(x) ：x变小了，需要往上调整。</p>
+<p><img src=".\assets\1619358192132.png" alt="1619358192132"></p>
+<h5 id="建堆（O-n-做法）"><a href="#建堆（O-n-做法）" class="headerlink" title="建堆（O(n)做法）"></a>建堆（O(n)做法）</h5><p>从$n / 2$处，即倒数第2层开始，往跟节点遍历，对这些节点执行down操作。最后一层经历过上层的down操作一定是满足堆定义的。O(n) 证明如下：</p>
+<p>倒数第二层有$ n / 4$个节点，则最多的操作的次数为：</p>
+<script type="math/tex; mode=display">
+\begin {aligned}
+&\frac n 4 \times 1 + \frac n 8 \times 2 + \frac n {16} \times 3 \dots \\
+=&\; n \left (\frac 1 {2^2} + \frac 2 {2^2} + \frac 3 {2^4} + \dots\right) \\
+&错位相减得\\
+\le & \; n
+\end {aligned}</script><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> heap[N], sz, m;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">down</span><span class="params">(<span class="keyword">int</span> idx)</span> </span>&#123; <span class="comment">// 往下调整需要与两个子节点比较</span></span><br><span class="line">    <span class="keyword">int</span> t = idx;</span><br><span class="line">    <span class="keyword">if</span> (<span class="number">2</span> * idx &lt;= sz &amp;&amp; heap[<span class="number">2</span> * idx] &lt; heap[t]) t = <span class="number">2</span> * idx;</span><br><span class="line">    <span class="keyword">if</span> (<span class="number">2</span> * idx + <span class="number">1</span> &lt;= sz &amp;&amp; heap[<span class="number">2</span> * idx + <span class="number">1</span>] &lt; heap[t]) t = <span class="number">2</span> * idx + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (idx != t) &#123;</span><br><span class="line">        swap(heap[t], heap[idx]);</span><br><span class="line">        down(t);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 建堆，从后开始往下调整即可</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = sz / <span class="number">2</span>; i != <span class="number">0</span>; -- i) down(i);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">up</span><span class="params">(<span class="keyword">int</span> idx)</span> </span>&#123; <span class="comment">// 往上调整只需要与父节点比较即可</span></span><br><span class="line">    <span class="keyword">while</span> (idx / <span class="number">2</span> &amp;&amp; heap[idx / <span class="number">2</span>] &gt; heap[idx]) &#123;</span><br><span class="line">        swap(heap[idx / <span class="number">2</span>], heap[u]);</span><br><span class="line">        idx /= <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="并查集"><a href="#并查集" class="headerlink" title="并查集"></a>并查集</h3><h4 id="朴素并查集"><a href="#朴素并查集" class="headerlink" title="朴素并查集"></a>朴素并查集</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 并查集模板题，主要功能是合并两个集合、查找两个元素是否属于同一集合</span></span><br><span class="line"><span class="comment">// 主要想法是建立一个集合数字的哈希表，表中保存当前数字的祖宗节点，若祖宗节点相同，表示它们是一个集合。</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1e5</span>+<span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> p[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(p[x] != x) p[x] = find(p[x]);<span class="comment">// 使用p[x]是为了合并集合时更改祖宗节点</span></span><br><span class="line">    <span class="keyword">return</span> p[x];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, m;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i ++) p[i] = i; <span class="comment">// 1. 并查集需要初始化自己为根节点</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(m -- )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">char</span> op[<span class="number">2</span>];</span><br><span class="line">        <span class="keyword">int</span> a, b;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%s%d%d"</span>, op, &amp;a, &amp;b);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(op[<span class="number">0</span>] == <span class="string">'M'</span>) p[find(a)] = find(b);  <span class="comment">// 2. 合并操作，将a的祖宗节点的祖宗节点设为b的祖宗节点</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(find(a) == find(b)) <span class="built_in">printf</span>(<span class="string">"Yes\n"</span>);  <span class="comment">// 查找操作</span></span><br><span class="line">            <span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"No\n"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="维护数量的并查集"><a href="#维护数量的并查集" class="headerlink" title="维护数量的并查集"></a>维护数量的并查集</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1e5</span>+<span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> p[N], num[N];</span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(p[x] != x) p[x] = find(p[x]);   <span class="comment">// 使用p[x]是为了合并集合时更改祖宗节点 ， 路径压缩</span></span><br><span class="line">    <span class="keyword">return</span> p[x];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    <span class="built_in">string</span> op;</span><br><span class="line">    <span class="keyword">int</span> a, b;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i ++)&#123;</span><br><span class="line">        p[i] = i;</span><br><span class="line">        num[i] = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(m --)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; op;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(op == <span class="string">"C"</span>)&#123;  <span class="comment">// 合并操作</span></span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b;</span><br><span class="line">            <span class="keyword">int</span> x = find(a), y = find(b);</span><br><span class="line">            <span class="keyword">if</span>(x != y)&#123;</span><br><span class="line">                p[x] = y;</span><br><span class="line">                num[y] += num[x];  <span class="comment">// b设为根节点</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(op == <span class="string">"Q1"</span>)&#123;  <span class="comment">// 查询是否在同一集合</span></span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b;</span><br><span class="line">            find(a)==find(b) ? <span class="built_in">puts</span>(<span class="string">"Yes"</span>) : <span class="built_in">puts</span>(<span class="string">"No"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;           <span class="comment">// 查询数量</span></span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; a;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, num[find(a)]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="STL"><a href="#STL" class="headerlink" title="STL"></a>STL</h3><ul>
+<li>priority_queue与set的区别</li>
+</ul>
+<p>其中优先队列是由堆实现的，适用于每次只取前面的数的情况。而set是由BST实现的，可以快速查询某个数是否在set中。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line">ector, 变长数组，倍增的思想</span><br><span class="line">    size()  返回元素个数</span><br><span class="line">    empty()  返回是否为空</span><br><span class="line">    clear()  清空</span><br><span class="line">    front()/back()</span><br><span class="line">    push_back()/pop_back()</span><br><span class="line">    begin()/end()</span><br><span class="line">    []</span><br><span class="line">    支持比较运算，按字典序</span><br><span class="line"></span><br><span class="line">pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;</span><br><span class="line">    first, 第一个元素</span><br><span class="line">    second, 第二个元素</span><br><span class="line">    支持比较运算，以first为第一关键字，以second为第二关键字（字典序）</span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span>，字符串</span><br><span class="line">    size()/length()  返回字符串长度</span><br><span class="line">    empty()</span><br><span class="line">    clear()</span><br><span class="line">    substr(起始下标，(子串长度))  返回子串</span><br><span class="line">    c_str()  返回字符串所在字符数组的起始地址</span><br><span class="line"></span><br><span class="line"><span class="built_in">queue</span>, 队列</span><br><span class="line">    size()</span><br><span class="line">    empty()</span><br><span class="line">    push()  向队尾插入一个元素</span><br><span class="line">    front()  返回队头元素</span><br><span class="line">    back()  返回队尾元素</span><br><span class="line">    pop()  弹出队头元素</span><br><span class="line"></span><br><span class="line">priority_queue, 优先队列，默认是大根堆</span><br><span class="line">    size()</span><br><span class="line">    empty()</span><br><span class="line">    push()  插入一个元素</span><br><span class="line">    top()  返回堆顶元素</span><br><span class="line">    pop()  弹出堆顶元素</span><br><span class="line">    定义成小根堆的方式：priority_queue&lt;<span class="keyword">int</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;, greater&lt;<span class="keyword">int</span>&gt;&gt; q;</span><br><span class="line"></span><br><span class="line"><span class="built_in">stack</span>, 栈</span><br><span class="line">    size()</span><br><span class="line">    empty()</span><br><span class="line">    push()  向栈顶插入一个元素</span><br><span class="line">    top()  返回栈顶元素</span><br><span class="line">    pop()  弹出栈顶元素</span><br><span class="line"></span><br><span class="line"><span class="built_in">deque</span>, 双端队列</span><br><span class="line">    size()</span><br><span class="line">    empty()</span><br><span class="line">    clear()</span><br><span class="line">    front()/back()</span><br><span class="line">    push_back()/pop_back()</span><br><span class="line">    push_front()/pop_front()</span><br><span class="line">    begin()/end()</span><br><span class="line">    []</span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span>, <span class="built_in">map</span>, <span class="built_in">multiset</span>, <span class="built_in">multimap</span>, 基于平衡二叉树（红黑树），动态维护有序序列</span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span>和<span class="built_in">map</span>的公共操作：</span><br><span class="line"></span><br><span class="line">	size()</span><br><span class="line">    empty()</span><br><span class="line">    clear()</span><br><span class="line">    begin()/end()</span><br><span class="line">    ++, -- 迭代器，返回前驱和后继，时间复杂度 O(logn)</span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span>和<span class="built_in">map</span>的区别：</span><br><span class="line">    <span class="built_in">set</span>/<span class="built_in">multiset</span></span><br><span class="line">        insert()  插入一个数</span><br><span class="line">        find()  查找一个数</span><br><span class="line">        count()  返回某一个数的个数</span><br><span class="line">        erase()</span><br><span class="line">            (<span class="number">1</span>) 输入是一个数x，删除所有<span class="function">x   <span class="title">O</span><span class="params">(k + logn)</span></span></span><br><span class="line">            (2) 输入一个迭代器，删除这个迭代器</span><br><span class="line">        lower_bound()/upper_bound()</span><br><span class="line">            lower_bound(x)  返回大于等于x的最小的数的迭代器</span><br><span class="line">            upper_bound(x)  返回大于x的最小的数的迭代器</span><br><span class="line">    <span class="built_in">map</span>/<span class="built_in">multimap</span></span><br><span class="line">        insert()  插入的数是一个pair</span><br><span class="line">        erase()  输入的参数是pair或者迭代器</span><br><span class="line">        find()</span><br><span class="line">        []  注意<span class="built_in">multimap</span>不支持此操作。 时间复杂度是 O(logn)</span><br><span class="line">        lower_bound()/upper_bound()</span><br><span class="line"></span><br><span class="line"><span class="built_in">unordered_set</span>, <span class="built_in">unordered_map</span>, <span class="built_in">unordered_multiset</span>, <span class="built_in">unordered_multimap</span>, 哈希表</span><br><span class="line">    和上面类似，增删改查的时间复杂度是 O(<span class="number">1</span>)</span><br><span class="line">    不支持 lower_bound()/upper_bound()， 迭代器的++，--</span><br><span class="line"></span><br><span class="line"><span class="built_in">bitset</span>, 圧位</span><br><span class="line">    <span class="built_in">bitset</span>&lt;10000&gt; s;</span><br><span class="line">    ~, &amp;, |, ^</span><br><span class="line">    &gt;&gt;, &lt;&lt;</span><br><span class="line">    ==, !=</span><br><span class="line">    []</span><br><span class="line"></span><br><span class="line">    count()  返回有多少个<span class="number">1</span></span><br><span class="line"></span><br><span class="line">    any()  判断是否至少有一个<span class="number">1</span></span><br><span class="line">    none()  判断是否全为<span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">set</span>()  把所有位置成<span class="number">1</span></span><br><span class="line">    <span class="built_in">set</span>(k, v)  将第k位变成v</span><br><span class="line">    reset()  把所有位变成<span class="number">0</span></span><br><span class="line">    flip()  等价于~</span><br><span class="line">    flip(k) 把第k位取反</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="../../../../../../tags/算法模板/" rel="tag"># 算法模板</a>
+          
+            <a href="../../../../../../tags/数据结构/" rel="tag"># 数据结构</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="../../../../../09/30/algorithm/Acwing/1. 基础模板/" rel="next" title="模板(基础模版)">
+                <i class="fa fa-chevron-left"></i> 模板(基础模版)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="../../../../17/ML/PLSA/PLSA/" rel="prev" title="概率潜在语义分析(PLSA)">
+                概率潜在语义分析(PLSA) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">brezezee</p>
+              <p class="site-description motion-element" itemprop="description">靡不有初，鲜克有终</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="https://brezezee.github.io/archives">
+              
+                  <span class="site-state-item-count">139</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="../../../../../../categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="../../../../../../tags/index.html">
+                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#数组模拟单链表"><span class="nav-text">数组模拟单链表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模拟栈和队列"><span class="nav-text">模拟栈和队列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单调栈"><span class="nav-text">单调栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#堆（以小根堆为例）"><span class="nav-text">堆（以小根堆为例）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#建堆（O-n-做法）"><span class="nav-text">建堆（O(n)做法）</span></a></li></ol></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#并查集"><span class="nav-text">并查集</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#朴素并查集"><span class="nav-text">朴素并查集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#维护数量的并查集"><span class="nav-text">维护数量的并查集</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#STL"><span class="nav-text">STL</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">brezezee</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">180.7k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../../../js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="../../../../../../js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="../../../../../../js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="../../../../../../js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../../../js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://brezezee.github.io/2019/10/15/algorithm/Acwing/2. 数据结构+STL/';
+          this.page.identifier = '2019/10/15/algorithm/Acwing/2. 数据结构+STL/';
+          this.page.title = '模板(数据结构)';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

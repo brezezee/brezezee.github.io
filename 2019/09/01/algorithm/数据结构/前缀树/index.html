@@ -88,7 +88,7 @@
 <meta property="og:description" content="实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。  示例:  Trie trie = new Trie();  trie.insert(“apple”);  trie.search(“apple”);   // 返回 true  trie.search(“app”);     // 返回 false  trie.startsWith">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.loli.net/2019/08/31/e17YTnUQxEJrLKi.png">
-<meta property="og:updated_time" content="2019-09-28T13:48:55.614Z">
+<meta property="og:updated_time" content="2020-11-04T07:05:25.600Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode 208. 前缀树">
 <meta name="twitter:description" content="实现一个 Trie (前缀树)，包含 insert, search, 和 startsWith 这三个操作。  示例:  Trie trie = new Trie();  trie.insert(“apple”);  trie.search(“apple”);   // 返回 true  trie.search(“app”);     // 返回 false  trie.startsWith">
@@ -310,8 +310,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-09-28T21:48:55+08:00">
-                2019-09-28
+              <time title="Post modified" itemprop="dateModified" datetime="2020-11-04T15:05:25+08:00">
+                2020-11-04
               </time>
             
           </span>
@@ -370,7 +370,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  738
+                  951
                 </span>
               
 
@@ -410,9 +410,9 @@
 </ul>
 <p>&emsp;&emsp;再来看看一个基本的字典树节点需要包含哪些信息。首先需要26个指针来指向下一个节点，可以使用指针数组来方便管理，并且字典树中的数据是有确定范围的，就是26个字母，因此数组的下标就能表示下一节点的字母是什么。还需要一个标志位来表示某节点是否是一个字符串的结尾，这样才能在查询时确认是否是原始输入字符串或是该字符串的子串。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//C++ 70ms 44MB</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">26</span>;  <span class="comment">//假设字符为26个小写字母</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Trie</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">bool</span> is_end_str; <span class="comment">// 标识当前结点是否是一个字符串的末尾</span></span><br><span class="line">    Trie *next[MAXN]; <span class="comment">// 下一个结点的指针数组，数组下标表示字母</span></span><br><span class="line">    Trie() &#123;</span><br><span class="line">        is_end_str = <span class="literal">false</span>;</span><br><span class="line">        <span class="built_in">memset</span>(next, <span class="number">0</span>, <span class="keyword">sizeof</span>(next));</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/** Inserts a word into the trie. */</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="built_in">string</span> word)</span> </span>&#123;</span><br><span class="line">        Trie *curr = <span class="keyword">this</span>; <span class="comment">//使用curr来索引树</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> ch : word)&#123;</span><br><span class="line">            <span class="keyword">if</span>(curr-&gt;next[ch-<span class="string">'a'</span>] == <span class="literal">NULL</span>)&#123;</span><br><span class="line">                Trie *new_node = <span class="keyword">new</span> Trie();</span><br><span class="line">                curr-&gt;next[ch-<span class="string">'a'</span>] = new_node;</span><br><span class="line">            &#125;</span><br><span class="line">            curr = curr-&gt;next[ch-<span class="string">'a'</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        curr-&gt;is_end_str = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/** Returns if the word is in the trie. */</span></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">search</span><span class="params">(<span class="built_in">string</span> word)</span> </span>&#123;</span><br><span class="line">        Trie *curr = <span class="keyword">this</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> ch : word)&#123;</span><br><span class="line">            <span class="keyword">if</span>(curr-&gt;next[ch-<span class="string">'a'</span>] == <span class="literal">NULL</span>)</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            curr = curr-&gt;next[ch-<span class="string">'a'</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> (curr-&gt;is_end_str);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/** Returns if there is any word in the trie that starts with the given prefix. */</span></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">startsWith</span><span class="params">(<span class="built_in">string</span> prefix)</span> </span>&#123;</span><br><span class="line">        Trie *curr = <span class="keyword">this</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> ch : prefix)&#123;</span><br><span class="line">            <span class="keyword">if</span>(curr-&gt;next[ch-<span class="string">'a'</span>] == <span class="literal">NULL</span>)</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            curr = curr-&gt;next[ch-<span class="string">'a'</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>&emsp;&emsp;这里直接为指针数组开辟了26个单位的空间，还是挺占内存的，在参考2中有一个双数组的优化方法。</p>
-<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference:"></a>Reference:</h3><p>[1] <a href="https://leetcode-cn.com/problems/implement-trie-prefix-tree/" target="_blank" rel="noopener">LeetCode-208</a></p>
-<p>[2] <a href="https://linux.thai.net/~thep/datrie/datrie.html" target="_blank" rel="noopener">An Implementation of Double-Array Trie</a></p>
+<h3 id="数组模拟Trie树"><a href="#数组模拟Trie树" class="headerlink" title="数组模拟Trie树"></a>数组模拟Trie树</h3><p>数组模拟的思想是使用二维数组，其中第一维表示树节点，第二维表示每个节点的子节点（字符），一个关键是用下标来建立它们之间的关系。</p>
+<p>每个节点内保存的都是下一个节点的下标，如果节点内容为0，则表示该节点为空节点。建立的过程中，下标是单增的，保证每个节点的唯一性。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1e5</span>+<span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> trie[N][<span class="number">26</span>], cnt[N], idx; <span class="comment">//下标是0的点既是根节点，也是空节点</span></span><br><span class="line"><span class="keyword">char</span> str[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> cur = <span class="number">0</span>; </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; str[i]; ++ i) &#123;</span><br><span class="line">        <span class="keyword">int</span> c = str[i] - <span class="string">'a'</span>;</span><br><span class="line">        <span class="keyword">if</span> (!trie[cur][c]) trie[cur][c] = ++ idx;  <span class="comment">// 之前没有该节点，新建</span></span><br><span class="line">        cur = trie[cur][c];                        <span class="comment">// 当前字符的的下一个节点</span></span><br><span class="line">    &#125;</span><br><span class="line">    cnt[cur] ++ ;  <span class="comment">// 在串的最后位置保存其计数</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> cur = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; str[i]; ++ i) &#123;</span><br><span class="line">        <span class="keyword">int</span> c = str[i] - <span class="string">'a'</span>;</span><br><span class="line">        <span class="keyword">if</span> (!trie[cur][c]) <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">// 查找失败</span></span><br><span class="line">        cur = trie[cur][c];          <span class="comment">// 下一个节点</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cnt[cur];                 <span class="comment">// 返回该串数量</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -445,8 +445,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="../../Leetcode/滑动窗口/" rel="next" title="滑动窗口">
-                <i class="fa fa-chevron-left"></i> 滑动窗口
+              <a href="../../../../../08/30/Language/python/NumPy基础/" rel="next" title="NumPy基础">
+                <i class="fa fa-chevron-left"></i> NumPy基础
               </a>
             
           </div>
@@ -455,8 +455,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="../../../../02/CV/digital image processing/Fourier transform/" rel="prev" title="傅里叶变换">
-                傅里叶变换 <i class="fa fa-chevron-right"></i>
+              <a href="../../Leetcode/滑动窗口/" rel="prev" title="滑动窗口">
+                滑动窗口 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -544,7 +544,7 @@
               
                 <a href="https://brezezee.github.io/archives">
               
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">139</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -599,7 +599,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Reference"><span class="nav-text">Reference:</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#数组模拟Trie树"><span class="nav-text">数组模拟Trie树</span></a></li></ol></div>
             
 
           </div>
@@ -619,7 +619,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -633,7 +633,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">72k</span>
+    <span title="Site words total count">180.7k</span>
   
 </div>
 

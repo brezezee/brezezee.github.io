@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="../../../../../lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="../../../../../lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="../../../../../css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="../../../../../images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../../../images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="../../../../../images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="../../../../../images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="服务端的一些配置服务器配置nginx 配置： 推流：rtmp://118.24.8.33:1933:/myapp/t 拉流：7766 命令服务器： websocket：7088 模拟unity： 1234567&amp;#123;    &quot;type&quot; : &quot;unity&quot;,    &quot;longitude&quot; : 103.927533,     &quot;latitude&quot; : 30.751957,    &quot;z&quot; : 6">
+<meta name="keywords" content="ml,dl,cv,ai">
+<meta property="og:type" content="article">
+<meta property="og:title" content="brezezee">
+<meta property="og:url" content="https://brezezee.github.io/2021/04/15/DJI/DJI/index.html">
+<meta property="og:site_name" content="brezezee">
+<meta property="og:description" content="服务端的一些配置服务器配置nginx 配置： 推流：rtmp://118.24.8.33:1933:/myapp/t 拉流：7766 命令服务器： websocket：7088 模拟unity： 1234567&amp;#123;    &quot;type&quot; : &quot;unity&quot;,    &quot;longitude&quot; : 103.927533,     &quot;latitude&quot; : 30.751957,    &quot;z&quot; : 6">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="c:/Users/Yunlian/AppData/Roaming/Typora/typora-user-images/1610678869181.png">
+<meta property="og:image" content="file://C:/Users/Yunlian/AppData/Roaming/Typora/typora-user-images/1600169124557.png?lastModify=1600168511">
+<meta property="og:image" content="c:/Users/Yunlian/AppData/Roaming/Typora/typora-user-images/1610034649777.png">
+<meta property="og:updated_time" content="2021-04-21T08:10:28.834Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="brezezee">
+<meta name="twitter:description" content="服务端的一些配置服务器配置nginx 配置： 推流：rtmp://118.24.8.33:1933:/myapp/t 拉流：7766 命令服务器： websocket：7088 模拟unity： 1234567&amp;#123;    &quot;type&quot; : &quot;unity&quot;,    &quot;longitude&quot; : 103.927533,     &quot;latitude&quot; : 30.751957,    &quot;z&quot; : 6">
+<meta name="twitter:image" content="c:/Users/Yunlian/AppData/Roaming/Typora/typora-user-images/1610678869181.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://brezezee.github.io/2021/04/15/DJI/DJI/">
+
+
+
+
+
+  <title> | brezezee</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">brezezee</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="https://brezezee.github.io" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="https://brezezee.github.io/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="https://brezezee.github.io/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-categories"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="https://brezezee.github.io/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="https://brezezee.github.io/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://brezezee.github.io">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="brezezee">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="../../../../../images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="brezezee">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-04-15T11:52:41+08:00">
+                2021-04-15
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2021-04-21T16:10:28+08:00">
+                2021-04-21
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/04/15/DJI/DJI/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2.4k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="服务端的一些配置"><a href="#服务端的一些配置" class="headerlink" title="服务端的一些配置"></a>服务端的一些配置</h2><h4 id="服务器配置"><a href="#服务器配置" class="headerlink" title="服务器配置"></a>服务器配置</h4><p>nginx 配置：</p>
+<p>推流：rtmp://118.24.8.33:1933:/myapp/t</p>
+<p>拉流：7766</p>
+<p>命令服务器：</p>
+<p>websocket：7088</p>
+<p>模拟unity：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"type"</span> : <span class="string">"unity"</span>,</span><br><span class="line">    <span class="attr">"longitude"</span> : <span class="number">103.927533</span>, </span><br><span class="line">    <span class="attr">"latitude"</span> : <span class="number">30.751957</span>,</span><br><span class="line">    <span class="attr">"z"</span> : <span class="number">60</span>,</span><br><span class="line">    <span class="attr">"cmd"</span> : <span class="string">""</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;type&quot; : &quot;unity&quot;,</span><br><span class="line">    &quot;longitude&quot; : 2.00001, </span><br><span class="line">    &quot;latitude&quot; : 2.00002,</span><br><span class="line">    &quot;z&quot; : 60,</span><br><span class="line">    &quot;cmd&quot; : &quot;&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="推流不同码率"><a href="#推流不同码率" class="headerlink" title="推流不同码率"></a>推流不同码率</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -threads <span class="number">2</span> -re -fflags +genpts -i <span class="string">"D:\Program Files\nginx-1.8.1\html\video2.mp4"</span> </span><br><span class="line">-s:<span class="number">0</span> <span class="number">1920</span>x1080 -ac <span class="number">2</span> -vcodec libx264 -profile:v main -b:v:<span class="number">0</span> <span class="number">2000</span>k -maxrate:<span class="number">0</span> <span class="number">2000</span>k -bufsize:<span class="number">0</span> <span class="number">4000</span>k -r <span class="number">30</span> -ar <span class="number">44100</span> -g <span class="number">48</span> -c:a aac -b:a:<span class="number">0</span> <span class="number">128</span>k </span><br><span class="line">-s:<span class="number">2</span> <span class="number">1280</span>x720 -ac <span class="number">2</span> -vcodec libx264 -profile:v main -b:v:<span class="number">1</span> <span class="number">1000</span>k -maxrate:<span class="number">2</span> <span class="number">1000</span>k -bufsize:<span class="number">2</span> <span class="number">2000</span>k -r <span class="number">30</span> -ar <span class="number">44100</span> -g <span class="number">48</span> -c:a aac -b:a:<span class="number">1</span> <span class="number">128</span>k </span><br><span class="line">-s:<span class="number">4</span> <span class="number">720</span>x480 -ac <span class="number">2</span> -vcodec libx264 -profile:v main -b:v:<span class="number">2</span> <span class="number">600</span>k -maxrate:<span class="number">4</span> <span class="number">600</span>k -bufsize:<span class="number">4</span> <span class="number">1000</span>k -r <span class="number">30</span> -ar <span class="number">44100</span> -g <span class="number">48</span> -c:a aac -b:a:<span class="number">2</span> <span class="number">128</span>k</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="加入json库，修改Cmake"><a href="#加入json库，修改Cmake" class="headerlink" title="加入json库，修改Cmake"></a>加入json库，修改Cmake</h4><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">2.8</span>)</span><br><span class="line"><span class="keyword">project</span>(djiosdk-flightcontrol-sample)</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(json_DIR /usr/lib/x86_64-linux-gnu)</span><br><span class="line"><span class="keyword">set</span>(CMAKE_CXX_FLAGS <span class="string">"$&#123;CMAKE_CXX_FLAGS&#125; -std=c++11 -ljsoncpp -pthread -g -O0"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">include_directories</span>(<span class="variable">$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;</span>/../../../core/inc)</span><br><span class="line"></span><br><span class="line"><span class="keyword">FILE</span>(GLOB SOURCE_FILES *.hpp *.cpp</span><br><span class="line">        <span class="variable">$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;</span>/../common/dji_linux_environment.cpp</span><br><span class="line">        <span class="variable">$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;</span>/../common/dji_linux_helpers.cpp</span><br><span class="line">        <span class="variable">$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;</span>/../../../core/src/flight_sample.cpp</span><br><span class="line">        <span class="variable">$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;</span>/../hal/*.c</span><br><span class="line">        <span class="variable">$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;</span>/../osal/*.c</span><br><span class="line">        <span class="variable">$&#123;LINKER_HEADER_SRC&#125;</span></span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_executable</span>(<span class="variable">$&#123;PROJECT_NAME&#125;</span> <span class="variable">$&#123;SOURCE_FILES&#125;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">link_directories</span>(<span class="variable">$&#123;json_DIR&#125;</span>)</span><br><span class="line"><span class="keyword">target_link_libraries</span>(djiosdk-flightcontrol-sample libjsoncpp.so)</span><br></pre></td></tr></table></figure>
+<p><img src="C:\Users\Yunlian\AppData\Roaming\Typora\typora-user-images\1610678869181.png" alt="1610678869181"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./nginx -c ./conf/nginx-win.conf</span><br><span class="line">ffmpeg -re -i video2.mp4 -c copy -f flv rtmp://118.24.8.33:1933/myapp/xxx</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>nginx 配置文件:</p>
+<p>/usr/local/nginx/conf/nginx.conf</p>
+<p>推流方地址：</p>
+<p>rtmp:/118.24.8.33:1933/myapp/xxxx</p>
+<p>拉流方地址：</p>
+<p><a href="http://118.24.8.33:7766/live?port=1933&amp;app=myapp&amp;stream=t" target="_blank" rel="noopener">http://118.24.8.33:7766/live?port=1933&amp;app=myapp&amp;stream=t</a></p>
+</blockquote>
+<h2 id="机载电脑配置"><a href="#机载电脑配置" class="headerlink" title="机载电脑配置"></a>机载电脑配置</h2><h4 id="使用DJI-Pilot"><a href="#使用DJI-Pilot" class="headerlink" title="使用DJI Pilot"></a>使用DJI Pilot</h4><p>当无人机Matrice 210 V2 和Matrice 210 RTK V2 搭载机载计算机飞行时，需使用DJI Pilot 模拟基于OSDK 开发的应用程序，具体步骤如下所示：</p>
+<ol>
+<li>将OSDK 开发包中对应平台文件夹(/onboard-sdk/sample/platform)中的配置文件 <strong>“UserConfig.txt”</strong> 拷贝至“执行应用程序的目录下”；</li>
+<li>将OSDK 开发包中对应平台文件夹(/utility/bin)中的配置工具<strong>M210ConfigTool</strong> 拷贝至“执行应用程序的目录下”；</li>
+<li>执行如下命令</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./M210ConfigTool --usb-port /dev/ttyACM0 --config-file UserConfig.txt --usb-connected-flight on</span><br></pre></td></tr></table></figure>
+<h4 id="设备连接（重要）"><a href="#设备连接（重要）" class="headerlink" title="设备连接（重要）"></a>设备连接（重要）</h4><p>必须保证遥控器和平板上app的连接，并且登录账号与注册OSDK开发密钥的『 账号保持一致 』。M210V2上的串口接口画反了，TX与RX接口需要交换位置。</p>
+<p><img src="file://C:/Users/Yunlian/AppData/Roaming/Typora/typora-user-images/1600169124557.png?lastModify=1600168511" alt="1600169124557"></p>
+<p>！！！！！！无人机的串口在扩展接口的第3列，上面第一个是GND，后面是两个分别是RX、TX，与串口连接时需要交叉连接。</p>
+<p>如果需要『 使用模拟器 』，需要PC电脑用双头USB连接无人机。</p>
+<p>如果用『 串口调试 』的话，电脑用USB-TTL连接机载电脑的UART0，需要在开机前连接上。</p>
+<h4 id="运行示例"><a href="#运行示例" class="headerlink" title="运行示例"></a>运行示例</h4><h5 id="1-确认串口访问权限"><a href="#1-确认串口访问权限" class="headerlink" title="1. 确认串口访问权限"></a>1. 确认串口访问权限</h5><p>编译示例代码前，请在终端上使用<code>ls -l /dev/xxx</code> 命令查看硬件平台串口（UART接口）的访问权限，若访问权限不足，请在终端中使用 <code>sudo chmod 777 /dev/xxx</code>命令获取串口设备访问权限。</p>
+<blockquote>
+<p><strong>说明：</strong> xxx为串口的名称。</p>
+</blockquote>
+<h5 id="2-编译示例代码"><a href="#2-编译示例代码" class="headerlink" title="2. 编译示例代码"></a>2. 编译示例代码</h5><p>进入示例代码的目录：<code>onboard-sdk</code>，使用如下命令将示例代码编译为示例程序：</p>
+<ol>
+<li><code>mkdir build &amp;&amp; cd build</code>；</li>
+<li><code>cmake ..</code> 或 <code>cmake .. -DADVANCED_SENSING=ON</code>(使用视觉功能)；</li>
+<li><code>make</code>；</li>
+</ol>
+<h5 id="3-复制配置文件"><a href="#3-复制配置文件" class="headerlink" title="3. 复制配置文件"></a>3. 复制配置文件</h5><p>将配置文件<code>UserConfig.txt</code>拷贝到bin文件中：<br><code>cp ../sample/platform/linux/common/UserConfig.txt bin/</code></p>
+<h5 id="4-输入程序运行命令-如下以运行flightcontrol-示例代码为例"><a href="#4-输入程序运行命令-如下以运行flightcontrol-示例代码为例" class="headerlink" title="4. 输入程序运行命令(如下以运行flightcontrol 示例代码为例)"></a>4. 输入程序运行命令(如下以运行flightcontrol 示例代码为例)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./djiosdk-flightcontrol-sample UserConfig.txt UserConfig.txt</span><br></pre></td></tr></table></figure>
+<h3 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a>配置环境</h3><h4 id="2-添加UART-读写权限"><a href="#2-添加UART-读写权限" class="headerlink" title="2. 添加UART 读写权限"></a>2. 添加UART 读写权限</h4><p>请按如下步骤为Linux 中指定的用户添加UART 读写权限：</p>
+<ol>
+<li>使用<code>sudo usermod -a -G dialout $USER</code>命令将用户添加至<code>dialout</code> 组中。</li>
+<li>重新登录所添加的账户后，该账户即可获取UART 读写权限。</li>
+</ol>
+<h4 id="3-添加DJI-USB-设备节点"><a href="#3-添加DJI-USB-设备节点" class="headerlink" title="3. 添加DJI USB 设备节点"></a>3. 添加DJI USB 设备节点</h4><p>如需在M210 系列的无人机上使用OSDK 中的视觉功能，使Linux 系统能够获取并标识DJI 的设备，请按如下步骤，在Linux 中添加DJI USB 设备节点：</p>
+<ol>
+<li>在<code>/etc/udev/rules.d/</code>目录下创建文件<code>DJIDevice.rules</code>。</li>
+<li>在<code>DJIDevice.rules</code>文件中添加<code>SUBSYSTEM==&quot;usb&quot;, ATTRS{idVendor}==&quot;2ca3&quot;, MODE=&quot;0666&quot;</code>。</li>
+<li>重新启动电脑后，系统即可识别DJI USB 设备。</li>
+</ol>
+<h3 id="飞行控制（FlightSample）——已弃用"><a href="#飞行控制（FlightSample）——已弃用" class="headerlink" title="飞行控制（FlightSample）——已弃用"></a>飞行控制（FlightSample）——已弃用</h3><blockquote>
+<p>第一版使用该接口，只能用于按相对位置飞行，已弃用</p>
+</blockquote>
+<h4 id="1-实例化对象"><a href="#1-实例化对象" class="headerlink" title="1.实例化对象"></a>1.实例化对象</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FlightSample* flightSample = <span class="keyword">new</span> FlightSample(vehicle);</span><br></pre></td></tr></table></figure>
+<h4 id="2-设置无人机基础参数"><a href="#2-设置无人机基础参数" class="headerlink" title="2. 设置无人机基础参数"></a>2. 设置无人机基础参数</h4><p>使用<code>flightSample</code> 和 <code>flightController</code> 中的接口设置无人机的基础参数。</p>
+<blockquote>
+<p><strong>说明：</strong> 为方便开发者快速设置无人机的基础参数，OSDK 将<code>flightController</code> 中的接口封装在 <code>flightSample</code><br>中，使用<code>flightController</code> 或 <code>flightSample</code> 中的接口均可设置无人机的基础参数。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">flightSample-&gt;monitoredTakeoff();</span><br><span class="line">vehicle-&gt;flightController-&gt;setCollisionAvoidanceEnabledSync(</span><br><span class="line">  FlightController::AvoidEnable::AVOID_ENABLE, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*! 飞行较长的距离 */</span></span><br><span class="line">flightSample-&gt;moveByPositionOffset((FlightSample::Vector3f)&#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">30</span>&#125;, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*! 飞行较短的距离 */</span></span><br><span class="line">flightSample-&gt;moveByPositionOffset((FlightSample::Vector3f)&#123;<span class="number">10</span>, <span class="number">0</span>, <span class="number">0</span>&#125;, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*!设置无人机当前位置为返航点 */</span></span><br><span class="line">flightSample-&gt;setNewHomeLocation();</span><br><span class="line"></span><br><span class="line"><span class="comment">/*! 设置无人机返航高度 */</span></span><br><span class="line">flightSample-&gt;setGoHomeAltitude(<span class="number">50</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*! 飞至另一个位置 */</span></span><br><span class="line">flightSample-&gt;moveByPositionOffset((FlightSample::Vector3f)&#123;<span class="number">20</span>, <span class="number">0</span>, <span class="number">0</span>&#125;, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">vehicle-&gt;flightController-&gt;setCollisionAvoidanceEnabledSync(</span><br><span class="line">FlightController::AvoidEnable::AVOID_DISABLE, <span class="number">1</span>);</span><br><span class="line"><span class="comment">/*! 返航并确认降落*/</span></span><br><span class="line">flightSample-&gt;goHomeAndConfirmLanding();</span><br><span class="line"></span><br><span class="line">vehicle-&gt;flightController-&gt;setCollisionAvoidanceEnabledSync(</span><br><span class="line">FlightController::AvoidEnable::AVOID_ENABLE, <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="飞行控制（MissionWaypoint）"><a href="#飞行控制（MissionWaypoint）" class="headerlink" title="飞行控制（MissionWaypoint）"></a>飞行控制（MissionWaypoint）</h3><blockquote>
+<p>航点飞行接口，目前我们的功能主要通过修改它来实现</p>
+</blockquote>
+<p>具体内容需要看机载上的代码，也可以先看官方的OSDK</p>
+<p><a href="https://github.com/dji-sdk/Onboard-SDK" target="_blank" rel="noopener">https://github.com/dji-sdk/Onboard-SDK</a></p>
+<p>GPS保存结构</p>
+<p><img src="C:\Users\Yunlian\AppData\Roaming\Typora\typora-user-images\1610034649777.png" alt="1610034649777"></p>
+<p>OpenProtocolCMD::ErrorCode::MissionACK::Common::IN_PROGRESS</p>
+<p>基础动作：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">功能类型</th>
+<th style="text-align:left">基本功能</th>
+<th style="text-align:left">功能说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">无人机锁定</td>
+<td style="text-align:left">解锁</td>
+<td style="text-align:left">无人机解锁后，无人机的螺旋桨会怠速旋转，但不会飞离地面</td>
+</tr>
+<tr>
+<td style="text-align:left">上锁</td>
+<td style="text-align:left">无人机上锁后，无人机的螺旋桨由怠速旋转状态变为静止状态</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">起飞和降落</td>
+<td style="text-align:left">自动起飞</td>
+<td style="text-align:left">使用该功能时，无人机会自动起飞1.2 米（该高度不可调整）</td>
+</tr>
+<tr>
+<td style="text-align:left">自动降落</td>
+<td style="text-align:left">使用该功能时，无人机会自动降落</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">取消自动降落</td>
+<td style="text-align:left">使用该功能时，无人机在下降多过程中会停止降落，并悬停在空中</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">降落确认</td>
+<td style="text-align:left">当无人机已降落到离地面一定距离时，用户使用该功能可确认无人机降落到地面</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">强制降落</td>
+<td style="text-align:left">无视降停面的状态，强制无人机降落（降落速度较快）</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">无人机返航</td>
+<td style="text-align:left">返航</td>
+<td style="text-align:left">使用该功能时，无人机会自动返航</td>
+</tr>
+<tr>
+<td style="text-align:left">取消返航</td>
+<td style="text-align:left">使用该功能时，无人机会悬停在空中</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="一些BUG记录"><a href="#一些BUG记录" class="headerlink" title="一些BUG记录"></a>一些BUG记录</h2><h4 id="解决bind-Address-already-in-use"><a href="#解决bind-Address-already-in-use" class="headerlink" title="解决bind: Address already in use"></a>解决bind: Address already in use</h4><p>使用setsockopt设置端口复用（val为1）。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.创建套接字 - 设置协议</span></span><br><span class="line">   <span class="keyword">int</span> sfd = socket(AF_INET,SOCK_STREAM,<span class="number">0</span>);</span><br><span class="line">   <span class="keyword">if</span>( <span class="number">-1</span> == sfd )</span><br><span class="line">   &#123;</span><br><span class="line">       perror(<span class="string">"socket"</span>);</span><br><span class="line">       <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">//2. 解决在close之后会有一个WAIT_TIME，导致bind失败的问题</span></span><br><span class="line">   <span class="keyword">int</span> val = <span class="number">1</span>;</span><br><span class="line">   <span class="keyword">int</span> ret = setsockopt(sfd,SOL_SOCKET,SO_REUSEADDR,(<span class="keyword">void</span> *)&amp;val,<span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line">   <span class="keyword">if</span>(ret == <span class="number">-1</span>)</span><br><span class="line">   &#123;</span><br><span class="line">       <span class="built_in">printf</span>(<span class="string">"setsockopt"</span>);</span><br><span class="line">       <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="accept函数返回-1"><a href="#accept函数返回-1" class="headerlink" title="accept函数返回-1"></a>accept函数返回-1</h4><p>调试方法: 返回-1时，看errno的值，printf(“%s\n”,strerror(errno));</p>
+<p>这里显示的是Invalid argument ，应该是参数不对，核对发现未初始化sock_len。</p>
+<h4 id="机载电脑无法开机"><a href="#机载电脑无法开机" class="headerlink" title="机载电脑无法开机"></a>机载电脑无法开机</h4><p>应该是卡在了开机界面，需要连接usb键盘，按以下顺序键入</p>
+<blockquote>
+<p>delete + 左方向键 + 回车 + 回车</p>
+</blockquote>
+<h4 id="mission中添加flight-sample头"><a href="#mission中添加flight-sample头" class="headerlink" title="mission中添加flight-sample头"></a>mission中添加flight-sample头</h4><p>需要修改mission 下的cmakelists</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FILE</span>(GLOB SOURCE_FILES <span class="variable">$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;</span>/../common/dji_linux_environment.cpp</span><br><span class="line">        <span class="variable">$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;</span>/../common/dji_linux_helpers.cpp</span><br><span class="line">        <span class="variable">$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;</span>/../../../core/src/flight_sample.cpp <span class="variable">$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;</span>/../hal/*.c</span><br><span class="line">        <span class="variable">$&#123;CMAKE_CURRENT_SOURCE_DIR&#125;</span>/../osal/*.c</span><br><span class="line">        )</span><br></pre></td></tr></table></figure>
+<h4 id="回调不执行"><a href="#回调不执行" class="headerlink" title="回调不执行"></a>回调不执行</h4><p>尝试手动链接linker库</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">OSDK_LIBS=~/Onboard-SDK/libs/</span><br><span class="line">LDFLAGS+=-rdynamic $(OSDK_LIBS)/libadvanced-sensing.a $(OSDK_LIBS)/libdjiosdk-core.a $(OSDK_LIBS)/libadvanced-sensing.a $(OSDK_LIBS)/../osdk-core/linker/x86/lib/libdji-linker.a</span><br></pre></td></tr></table></figure>
+<p>问题：</p>
+<ol>
+<li>无人机网络断开（网卡松动）</li>
+<li>机载与无人机断开（串口松动）</li>
+<li>消息粘包（消息发送堆积）</li>
+</ol>
+<p>方案：</p>
+<p>1、2 初步估计都是硬件问题，用胶布固定硬件。</p>
+<p>3 单独写个字符串解析。</p>
+<h2 id="交互接口"><a href="#交互接口" class="headerlink" title="交互接口"></a>交互接口</h2><p>命令端：</p>
+<ol>
+<li>连接： 可选TCP或Websocket连接，服务器端口: 118.24.8.33:7088。</li>
+<li>连接后发送CC 确认身份。</li>
+<li>经纬度通过json封装后发送，格式为</li>
+</ol>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"type"</span> : <span class="string">"CC"</span>,</span><br><span class="line">    <span class="attr">"longitude"</span> : <span class="number">103.927533</span>, </span><br><span class="line">    <span class="attr">"latitude"</span> : <span class="number">30.751957</span>,</span><br><span class="line">    <span class="attr">"z"</span> : <span class="number">60</span>,</span><br><span class="line">    <span class="attr">"cmd"</span> : <span class="string">""</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>“type” : 自己的类型</p>
+<p>“longitude” : 经度</p>
+<p>“latitude” : 纬度</p>
+<p>“z” : 相对起飞点的高度</p>
+<p>“cmd” ： 可选命令，目前有（”gohome”、”ascend”、”descend”)  对应 （返航、上升、下降）。</p>
+</blockquote>
+<p>WEB端：</p>
+<p>通过拉流获取无人机的直播流，拉流地址为：</p>
+<blockquote>
+<p><a href="http://118.24.8.33:7766/live?port=1933&amp;app=myapp&amp;stream=t" target="_blank" rel="noopener">http://118.24.8.33:7766/live?port=1933&amp;app=myapp&amp;stream=t</a></p>
+</blockquote>
+<p>需配置web端支持flv格式的视频流，推荐方案flv.js，项目地址：</p>
+<blockquote>
+<p><a href="https://github.com/Bilibili/flv.js" target="_blank" rel="noopener">https://github.com/Bilibili/flv.js</a></p>
+</blockquote>
+<p>参考Demo：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">content</span>=<span class="string">"text/html; charset=utf-8"</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Type"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>flv.js demo<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">        .mainContainer &#123;</span><br><span class="line">            display: block;</span><br><span class="line">            width: 1024px;</span><br><span class="line">            margin-left: auto;</span><br><span class="line">            margin-right: auto;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        .urlInput &#123;</span><br><span class="line">            display: block;</span><br><span class="line">            width: 100%;</span><br><span class="line">            margin-left: auto;</span><br><span class="line">            margin-right: auto;</span><br><span class="line">            margin-top: 8px;</span><br><span class="line">            margin-bottom: 8px;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        .centeredVideo &#123;</span><br><span class="line">            display: block;</span><br><span class="line">            width: 100%;</span><br><span class="line">            height: 576px;</span><br><span class="line">            margin-left: auto;</span><br><span class="line">            margin-right: auto;</span><br><span class="line">            margin-bottom: auto;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        .controls &#123;</span><br><span class="line">            display: block;</span><br><span class="line">            width: 100%;</span><br><span class="line">            text-align: center;</span><br><span class="line">            margin-left: auto;</span><br><span class="line">            margin-right: auto;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"mainContainer"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">video</span> <span class="attr">name</span>=<span class="string">"videoElement"</span> <span class="attr">id</span>=<span class="string">"videoElement"</span> <span class="attr">class</span>=<span class="string">"centeredVideo"</span> <span class="attr">controls</span> <span class="attr">muted</span> <span class="attr">autoplay</span> <span class="attr">width</span>=<span class="string">"1024"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">height</span>=<span class="string">"576"</span>&gt;</span></span><br><span class="line">            Your browser is too old which doesn't support HTML5 video.</span><br><span class="line">        <span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"flvjs/flv.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        function start() &#123;</span><br><span class="line">            if (flvjs.isSupported()) &#123;</span><br><span class="line">                var videoElement = document.getElementById('videoElement');</span><br><span class="line">                var flvPlayer = flvjs.createPlayer(&#123;</span><br><span class="line">                    type: 'flv',</span><br><span class="line">                    url: 'http://118.24.8.33:7766/live?port=1933&amp;app=myapp&amp;stream=t'</span><br><span class="line">                &#125;);</span><br><span class="line">                flvPlayer.attachMediaElement(videoElement);</span><br><span class="line">                flvPlayer.load();</span><br><span class="line">                flvPlayer.play();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        document.addEventListener('DOMContentLoaded', function () &#123;</span><br><span class="line">            start();</span><br><span class="line">        &#125;);</span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="../../../01/linux/git使用/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="../../../18/服务器/学习路线/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">brezezee</p>
+              <p class="site-description motion-element" itemprop="description">靡不有初，鲜克有终</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="https://brezezee.github.io/archives">
+              
+                  <span class="site-state-item-count">139</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="../../../../../categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="../../../../../tags/index.html">
+                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#服务端的一些配置"><span class="nav-text">服务端的一些配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#服务器配置"><span class="nav-text">服务器配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#推流不同码率"><span class="nav-text">推流不同码率</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#加入json库，修改Cmake"><span class="nav-text">加入json库，修改Cmake</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#机载电脑配置"><span class="nav-text">机载电脑配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用DJI-Pilot"><span class="nav-text">使用DJI Pilot</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设备连接（重要）"><span class="nav-text">设备连接（重要）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行示例"><span class="nav-text">运行示例</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-确认串口访问权限"><span class="nav-text">1. 确认串口访问权限</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-编译示例代码"><span class="nav-text">2. 编译示例代码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-复制配置文件"><span class="nav-text">3. 复制配置文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-输入程序运行命令-如下以运行flightcontrol-示例代码为例"><span class="nav-text">4. 输入程序运行命令(如下以运行flightcontrol 示例代码为例)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置环境"><span class="nav-text">配置环境</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-添加UART-读写权限"><span class="nav-text">2. 添加UART 读写权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-添加DJI-USB-设备节点"><span class="nav-text">3. 添加DJI USB 设备节点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#飞行控制（FlightSample）——已弃用"><span class="nav-text">飞行控制（FlightSample）——已弃用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-实例化对象"><span class="nav-text">1.实例化对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-设置无人机基础参数"><span class="nav-text">2. 设置无人机基础参数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#飞行控制（MissionWaypoint）"><span class="nav-text">飞行控制（MissionWaypoint）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些BUG记录"><span class="nav-text">一些BUG记录</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#解决bind-Address-already-in-use"><span class="nav-text">解决bind: Address already in use</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#accept函数返回-1"><span class="nav-text">accept函数返回-1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#机载电脑无法开机"><span class="nav-text">机载电脑无法开机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mission中添加flight-sample头"><span class="nav-text">mission中添加flight-sample头</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#回调不执行"><span class="nav-text">回调不执行</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#交互接口"><span class="nav-text">交互接口</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">brezezee</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">180.7k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../../js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="../../../../../js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="../../../../../js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="../../../../../js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../../js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://brezezee.github.io/2021/04/15/DJI/DJI/';
+          this.page.identifier = '2021/04/15/DJI/DJI/';
+          this.page.title = '';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

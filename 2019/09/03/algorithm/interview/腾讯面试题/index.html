@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="面试,刷题,">
+  <meta name="keywords" content="刷题,面试,">
 
 
 
@@ -80,7 +80,7 @@
 
 
 <meta name="description" content="题目： 有64匹马，8个跑道，要找出跑得最快的4匹马，要比赛最少多少轮？  分析：&amp;emsp;&amp;emsp;即每轮可以确定8匹马的相对速度，肯定需要假设每次马的速度恒定。首先64匹马都需要先上场跑一趟，64匹都跑了一圈之后我们能得到哪些信息？  每组中的8匹马的相对速度可以确定  &amp;emsp;&amp;emsp;然后就直接取每组的前4匹继续跑吗，当然不行。这个已有信息利用得也太少了。每组内相对速度确定，说明">
-<meta name="keywords" content="面试,刷题">
+<meta name="keywords" content="刷题,面试">
 <meta property="og:type" content="article">
 <meta property="og:title" content="腾讯面试题-64马8跑道">
 <meta property="og:url" content="https://brezezee.github.io/2019/09/03/algorithm/interview/腾讯面试题/index.html">
@@ -90,7 +90,14 @@
 <meta property="og:image" content="https://i.loli.net/2019/09/03/K2XJO9IUfFv6aim.png">
 <meta property="og:image" content="https://i.loli.net/2019/09/03/mhNL7pqoxBGsjzy.png">
 <meta property="og:image" content="https://i.loli.net/2019/09/03/4iEpc7JxBbhV9CA.png">
-<meta property="og:updated_time" content="2019-09-03T08:38:43.960Z">
+<meta property="og:image" content="c:/Users/Yunlian/AppData/Roaming/Typora/typora-user-images/1614047130760.png">
+<meta property="og:image" content="c:/Users/Yunlian/AppData/Roaming/Typora/typora-user-images/1614047069537.png">
+<meta property="og:image" content="c:/Users/Yunlian/AppData/Roaming/Typora/typora-user-images/1614047056099.png">
+<meta property="og:image" content="c:/Users/Yunlian/AppData/Roaming/Typora/typora-user-images/1614047034111.png">
+<meta property="og:image" content="c:/Users/Yunlian/AppData/Roaming/Typora/typora-user-images/1614047022076.png">
+<meta property="og:image" content="c:/Users/Yunlian/AppData/Roaming/Typora/typora-user-images/1614047007800.png">
+<meta property="og:image" content="c:/Users/Yunlian/AppData/Roaming/Typora/typora-user-images/1614046992751.png">
+<meta property="og:updated_time" content="2021-02-23T08:02:30.776Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="腾讯面试题-64马8跑道">
 <meta name="twitter:description" content="题目： 有64匹马，8个跑道，要找出跑得最快的4匹马，要比赛最少多少轮？  分析：&amp;emsp;&amp;emsp;即每轮可以确定8匹马的相对速度，肯定需要假设每次马的速度恒定。首先64匹马都需要先上场跑一趟，64匹都跑了一圈之后我们能得到哪些信息？  每组中的8匹马的相对速度可以确定  &amp;emsp;&amp;emsp;然后就直接取每组的前4匹继续跑吗，当然不行。这个已有信息利用得也太少了。每组内相对速度确定，说明">
@@ -312,8 +319,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-09-03T16:38:43+08:00">
-                2019-09-03
+              <time title="Post modified" itemprop="dateModified" datetime="2021-02-23T16:02:30+08:00">
+                2021-02-23
               </time>
             
           </span>
@@ -435,6 +442,13 @@
 </ol>
 <p>由此，可以得到结论：</p>
 <p>&emsp;&emsp;先跑8轮确定组内排名，再让各组第一跑一轮，确定组间老大地位。至此可淘汰至$4\times 4$。再根据已有的组间老大顺序和组内顺序，可以淘汰不可能选上的6匹，剩下10匹。其中最快的已确定，9选3。除去$B1$，让剩下的8匹跑，若$B1$的“小弟”给力，就能直接确定前4。如若不然，则需再加一轮。因此总的轮数是10或者11。</p>
+<p><img src="C:\Users\Yunlian\AppData\Roaming\Typora\typora-user-images\1614047130760.png" alt="1614047130760"></p>
+<p><img src="C:\Users\Yunlian\AppData\Roaming\Typora\typora-user-images\1614047069537.png" alt="1614047069537"></p>
+<p><img src="C:\Users\Yunlian\AppData\Roaming\Typora\typora-user-images\1614047056099.png" alt="1614047056099"></p>
+<p><img src="C:\Users\Yunlian\AppData\Roaming\Typora\typora-user-images\1614047034111.png" alt="1614047034111"></p>
+<p><img src="C:\Users\Yunlian\AppData\Roaming\Typora\typora-user-images\1614047022076.png" alt="1614047022076"></p>
+<p><img src="C:\Users\Yunlian\AppData\Roaming\Typora\typora-user-images\1614047007800.png" alt="1614047007800"></p>
+<p><img src="C:\Users\Yunlian\AppData\Roaming\Typora\typora-user-images\1614046992751.png" alt="1614046992751"></p>
 
       
     </div>
@@ -452,9 +466,9 @@
       
         <div class="post-tags">
           
-            <a href="../../../../../../tags/面试/" rel="tag"># 面试</a>
-          
             <a href="../../../../../../tags/刷题/" rel="tag"># 刷题</a>
+          
+            <a href="../../../../../../tags/面试/" rel="tag"># 面试</a>
           
         </div>
       
@@ -467,7 +481,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="../../../../02/CV/digital image processing/Fourier transform/" rel="next" title="傅里叶变换">
+              <a href="../../../../02/ML/Fourier transform/" rel="next" title="傅里叶变换">
                 <i class="fa fa-chevron-left"></i> 傅里叶变换
               </a>
             
@@ -566,7 +580,7 @@
               
                 <a href="https://brezezee.github.io/archives">
               
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">139</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -641,7 +655,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -655,7 +669,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">72k</span>
+    <span title="Site words total count">180.7k</span>
   
 </div>
 

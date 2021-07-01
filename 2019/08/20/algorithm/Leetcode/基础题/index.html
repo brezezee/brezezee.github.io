@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="刷题,基础题,">
+  <meta name="keywords" content="基础题,刷题,">
 
 
 
@@ -80,14 +80,14 @@
 
 
 <meta name="description" content="1. 互补查找 题目描述:  给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。 你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。 示例:  给定 nums = [2, 7, 11, 15], target = 9因为 nums[0] + nums[1] = 2 + 7 = 9所以返回 [0,">
-<meta name="keywords" content="刷题,基础题">
+<meta name="keywords" content="基础题,刷题">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基础题">
 <meta property="og:url" content="https://brezezee.github.io/2019/08/20/algorithm/Leetcode/基础题/index.html">
 <meta property="og:site_name" content="brezezee">
 <meta property="og:description" content="1. 互补查找 题目描述:  给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。 你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。 示例:  给定 nums = [2, 7, 11, 15], target = 9因为 nums[0] + nums[1] = 2 + 7 = 9所以返回 [0,">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-09-07T03:31:37.960Z">
+<meta property="og:updated_time" content="2020-09-11T03:09:43.958Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基础题">
 <meta name="twitter:description" content="1. 互补查找 题目描述:  给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。 你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。 示例:  给定 nums = [2, 7, 11, 15], target = 9因为 nums[0] + nums[1] = 2 + 7 = 9所以返回 [0,">
@@ -308,8 +308,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2019-09-07T11:31:37+08:00">
-                2019-09-07
+              <time title="Post modified" itemprop="dateModified" datetime="2020-09-11T11:09:43+08:00">
+                2020-09-11
               </time>
             
           </span>
@@ -368,7 +368,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  853
+                  1.2k
                 </span>
               
 
@@ -418,6 +418,24 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">carryTwoNumbers</span><span class="params">(ListNode* l1, ListNode* l2)</span> </span>&#123;</span><br><span class="line">        ListNode* L3 = <span class="keyword">new</span> ListNode(<span class="number">-1</span>);</span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>, carry = <span class="number">0</span>;</span><br><span class="line">        ListNode* res = L3;</span><br><span class="line">        ListNode* p=l1, *q=l2;</span><br><span class="line">        <span class="keyword">while</span>(p!=<span class="literal">NULL</span>&amp;&amp; q!=<span class="literal">NULL</span> )</span><br><span class="line">        &#123;</span><br><span class="line">            sum = q-&gt;val+p-&gt;val+carry;</span><br><span class="line">            res-&gt;next =<span class="keyword">new</span> ListNode(sum % <span class="number">10</span>);</span><br><span class="line">            carry = sum / <span class="number">10</span>;</span><br><span class="line">            p = p-&gt;next;</span><br><span class="line">            q = q-&gt;next;</span><br><span class="line">            res = res-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(p)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">while</span>(p)</span><br><span class="line">            &#123;</span><br><span class="line">                sum = carry + p-&gt;val;</span><br><span class="line">                res-&gt;next = <span class="keyword">new</span> ListNode(sum % <span class="number">10</span>);</span><br><span class="line">                carry = sum / <span class="number">10</span>;</span><br><span class="line">                p=p-&gt;next;</span><br><span class="line">                res = res-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(q)&#123;</span><br><span class="line">            <span class="keyword">while</span>(q)</span><br><span class="line">            &#123;</span><br><span class="line">                sum = carry + q-&gt;val;   </span><br><span class="line">                res-&gt;next = <span class="keyword">new</span> ListNode(sum % <span class="number">10</span>);</span><br><span class="line">                carry = sum / <span class="number">10</span>;</span><br><span class="line">                q = q-&gt;next;</span><br><span class="line">                res = res-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(carry)</span><br><span class="line">        &#123;</span><br><span class="line">            res-&gt;next = <span class="keyword">new</span> ListNode(<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> L3-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>若考虑代码简洁，上述情形可统一起来，当它们其中有一个还未加完时都进入循环，在内部再进行判断是否作加法。代码如下：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">carryTwoNumbers</span><span class="params">(ListNode* l1, ListNode* l2)</span> </span>&#123;</span><br><span class="line">        ListNode* head=<span class="keyword">new</span> ListNode(<span class="number">-1</span>);<span class="comment">//存放结果的链表</span></span><br><span class="line">        ListNode* h=head;<span class="comment">//移动指针</span></span><br><span class="line">        <span class="keyword">int</span> sum=<span class="number">0</span>;<span class="comment">//每个位的加和结果</span></span><br><span class="line">        <span class="keyword">bool</span> carry=<span class="literal">false</span>;<span class="comment">//进位标志</span></span><br><span class="line">        <span class="keyword">while</span>(l1!=<span class="literal">NULL</span>||l2!=<span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            sum=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span>(l1!=<span class="literal">NULL</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                sum+=l1-&gt;val;</span><br><span class="line">                l1=l1-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(l2!=<span class="literal">NULL</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                sum+=l2-&gt;val;</span><br><span class="line">                l2=l2-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(carry)</span><br><span class="line">                sum++;</span><br><span class="line">            h-&gt;next=<span class="keyword">new</span> ListNode(sum%<span class="number">10</span>);</span><br><span class="line">            h=h-&gt;next;</span><br><span class="line">            carry=sum&gt;=<span class="number">10</span>?<span class="literal">true</span>:<span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(carry)</span><br><span class="line">        &#123;</span><br><span class="line">            h-&gt;next=<span class="keyword">new</span> ListNode(<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> head-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="旋转矩阵"><a href="#旋转矩阵" class="headerlink" title="旋转矩阵"></a>旋转矩阵</h3><p>找规律可得矩阵$m(i, j)$位置顺时针旋转后得到的值是$m(n - j - 1, i)$处的值，将矩阵分为四块，则每次旋转与i，j相关的需要改动的有四个，关系如下</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+m(i, j) &= m (n - j - 1, i)\\
+m (n - j - 1, i) &= m (n - i - 1, n - j - 1)\\
+m (n - i - 1, n - j - 1) &= m (j , n - i - 1)\\
+m (j , n - i - 1) &= m (i, j)\\
+\end{aligned}</script><p>这四个赋值是循环的，因此可以通过三个交换来代替，形如：</p>
+<script type="math/tex; mode=display">
+a = b\\
+b = c\\
+c = d\\
+d = a</script><p>的循环赋值，可以通过下述交换得到同样的效果</p>
+<script type="math/tex; mode=display">
+swap(a, d)\\
+swap(a, c)\\
+swap(a, b)\\</script><p>矩阵分块的时候还需考虑奇数情况，这时只要在分块时在其中一维增加一行或一列即可。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">rotate</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; matrix)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = matrix.size();</span><br><span class="line">        <span class="keyword">if</span>(n == <span class="number">0</span>) &#123; <span class="keyword">return</span>; &#125;</span><br><span class="line">        <span class="keyword">int</span> r = n &gt;&gt; <span class="number">1</span>; </span><br><span class="line">        <span class="keyword">int</span> c = (n + <span class="number">1</span>) &gt;&gt; <span class="number">1</span>; </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; r; ++ i) &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; c; ++ j) &#123;</span><br><span class="line">                swap(matrix[i][j], matrix[j][n-i<span class="number">-1</span>]);</span><br><span class="line">                swap(matrix[i][j], matrix[n-i<span class="number">-1</span>][n-j<span class="number">-1</span>]);</span><br><span class="line">                swap(matrix[i][j], matrix[n-j<span class="number">-1</span>][i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -435,9 +453,9 @@
       
         <div class="post-tags">
           
-            <a href="../../../../../../tags/刷题/" rel="tag"># 刷题</a>
-          
             <a href="../../../../../../tags/基础题/" rel="tag"># 基础题</a>
+          
+            <a href="../../../../../../tags/刷题/" rel="tag"># 刷题</a>
           
         </div>
       
@@ -460,7 +478,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="../../../enviroment install/海思3559a移植/" rel="prev" title="海思3559A系统移植">
+              <a href="../../../enviroment/海思3559a移植/" rel="prev" title="海思3559A系统移植">
                 海思3559A系统移植 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -549,7 +567,7 @@
               
                 <a href="https://brezezee.github.io/archives">
               
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">139</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -604,7 +622,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-互补查找"><span class="nav-text">1. 互补查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-大数求和（链表）"><span class="nav-text">2. 大数求和（链表）</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-互补查找"><span class="nav-text">1. 互补查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-大数求和（链表）"><span class="nav-text">2. 大数求和（链表）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#旋转矩阵"><span class="nav-text">旋转矩阵</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -624,7 +642,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -638,7 +656,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">72k</span>
+    <span title="Site words total count">180.7k</span>
   
 </div>
 

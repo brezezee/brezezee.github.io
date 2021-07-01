@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="../../../../../lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="../../../../../lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="../../../../../css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="../../../../../images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../../../images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="../../../../../images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="../../../../../images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="基本命令1234567891011121314151617181920break/b 设置断点(函数名，代码行，a.cpp:20)delete n 删除第n个断点info b  显示设置的断点delete breakpoints 删除所有断点set args ... 设置程序参数run/r  开始运行continue/c 执行到下一个断点next/n 下一行，遇到函数不会进入step/s 下一步，">
+<meta name="keywords" content="ml,dl,cv,ai">
+<meta property="og:type" content="article">
+<meta property="og:title" content="brezezee">
+<meta property="og:url" content="https://brezezee.github.io/2021/06/10/tricks and tools/gdb/index.html">
+<meta property="og:site_name" content="brezezee">
+<meta property="og:description" content="基本命令1234567891011121314151617181920break/b 设置断点(函数名，代码行，a.cpp:20)delete n 删除第n个断点info b  显示设置的断点delete breakpoints 删除所有断点set args ... 设置程序参数run/r  开始运行continue/c 执行到下一个断点next/n 下一行，遇到函数不会进入step/s 下一步，">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2021-06-26T12:20:56.634Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="brezezee">
+<meta name="twitter:description" content="基本命令1234567891011121314151617181920break/b 设置断点(函数名，代码行，a.cpp:20)delete n 删除第n个断点info b  显示设置的断点delete breakpoints 删除所有断点set args ... 设置程序参数run/r  开始运行continue/c 执行到下一个断点next/n 下一行，遇到函数不会进入step/s 下一步，">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://brezezee.github.io/2021/06/10/tricks and tools/gdb/">
+
+
+
+
+
+  <title> | brezezee</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">brezezee</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="https://brezezee.github.io" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="https://brezezee.github.io/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="https://brezezee.github.io/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-categories"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="https://brezezee.github.io/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="https://brezezee.github.io/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://brezezee.github.io">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="brezezee">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="../../../../../images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="brezezee">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-06-10T23:50:12+08:00">
+                2021-06-10
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2021-06-26T20:20:56+08:00">
+                2021-06-26
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/06/10/tricks and tools/gdb/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  3.1k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">break/b 设置断点(函数名，代码行，a.cpp:20)</span><br><span class="line">delete n 删除第n个断点</span><br><span class="line">info b  显示设置的断点</span><br><span class="line">delete breakpoints 删除所有断点</span><br><span class="line">set args ... 设置程序参数</span><br><span class="line">run/r  开始运行</span><br><span class="line">continue/c 执行到下一个断点</span><br><span class="line">next/n 下一行，遇到函数不会进入</span><br><span class="line">step/s 下一步，遇到函数会进入</span><br><span class="line">backtrace/bt  回溯出问题的调用</span><br><span class="line">f x  x为6显示的几号代码</span><br><span class="line">until  运行到退出该函数体</span><br><span class="line">finish 运行到当前函数返回，并打印堆栈地址和返回值</span><br><span class="line"></span><br><span class="line">list/l 默认显示10行代码</span><br><span class="line">list 行号  显示以行号为中心的前后10行代码</span><br><span class="line">list 函数名</span><br><span class="line">list 不带参数则接上次list继续显示剩下的</span><br><span class="line"></span><br><span class="line">print/p</span><br></pre></td></tr></table></figure>
+<p>对于bazel编译或可执行程序不在源码目录下时，可用<code>dir</code>设置源码目录</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dir /home/lirongyun/megvii/</span><br></pre></td></tr></table></figure>
+<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><ul>
+<li>run：简记为 r ，其作用是运行程序，当遇到断点后，程序会在断点处停止运行，等待用户输入下一步的命令。</li>
+<li>continue （简写c ）：继续执行，到下一个断点处（或运行结束）</li>
+<li>next：（简写 n），单步跟踪程序，当遇到函数调用时，也不进入此函数体；此命令同 step 的主要区别是，step 遇到用户自定义的函数，将步进到函数中去运行，而 next 则直接调用函数，不会进入到函数体内。</li>
+<li>step （简写s）：单步调试如果有函数调用，则进入函数；与命令n不同，n是不进入调用的函数的</li>
+<li>until：当你厌倦了在一个循环体内单步跟踪时，这个命令可以运行程序直到退出循环体。</li>
+<li>until+行号： 运行至某行，不仅仅用来跳出循环</li>
+<li>finish： 运行程序，直到当前函数完成返回，并打印函数返回时的堆栈地址和返回值及参数值等信息。</li>
+<li>call 函数(参数)：调用程序中可见的函数，并传递“参数”，如：call gdb_test(55)</li>
+<li>quit：简记为 q ，退出gdb</li>
+</ul>
+<h3 id="设置断点"><a href="#设置断点" class="headerlink" title="设置断点"></a>设置断点</h3><ul>
+<li><ul>
+<li><p>break n （简写b n）:在第n行处设置断点</p>
+<pre><code>（可以带上代码路径和代码名称： b OAGUPDATE.cpp:578）
+</code></pre></li>
+</ul>
+</li>
+<li><p>b fn1 if a＞b：条件断点设置</p>
+</li>
+<li><p>break func（break缩写为b）：在函数func()的入口处设置断点，如：break cb_button</p>
+</li>
+<li><p>delete 断点号n：删除第n个断点</p>
+</li>
+<li><p>disable 断点号n：暂停第n个断点</p>
+</li>
+<li><p>enable 断点号n：开启第n个断点</p>
+</li>
+<li><p>clear 行号n：清除第n行的断点</p>
+</li>
+<li><p>info b （info breakpoints） ：显示当前程序的断点设置情况</p>
+</li>
+<li><p>delete breakpoints：清除所有断点：</p>
+</li>
+</ul>
+<h3 id="查看源代码"><a href="#查看源代码" class="headerlink" title="查看源代码"></a>查看源代码</h3><ul>
+<li>list ：简记为 l ，其作用就是列出程序的源代码，默认每次显示10行。</li>
+<li>list 行号：将显示当前文件以“行号”为中心的前后10行代码，如：list 12</li>
+<li>list 函数名：将显示“函数名”所在函数的源代码，如：list main</li>
+<li>list ：不带参数，将接着上一次 list 命令的，输出下边的内容。</li>
+</ul>
+<h3 id="打印表达式"><a href="#打印表达式" class="headerlink" title="打印表达式"></a>打印表达式</h3><ul>
+<li>print 表达式：简记为 p ，其中“表达式”可以是任何当前正在被测试程序的有效表达式，比如当前正在调试C语言的程序，那么“表达式”可以是任何C语言的有效表达式，包括数字，变量甚至是函数调用。</li>
+<li>print a：将显示整数 a 的值</li>
+<li>print ++a：将把 a 中的值加1,并显示出来</li>
+<li>print name：将显示字符串 name 的值</li>
+<li>print gdb_test(22)：将以整数22作为参数调用 gdb_test() 函数</li>
+<li>print gdb_test(a)：将以变量 a 作为参数调用 gdb_test() 函数</li>
+<li>display 表达式：在单步运行时将非常有用，使用display命令设置一个表达式后，它将在每次单步进行指令后，紧接着输出被设置的表达式及值。如： display a</li>
+<li>watch 表达式：设置一个监视点，一旦被监视的“表达式”的值改变，gdb将强行终止正在被调试的程序。如： watch a</li>
+<li>whatis ：查询变量或函数</li>
+<li>info function： 查询函数</li>
+<li>扩展info locals： 显示当前堆栈页的所有变量</li>
+</ul>
+<h3 id="查询运行信息"><a href="#查询运行信息" class="headerlink" title="查询运行信息"></a>查询运行信息</h3><ul>
+<li>where/bt ：当前运行的堆栈列表；</li>
+<li>bt backtrace 显示当前调用堆栈</li>
+<li>up/down 改变堆栈显示的深度</li>
+<li>set args 参数:指定运行时的参数</li>
+<li>show args：查看设置好的参数</li>
+<li>info program： 来查看程序的是否在运行，进程号，被暂停的原因。</li>
+</ul>
+<h3 id="分割窗口"><a href="#分割窗口" class="headerlink" title="分割窗口"></a>分割窗口</h3><ul>
+<li>layout：用于分割窗口，可以一边查看代码，一边测试：</li>
+<li>layout src：显示源代码窗口</li>
+<li>layout asm：显示反汇编窗口</li>
+<li>layout regs：显示源代码/反汇编和CPU寄存器窗口</li>
+<li>layout split：显示源代码和反汇编窗口</li>
+<li>Ctrl + L：刷新窗口</li>
+</ul>
+<h4 id="反向调试"><a href="#反向调试" class="headerlink" title="反向调试"></a>反向调试</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> <span class="built_in">exec</span>-direction [forward | reverse] <span class="comment"># 设置程序运行方向，然后可用s，n等调试</span></span><br></pre></td></tr></table></figure>
+<h3 id="megvii-wiki"><a href="#megvii-wiki" class="headerlink" title="megvii wiki"></a>megvii wiki</h3><p><strong>gdb命令调试技巧</strong></p>
+<p><strong>一、信息显示</strong><br>1、显示gdb版本 (gdb) show version<br>2、显示gdb版权 (gdb) show version or show warranty<br>3、启动时不显示提示信息gdb -q exe 或者.bashrc 添加alias gdb=”gdb -q”，重启shell<br>4、退出时不显示提示信息(gdb) set confirm off<br>5、输出信息多时不会暂停输出(gdb)set pagination off</p>
+<p><strong>二、函数</strong><br>1、列出函数的名字(gdb) info functions<br>2、是否进入待调试信息的函数(gdb)step s<br>3、进入不带调试信息的函数(gdb)set step-mode on<br>4、退出正在调试的函数(gdb)return expression 或者 (gdb)finish<br>5、直接执行函数(gdb)start 函数名 call函数名<br>6、打印函数堆栈帧信息(gdb)info frame or i frame<br>7、查看函数寄存器信息(gdb)i registers<br>8、查看函数反汇编代码(gdb)disassemble func<br>9、打印尾调用堆栈帧信息(gdb)set debug entry-values 1<br>10、选择函数堆栈帧(gdb)frame n<br>11、向上或向下切换函数堆栈帧(gdb)up n down n</p>
+<p><strong>三、断点</strong><br>1、在匿名空间设置断点(gdb)b Foo::foo (gdb) b (anonymous namespace)::bar<br>2、在程序地址上打断点(gdb)b <em>address (gdb) b </em>0x400522<br>3、在程序入口处打断点$strip a.out $readelf -h a.out或者(gdb)info files定位Entry point: 0x400440 (gdb)b *0x400440<br>4、在文件行号上打断点(gdb)b linenum (gdb)b file.cpp:linenum (gdb)info breakpoints<br>5、保存已经设置的断点(gdb)save breakpoints file-breakpoints-to-save (gdb)source file-breakpoints-to-save<br>6、设置临时断点(gdb)tbreak linenum<br>7、设置条件断点(gdb)b linenum if cond b 11 if i==10<br>8、忽略断点(gdb)ignore bnum count</p>
+<p><strong>四、观察点</strong><br>1、设置观察点(gdb)watch a wacth <em>(type</em>)adress info watchpoints disable、enable、delete<br>2、设置观察点只针对特定线程生效(gdb)info threads watch expr thread threadnum wa a thread 2<br>3、设置读观察点(gdb)rwatch<br>4、设置读写观察点(gdb)awacth</p>
+<p><strong>五、Catchpoint</strong><br>1、让catchpoint只触发一次(gdb)tcatch<br>2、为fork调用设置catchpoint (gdb)catch fork<br>3、为vfork调用设置catchpoint (gdb)catch vfork<br>4、为exec调用设置catchpoint (gdb)catch exec<br>5、为系统调用设置catchpoint (gdb)catch syscall name or num<br>6、通过ptrace调用设置catchpoint破解anti-debugging的程序 (gdb)catch syscall ptrace set $rax=0</p>
+<p><strong>六、打印</strong><br>1、打印ASCII和宽字符字符串 (gdb)x/s str x/ws 4_wstr x/hs 2_wstr<br>2、打印STL容器中的内容 (gdb)p vec<br>3、打印大数组中的内容 (gdb)set print elements number-of-elements set print elements 0 or set print elements unlimited<br>4、打印数组中任意连续的元素值(gdb)p array[index]@num<br>5、打印数组的索引下标(gdb)set print array-indexes on<br>6、打印函数局部变量的值(gdb)bt full info locals<br>7、打印进程的内存信息(gdb)i proc mappings i files<br>8、打印静态变量的值(gdb)p ‘static-1.c’::var<br>9、打印变量的类型和所在文件(gdb)whatis he ptype he i variables he<br>10、打印内存的值(gdb)16进制 x/16xb a 10进制x/16ub a 二进制x/16tb a<br>11、打印源代码行(gdb)l line l 函数 l - l + l 1,10<br>12、每行打印一个结构体成员(gdb)set print pretty on<br>13、按照派生类打印对象(gdb)set print object on<br>14、指定程序的输入输出设备(gdb)tty gdb -tty /dev/pts/2 ./a.out tty /dev/pts/2<br>15、使用”$\_“和”$\__”变量(gdb) x “命令会把最后检查的内存地址值存在“ $_ ”这个“convenience variable”中，并<br>且会把这个地址中的内容放在“ $<strong> ”这个“convenience variable”<br>16、打印程序动态分配内存的信息(gdb)define mallocinfo set $</strong>f = fopen(“/dev/tty”, “w”) call malloc_info(0, $<strong>f)call fclose($</strong>f)end mallocinfo<br>17、打印调用栈帧中变量的值(gdb)b func_1 r bt f 1 p b f 2 p b p func2::b p func_3::b</p>
+<p><strong>七、多进程/线程</strong><br>1、调试已经运行的进程gdb program -p=10210 (gdb)attach pid detach<br>2、调试子进程(gdb)set follow-fork-mode child<br>3、同时调试父进程和子进程(gdb)set detach-on-fork off i inferiors set schedule-multiple on<br>4、查看线程信息(gdb)i threads<br>5、在Solaris上使用maintenance命令查看线程信息(gdb)maint info sol-threads<br>6、不显示线程启动和退出信息(gdb)set print thread-events off<br>7、只允许一个线程运行(gdb)set scheduler-locking on<br>8、使用”$_thread”变量(gdb)command 2Type commands for breakpoint(s) 2, one per line.End with a line saying just “end”.&gt;printf “thread id=%d\n”, $_thread &gt;end<br>9、一个gdb会话中同时调试多个程序(gdb)add-inferior [ -copies n ] [ -exec executable ]<br>10、打印程序进程空间信息(gdb)maint info program-spaces<br>11、使用”$_exitcode”变量(gdb)p $_exitcode</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ps aux | grep porg  # 查看进程</span><br><span class="line">ps -aL | grep porg	    # 查看轻量级线程</span><br><span class="line">pstree -p main_threadid # 查看与主线程相关的线程</span><br></pre></td></tr></table></figure>
+<p><strong>八、core dump文件</strong><br>1、为调试进程产生core dump文件(gdb)generate-core-file or gcore<br>2、加载可执行程序和core dump文件(gdb)gdb -q /data/nan/a /var/core/core.a.22268.1402638140</p>
+<p><strong>九、汇编</strong><br>1、设置汇编指令格式(gdb)set disassembly-flavor intel disassemble main<br>2、在函数的第一条汇编指令打断点(gdb)b *main<br>3、自动反汇编后面要执行的代码(gdb)set disassemble-next-line on set disassemble-next-line auto set disassemble-next-line off<br>4、将源程序和汇编指令映射起来(gdb)disas /m main<br>5、显示将要执行的汇编指令(gdb)display /i $pc<br>6、打印寄存器的值(gdb)i registers i all-registers i registers eax<br>7、显示程序原始机器码(gdb)disassemble /r main</p>
+<p><strong>十、改变程序执行顺序</strong><br>1、改变字符串的值(gdb)set main::p1=”Jil”<br>2、设置变量的值(gdb)set var variable=expr set var i = 8 set {int}0x8047a54 = 8 set var $eax = 8<br>3、修改PC寄存器的值(gdb)p $pc set var $pc=0x08050949<br>4、跳转到指定位置执行(gdb)j 15<br>5、使用断点命令改变程序的执行(gdb)(gdb) b drawing Breakpoint 1 at 0x40064d: file win.c, line 6.<br>(gdb) command 1<br>Type commands for breakpoint(s) 1, one per line.<br>End with a line saying just “end”.<br>>silent<br>>set variable n = 0<br>>continue<br>>end<br>(gdb) r<br>6、修改被调试程序的二进制文件gdb -write ./a.out (gdb)show write set write on disassemble /mr drawing set variable <em>(short</em>)0x400651=0x0ceb disassemble /mr drawing</p>
+<p><strong>十一、信号</strong><br>1、查看信号处理信息(gdb)i signals<br>2、信号发生时是否暂停程序(gdb) handle signal stop/nostop<br>3、信号发生时是否打印信号信息(gdb)handle signal print/noprint<br>4、信号发生时是否把信息丢给程序处理(gdb)handle signal pass(noignore)/nopass(ignore)<br>5、给程序发送信息(gdb)signal signal_name<br>6、使用”$_siginfo”变量(gdb)ptype $_siginfo</p>
+<p><strong>十二、共享库</strong><br>1、显示共享连接库信息(gdb)info sharedlibrary regex</p>
+<p><strong>十三、脚本</strong><br>1、配置gdb init文件(gdb) home目录下的 .gdbinit<br>2、按何种方式解析脚本文件(gdb)set script-extension off soft strict<br>3、保存历史命令(gdb)set history filename ~/.gdb_history set history save on</p>
+<p><strong>十四、源文件</strong><br>1、设置源文件查找路径(gdb)directory ../ki/<br>2、替换查找源文件的目录(gdb)set substitute-path from to</p>
+<p><strong>十五、图形化界面</strong><br>1、进入和退出图形化调试界面(gdb)gdb -tui program<br>2、显示汇编代码窗口(gdb)layout asm<br>3、显示寄存器窗口(gdb)layout regs<br>4、调整窗口大小(gdb)winheight <win_name> [+ | -]count</win_name></p>
+<p>十六、其它<br>1、命令行选项的格式(gdb)gdb -help<br>2、支持预处理器宏信息(gdb)gcc -g3<br>3、使用命令的缩写形式(gdb)b -&gt; break<br>c -&gt; continue<br>d -&gt; delete<br>f -&gt; frame<br>i -&gt; info<br>j -&gt; jump<br>l -&gt; list<br>n -&gt; next<br>p -&gt; print<br>r -&gt; run<br>s -&gt; step<br>u -&gt; until<br>aw -&gt; awatch<br>bt -&gt; backtrace<br>dir -&gt; directory<br>disas -&gt; disassemble<br>fin -&gt; finish<br>ig -&gt; ignore<br>ni -&gt; nexti<br>rw -&gt; rwatch<br>si -&gt; stepi<br>tb -&gt; tbreak<br>wa -&gt; watch<br>win -&gt; winheight<br>4、在gdb中执行shell命令和make(gdb)shell ls<br>5、在gdb中执行cd和pwd命令(gdb)pwd cd tmp<br>6、设置命令提示符(gdb)gdb -q `which gdb<br>7、设置被调试程序的参数(gdb)gdb -args ./a.out a b c set args a b c r a b<br>8、设置被调试程序的环境变量(gdb)set env varname=value<br>9、得到命令的帮助信息(gdb)help<br>10、记录执行gdb的过程(gdb)set logging file log.txt set logging on</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="../../../04/megvii/load_and_run重构方案/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="../../../26/megvii/lite源码阅读/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">brezezee</p>
+              <p class="site-description motion-element" itemprop="description">靡不有初，鲜克有终</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="https://brezezee.github.io/archives">
+              
+                  <span class="site-state-item-count">139</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="../../../../../categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="../../../../../tags/index.html">
+                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本命令"><span class="nav-text">基本命令</span></a></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#运行"><span class="nav-text">运行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置断点"><span class="nav-text">设置断点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看源代码"><span class="nav-text">查看源代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打印表达式"><span class="nav-text">打印表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询运行信息"><span class="nav-text">查询运行信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分割窗口"><span class="nav-text">分割窗口</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#反向调试"><span class="nav-text">反向调试</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#megvii-wiki"><span class="nav-text">megvii wiki</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">brezezee</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">180.7k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../../js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="../../../../../js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="../../../../../js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="../../../../../js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../../js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://brezezee.github.io/2021/06/10/tricks and tools/gdb/';
+          this.page.identifier = '2021/06/10/tricks and tools/gdb/';
+          this.page.title = '';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

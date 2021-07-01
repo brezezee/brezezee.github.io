@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="../../../../../../lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="../../../../../../lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="../../../../../../css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="../../../../../../images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../../../../images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="../../../../../../images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="../../../../../../images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="链表题反转链表123456789101112131415161718192021ListNode* reverseList(ListNode* head) &amp;#123;    // 三指针    // ListNode *pre = head, *cur = nullptr;    // while (pre) &amp;#123;    //     ListNode* t = pre-&amp;gt;next">
+<meta name="keywords" content="ml,dl,cv,ai">
+<meta property="og:type" content="article">
+<meta property="og:title" content="brezezee">
+<meta property="og:url" content="https://brezezee.github.io/2021/02/22/algorithm/interview/面试高频题/index.html">
+<meta property="og:site_name" content="brezezee">
+<meta property="og:description" content="链表题反转链表123456789101112131415161718192021ListNode* reverseList(ListNode* head) &amp;#123;    // 三指针    // ListNode *pre = head, *cur = nullptr;    // while (pre) &amp;#123;    //     ListNode* t = pre-&amp;gt;next">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2021-03-07T16:51:42.337Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="brezezee">
+<meta name="twitter:description" content="链表题反转链表123456789101112131415161718192021ListNode* reverseList(ListNode* head) &amp;#123;    // 三指针    // ListNode *pre = head, *cur = nullptr;    // while (pre) &amp;#123;    //     ListNode* t = pre-&amp;gt;next">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://brezezee.github.io/2021/02/22/algorithm/interview/面试高频题/">
+
+
+
+
+
+  <title> | brezezee</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">brezezee</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="https://brezezee.github.io" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="https://brezezee.github.io/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="https://brezezee.github.io/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-categories"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="https://brezezee.github.io/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="https://brezezee.github.io/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://brezezee.github.io">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="brezezee">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="../../../../../../images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="brezezee">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-02-22T20:40:42+08:00">
+                2021-02-22
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2021-03-08T00:51:42+08:00">
+                2021-03-08
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/02/22/algorithm/interview/面试高频题/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2.6k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="链表题"><a href="#链表题" class="headerlink" title="链表题"></a>链表题</h3><h4 id="反转链表"><a href="#反转链表" class="headerlink" title="反转链表"></a>反转链表</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ListNode* <span class="title">reverseList</span><span class="params">(ListNode* head)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 三指针</span></span><br><span class="line">    <span class="comment">// ListNode *pre = head, *cur = nullptr;</span></span><br><span class="line">    <span class="comment">// while (pre) &#123;</span></span><br><span class="line">    <span class="comment">//     ListNode* t = pre-&gt;next;</span></span><br><span class="line">    <span class="comment">//     pre-&gt;next = cur;</span></span><br><span class="line">    <span class="comment">//     cur = pre;</span></span><br><span class="line">    <span class="comment">//     pre = t;</span></span><br><span class="line">    <span class="comment">// &#125;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// return cur;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 递归</span></span><br><span class="line">    <span class="keyword">if</span> (!head || !head-&gt;next) <span class="keyword">return</span> head;  <span class="comment">// 结束条件，返回的是最后的头结点</span></span><br><span class="line"></span><br><span class="line">    ListNode *res = reverseList(head-&gt;next); <span class="comment">// 递归下一个节点，通过递归去寻找和保存下一个节点的指针</span></span><br><span class="line">    head-&gt;next-&gt;next = head; <span class="comment">// 将后面的倒过来指向自己</span></span><br><span class="line">    head-&gt;next = <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="反转链表II"><a href="#反转链表II" class="headerlink" title="反转链表II"></a>反转链表II</h4><p>反转从位置m到n的链表，一趟扫描完成。</p>
+<p>有哨兵和无哨兵</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ListNode* <span class="title">reverseBetween</span><span class="params">(ListNode *head, <span class="keyword">int</span> m, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!head) <span class="keyword">return</span> head;</span><br><span class="line">    <span class="keyword">int</span> cnt = n - m + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    ListNode *H = <span class="keyword">new</span> ListNode();</span><br><span class="line">    H-&gt;next = head;</span><br><span class="line">    ListNode *dummy = H, *pre, *tail, *t;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (m &gt; <span class="number">1</span>) &#123;</span><br><span class="line">        dummy = dummy-&gt;next;</span><br><span class="line">        -- m;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    pre = dummy-&gt;next;</span><br><span class="line">    <span class="keyword">while</span> (cnt --) &#123;</span><br><span class="line">        t = pre-&gt;next;</span><br><span class="line">        pre-&gt;next = tail;</span><br><span class="line">        tail = pre;</span><br><span class="line">        pre = t;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    dummy-&gt;next-&gt;next = pre;  <span class="comment">// 有哨兵则不需要判断是否有第一段</span></span><br><span class="line">    dummy-&gt;next = tail;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> H-&gt;next;</span><br><span class="line">    <span class="comment">// // 除head外，还需rear和h来分别保存第一段的结尾和第二段的开头</span></span><br><span class="line">    <span class="comment">// ListNode *rear = nullptr,  *h;  // 用于保存边界</span></span><br><span class="line">    <span class="comment">// ListNode *pre = head, *cur;     // 用于反转链表</span></span><br><span class="line">    <span class="comment">// while (m &gt; 1) &#123;</span></span><br><span class="line">    <span class="comment">//     rear = pre;</span></span><br><span class="line">    <span class="comment">//     pre = pre-&gt;next;</span></span><br><span class="line">    <span class="comment">//     -- m;</span></span><br><span class="line">    <span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// h = pre;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// // 反转</span></span><br><span class="line">    <span class="comment">// while (cnt --) &#123;</span></span><br><span class="line">    <span class="comment">//     ListNode *t = pre-&gt;next;</span></span><br><span class="line">    <span class="comment">//     pre-&gt;next = cur;</span></span><br><span class="line">    <span class="comment">//     cur = pre;</span></span><br><span class="line">    <span class="comment">//     pre = t;</span></span><br><span class="line">    <span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// // 连接一二段</span></span><br><span class="line">    <span class="comment">// if (rear) rear-&gt;next = cur;  // 判断是否有第一段</span></span><br><span class="line">    <span class="comment">// else      head = cur;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// h-&gt;next = pre;              // 连接第三段</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// return head;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="k个一组翻转链表"><a href="#k个一组翻转链表" class="headerlink" title="k个一组翻转链表"></a>k个一组翻转链表</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ListNode* <span class="title">reverseKGroup</span><span class="params">(ListNode* head, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">    ListNode *H = <span class="keyword">new</span> ListNode();</span><br><span class="line">    H-&gt;next = head;</span><br><span class="line">    ListNode *cur = H, *pre, *tail = <span class="literal">nullptr</span>, *t;   <span class="comment">// cur是每k个链表段的表头节点, pre tail 用于翻转, t是中间临时指针</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (cur-&gt;next) &#123;</span><br><span class="line">        pre = cur-&gt;next;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; k; ++ i) &#123;  <span class="comment">// 判断是否剩余k个</span></span><br><span class="line">            <span class="keyword">if</span> (!pre) <span class="keyword">return</span> H-&gt;next;</span><br><span class="line">            pre = pre-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        pre = cur-&gt;next;                <span class="comment">// 重新指向第一个节点，开始翻转</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; k; ++ i) &#123;  <span class="comment">// 翻转k个</span></span><br><span class="line">            t = pre-&gt;next;</span><br><span class="line">            pre-&gt;next = tail;</span><br><span class="line">            tail = pre;</span><br><span class="line">            pre = t;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 连接</span></span><br><span class="line">        t = cur-&gt;next;     <span class="comment">// 保存翻转前的第一个节点，也就是翻转后的尾节点</span></span><br><span class="line">        t-&gt;next = pre;     <span class="comment">// 新的尾节点 和 后一段的头节点 连接 </span></span><br><span class="line">        cur-&gt;next = tail;  <span class="comment">// 该段新的头结点</span></span><br><span class="line"></span><br><span class="line">        cur = t;           <span class="comment">// 翻转后的尾节点是下一段的头结点</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> H-&gt;next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="分隔链表-快慢指针"><a href="#分隔链表-快慢指针" class="headerlink" title="分隔链表(快慢指针)"></a>分隔链表(快慢指针)</h4><p>慢指针负责找到第一个 &gt;= x 的节点的父节点，然后快指针负责从该节点开始寻找 &lt; x 的节点，并将其插入到慢指针之后，同时慢指针指向插入的节点。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ListNode* <span class="title">partition</span><span class="params">(ListNode* head, <span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    ListNode *dummy = <span class="keyword">new</span> ListNode(<span class="number">-1</span>, head);</span><br><span class="line">    ListNode *slow = dummy, *fast = slow;</span><br><span class="line">    ListNode *t;</span><br><span class="line">    <span class="keyword">while</span> (fast-&gt;next) &#123;</span><br><span class="line">        <span class="keyword">if</span> (slow-&gt;next-&gt;val &lt; x) &#123;  <span class="comment">// 在找到第一个&gt;= x的数后就不会再执行，之后fast指针找到的 &lt; x 的数通过头插法加入</span></span><br><span class="line">            slow = slow-&gt;next;</span><br><span class="line">            fast = slow;            <span class="comment">// fast指针的起始位置</span></span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span> (fast-&gt;next-&gt;val &lt; x) &#123; <span class="comment">// 找寻的节点是next指向的节点满足 &lt; x 的节点。</span></span><br><span class="line">            t = fast-&gt;next;</span><br><span class="line">            fast-&gt;next = t-&gt;next;</span><br><span class="line">            t-&gt;next = slow-&gt;next;</span><br><span class="line">            slow-&gt;next = t;</span><br><span class="line">            slow = t;</span><br><span class="line">        &#125;<span class="keyword">else</span></span><br><span class="line">            fast = fast-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// while (cur-&gt;next &amp;&amp; cur-&gt;next-&gt;val &lt; x) &#123;</span></span><br><span class="line">    <span class="comment">//     cur = cur-&gt;next;</span></span><br><span class="line">    <span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// ListNode *p = cur, *t;</span></span><br><span class="line">    <span class="comment">// while (p-&gt;next) &#123;</span></span><br><span class="line">    <span class="comment">//     if (p-&gt;next-&gt;val &lt; x) &#123;</span></span><br><span class="line">    <span class="comment">//         t = p-&gt;next;</span></span><br><span class="line">    <span class="comment">//         p-&gt;next = t-&gt;next;</span></span><br><span class="line">    <span class="comment">//         t-&gt;next = cur-&gt;next;</span></span><br><span class="line">    <span class="comment">//         cur-&gt;next = t;</span></span><br><span class="line">    <span class="comment">//         cur = t;</span></span><br><span class="line">    <span class="comment">//     &#125;else &#123;</span></span><br><span class="line">    <span class="comment">//         p = p-&gt;next;</span></span><br><span class="line">    <span class="comment">//     &#125;</span></span><br><span class="line">    <span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> dummy-&gt;next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="两个链表的第一个公共节点"><a href="#两个链表的第一个公共节点" class="headerlink" title="两个链表的第一个公共节点"></a><strong>两个链表的第一个公共节点</strong></h4><h4 id="环形链表"><a href="#环形链表" class="headerlink" title="环形链表"></a>环形链表</h4><p>环形链表就是会访问到之前访问过的节点，可以通过hash表保存。若对空间有要求可以用快慢指针，这个需要推公式：</p>
+<blockquote>
+<p>在有环的情况中，fast和slow相遇，最终的步数是f = 2s，设进入环之前有a个节点，环内有b个节点，a是它们都走过的路程，因此在环中相遇即f比s多走n个环，即    f = s + nb ，可推出s = nb ，这说明s走的路程是环b的整数倍，s在进入环前走了a个距离，那么从当前点再走a个距离便到了进入环的入口，因此再设一个从head出发    的节点，当它与相遇后的s再次相遇的节点就是环的入口。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 快慢指针</span></span><br><span class="line"><span class="function">ListNode *<span class="title">detectCycle</span><span class="params">(ListNode *head)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ListNode *fast = head, *slow = head;</span><br><span class="line">    <span class="keyword">while</span> (fast &amp;&amp; fast-&gt;next)</span><br><span class="line">    &#123;</span><br><span class="line">        fast = fast-&gt;next-&gt;next;</span><br><span class="line">        slow = slow-&gt;next;</span><br><span class="line">        <span class="keyword">if</span> (fast == slow)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 达到相遇点</span></span><br><span class="line">            ListNode *slow2 = head;</span><br><span class="line">            <span class="keyword">while</span> (slow2 != slow)</span><br><span class="line">            &#123;</span><br><span class="line">                slow2 = slow2-&gt;next;</span><br><span class="line">                slow = slow-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> slow2;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nullptr</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="双指针"><a href="#双指针" class="headerlink" title="双指针"></a>双指针</h3><h4 id="三数之和"><a href="#三数之和" class="headerlink" title="三数之和"></a>三数之和</h4><blockquote>
+<p>求满足三数之和为0，且不重复的组合</p>
+</blockquote>
+<p>这题的一个关键是不重复，和为0。暴力的做法是三重循环得到满足和为0的组合，再用哈希表去重。优化去重可先将它们排序后再循环，此时三个数$a, b, c$满足$a \le b \le c$ 。这样元素的组合顺序就确定了，但是没有完全去除重复，例如$-2, 2,2,2$ ，$b,c$可以两次都取2，因此在得到一个组合后，需要判断当前的循环的下一个数是否跟本次加入组合的数相同，相同则跳过。这样就可以完全去除重复。</p>
+<p>再观察到$a \le b \le c$ ，后面两个数的大小关系是确定的，因此可以分别从左右两侧进行第二第三层循环，在它们相交时终止，这样将复杂度降到$O(N^2)$ 。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; threeSum(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">    <span class="keyword">int</span> n = nums.size();</span><br><span class="line">    sort(nums.begin(), nums.end());</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; res;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> p = <span class="number">0</span>; p &lt; n - <span class="number">2</span>; ++ p) &#123;</span><br><span class="line">        <span class="keyword">if</span> (nums[p] &gt; <span class="number">0</span>) <span class="keyword">return</span> res;</span><br><span class="line">        <span class="keyword">if</span> (p &gt; <span class="number">0</span> &amp;&amp; nums[p] == nums[p - <span class="number">1</span>]) <span class="keyword">continue</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> l = p + <span class="number">1</span>, r = n - <span class="number">1</span>; l &lt;  r; ) &#123;</span><br><span class="line">            <span class="keyword">int</span> t = nums[p] + nums[l] + nums[r];</span><br><span class="line">            <span class="keyword">if</span> (t == <span class="number">0</span>) &#123;</span><br><span class="line">                res.push_back(&#123;nums[p], nums[l ++], nums[r --]&#125;);</span><br><span class="line">                <span class="keyword">while</span> (l &lt; r &amp;&amp; nums[l] == nums[l - <span class="number">1</span>]) ++ l;  <span class="comment">// 与之前已加入的比较，是否重复</span></span><br><span class="line">                <span class="keyword">while</span> (l &lt; r &amp;&amp; nums[r] == nums[r + <span class="number">1</span>]) -- r;  </span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (t &lt; <span class="number">0</span>) &#123;</span><br><span class="line">                ++ l;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                -- r;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="单调栈"><a href="#单调栈" class="headerlink" title="单调栈"></a>单调栈</h3><h4 id="下一个更大的数"><a href="#下一个更大的数" class="headerlink" title="下一个更大的数"></a>下一个更大的数</h4><blockquote>
+<p>给定一个循环数组（最后一个元素的下一个元素是数组的第一个元素），输出每个元素的下一个更大元素。数字 x 的下一个更大的元素是按数组遍历顺序，这个数字之后的第一个比它更大的数，这意味着你应该循环地搜索它的下一个更大的数。如果不存在，则输出 -1。</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; nextGreaterElements(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums) &#123;</span><br><span class="line">    <span class="keyword">int</span> n = nums.size();</span><br><span class="line">    <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; stk;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res(n, <span class="number">-1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 5 4 3 2 7 前面四个单减的第一个最大的数都是7，因此不需要再多余的挨个搜索</span></span><br><span class="line">    <span class="comment">// 当单减的时候就入栈，直到遇到一个较大的数，这时查看这个数能大过多少栈中的，则为栈中的数赋值即可</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span> * n - <span class="number">1</span>; ++ i) &#123;</span><br><span class="line">        <span class="keyword">while</span> (stk.size() &amp;&amp; nums[stk.top()] &lt; nums[i % n]) &#123;</span><br><span class="line">            res[stk.top()] = nums[i % n];</span><br><span class="line">            stk.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        stk.push(i % n);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&emsp;</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><h4 id="接雨水"><a href="#接雨水" class="headerlink" title="接雨水"></a>接雨水</h4><p>给定 <em>n</em> 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 暴力做法，直接搜索一个柱子两侧最高的柱，它的水平线一定是其中较矮的那个，这样每次左右分别搜索最高的柱子，一次搜索可以确定一个柱子上方的雨水量</span></span><br><span class="line"><span class="comment">// 搜索时需要包括本身（如果没有比自己高的那自己就是最高的）。</span></span><br><span class="line"><span class="comment">// class Solution&#123;</span></span><br><span class="line"><span class="comment">// public:</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// int trap(vector&lt;int&gt;&amp; height)</span></span><br><span class="line"><span class="comment">// &#123;</span></span><br><span class="line"><span class="comment">//     int ans = 0;</span></span><br><span class="line"><span class="comment">//     int size = height.size();</span></span><br><span class="line"><span class="comment">//     for (int i = 1; i &lt; size - 1; i++) &#123;</span></span><br><span class="line"><span class="comment">//         int max_left = 0, max_right = 0;</span></span><br><span class="line"><span class="comment">//         for (int j = i; j &gt;= 0; j--) &#123; //Search the left part for max bar size</span></span><br><span class="line"><span class="comment">//             max_left = max(max_left, height[j]);</span></span><br><span class="line"><span class="comment">//         &#125;</span></span><br><span class="line"><span class="comment">//         for (int j = i; j &lt; size; j++) &#123; //Search the right part for max bar size</span></span><br><span class="line"><span class="comment">//             max_right = max(max_right, height[j]);</span></span><br><span class="line"><span class="comment">//         &#125;</span></span><br><span class="line">        </span><br><span class="line"><span class="comment">//         int t = min(max_left, max_right) - height[i];</span></span><br><span class="line"><span class="comment">//         ans += t;</span></span><br><span class="line"><span class="comment">//     &#125;</span></span><br><span class="line"><span class="comment">//     return ans;</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"><span class="comment">// &#125;;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// // 动态规划：先正反两次遍历得到每个位置i的左右两端最大的数，则可以直接计算每个位置的水量</span></span><br><span class="line"><span class="comment">// class Solution &#123;</span></span><br><span class="line"><span class="comment">// public:</span></span><br><span class="line"><span class="comment">//     int trap(vector&lt;int&gt;&amp; h) &#123;</span></span><br><span class="line"><span class="comment">//        int n = h.size();</span></span><br><span class="line"><span class="comment">//        int res = 0;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//        vector&lt;int&gt; left_max(n), right_max(n);</span></span><br><span class="line"><span class="comment">//        for (int t = -1, i = 0; i &lt; n - 1; ++ i) &#123;</span></span><br><span class="line"><span class="comment">//            if (t &lt; h[i]) t = h[i];</span></span><br><span class="line"><span class="comment">//            left_max[i] = t; </span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//        for (int t = -1, i = n - 1; i &gt; 0; -- i) &#123;</span></span><br><span class="line"><span class="comment">//            if (t &lt; h[i]) t = h[i];</span></span><br><span class="line"><span class="comment">//            right_max[i] = t;</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//        for (int i = 1; i &lt; n - 1; ++ i) &#123;</span></span><br><span class="line"><span class="comment">//            res += (min(right_max[i], left_max[i]) - h[i]);</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line"><span class="comment">//        return res;</span></span><br><span class="line"><span class="comment">//     &#125;</span></span><br><span class="line"><span class="comment">// &#125;;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 单调栈， 如果说暴力是按纵轴确认，单调栈就是按横轴确认（确定两个柱子之间有多宽的雨水量）。</span></span><br><span class="line"><span class="comment">// 雨水会出现在凹槽中，因此从左遍历只需要维护一个单调递减栈，就能保证左侧是凹的形状，当遇到不满足单调递减的柱时，计算左侧是否已有积水，和积水的宽度高度</span></span><br><span class="line"><span class="comment">// 并且由单调栈的性质，保存的一定是一个不增的序列。</span></span><br><span class="line"><span class="comment">// class Solution &#123;</span></span><br><span class="line"><span class="comment">//     int stk[100000];</span></span><br><span class="line"><span class="comment">//     int tt = -1;</span></span><br><span class="line"><span class="comment">// public:</span></span><br><span class="line"><span class="comment">//     int trap(vector&lt;int&gt;&amp; h) &#123;</span></span><br><span class="line"><span class="comment">//         int n = h.size();</span></span><br><span class="line">        </span><br><span class="line"><span class="comment">//         int res = 0;</span></span><br><span class="line"><span class="comment">//         for (int i = 0; i &lt; n; ++ i) &#123;</span></span><br><span class="line"><span class="comment">//             while (tt != -1 &amp;&amp; h[stk[tt]] &lt; h[i]) &#123;</span></span><br><span class="line"><span class="comment">//                 int mid = stk[tt --];</span></span><br><span class="line"><span class="comment">//                 if (tt == -1) break;</span></span><br><span class="line"><span class="comment">//                 int l = stk[tt];</span></span><br><span class="line"><span class="comment">//                 res += (i - l - 1) * (min(h[i], h[l]) - h[mid]);</span></span><br><span class="line"><span class="comment">//             &#125;</span></span><br><span class="line"><span class="comment">//             stk[++ tt] = i;</span></span><br><span class="line"><span class="comment">//         &#125;</span></span><br><span class="line"><span class="comment">//         return res;</span></span><br><span class="line"><span class="comment">//     &#125;</span></span><br><span class="line"><span class="comment">// &#125;;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 双指针 ： 暴力法和动态规划都是需要一个柱子左右两侧最高的中较小的即可，那么可从两侧分别遍历，分别维护两侧最大的柱子，</span></span><br><span class="line"><span class="comment">// 在遍历的过程中，可以先计算较小端的水量，以左侧为例，它左侧的最大值已确定，而右侧最大值比它大，那么它的水量只与左侧最大值相关。</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">trap</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; h)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> l = <span class="number">0</span>, r = h.size() - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> left_max = <span class="number">0</span>, right_max = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (l &lt;= r) &#123;</span><br><span class="line">            <span class="keyword">if</span> (h[l] &lt;= h[r]) &#123;</span><br><span class="line">                h[l] &lt; left_max ? res += left_max - h[l] : left_max = h[l];</span><br><span class="line">                ++ l;</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                h[r] &lt; right_max ? res += right_max - h[r] : right_max = h[r];</span><br><span class="line">                -- r;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="../../../../../01/31/temp/temp2/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="../../小技巧/杨辉三角与二项式定理/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">brezezee</p>
+              <p class="site-description motion-element" itemprop="description">靡不有初，鲜克有终</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="https://brezezee.github.io/archives">
+              
+                  <span class="site-state-item-count">139</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="../../../../../../categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="../../../../../../tags/index.html">
+                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#链表题"><span class="nav-text">链表题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#反转链表"><span class="nav-text">反转链表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#反转链表II"><span class="nav-text">反转链表II</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#k个一组翻转链表"><span class="nav-text">k个一组翻转链表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分隔链表-快慢指针"><span class="nav-text">分隔链表(快慢指针)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#两个链表的第一个公共节点"><span class="nav-text">两个链表的第一个公共节点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#环形链表"><span class="nav-text">环形链表</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#双指针"><span class="nav-text">双指针</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#三数之和"><span class="nav-text">三数之和</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单调栈"><span class="nav-text">单调栈</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#下一个更大的数"><span class="nav-text">下一个更大的数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路"><span class="nav-text">思路</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#接雨水"><span class="nav-text">接雨水</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">brezezee</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">180.7k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../../../js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="../../../../../../js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="../../../../../../js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="../../../../../../js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../../../js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://brezezee.github.io/2021/02/22/algorithm/interview/面试高频题/';
+          this.page.identifier = '2021/02/22/algorithm/interview/面试高频题/';
+          this.page.title = '';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
