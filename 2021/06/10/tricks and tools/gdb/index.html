@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="基本命令1234567891011121314151617181920break/b 设置断点(函数名，代码行，a.cpp:20)delete n 删除第n个断点info b  显示设置的断点delete breakpoints 删除所有断点set args ... 设置程序参数run/r  开始运行continue/c 执行到下一个断点next/n 下一行，遇到函数不会进入step/s 下一步，">
+<meta name="description" content="文件分析指令123456file xxx  # 查看文件格式信息size *.o   # 查看ELF各个段的长度objdump -h *.o # 查看目标文件结构和信息 -h(段信息) -sd(以16进制打印并且反汇编)readelf -S *.o nm *.o   # 查看符号表c++filt &amp;quot;符号名&amp;quot; # 还原经过mangling后名称 基本命令1234567891011">
 <meta name="keywords" content="gdb">
 <meta property="og:type" content="article">
 <meta property="og:title" content="gdb基本命令">
 <meta property="og:url" content="https://brezezee.github.io/2021/06/10/tricks and tools/gdb/index.html">
 <meta property="og:site_name" content="brezezee">
-<meta property="og:description" content="基本命令1234567891011121314151617181920break/b 设置断点(函数名，代码行，a.cpp:20)delete n 删除第n个断点info b  显示设置的断点delete breakpoints 删除所有断点set args ... 设置程序参数run/r  开始运行continue/c 执行到下一个断点next/n 下一行，遇到函数不会进入step/s 下一步，">
+<meta property="og:description" content="文件分析指令123456file xxx  # 查看文件格式信息size *.o   # 查看ELF各个段的长度objdump -h *.o # 查看目标文件结构和信息 -h(段信息) -sd(以16进制打印并且反汇编)readelf -S *.o nm *.o   # 查看符号表c++filt &amp;quot;符号名&amp;quot; # 还原经过mangling后名称 基本命令1234567891011">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-07-01T17:12:57.533Z">
+<meta property="og:updated_time" content="2021-07-04T02:57:53.990Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="gdb基本命令">
-<meta name="twitter:description" content="基本命令1234567891011121314151617181920break/b 设置断点(函数名，代码行，a.cpp:20)delete n 删除第n个断点info b  显示设置的断点delete breakpoints 删除所有断点set args ... 设置程序参数run/r  开始运行continue/c 执行到下一个断点next/n 下一行，遇到函数不会进入step/s 下一步，">
+<meta name="twitter:description" content="文件分析指令123456file xxx  # 查看文件格式信息size *.o   # 查看ELF各个段的长度objdump -h *.o # 查看目标文件结构和信息 -h(段信息) -sd(以16进制打印并且反汇编)readelf -S *.o nm *.o   # 查看符号表c++filt &amp;quot;符号名&amp;quot; # 还原经过mangling后名称 基本命令1234567891011">
 
 
 
@@ -308,8 +308,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2021-07-02T01:12:57+08:00">
-                2021-07-02
+              <time title="Post modified" itemprop="dateModified" datetime="2021-07-04T10:57:53+08:00">
+                2021-07-04
               </time>
             
           </span>
@@ -368,7 +368,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  3.1k
+                  3.2k
                 </span>
               
 
@@ -393,7 +393,8 @@
       
 
       
-        <h4 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">break/b 设置断点(函数名，代码行，a.cpp:20)</span><br><span class="line">delete n 删除第n个断点</span><br><span class="line">info b  显示设置的断点</span><br><span class="line">delete breakpoints 删除所有断点</span><br><span class="line">set args ... 设置程序参数</span><br><span class="line">run/r  开始运行</span><br><span class="line">continue/c 执行到下一个断点</span><br><span class="line">next/n 下一行，遇到函数不会进入</span><br><span class="line">step/s 下一步，遇到函数会进入</span><br><span class="line">backtrace/bt  回溯出问题的调用</span><br><span class="line">f x  x为6显示的几号代码</span><br><span class="line">until  运行到退出该函数体</span><br><span class="line">finish 运行到当前函数返回，并打印堆栈地址和返回值</span><br><span class="line"></span><br><span class="line">list/l 默认显示10行代码</span><br><span class="line">list 行号  显示以行号为中心的前后10行代码</span><br><span class="line">list 函数名</span><br><span class="line">list 不带参数则接上次list继续显示剩下的</span><br><span class="line"></span><br><span class="line">print/p</span><br></pre></td></tr></table></figure>
+        <h4 id="文件分析指令"><a href="#文件分析指令" class="headerlink" title="文件分析指令"></a>文件分析指令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">file xxx  # 查看文件格式信息</span><br><span class="line">size *.o   # 查看ELF各个段的长度</span><br><span class="line">objdump -h *.o # 查看目标文件结构和信息 -h(段信息) -sd(以16进制打印并且反汇编)</span><br><span class="line">readelf -S *.o </span><br><span class="line">nm *.o   # 查看符号表</span><br><span class="line">c++filt &quot;符号名&quot; # 还原经过mangling后名称</span><br></pre></td></tr></table></figure>
+<h4 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">break/b 设置断点(函数名，代码行，a.cpp:20)</span><br><span class="line">delete n 删除第n个断点</span><br><span class="line">info b  显示设置的断点</span><br><span class="line">delete breakpoints 删除所有断点</span><br><span class="line">set args ... 设置程序参数</span><br><span class="line">run/r  开始运行</span><br><span class="line">continue/c 执行到下一个断点</span><br><span class="line">next/n 下一行，遇到函数不会进入</span><br><span class="line">step/s 下一步，遇到函数会进入</span><br><span class="line">backtrace/bt  回溯出问题的调用</span><br><span class="line">f x  x为6显示的几号代码</span><br><span class="line">until  运行到退出该函数体</span><br><span class="line">finish 运行到当前函数返回，并打印堆栈地址和返回值</span><br><span class="line"></span><br><span class="line">list/l 默认显示10行代码</span><br><span class="line">list 行号  显示以行号为中心的前后10行代码</span><br><span class="line">list 函数名</span><br><span class="line">list 不带参数则接上次list继续显示剩下的</span><br><span class="line"></span><br><span class="line">print/p</span><br></pre></td></tr></table></figure>
 <p>对于bazel编译或可执行程序不在源码目录下时，可用<code>dir</code>设置源码目录</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dir /home/lirongyun/megvii/</span><br></pre></td></tr></table></figure>
 <h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><ul>
@@ -614,7 +615,7 @@
               
                 <a href="https://brezezee.github.io/archives">
               
-                  <span class="site-state-item-count">139</span>
+                  <span class="site-state-item-count">140</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -669,7 +670,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本命令"><span class="nav-text">基本命令</span></a></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#运行"><span class="nav-text">运行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置断点"><span class="nav-text">设置断点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看源代码"><span class="nav-text">查看源代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打印表达式"><span class="nav-text">打印表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询运行信息"><span class="nav-text">查询运行信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分割窗口"><span class="nav-text">分割窗口</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#反向调试"><span class="nav-text">反向调试</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#megvii-wiki"><span class="nav-text">megvii wiki</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#文件分析指令"><span class="nav-text">文件分析指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基本命令"><span class="nav-text">基本命令</span></a></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#运行"><span class="nav-text">运行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置断点"><span class="nav-text">设置断点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看源代码"><span class="nav-text">查看源代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#打印表达式"><span class="nav-text">打印表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询运行信息"><span class="nav-text">查询运行信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分割窗口"><span class="nav-text">分割窗口</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#反向调试"><span class="nav-text">反向调试</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#megvii-wiki"><span class="nav-text">megvii wiki</span></a></li></div>
             
 
           </div>
@@ -703,7 +704,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">180.7k</span>
+    <span title="Site words total count">181k</span>
   
 </div>
 
