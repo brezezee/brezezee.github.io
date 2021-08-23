@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="nginx,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="新建一个源码目录  12$ mkdir nginx-src$ cd nginx-src  下载相关源码  12345678910111213#nginx源码$ git clone https://github.com/nginx/nginx.git#nginx的rtmp模块源码$ git clone https://github.com/arut/nginx-rtmp-module.git$ w">
-<meta name="keywords" content="ml,dl,cv,ai">
+<meta name="description" content="新建一个源码目录  12$ mkdir nginx-src$ cd nginx-src  下载相关源码  12345678910111213#nginx源码$ git clone https://github.com/nginx/nginx.git#nginx的rtmp模块源码$ git clone https://github.com/arut/nginx-rtmp-module.git$">
+<meta name="keywords" content="nginx">
 <meta property="og:type" content="article">
-<meta property="og:title" content="brezezee">
-<meta property="og:url" content="https://brezezee.github.io/2020/09/09/enviroment/nginx+ffmpeg/index.html">
+<meta property="og:title" content="nginx+flv">
+<meta property="og:url" content="https://brezezee.github.io/2019/10/12/enviroment/nginx+ffmpeg/index.html">
 <meta property="og:site_name" content="brezezee">
-<meta property="og:description" content="新建一个源码目录  12$ mkdir nginx-src$ cd nginx-src  下载相关源码  12345678910111213#nginx源码$ git clone https://github.com/nginx/nginx.git#nginx的rtmp模块源码$ git clone https://github.com/arut/nginx-rtmp-module.git$ w">
+<meta property="og:description" content="新建一个源码目录  12$ mkdir nginx-src$ cd nginx-src  下载相关源码  12345678910111213#nginx源码$ git clone https://github.com/nginx/nginx.git#nginx的rtmp模块源码$ git clone https://github.com/arut/nginx-rtmp-module.git$">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-04-22T09:11:07.000Z">
+<meta property="og:updated_time" content="2021-08-23T16:52:17.596Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="brezezee">
-<meta name="twitter:description" content="新建一个源码目录  12$ mkdir nginx-src$ cd nginx-src  下载相关源码  12345678910111213#nginx源码$ git clone https://github.com/nginx/nginx.git#nginx的rtmp模块源码$ git clone https://github.com/arut/nginx-rtmp-module.git$ w">
+<meta name="twitter:title" content="nginx+flv">
+<meta name="twitter:description" content="新建一个源码目录  12$ mkdir nginx-src$ cd nginx-src  下载相关源码  12345678910111213#nginx源码$ git clone https://github.com/nginx/nginx.git#nginx的rtmp模块源码$ git clone https://github.com/arut/nginx-rtmp-module.git$">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://brezezee.github.io/2020/09/09/enviroment/nginx+ffmpeg/">
+  <link rel="canonical" href="https://brezezee.github.io/2019/10/12/enviroment/nginx+ffmpeg/">
 
 
 
 
 
-  <title> | brezezee</title>
+  <title>nginx+flv | brezezee</title>
   
 
 
@@ -280,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline"></h1>
+          <h1 class="post-title" itemprop="name headline">nginx+flv</h1>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-09T11:35:57+08:00">
-                2020-09-09
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-12T12:32:12+08:00">
+                2019-10-12
               </time>
             
 
@@ -308,12 +308,34 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2021-04-22T17:11:07+08:00">
-                2021-04-22
+              <time title="Post modified" itemprop="dateModified" datetime="2021-08-24T00:52:17+08:00">
+                2021-08-24
               </time>
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="../../../../../categories/environment-config/" itemprop="url" rel="index">
+                    <span itemprop="name">环境搭建</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -324,7 +346,7 @@
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/09/09/enviroment/nginx+ffmpeg/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/10/12/enviroment/nginx+ffmpeg/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -371,14 +393,14 @@
       
 
       
-        <ul>
+        <h2 id><a href="#" class="headerlink" title=" "></a> </h2><ul>
 <li>新建一个源码目录</li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> mkdir nginx-src</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> nginx-src</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> mkdir nginx-src</span><br><span class="line"><span class="meta">$</span> cd nginx-src</span><br></pre></td></tr></table></figure>
 <ul>
 <li>下载相关源码</li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">nginx源码</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git <span class="built_in">clone</span> https://github.com/nginx/nginx.git</span></span><br><span class="line"><span class="meta">#</span><span class="bash">nginx的rtmp模块源码</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git <span class="built_in">clone</span> https://github.com/arut/nginx-rtmp-module.git</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> wget  http://www.openssl.org/<span class="built_in">source</span>/openssl-1.0.2g.tar.gz</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> tar -zxvf openssl-1.0.2g.tar.gz</span></span><br><span class="line"><span class="meta">#</span><span class="bash">nginx的依赖pcre源码</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> wget ftp://ftp.pcre.org/pub/pcre/pcre-8.39.tar.gz</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> tar -xzvf pcre-8.39.tar.gz</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./configure</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> pcre-8.39</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo make &amp;&amp; sudo make install</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> nginx$ git checkout release-1.9.9</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>nginx源码</span><br><span class="line"><span class="meta">$</span> git clone https://github.com/nginx/nginx.git</span><br><span class="line"><span class="meta">#</span>nginx的rtmp模块源码</span><br><span class="line"><span class="meta">$</span> git clone https://github.com/arut/nginx-rtmp-module.git</span><br><span class="line"><span class="meta">$</span> wget  http://www.openssl.org/source/openssl-1.0.2g.tar.gz</span><br><span class="line"><span class="meta">$</span> tar -zxvf openssl-1.0.2g.tar.gz</span><br><span class="line"><span class="meta">#</span>nginx的依赖pcre源码</span><br><span class="line"><span class="meta">$</span> wget ftp://ftp.pcre.org/pub/pcre/pcre-8.39.tar.gz</span><br><span class="line"><span class="meta">$</span> tar -xzvf pcre-8.39.tar.gz</span><br><span class="line"><span class="meta">$</span> ./configure</span><br><span class="line"><span class="meta">$</span> cd pcre-8.39</span><br><span class="line"><span class="meta">$</span> sudo make &amp;&amp; sudo make install</span><br><span class="line"><span class="meta">$</span> cd nginx$ git checkout release-1.9.9</span><br></pre></td></tr></table></figure>
 <p>这里还需要openssl的源码，因为wget下载失败，因此我用http下载再上传到nginx-src目录</p>
 <ul>
 <li>编译脚本</li>
@@ -389,7 +411,7 @@
 <ul>
 <li>配置并安装</li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> chmod a+x cfg.sh</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo ./cfg.sh</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo make </span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo make install</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> chmod a+x cfg.sh</span><br><span class="line"><span class="meta">$</span> sudo ./cfg.sh</span><br><span class="line"><span class="meta">$</span> sudo make </span><br><span class="line"><span class="meta">$</span> sudo make install</span><br></pre></td></tr></table></figure>
 <p>如果配置出问题可能是缺少包，可尝试</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install openssl openssl-dev</span><br></pre></td></tr></table></figure>
 <ul>
@@ -435,6 +457,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="../../../../../tags/nginx/" rel="tag"># nginx</a>
+          
+        </div>
+      
 
       
       
@@ -444,8 +472,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="../vscode配置跳板ssh/" rel="next" title>
-                <i class="fa fa-chevron-left"></i> 
+              <a href="../../tricks and tools/vscode快捷键/" rel="next" title="vscode快捷键">
+                <i class="fa fa-chevron-left"></i> vscode快捷键
               </a>
             
           </div>
@@ -454,8 +482,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="../KingHonor/" rel="prev" title>
-                 <i class="fa fa-chevron-right"></i>
+              <a href="../../../15/algorithm/Acwing/2. 数据结构+STL/" rel="prev" title="模板(数据结构)">
+                模板(数据结构) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -543,7 +571,7 @@
               
                 <a href="https://brezezee.github.io/archives">
               
-                  <span class="site-state-item-count">116</span>
+                  <span class="site-state-item-count">107</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -554,7 +582,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="../../../../../categories/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -565,7 +593,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="../../../../../tags/index.html">
-                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-count">48</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -598,7 +626,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#flv-js-版"><span class="nav-text">flv.js 版</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Reference"><span class="nav-text">Reference:</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-text"> </span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#flv-js-版"><span class="nav-text">flv.js 版</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Reference"><span class="nav-text">Reference:</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -632,7 +660,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">161.3k</span>
+    <span title="Site words total count">160.4k</span>
   
 </div>
 
@@ -770,9 +798,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'https://brezezee.github.io/2020/09/09/enviroment/nginx+ffmpeg/';
-          this.page.identifier = '2020/09/09/enviroment/nginx+ffmpeg/';
-          this.page.title = '';
+          this.page.url = 'https://brezezee.github.io/2019/10/12/enviroment/nginx+ffmpeg/';
+          this.page.identifier = '2019/10/12/enviroment/nginx+ffmpeg/';
+          this.page.title = 'nginx+flv';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://.disqus.com/embed.js';

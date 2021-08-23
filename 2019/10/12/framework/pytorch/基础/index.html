@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="pytorch,">
 
 
 
@@ -79,22 +79,22 @@
 
 
 
-<meta name="description" content="pytorch包含的组件&amp;emsp;&amp;emsp;PyTorch的核心是提供多维数组的库，在PyTorch术语中这些多维数组称为张量（tensor），而torch模块则提供了可对其进行扩展操作的库。张量和相关操作都可以在CPU或GPU上运行。PyTorch提供的第二个核心功能是允许张量跟踪对其所执行的操作，并通过反向传播来计算输出相对于其任何输入的导数。此功能由张量自身提供，并通过torch.aut">
-<meta name="keywords" content="ml,dl,cv,ai">
+<meta name="description" content="pytorch包含的组件&amp;emsp;&amp;emsp;PyTorch的核心是提供多维数组的库，在PyTorch术语中这些多维数组称为张量（tensor），而torch模块则提供了可对其进行扩展操作的库。张量和相关操作都可以在CPU或GPU上运行。PyTorch提供的第二个核心功能是允许张量跟踪对其所执行的操作，并通过反向传播来计算输出相对于其任何输入的导数。此功能由张量自身提供，并通过torch.au">
+<meta name="keywords" content="pytorch">
 <meta property="og:type" content="article">
-<meta property="og:title" content="brezezee">
-<meta property="og:url" content="https://brezezee.github.io/2020/09/09/framework/pytorch/基础/index.html">
+<meta property="og:title" content="Pytorch基础">
+<meta property="og:url" content="https://brezezee.github.io/2019/10/12/framework/pytorch/基础/index.html">
 <meta property="og:site_name" content="brezezee">
-<meta property="og:description" content="pytorch包含的组件&amp;emsp;&amp;emsp;PyTorch的核心是提供多维数组的库，在PyTorch术语中这些多维数组称为张量（tensor），而torch模块则提供了可对其进行扩展操作的库。张量和相关操作都可以在CPU或GPU上运行。PyTorch提供的第二个核心功能是允许张量跟踪对其所执行的操作，并通过反向传播来计算输出相对于其任何输入的导数。此功能由张量自身提供，并通过torch.aut">
+<meta property="og:description" content="pytorch包含的组件&amp;emsp;&amp;emsp;PyTorch的核心是提供多维数组的库，在PyTorch术语中这些多维数组称为张量（tensor），而torch模块则提供了可对其进行扩展操作的库。张量和相关操作都可以在CPU或GPU上运行。PyTorch提供的第二个核心功能是允许张量跟踪对其所执行的操作，并通过反向传播来计算输出相对于其任何输入的导数。此功能由张量自身提供，并通过torch.au">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://brezezee.github.io/2020/09/09/framework/pytorch/基础/2.2.png">
+<meta property="og:image" content="https://brezezee.github.io/2019/10/12/framework/pytorch/基础/2.2.png">
 <meta property="og:image" content="https://tangshusen.me/Deep-Learning-with-PyTorch-Chinese/img/chapter2/2.3.png">
 <meta property="og:image" content="https://tangshusen.me/Deep-Learning-with-PyTorch-Chinese/img/chapter2/2.4.png">
-<meta property="og:updated_time" content="2020-04-09T04:01:12.000Z">
+<meta property="og:updated_time" content="2021-08-23T16:53:58.776Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="brezezee">
-<meta name="twitter:description" content="pytorch包含的组件&amp;emsp;&amp;emsp;PyTorch的核心是提供多维数组的库，在PyTorch术语中这些多维数组称为张量（tensor），而torch模块则提供了可对其进行扩展操作的库。张量和相关操作都可以在CPU或GPU上运行。PyTorch提供的第二个核心功能是允许张量跟踪对其所执行的操作，并通过反向传播来计算输出相对于其任何输入的导数。此功能由张量自身提供，并通过torch.aut">
-<meta name="twitter:image" content="https://brezezee.github.io/2020/09/09/framework/pytorch/基础/2.2.png">
+<meta name="twitter:title" content="Pytorch基础">
+<meta name="twitter:description" content="pytorch包含的组件&amp;emsp;&amp;emsp;PyTorch的核心是提供多维数组的库，在PyTorch术语中这些多维数组称为张量（tensor），而torch模块则提供了可对其进行扩展操作的库。张量和相关操作都可以在CPU或GPU上运行。PyTorch提供的第二个核心功能是允许张量跟踪对其所执行的操作，并通过反向传播来计算输出相对于其任何输入的导数。此功能由张量自身提供，并通过torch.au">
+<meta name="twitter:image" content="https://brezezee.github.io/2019/10/12/framework/pytorch/基础/2.2.png">
 
 
 
@@ -124,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="https://brezezee.github.io/2020/09/09/framework/pytorch/基础/">
+  <link rel="canonical" href="https://brezezee.github.io/2019/10/12/framework/pytorch/基础/">
 
 
 
 
 
-  <title> | brezezee</title>
+  <title>Pytorch基础 | brezezee</title>
   
 
 
@@ -284,7 +284,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline"></h1>
+          <h1 class="post-title" itemprop="name headline">Pytorch基础</h1>
         
 
         <div class="post-meta">
@@ -296,8 +296,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-09T11:35:58+08:00">
-                2020-09-09
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-12T12:32:12+08:00">
+                2019-10-12
               </time>
             
 
@@ -312,12 +312,34 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2020-04-09T12:01:12+08:00">
-                2020-04-09
+              <time title="Post modified" itemprop="dateModified" datetime="2021-08-24T00:53:58+08:00">
+                2021-08-24
               </time>
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="../../../../../../categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -328,7 +350,7 @@
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/09/09/framework/pytorch/基础/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/10/12/framework/pytorch/基础/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -375,7 +397,7 @@
       
 
       
-        <h3 id="pytorch包含的组件"><a href="#pytorch包含的组件" class="headerlink" title="pytorch包含的组件"></a>pytorch包含的组件</h3><p>&emsp;&emsp;PyTorch的核心是提供多维数组的库，在PyTorch术语中这些多维数组称为张量（tensor），而<code>torch</code>模块则提供了可对其进行扩展操作的库。张量和相关操作都可以在CPU或GPU上运行。PyTorch提供的第二个核心功能是允许张量跟踪对其所执行的操作，并通过反向传播来计算输出相对于其任何输入的导数。此功能由张量自身提供，并通过<code>torch.autograd</code>进一步扩展完善。</p>
+        <h2 id><a href="#" class="headerlink" title=" "></a> </h2><h3 id="pytorch包含的组件"><a href="#pytorch包含的组件" class="headerlink" title="pytorch包含的组件"></a>pytorch包含的组件</h3><p>&emsp;&emsp;PyTorch的核心是提供多维数组的库，在PyTorch术语中这些多维数组称为张量（tensor），而<code>torch</code>模块则提供了可对其进行扩展操作的库。张量和相关操作都可以在CPU或GPU上运行。PyTorch提供的第二个核心功能是允许张量跟踪对其所执行的操作，并通过反向传播来计算输出相对于其任何输入的导数。此功能由张量自身提供，并通过<code>torch.autograd</code>进一步扩展完善。</p>
 <p>&emsp;&emsp;PyTorch中用于构建神经网络的核心模块位于<code>torch.nn</code>中，该模块提供了常见的神经网络层和其他架构组件。全连接层、卷积层、激活函数和损失函数都能在该模块找到。为了训练该模型，你需要以下几点（除了循环本身以外，循环可直接采用标准的Python for循环）：训练数据的资源、使模型能够适应训练数据的优化器以及将模型和数据导入硬件中的方法，该硬件将执行训练模型所需的计算。</p>
 <p>&emsp;&emsp;<code>torch.util.data</code>模块能够找到适用于数据加载和处理的工具。需要用到的两个主要的类是<code>Dataset</code>和<code>DataLoader</code>。<code>Dataset</code>承担了你的自定义的数据（可以是任何一种格式）与标准PyTorch张量之间的转换任务。<code>DataLoader</code>可以在后台生成子进程来从<code>Dataset</code>中加载数据，使数据准备就绪并在循环可以使用后立即等待训练循环。</p>
 <p>在最简单的情况下，模型将在本地CPU或单个GPU上运行所需的计算。因此，当训练循环获取到数据时就能够立即开始运算。然而更常见的情形是使用专用的硬件（例如多个GPU）或利用多台计算机的资源来训练模型。在这些情况下，可以通过<code>torch.nn.DataParallel</code>和<code>torch.distributed</code>来使用其他的可用硬件。</p>
@@ -484,6 +506,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="../../../../../../tags/pytorch/" rel="tag"># pytorch</a>
+          
+        </div>
+      
 
       
       
@@ -493,8 +521,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="../../../Language/python/Untitled/" rel="next" title>
-                <i class="fa fa-chevron-left"></i> 
+              <a href="../../../../../09/30/algorithm/Acwing/1. 基础模板/" rel="next" title="模板(基础模版)">
+                <i class="fa fa-chevron-left"></i> 模板(基础模版)
               </a>
             
           </div>
@@ -503,8 +531,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="../各类数据表示/" rel="prev" title>
-                 <i class="fa fa-chevron-right"></i>
+              <a href="../../../tricks and tools/vscode快捷键/" rel="prev" title="vscode快捷键">
+                vscode快捷键 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -592,7 +620,7 @@
               
                 <a href="https://brezezee.github.io/archives">
               
-                  <span class="site-state-item-count">116</span>
+                  <span class="site-state-item-count">107</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -603,7 +631,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="../../../../../../categories/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -614,7 +642,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="../../../../../../tags/index.html">
-                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-count">48</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -647,7 +675,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#pytorch包含的组件"><span class="nav-text">pytorch包含的组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#张量-Tensor"><span class="nav-text">张量(Tensor)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#张量存储"><span class="nav-text">张量存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连续存储"><span class="nav-text">连续存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类型转化与索引"><span class="nav-text">类型转化与索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模型张量的保存"><span class="nav-text">模型张量的保存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#张量转移到GPU运行"><span class="nav-text">张量转移到GPU运行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相关API"><span class="nav-text">相关API</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-text"> </span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pytorch包含的组件"><span class="nav-text">pytorch包含的组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#张量-Tensor"><span class="nav-text">张量(Tensor)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#张量存储"><span class="nav-text">张量存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连续存储"><span class="nav-text">连续存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类型转化与索引"><span class="nav-text">类型转化与索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模型张量的保存"><span class="nav-text">模型张量的保存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#张量转移到GPU运行"><span class="nav-text">张量转移到GPU运行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相关API"><span class="nav-text">相关API</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -681,7 +709,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">161.3k</span>
+    <span title="Site words total count">160.4k</span>
   
 </div>
 
@@ -819,9 +847,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'https://brezezee.github.io/2020/09/09/framework/pytorch/基础/';
-          this.page.identifier = '2020/09/09/framework/pytorch/基础/';
-          this.page.title = '';
+          this.page.url = 'https://brezezee.github.io/2019/10/12/framework/pytorch/基础/';
+          this.page.identifier = '2019/10/12/framework/pytorch/基础/';
+          this.page.title = 'Pytorch基础';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://.disqus.com/embed.js';
