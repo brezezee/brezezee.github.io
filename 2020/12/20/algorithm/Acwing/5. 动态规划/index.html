@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="brezezee">
 <meta property="og:description" content="背包问题01背包  01背包主要解决的问题就是选or不选的情况。枚举选了当前物品后的状态转移，而选当前物品之前的状态可以通过减去当前体积得到。  01背包分为两种，一种是固定容量，求能得到的最大价值。一种是确定最小价值，求可能的方案数量。有些类似对偶问题。 1. 最大价值解模板题 物品只能使用一次，每个物品有不同的价值和体积，如何在给定容量选取物品得到最大价值。  关键点：  状态如何定义 子问题">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-04-20T03:01:18.098Z">
+<meta property="og:updated_time" content="2021-08-21T14:04:13.841Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="brezezee">
 <meta name="twitter:description" content="背包问题01背包  01背包主要解决的问题就是选or不选的情况。枚举选了当前物品后的状态转移，而选当前物品之前的状态可以通过减去当前体积得到。  01背包分为两种，一种是固定容量，求能得到的最大价值。一种是确定最小价值，求可能的方案数量。有些类似对偶问题。 1. 最大价值解模板题 物品只能使用一次，每个物品有不同的价值和体积，如何在给定容量选取物品得到最大价值。  关键点：  状态如何定义 子问题">
@@ -308,8 +308,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2021-04-20T11:01:18+08:00">
-                2021-04-20
+              <time title="Post modified" itemprop="dateModified" datetime="2021-08-21T22:04:13+08:00">
+                2021-08-21
               </time>
             
           </span>
@@ -346,7 +346,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  2.4k
+                  2.5k
                 </span>
               
 
@@ -391,7 +391,7 @@
 dp(i, v) = max(dp(i - 1, v), dp(i-1, v-v[i]) + w[i])</script><ul>
 <li>一维优化</li>
 </ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++ i) <span class="built_in">cin</span> &gt;&gt; v[i] &gt;&gt; w[i];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++ i) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; ++ j) &#123;</span><br><span class="line">        f[i][j] = f[i - <span class="number">1</span>][j]; <span class="comment">// 新加入物品后他的最大价值至少是之前的最大价值</span></span><br><span class="line">        <span class="keyword">if</span> (j &gt;= v[i]) &#123;       <span class="comment">// 如果当前物品的体积小于该状态的总体积</span></span><br><span class="line">            f[i][j] = max(f[i][j], f[i - <span class="number">1</span>][j - v[i]] + w[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++ i) <span class="built_in">cin</span> &gt;&gt; v[i] &gt;&gt; w[i];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++ i) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; ++ j) &#123;</span><br><span class="line">        f[i][j] = f[i - <span class="number">1</span>][j]; <span class="comment">// 新加入物品后他的最大价值至少是之前的最大价值</span></span><br><span class="line">        <span class="keyword">if</span> (j &gt;= v[i]) &#123;       <span class="comment">// 如果当前物品的体积小于该状态的总体积（能放下）</span></span><br><span class="line">            f[i][j] = max(f[i][j], f[i - <span class="number">1</span>][j - v[i]] + w[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>二维空间</li>
 </ul>
@@ -451,7 +451,11 @@ dp(i, j) = max(dp(i-1,j),dp(i-1, j-v)+w,dp(i-1,j-2v)+2w,...)</script><p>而注�
 dp(i, j-v) = max(dp(i-1,j-v), dp(i-1,j-2v)+w, dp(i-1,j-3v)+2w, ...)</script><p>可以看出二式相比于一式的后面只少了w，因此</p>
 <script type="math/tex; mode=display">
 dp(i,j) = max(dp(i-1, j), dp(i,j-v)+w)</script><p>完全背包与01背包公式不同的地方只是在更新的时候用的是本层的物品$i$，所以他们的枚举方式有细微区别，完全背包从前往后枚举即可。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++ i) <span class="built_in">cin</span> &gt;&gt; v[i] &gt;&gt; w[i];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++ i) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = v[i]; j &lt;= m; ++ j) &#123;</span><br><span class="line">    	f[j] = max(f[j], f[j - v[i]] + w[i]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; f[m] &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>对比01背包公式：</p>
+<script type="math/tex; mode=display">
+dp(i, v) = max(dp(i - 1, v), dp(i-1, v-v[i]) + w[i])</script></blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++ i) <span class="built_in">cin</span> &gt;&gt; v[i] &gt;&gt; w[i];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++ i) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = v[i]; j &lt;= m; ++ j) &#123;  <span class="comment">// 01 ： for (j = m; j &gt;= v[i]; --j)</span></span><br><span class="line">    	f[j] = max(f[j], f[j - v[i]] + w[i]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; f[m] &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
 <h4 id="多重背包"><a href="#多重背包" class="headerlink" title="多重背包"></a>多重背包</h4><blockquote>
 <p>物品限制了件数</p>
 </blockquote>
@@ -479,7 +483,7 @@ dp(i,j) = max(dp(i-1, j), dp(i,j-v)+w)</script><p>完全背包与01背包公式�
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="../6. 贪心/" rel="next" title>
+              <a href="../../../enviroment/DNS/" rel="next" title>
                 <i class="fa fa-chevron-left"></i> 
               </a>
             
@@ -578,7 +582,7 @@ dp(i,j) = max(dp(i-1, j), dp(i,j-v)+w)</script><p>完全背包与01背包公式�
               
                 <a href="https://brezezee.github.io/archives">
               
-                  <span class="site-state-item-count">141</span>
+                  <span class="site-state-item-count">122</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -600,7 +604,7 @@ dp(i,j) = max(dp(i-1, j), dp(i,j-v)+w)</script><p>完全背包与01背包公式�
               
               <div class="site-state-item site-state-tags">
                 <a href="../../../../../../tags/index.html">
-                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-count">44</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -667,7 +671,7 @@ dp(i,j) = max(dp(i-1, j), dp(i,j-v)+w)</script><p>完全背包与01背包公式�
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">181k</span>
+    <span title="Site words total count">162k</span>
   
 </div>
 

@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="C++,虚函数,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="子类在覆盖（重写）父类的虚函数时，名称和参数列表必须保持一致，不然就不会发生虚函数的覆盖，而是屏蔽了父类的该函数。">
-<meta name="keywords" content="ml,dl,cv,ai">
+<meta name="description" content="子类在覆盖（重写）父类的虚函数时，名称和参数列表必须保持一致，不然就不会发生虚函数的覆盖（重写），而是屏蔽了父类的该函数。 虚函数的调用开销 虚函数相较与普通函数，多了一次访问内存的操作，需要通过虚表指针找到虚表再调用该函数。因此虚函数的调用是一个间接调用，但这对性能的影响不是很大。 间接调用产生了一个新的问题，就是现代处理器流水线的分支预测可能会失败，这时需要重新取指，译码，运行，写回。但是现代">
+<meta name="keywords" content="C++,虚函数">
 <meta property="og:type" content="article">
-<meta property="og:title" content="brezezee">
+<meta property="og:title" content="虚函数的开销">
 <meta property="og:url" content="https://brezezee.github.io/2021/01/16/c++/虚函数/index.html">
 <meta property="og:site_name" content="brezezee">
-<meta property="og:description" content="子类在覆盖（重写）父类的虚函数时，名称和参数列表必须保持一致，不然就不会发生虚函数的覆盖，而是屏蔽了父类的该函数。">
+<meta property="og:description" content="子类在覆盖（重写）父类的虚函数时，名称和参数列表必须保持一致，不然就不会发生虚函数的覆盖（重写），而是屏蔽了父类的该函数。 虚函数的调用开销 虚函数相较与普通函数，多了一次访问内存的操作，需要通过虚表指针找到虚表再调用该函数。因此虚函数的调用是一个间接调用，但这对性能的影响不是很大。 间接调用产生了一个新的问题，就是现代处理器流水线的分支预测可能会失败，这时需要重新取指，译码，运行，写回。但是现代">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-01-16T08:20:45.432Z">
+<meta property="og:updated_time" content="2021-08-23T16:45:32.642Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="brezezee">
-<meta name="twitter:description" content="子类在覆盖（重写）父类的虚函数时，名称和参数列表必须保持一致，不然就不会发生虚函数的覆盖，而是屏蔽了父类的该函数。">
+<meta name="twitter:title" content="虚函数的开销">
+<meta name="twitter:description" content="子类在覆盖（重写）父类的虚函数时，名称和参数列表必须保持一致，不然就不会发生虚函数的覆盖（重写），而是屏蔽了父类的该函数。 虚函数的调用开销 虚函数相较与普通函数，多了一次访问内存的操作，需要通过虚表指针找到虚表再调用该函数。因此虚函数的调用是一个间接调用，但这对性能的影响不是很大。 间接调用产生了一个新的问题，就是现代处理器流水线的分支预测可能会失败，这时需要重新取指，译码，运行，写回。但是现代">
 
 
 
@@ -126,7 +126,7 @@
 
 
 
-  <title> | brezezee</title>
+  <title>虚函数的开销 | brezezee</title>
   
 
 
@@ -280,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline"></h1>
+          <h1 class="post-title" itemprop="name headline">虚函数的开销</h1>
         
 
         <div class="post-meta">
@@ -308,12 +308,34 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2021-01-16T16:20:45+08:00">
-                2021-01-16
+              <time title="Post modified" itemprop="dateModified" datetime="2021-08-24T00:45:32+08:00">
+                2021-08-24
               </time>
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="../../../../../categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -346,7 +368,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  51
+                  339
                 </span>
               
 
@@ -371,7 +393,27 @@
       
 
       
-        <p>子类在覆盖（重写）父类的虚函数时，名称和参数列表必须保持一致，不然就不会发生虚函数的覆盖，而是屏蔽了父类的该函数。</p>
+        <p>子类在覆盖（重写）父类的虚函数时，名称和参数列表必须保持一致，不然就不会发生虚函数的覆盖（重写），而是屏蔽了父类的该函数。</p>
+<h4 id="虚函数的调用开销"><a href="#虚函数的调用开销" class="headerlink" title="虚函数的调用开销"></a>虚函数的调用开销</h4><ol>
+<li>虚函数相较与普通函数，多了一次访问内存的操作，需要通过虚表指针找到虚表再调用该函数。因此虚函数的调用是一个间接调用，但这对性能的影响不是很大。</li>
+<li>间接调用产生了一个新的问题，就是现代处理器流水线的分支预测可能会失败，这时需要重新取指，译码，运行，写回。但是现代处理器预测的成功率还是挺高的。</li>
+<li>影响比较明显的是虚函数抑制了内联函数，这带来了较大影响。不能内联还会影响编译器做一些优化，比如常量折叠和常量传播</li>
+</ol>
+<blockquote>
+<p>编译器对内联的一些优化：</p>
+<ol>
+<li>消除了调用、返回、参数传递等开销</li>
+<li>缓存更优，因为代码连续</li>
+<li>指针消除</li>
+<li>公共表达式消除</li>
+<li>寄存器变量选择优化</li>
+<li>循环展开</li>
+<li>循环不变代码</li>
+<li>指令重排</li>
+</ol>
+<p>内联的缺点：</p>
+<p>多个地方调用一个内联的话会使得代码量变大</p>
+</blockquote>
 
       
     </div>
@@ -387,6 +429,14 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="../../../../../tags/C/" rel="tag"># C++</a>
+          
+            <a href="../../../../../tags/虚函数/" rel="tag"># 虚函数</a>
+          
+        </div>
+      
 
       
       
@@ -396,7 +446,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="../../../15/DJI/无人机交互/" rel="next" title>
+              <a href="../../../../../2020/12/22/enviroment/jsoncpp配置/" rel="next" title>
                 <i class="fa fa-chevron-left"></i> 
               </a>
             
@@ -470,8 +520,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -486,7 +545,7 @@
               
                 <a href="https://brezezee.github.io/archives">
               
-                  <span class="site-state-item-count">141</span>
+                  <span class="site-state-item-count">122</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -508,7 +567,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="../../../../../tags/index.html">
-                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-count">44</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -531,6 +590,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#虚函数的调用开销"><span class="nav-text">虚函数的调用开销</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -559,7 +634,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">181k</span>
+    <span title="Site words total count">162k</span>
   
 </div>
 
@@ -699,7 +774,7 @@
         var disqus_config = function () {
           this.page.url = 'https://brezezee.github.io/2021/01/16/c++/虚函数/';
           this.page.identifier = '2021/01/16/c++/虚函数/';
-          this.page.title = '';
+          this.page.title = '虚函数的开销';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://.disqus.com/embed.js';

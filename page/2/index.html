@@ -263,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://brezezee.github.io../../2021/05/21/megvii/打包c++mdl模型/">
+    <link itemprop="mainEntityOfPage" href="https://brezezee.github.io../../2021/07/30/c++/一些总结/智能指针/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="brezezee">
@@ -282,7 +282,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="../../2021/05/21/megvii/打包c++mdl模型/" itemprop="url">Untitled</a></h1>
+                <a class="post-title-link" href="../../2021/07/30/c++/一些总结/智能指针/" itemprop="url">Untitled</a></h1>
         
 
         <div class="post-meta">
@@ -294,8 +294,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-05-21T10:48:54+08:00">
-                2021-05-21
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-07-30T22:29:28+08:00">
+                2021-07-30
               </time>
             
 
@@ -310,8 +310,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2021-06-27T23:48:29+08:00">
-                2021-06-27
+              <time title="Post modified" itemprop="dateModified" datetime="2021-07-30T22:52:46+08:00">
+                2021-07-30
               </time>
             
           </span>
@@ -325,8 +325,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="../../2021/05/21/megvii/打包c++mdl模型/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/05/21/megvii/打包c++mdl模型/" itemprop="commentCount"></span>
+                <a href="../../2021/07/30/c++/一些总结/智能指针/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/07/30/c++/一些总结/智能指针/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -348,7 +348,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  218
+                  269
                 </span>
               
 
@@ -375,14 +375,17 @@
       
         
           
-          
-下载megskull模型文件 
+          一些缺陷
+公用引用计数，计数器通过new放在堆上，引起性能问题
+引用计数的内存位置和数据的内存位置不一致，缓存失效等性能问题
+容易出现一个对象被绑定了两个引用计数，双重删除。
 
-1https://git-core.megvii-inc.com/brain-sdk/AIBenchmark/-/tree/master/models/model-
+解决方法
+std::m
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="../../2021/05/21/megvii/打包c++mdl模型/#more" rel="contents">
+            <a class="btn" href="../../2021/07/30/c++/一些总结/智能指针/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -433,7 +436,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://brezezee.github.io../../2021/05/21/megvii/一些BUG/">
+    <link itemprop="mainEntityOfPage" href="https://brezezee.github.io../../2021/07/25/linux/基本管理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="brezezee">
@@ -452,7 +455,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="../../2021/05/21/megvii/一些BUG/" itemprop="url">Untitled</a></h1>
+                <a class="post-title-link" href="../../2021/07/25/linux/基本管理/" itemprop="url">Untitled</a></h1>
         
 
         <div class="post-meta">
@@ -464,8 +467,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-05-21T10:35:38+08:00">
-                2021-05-21
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-07-25T00:23:46+08:00">
+                2021-07-25
               </time>
             
 
@@ -480,8 +483,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2021-06-24T23:40:09+08:00">
-                2021-06-24
+              <time title="Post modified" itemprop="dateModified" datetime="2021-07-25T00:30:12+08:00">
+                2021-07-25
               </time>
             
           </span>
@@ -495,8 +498,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="../../2021/05/21/megvii/一些BUG/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/05/21/megvii/一些BUG/" itemprop="commentCount"></span>
+                <a href="../../2021/07/25/linux/基本管理/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/07/25/linux/基本管理/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -518,7 +521,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  199
+                  78
                 </span>
               
 
@@ -545,13 +548,17 @@
       
         
           
-          io.dump 与h5py不兼容解决方法：h5py降到3.0.0
-1pip3 install h5py==3.0.0
-模板参数推导问题在reflect中，因为用到了模板参数推导来生成对应的单例工厂，它
+          创建用户123useradd + name adduser + namepasswd + name
+
+id : 查看用户UID、GID、用户组
+chfn: 更改用户信息
+
+管理用户组
+12345gro
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="../../2021/05/21/megvii/一些BUG/#more" rel="contents">
+            <a class="btn" href="../../2021/07/25/linux/基本管理/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -602,7 +609,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://brezezee.github.io../../2021/05/20/megvii/旷视MegBrain/">
+    <link itemprop="mainEntityOfPage" href="https://brezezee.github.io../../2021/07/11/enviroment/代理搭建/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="brezezee">
@@ -621,7 +628,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="../../2021/05/20/megvii/旷视MegBrain/" itemprop="url">Untitled</a></h1>
+                <a class="post-title-link" href="../../2021/07/11/enviroment/代理搭建/" itemprop="url">Untitled</a></h1>
         
 
         <div class="post-meta">
@@ -633,8 +640,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-05-20T10:51:34+08:00">
-                2021-05-20
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-07-11T14:58:21+08:00">
+                2021-07-11
               </time>
             
 
@@ -649,8 +656,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2021-06-22T09:06:26+08:00">
-                2021-06-22
+              <time title="Post modified" itemprop="dateModified" datetime="2021-07-11T17:04:11+08:00">
+                2021-07-11
               </time>
             
           </span>
@@ -664,8 +671,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="../../2021/05/20/megvii/旷视MegBrain/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/05/20/megvii/旷视MegBrain/" itemprop="commentCount"></span>
+                <a href="../../2021/07/11/enviroment/代理搭建/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/07/11/enviroment/代理搭建/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -687,7 +694,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  333
+                  15
                 </span>
               
 
@@ -714,21 +721,13 @@
       
         
           
-          Mac 环境配置
-onedriver
-vscode
-Royal TSX
-Typora
+          
+iptables -t nat -A POSTROUTING -s 192.168.10.0/24 -o eth0 -j MASQUERADE
 
-
-vscode比较好用的插件
-
-
-Remote-SSH 远程开发Vim 使用vim类型快捷键GitLens 每行
-          ...
+          
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="../../2021/05/20/megvii/旷视MegBrain/#more" rel="contents">
+            <a class="btn" href="../../2021/07/11/enviroment/代理搭建/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -779,7 +778,7 @@ Remote-SSH 远程开发Vim 使用vim类型快捷键GitLens 每行
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://brezezee.github.io../../2021/04/23/DJI/网络配置需求/">
+    <link itemprop="mainEntityOfPage" href="https://brezezee.github.io../../2021/07/10/enviroment/shell配置/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="brezezee">
@@ -798,7 +797,7 @@ Remote-SSH 远程开发Vim 使用vim类型快捷键GitLens 每行
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="../../2021/04/23/DJI/网络配置需求/" itemprop="url">Untitled</a></h1>
+                <a class="post-title-link" href="../../2021/07/10/enviroment/shell配置/" itemprop="url">shell 配置</a></h1>
         
 
         <div class="post-meta">
@@ -810,8 +809,8 @@ Remote-SSH 远程开发Vim 使用vim类型快捷键GitLens 每行
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-04-23T10:48:21+08:00">
-                2021-04-23
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-07-10T11:37:24+08:00">
+                2021-07-10
               </time>
             
 
@@ -826,12 +825,34 @@ Remote-SSH 远程开发Vim 使用vim类型快捷键GitLens 每行
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2021-04-23T11:32:58+08:00">
-                2021-04-23
+              <time title="Post modified" itemprop="dateModified" datetime="2021-07-10T15:20:50+08:00">
+                2021-07-10
               </time>
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="../../categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -841,8 +862,8 @@ Remote-SSH 远程开发Vim 使用vim类型快捷键GitLens 每行
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="../../2021/04/23/DJI/网络配置需求/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/04/23/DJI/网络配置需求/" itemprop="commentCount"></span>
+                <a href="../../2021/07/10/enviroment/shell配置/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/07/10/enviroment/shell配置/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -864,7 +885,7 @@ Remote-SSH 远程开发Vim 使用vim类型快捷键GitLens 每行
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  162
+                  220
                 </span>
               
 
@@ -891,14 +912,12 @@ Remote-SSH 远程开发Vim 使用vim类型快捷键GitLens 每行
       
         
           
-          总体需求服务器、平板、机载网络都需在同一个局域网中。平板和机载通过无线网连接，其中平板对网络带宽要求较高，机载对网络范围和信号强度要求较高。
-具体需求
-带宽要求：
-平板需求千兆网络带宽，同时服务器也至
+          git bash显示配置1231. vi .bash_profile2. export PS1=’[\u@\h \W]\$’  3. source .bash_profile
+PS1是控制终端输出的环
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="../../2021/04/23/DJI/网络配置需求/#more" rel="contents">
+            <a class="btn" href="../../2021/07/10/enviroment/shell配置/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -949,7 +968,7 @@ Remote-SSH 远程开发Vim 使用vim类型快捷键GitLens 每行
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://brezezee.github.io../../2021/04/21/DJI/网络通信-breeze/">
+    <link itemprop="mainEntityOfPage" href="https://brezezee.github.io../../2021/06/26/megvii/lite源码阅读/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="brezezee">
@@ -968,7 +987,7 @@ Remote-SSH 远程开发Vim 使用vim类型快捷键GitLens 每行
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="../../2021/04/21/DJI/网络通信-breeze/" itemprop="url">Untitled</a></h1>
+                <a class="post-title-link" href="../../2021/06/26/megvii/lite源码阅读/" itemprop="url">Untitled</a></h1>
         
 
         <div class="post-meta">
@@ -980,8 +999,8 @@ Remote-SSH 远程开发Vim 使用vim类型快捷键GitLens 每行
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-04-21T16:11:33+08:00">
-                2021-04-21
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-06-26T19:57:37+08:00">
+                2021-06-26
               </time>
             
 
@@ -996,8 +1015,8 @@ Remote-SSH 远程开发Vim 使用vim类型快捷键GitLens 每行
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2021-04-21T16:11:34+08:00">
-                2021-04-21
+              <time title="Post modified" itemprop="dateModified" datetime="2021-06-28T11:34:24+08:00">
+                2021-06-28
               </time>
             
           </span>
@@ -1011,8 +1030,8 @@ Remote-SSH 远程开发Vim 使用vim类型快捷键GitLens 每行
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="../../2021/04/21/DJI/网络通信-breeze/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/04/21/DJI/网络通信-breeze/" itemprop="commentCount"></span>
+                <a href="../../2021/06/26/megvii/lite源码阅读/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/06/26/megvii/lite源码阅读/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1034,7 +1053,7 @@ Remote-SSH 远程开发Vim 使用vim类型快捷键GitLens 每行
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  2.4k
+                  491
                 </span>
               
 
@@ -1061,17 +1080,11 @@ Remote-SSH 远程开发Vim 使用vim类型快捷键GitLens 每行
       
         
           
-          服务端的一些配置服务器配置nginx 配置：
-推流：rtmp://118.24.8.33:1933:/myapp/t
-拉流：7766
-命令服务器：
-websocket：7088
-模拟unity：
-12
+          核心结构file related12345// file.cppclass InputFile::FsImpl final : public InputFile &#123;	FILE* m_fptr
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="../../2021/04/21/DJI/网络通信-breeze/#more" rel="contents">
+            <a class="btn" href="../../2021/06/26/megvii/lite源码阅读/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1122,7 +1135,7 @@ websocket：7088
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://brezezee.github.io../../2021/04/18/服务器/学习路线/">
+    <link itemprop="mainEntityOfPage" href="https://brezezee.github.io../../2021/06/10/tricks and tools/gdb/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="brezezee">
@@ -1141,7 +1154,7 @@ websocket：7088
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="../../2021/04/18/服务器/学习路线/" itemprop="url">Untitled</a></h1>
+                <a class="post-title-link" href="../../2021/06/10/tricks and tools/gdb/" itemprop="url">gdb基本命令</a></h1>
         
 
         <div class="post-meta">
@@ -1153,8 +1166,8 @@ websocket：7088
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-04-18T14:01:56+08:00">
-                2021-04-18
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-06-10T23:50:12+08:00">
+                2021-06-10
               </time>
             
 
@@ -1169,12 +1182,34 @@ websocket：7088
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2021-04-26T23:37:31+08:00">
-                2021-04-26
+              <time title="Post modified" itemprop="dateModified" datetime="2021-07-11T17:04:43+08:00">
+                2021-07-11
               </time>
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="../../categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1184,8 +1219,8 @@ websocket：7088
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="../../2021/04/18/服务器/学习路线/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/04/18/服务器/学习路线/" itemprop="commentCount"></span>
+                <a href="../../2021/06/10/tricks and tools/gdb/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/06/10/tricks and tools/gdb/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1207,7 +1242,7 @@ websocket：7088
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  135
+                  3.2k
                 </span>
               
 
@@ -1234,15 +1269,11 @@ websocket：7088
       
         
           
-          搜索引擎、微服务、RPC框架、KV、存储、MQ
-基本功：
-《CSAPP》、《程序员的自我修养》
-《操作系统：精髓和设计原理》、《linux内核设计与实现》
-C++：《C++ Primer》、《Effe
+          文件分析指令123456file xxx  # 查看文件格式信息size *.o   # 查看ELF各个段的长度objdump -h *.o # 查看目标文件结构和信息 -h(段信息) -sd(以16
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="../../2021/04/18/服务器/学习路线/#more" rel="contents">
+            <a class="btn" href="../../2021/06/10/tricks and tools/gdb/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1293,7 +1324,7 @@ C++：《C++ Primer》、《Effe
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://brezezee.github.io../../2021/04/15/DJI/DJI/">
+    <link itemprop="mainEntityOfPage" href="https://brezezee.github.io../../2021/06/04/megvii/load_and_run重构方案/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="brezezee">
@@ -1312,7 +1343,7 @@ C++：《C++ Primer》、《Effe
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="../../2021/04/15/DJI/DJI/" itemprop="url">Untitled</a></h1>
+                <a class="post-title-link" href="../../2021/06/04/megvii/load_and_run重构方案/" itemprop="url">Untitled</a></h1>
         
 
         <div class="post-meta">
@@ -1324,8 +1355,8 @@ C++：《C++ Primer》、《Effe
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-04-15T11:52:41+08:00">
-                2021-04-15
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-06-04T19:12:42+08:00">
+                2021-06-04
               </time>
             
 
@@ -1340,8 +1371,8 @@ C++：《C++ Primer》、《Effe
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2021-04-21T16:10:28+08:00">
-                2021-04-21
+              <time title="Post modified" itemprop="dateModified" datetime="2021-06-29T15:07:40+08:00">
+                2021-06-29
               </time>
             
           </span>
@@ -1355,8 +1386,8 @@ C++：《C++ Primer》、《Effe
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="../../2021/04/15/DJI/DJI/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/04/15/DJI/DJI/" itemprop="commentCount"></span>
+                <a href="../../2021/06/04/megvii/load_and_run重构方案/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/06/04/megvii/load_and_run重构方案/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1378,7 +1409,7 @@ C++：《C++ Primer》、《Effe
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  2.4k
+                  482
                 </span>
               
 
@@ -1405,17 +1436,15 @@ C++：《C++ Primer》、《Effe
       
         
           
-          服务端的一些配置服务器配置nginx 配置：
-推流：rtmp://118.24.8.33:1933:/myapp/t
-拉流：7766
-命令服务器：
-websocket：7088
-模拟unity：
-12
+          主要区别是配置参数功能的真正实现放在哪个地方（config 或 model）
+config方案
+主要逻辑
+
+每个config中实现为lite和mdl初始化自己对应配置项的方法，由manager统一调用
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="../../2021/04/15/DJI/DJI/#more" rel="contents">
+            <a class="btn" href="../../2021/06/04/megvii/load_and_run重构方案/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1466,7 +1495,7 @@ websocket：7088
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://brezezee.github.io../../2021/04/01/linux/git使用/">
+    <link itemprop="mainEntityOfPage" href="https://brezezee.github.io../../2021/05/28/megvii/load_and_run测试/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="brezezee">
@@ -1485,7 +1514,7 @@ websocket：7088
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="../../2021/04/01/linux/git使用/" itemprop="url">Untitled</a></h1>
+                <a class="post-title-link" href="../../2021/05/28/megvii/load_and_run测试/" itemprop="url">Untitled</a></h1>
         
 
         <div class="post-meta">
@@ -1497,8 +1526,8 @@ websocket：7088
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-04-01T00:10:32+08:00">
-                2021-04-01
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-05-28T20:29:01+08:00">
+                2021-05-28
               </time>
             
 
@@ -1513,8 +1542,8 @@ websocket：7088
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2021-04-01T21:48:03+08:00">
-                2021-04-01
+              <time title="Post modified" itemprop="dateModified" datetime="2021-06-01T15:41:32+08:00">
+                2021-06-01
               </time>
             
           </span>
@@ -1528,8 +1557,8 @@ websocket：7088
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="../../2021/04/01/linux/git使用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/04/01/linux/git使用/" itemprop="commentCount"></span>
+                <a href="../../2021/05/28/megvii/load_and_run测试/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/05/28/megvii/load_and_run测试/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1551,7 +1580,7 @@ websocket：7088
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  190
+                  282
                 </span>
               
 
@@ -1578,15 +1607,15 @@ websocket：7088
       
         
           
-          首次使用一般要先生成自己的公钥
-1ssh-keygen -t rsa -C "brezezee"
-一直回车，cat公钥所在的文件，将公钥复制并在网页中ssh 设置中粘贴。
-配置自己的信息
-12345g
+          
+—multithread  [num] 开启多线程
+—multi-thread-core-ids [“0, 1…”] 指定线程使用的核心
+—profile [name] 生成用于分析的json文件
+
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="../../2021/04/01/linux/git使用/#more" rel="contents">
+            <a class="btn" href="../../2021/05/28/megvii/load_and_run测试/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1637,7 +1666,7 @@ websocket：7088
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://brezezee.github.io../../2021/03/23/algorithm/Leetcode/哈希/">
+    <link itemprop="mainEntityOfPage" href="https://brezezee.github.io../../2021/05/26/c++/Traits-STL/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="brezezee">
@@ -1656,7 +1685,7 @@ websocket：7088
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="../../2021/03/23/algorithm/Leetcode/哈希/" itemprop="url">Untitled</a></h1>
+                <a class="post-title-link" href="../../2021/05/26/c++/Traits-STL/" itemprop="url">Traits-STL</a></h1>
         
 
         <div class="post-meta">
@@ -1668,8 +1697,8 @@ websocket：7088
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-03-23T23:33:25+08:00">
-                2021-03-23
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-05-26T13:15:35+08:00">
+                2021-05-26
               </time>
             
 
@@ -1684,12 +1713,34 @@ websocket：7088
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2021-03-23T23:37:28+08:00">
-                2021-03-23
+              <time title="Post modified" itemprop="dateModified" datetime="2021-07-02T01:10:51+08:00">
+                2021-07-02
               </time>
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="../../categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1699,8 +1750,8 @@ websocket：7088
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="../../2021/03/23/algorithm/Leetcode/哈希/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/03/23/algorithm/Leetcode/哈希/" itemprop="commentCount"></span>
+                <a href="../../2021/05/26/c++/Traits-STL/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/05/26/c++/Traits-STL/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1722,7 +1773,7 @@ websocket：7088
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  159
+                  1.9k
                 </span>
               
 
@@ -1749,14 +1800,12 @@ websocket：7088
       
         
           
-          和为K的子数组
-要求和为k的连续子数组
-
-思路大概是 遍历的时候维护前缀和，通过hash表记录这些和，每次用当前前缀和 - k 看是否有满足的点，若有则是满足条件的子数组，哈希映射的值应该是该和 出现
+          背景在STL迭代器中，为了适配不同类型的容器，常常需要迭代器主动获取  迭代器指向的类型，并且申明该类型的变量。模板函数的参数推导功能可用于推导变量类型
+12345678910111213141516
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="../../2021/03/23/algorithm/Leetcode/哈希/#more" rel="contents">
+            <a class="btn" href="../../2021/05/26/c++/Traits-STL/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1807,7 +1856,7 @@ websocket：7088
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://brezezee.github.io../../2021/03/22/面试/面试记录/">
+    <link itemprop="mainEntityOfPage" href="https://brezezee.github.io../../2021/05/22/megvii/parallel programming/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="brezezee">
@@ -1826,7 +1875,7 @@ websocket：7088
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="../../2021/03/22/面试/面试记录/" itemprop="url">Untitled</a></h1>
+                <a class="post-title-link" href="../../2021/05/22/megvii/parallel programming/" itemprop="url">Untitled</a></h1>
         
 
         <div class="post-meta">
@@ -1838,8 +1887,8 @@ websocket：7088
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-03-22T23:26:59+08:00">
-                2021-03-22
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2021-05-22T11:28:37+08:00">
+                2021-05-22
               </time>
             
 
@@ -1854,8 +1903,8 @@ websocket：7088
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2021-04-25T23:07:42+08:00">
-                2021-04-25
+              <time title="Post modified" itemprop="dateModified" datetime="2021-06-09T00:57:04+08:00">
+                2021-06-09
               </time>
             
           </span>
@@ -1869,8 +1918,8 @@ websocket：7088
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="../../2021/03/22/面试/面试记录/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/03/22/面试/面试记录/" itemprop="commentCount"></span>
+                <a href="../../2021/05/22/megvii/parallel programming/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/05/22/megvii/parallel programming/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1892,7 +1941,7 @@ websocket：7088
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1.5k
+                  395
                 </span>
               
 
@@ -1919,23 +1968,12 @@ websocket：7088
       
         
           
-          阿里一面项目：
-
-epoll的边缘触发和水平触发
-有io复用为何还用多线程
-select与epoll的区别
-epoll的复杂度
-红黑树的插入删除复杂度
-
-
-各种同步机制（锁、信号量等）的性能比较
-
-
-
+          
+123456789101112131415161718192021222324        # This is the inner loop of mandel_ref        # Para
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="../../2021/03/22/面试/面试记录/#more" rel="contents">
+            <a class="btn" href="../../2021/05/22/megvii/parallel programming/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1977,7 +2015,7 @@ epoll的复杂度
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="../../"><i class="fa fa-angle-left"></i></a><a class="page-number" href="../../">1</a><span class="page-number current">2</span><a class="page-number" href="../3/">3</a><span class="space">&hellip;</span><a class="page-number" href="../15/">15</a><a class="extend next" rel="next" href="../3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="../../"><i class="fa fa-angle-left"></i></a><a class="page-number" href="../../">1</a><span class="page-number current">2</span><a class="page-number" href="../3/">3</a><span class="space">&hellip;</span><a class="page-number" href="../13/">13</a><a class="extend next" rel="next" href="../3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2023,7 +2061,7 @@ epoll的复杂度
               
                 <a href="https://brezezee.github.io/archives">
               
-                  <span class="site-state-item-count">141</span>
+                  <span class="site-state-item-count">122</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2045,7 +2083,7 @@ epoll的复杂度
               
               <div class="site-state-item site-state-tags">
                 <a href="../../tags/index.html">
-                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-count">44</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -2096,7 +2134,7 @@ epoll的复杂度
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">181k</span>
+    <span title="Site words total count">162k</span>
   
 </div>
 

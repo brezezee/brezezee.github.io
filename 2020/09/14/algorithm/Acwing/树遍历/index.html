@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="brezezee">
 <meta property="og:description" content="前序遍历在前序遍历中，根节点最先访问，因此可以直接用栈来保存需要递归访问的两个子树。右子树后访问，因此先入栈右子树。 123456789101112131415vector&amp;lt;int&amp;gt; preorderTraversal(TreeNode* r) &amp;#123;    vector&amp;lt;int&amp;gt; res;    if (!r) return res;    TreeNode * s">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-02-26T05:29:49.875Z">
+<meta property="og:updated_time" content="2021-07-17T15:27:58.169Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="brezezee">
 <meta name="twitter:description" content="前序遍历在前序遍历中，根节点最先访问，因此可以直接用栈来保存需要递归访问的两个子树。右子树后访问，因此先入栈右子树。 123456789101112131415vector&amp;lt;int&amp;gt; preorderTraversal(TreeNode* r) &amp;#123;    vector&amp;lt;int&amp;gt; res;    if (!r) return res;    TreeNode * s">
@@ -308,8 +308,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2021-02-26T13:29:49+08:00">
-                2021-02-26
+              <time title="Post modified" itemprop="dateModified" datetime="2021-07-17T23:27:58+08:00">
+                2021-07-17
               </time>
             
           </span>
@@ -346,7 +346,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  593
+                  601
                 </span>
               
 
@@ -376,7 +376,7 @@
 <h3 id="中序遍历"><a href="#中序遍历" class="headerlink" title="中序遍历"></a>中序遍历</h3><p>在前序遍历中，因为根节点直接访问，因此不需要回溯。而中序遍历和后序遍历都需要回溯，对中序遍历而言，在回溯的过程中，按照规则若有左节点则需将左节点入栈。若刚访问了当前节点，则下一步需要访问当前节点的右节点，将右节点赋值给当前节点。这样进入下一次循环，对该右子树进行同样的操作。若该节点为空，则会弹出之前入栈的节点进行回溯，避免了重复入栈左节点。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; inorderTraversal(TreeNode* root) &#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</span><br><span class="line">    TreeNode * stk[<span class="number">1000</span>];</span><br><span class="line">    <span class="keyword">int</span> tt = <span class="number">-1</span>;</span><br><span class="line">    TreeNode * r = root;</span><br><span class="line">    <span class="comment">// 利用空节点</span></span><br><span class="line">    <span class="keyword">while</span> (~tt || r) &#123;</span><br><span class="line">        <span class="keyword">while</span> (r) &#123;</span><br><span class="line">            stk[++ tt] = r;</span><br><span class="line">            r = r-&gt;left;</span><br><span class="line">        &#125;</span><br><span class="line">        r = stk[tt--]; <span class="comment">// 访问的节点都是从栈中弹出</span></span><br><span class="line">        res.push_back(r-&gt;val);</span><br><span class="line">        r = r-&gt;right; <span class="comment">// 访问了一个节点后将其右节点赋值给它</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="后序遍历"><a href="#后序遍历" class="headerlink" title="后序遍历"></a>后序遍历</h3><p>后序遍历与中序遍历有相同的框架，只是后序需要保证先访问右节点再访问根节点。因此在对一个节点进行访问时，需要先确认当前节点无右节点或者右节点已访问。对当前节点进行访问后需要将当前节点置空，以保证下一轮迭代时的节点是从栈中弹出的。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; postorderTraversal(TreeNode* root) &#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</span><br><span class="line">    <span class="keyword">if</span> (!root) <span class="keyword">return</span> res;</span><br><span class="line">    TreeNode * stk[<span class="number">1000</span>];</span><br><span class="line">    <span class="keyword">int</span> tt = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">while</span> (~tt || root) &#123;</span><br><span class="line">        <span class="keyword">while</span> (root) &#123;</span><br><span class="line">            stk[++ tt] = root;</span><br><span class="line">            root = root-&gt;left;</span><br><span class="line">        &#125;</span><br><span class="line">        root = stk[tt--];</span><br><span class="line">        <span class="comment">// 与中序的区别，需先确认右节点已访问。</span></span><br><span class="line">        <span class="keyword">if</span> (!root-&gt;right || (size(res) &amp;&amp; res[size(res)<span class="number">-1</span>] == root-&gt;right-&gt;val))&#123;</span><br><span class="line">            <span class="comment">// 无右节点或右节点已访问,则可以访问当前节点</span></span><br><span class="line">            res.push_back(root-&gt;val);</span><br><span class="line">            root = <span class="literal">nullptr</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            stk[++ tt] = root;</span><br><span class="line">            root = root-&gt;right;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; postorderTraversal(TreeNode* root) &#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; res;</span><br><span class="line">    <span class="keyword">if</span> (!root) <span class="keyword">return</span> res;</span><br><span class="line">    <span class="built_in">stack</span>&lt;TreeNode*&gt; st;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (st.size() || root) &#123;</span><br><span class="line">        <span class="keyword">while</span> (root) &#123;</span><br><span class="line">            st.push(root);</span><br><span class="line">            root = root-&gt;left;</span><br><span class="line">        &#125;</span><br><span class="line">        root = st.top(); st.pop();</span><br><span class="line">        <span class="comment">// 后序访问当前节点需保证 无右节点 或 右节点已访问</span></span><br><span class="line">        <span class="keyword">if</span> (!root-&gt;right || (res.size() &amp;&amp; root-&gt;right-&gt;val == res.back())) &#123;</span><br><span class="line">            <span class="comment">// 访问当前节点</span></span><br><span class="line">            res.push_back(root-&gt;val);</span><br><span class="line">            root = <span class="literal">nullptr</span>;  <span class="comment">// 需要置空避免再次访问</span></span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;   </span><br><span class="line">            <span class="comment">// 先访问右子树</span></span><br><span class="line">            st.push(root);</span><br><span class="line">            root = root-&gt;right;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -500,7 +500,7 @@
               
                 <a href="https://brezezee.github.io/archives">
               
-                  <span class="site-state-item-count">141</span>
+                  <span class="site-state-item-count">122</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -522,7 +522,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="../../../../../../tags/index.html">
-                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-count">44</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -589,7 +589,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">181k</span>
+    <span title="Site words total count">162k</span>
   
 </div>
 

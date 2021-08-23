@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="awk、sed、grep更适合的方向：  grep 更适合单纯的查找或匹配文本 sed 更适合编辑匹配到的文本 awk 更适合格式化文本，对文本进行较复杂格式处理  grepsed基本命令1sed [options] &amp;#123;command&amp;#125; &amp;#123;input_file&amp;#125; 替换命令 基本语法  12sed ‘[address-range|pattern-range]">
+<meta name="description" content="awk、sed、grep更适合的方向：  grep 更适合单纯的查找或匹配文本 sed 更适合编辑匹配到的文本 awk 更适合格式化文本，对文本进行较复杂格式处理  grepsed基本命令1sed [options] &amp;#123;&apos;command&apos;&amp;#125; &amp;#123;input_file&amp;#125; 其中command中可以指定地址范围 和 模式串范围 ， 1sed [options] &amp;#">
 <meta name="keywords" content="ml,dl,cv,ai">
 <meta property="og:type" content="article">
 <meta property="og:title" content="brezezee">
 <meta property="og:url" content="https://brezezee.github.io/2021/03/21/linux/文本处理命令/index.html">
 <meta property="og:site_name" content="brezezee">
-<meta property="og:description" content="awk、sed、grep更适合的方向：  grep 更适合单纯的查找或匹配文本 sed 更适合编辑匹配到的文本 awk 更适合格式化文本，对文本进行较复杂格式处理  grepsed基本命令1sed [options] &amp;#123;command&amp;#125; &amp;#123;input_file&amp;#125; 替换命令 基本语法  12sed ‘[address-range|pattern-range]">
+<meta property="og:description" content="awk、sed、grep更适合的方向：  grep 更适合单纯的查找或匹配文本 sed 更适合编辑匹配到的文本 awk 更适合格式化文本，对文本进行较复杂格式处理  grepsed基本命令1sed [options] &amp;#123;&apos;command&apos;&amp;#125; &amp;#123;input_file&amp;#125; 其中command中可以指定地址范围 和 模式串范围 ， 1sed [options] &amp;#">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-06-17T06:43:39.000Z">
+<meta property="og:updated_time" content="2021-08-15T16:49:49.880Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="brezezee">
-<meta name="twitter:description" content="awk、sed、grep更适合的方向：  grep 更适合单纯的查找或匹配文本 sed 更适合编辑匹配到的文本 awk 更适合格式化文本，对文本进行较复杂格式处理  grepsed基本命令1sed [options] &amp;#123;command&amp;#125; &amp;#123;input_file&amp;#125; 替换命令 基本语法  12sed ‘[address-range|pattern-range]">
+<meta name="twitter:description" content="awk、sed、grep更适合的方向：  grep 更适合单纯的查找或匹配文本 sed 更适合编辑匹配到的文本 awk 更适合格式化文本，对文本进行较复杂格式处理  grepsed基本命令1sed [options] &amp;#123;&apos;command&apos;&amp;#125; &amp;#123;input_file&amp;#125; 其中command中可以指定地址范围 和 模式串范围 ， 1sed [options] &amp;#">
 
 
 
@@ -308,8 +308,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2021-06-17T14:43:39+08:00">
-                2021-06-17
+              <time title="Post modified" itemprop="dateModified" datetime="2021-08-16T00:49:49+08:00">
+                2021-08-16
               </time>
             
           </span>
@@ -346,7 +346,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  385
+                  494
                 </span>
               
 
@@ -377,11 +377,23 @@
 <li>sed 更适合编辑匹配到的文本</li>
 <li>awk 更适合格式化文本，对文本进行较复杂格式处理</li>
 </ul>
-<h4 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h4><h3 id="sed"><a href="#sed" class="headerlink" title="sed"></a>sed</h3><h4 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed [options] &#123;command&#125; &#123;input_file&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h4><h3 id="sed"><a href="#sed" class="headerlink" title="sed"></a>sed</h3><h4 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed [options] &#123;'command'&#125; &#123;input_file&#125;</span><br></pre></td></tr></table></figure>
+<p>其中<code>command</code>中可以指定地址范围 和 模式串范围 ，</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed [options] &#123;<span class="string">'[address-range|pattern-range]  command'</span>&#125; &#123;input fine&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>执行多条命令<code>-e</code> 或<code>{}</code></li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed [options] -e &#123;<span class="string">'command1'</span>&#125; -e &#123;<span class="string">'command2'</span>&#125; &#123;input file&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed [options] <span class="string">'&#123;command1 command2&#125;'</span> &#123;input file&#125;</span><br></pre></td></tr></table></figure>
+<p>这里 包围<code>command</code> 的大括号是必须的</p>
+<h4 id="常用参数"><a href="#常用参数" class="headerlink" title="常用参数"></a>常用参数</h4><ul>
+<li><code>-n</code> :  屏蔽sed的默认输出（默认输出所有行）</li>
+<li><code>-i</code> : in-place，修改直接定向到源文件</li>
+</ul>
 <h4 id="替换命令"><a href="#替换命令" class="headerlink" title="替换命令"></a>替换命令</h4><ul>
 <li>基本语法</li>
 </ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed ‘[address-range|pattern-range] s/original-string/replacement-string/[substitute-flags]’</span><br><span class="line">input file</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed <span class="string">'[address-range|pattern-range]  s/original-string/replacement-string/[substitute-flags]'</span> input file</span><br></pre></td></tr></table></figure>
 <p>Eg:</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed <span class="string">'/Sales/ s/Manager/Load/'</span> employee.txt</span><br></pre></td></tr></table></figure>
 <p>上面<code>/Sales/</code>为范围限制，后面的<code>s</code>为替换命令，表示将<code>Manager</code>替换为<code>Load</code>。范围限制是可选的，默认是全部行。</p>
@@ -442,7 +454,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="../../../18/面试/linux/" rel="next" title>
+              <a href="../../../14/algorithm/Leetcode/二叉树/" rel="next" title>
                 <i class="fa fa-chevron-left"></i> 
               </a>
             
@@ -452,7 +464,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="../../../22/面试/具体问题or代码/" rel="prev" title>
+              <a href="../../../23/algorithm/Leetcode/哈希/" rel="prev" title>
                  <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -541,7 +553,7 @@
               
                 <a href="https://brezezee.github.io/archives">
               
-                  <span class="site-state-item-count">141</span>
+                  <span class="site-state-item-count">122</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -563,7 +575,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="../../../../../tags/index.html">
-                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-count">44</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -596,7 +608,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#grep"><span class="nav-text">grep</span></a></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#sed"><span class="nav-text">sed</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本命令"><span class="nav-text">基本命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#替换命令"><span class="nav-text">替换命令</span></a></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#grep"><span class="nav-text">grep</span></a></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#sed"><span class="nav-text">sed</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本命令"><span class="nav-text">基本命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常用参数"><span class="nav-text">常用参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#替换命令"><span class="nav-text">替换命令</span></a></li></ol></li></div>
             
 
           </div>
@@ -630,7 +642,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">181k</span>
+    <span title="Site words total count">162k</span>
   
 </div>
 
