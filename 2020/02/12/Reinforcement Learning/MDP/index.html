@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="强化学习,MDP,">
 
 
 
@@ -80,25 +80,25 @@
 
 
 <meta name="description" content="马尔可夫奖励过程的Bellman方程如下：  \begin{aligned} v(s) =&amp; E[R_{t+1} + \gamma v(S_{t+1})| S_t = s] \\  =&amp; R_s + \gamma \sum_{s&apos; \in S}P_{ss&apos;}v(s&apos;)    \end{aligned}这个方程可用矩阵形式简单表达：  v = R + \gamma P v对于$n$ 个状态的价值函数">
-<meta name="keywords" content="ml,dl,cv,ai">
+<meta name="keywords" content="强化学习,MDP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="brezezee">
-<meta property="og:url" content="https://brezezee.github.io/2020/09/09/Reinforcement Learning/MDP/index.html">
+<meta property="og:title" content="马尔科夫过程">
+<meta property="og:url" content="https://brezezee.github.io/2020/02/12/Reinforcement Learning/MDP/index.html">
 <meta property="og:site_name" content="brezezee">
 <meta property="og:description" content="马尔可夫奖励过程的Bellman方程如下：  \begin{aligned} v(s) =&amp; E[R_{t+1} + \gamma v(S_{t+1})| S_t = s] \\  =&amp; R_s + \gamma \sum_{s&apos; \in S}P_{ss&apos;}v(s&apos;)    \end{aligned}这个方程可用矩阵形式简单表达：  v = R + \gamma P v对于$n$ 个状态的价值函数">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://brezezee.github.io/2020/09/09/Reinforcement%20Learning/MDP/1587283461629.png">
-<meta property="og:image" content="https://brezezee.github.io/2020/09/09/Reinforcement%20Learning/MDP/1587283525297.png">
-<meta property="og:image" content="https://brezezee.github.io/2020/09/09/Reinforcement%20Learning/MDP/1587283595711.png">
-<meta property="og:image" content="https://brezezee.github.io/2020/09/09/Reinforcement%20Learning/MDP/1587283783916.png">
-<meta property="og:image" content="https://brezezee.github.io/2020/09/09/Reinforcement%20Learning/MDP/1587303832994.png">
-<meta property="og:image" content="https://brezezee.github.io/2020/09/09/Reinforcement%20Learning/MDP/1587391230337.png">
-<meta property="og:image" content="https://brezezee.github.io/2020/09/09/Reinforcement%20Learning/MDP/1587401561816.png">
-<meta property="og:updated_time" content="2020-10-19T13:43:13.000Z">
+<meta property="og:image" content="https://brezezee.github.io/2020/02/12/Reinforcement%20Learning/MDP/1587283461629.png">
+<meta property="og:image" content="https://brezezee.github.io/2020/02/12/Reinforcement%20Learning/MDP/1587283525297.png">
+<meta property="og:image" content="https://brezezee.github.io/2020/02/12/Reinforcement%20Learning/MDP/1587283595711.png">
+<meta property="og:image" content="https://brezezee.github.io/2020/02/12/Reinforcement%20Learning/MDP/1587283783916.png">
+<meta property="og:image" content="https://brezezee.github.io/2020/02/12/Reinforcement%20Learning/MDP/1587303832994.png">
+<meta property="og:image" content="https://brezezee.github.io/2020/02/12/Reinforcement%20Learning/MDP/1587391230337.png">
+<meta property="og:image" content="https://brezezee.github.io/2020/02/12/Reinforcement%20Learning/MDP/1587401561816.png">
+<meta property="og:updated_time" content="2021-08-23T17:01:26.881Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="brezezee">
+<meta name="twitter:title" content="马尔科夫过程">
 <meta name="twitter:description" content="马尔可夫奖励过程的Bellman方程如下：  \begin{aligned} v(s) =&amp; E[R_{t+1} + \gamma v(S_{t+1})| S_t = s] \\  =&amp; R_s + \gamma \sum_{s&apos; \in S}P_{ss&apos;}v(s&apos;)    \end{aligned}这个方程可用矩阵形式简单表达：  v = R + \gamma P v对于$n$ 个状态的价值函数">
-<meta name="twitter:image" content="https://brezezee.github.io/2020/09/09/Reinforcement%20Learning/MDP/1587283461629.png">
+<meta name="twitter:image" content="https://brezezee.github.io/2020/02/12/Reinforcement%20Learning/MDP/1587283461629.png">
 
 
 
@@ -128,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="https://brezezee.github.io/2020/09/09/Reinforcement Learning/MDP/">
+  <link rel="canonical" href="https://brezezee.github.io/2020/02/12/Reinforcement Learning/MDP/">
 
 
 
 
 
-  <title> | brezezee</title>
+  <title>马尔科夫过程 | brezezee</title>
   
 
 
@@ -288,7 +288,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline"></h1>
+          <h1 class="post-title" itemprop="name headline">马尔科夫过程</h1>
         
 
         <div class="post-meta">
@@ -300,8 +300,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-09T11:35:58+08:00">
-                2020-09-09
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-12T12:32:12+08:00">
+                2020-02-12
               </time>
             
 
@@ -316,12 +316,34 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2020-10-19T21:43:13+08:00">
-                2020-10-19
+              <time title="Post modified" itemprop="dateModified" datetime="2021-08-24T01:01:26+08:00">
+                2021-08-24
               </time>
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="../../../../../categories/强化学习/" itemprop="url" rel="index">
+                    <span itemprop="name">强化学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -332,7 +354,7 @@
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/09/09/Reinforcement Learning/MDP/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2020/02/12/Reinforcement Learning/MDP/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -428,6 +450,14 @@ v =& (1-\gamma P v)^{-1} R
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="../../../../../tags/强化学习/" rel="tag"># 强化学习</a>
+          
+            <a href="../../../../../tags/MDP/" rel="tag"># MDP</a>
+          
+        </div>
+      
 
       
       
@@ -437,8 +467,8 @@ v =& (1-\gamma P v)^{-1} R
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="../函数逼近离轨11/" rel="next" title>
-                <i class="fa fa-chevron-left"></i> 
+              <a href="../../../../../2019/11/13/hobby/不良人/" rel="next" title="不良人">
+                <i class="fa fa-chevron-left"></i> 不良人
               </a>
             
           </div>
@@ -447,7 +477,7 @@ v =& (1-\gamma P v)^{-1} R
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="../Sutton/C9_tile_coding/" rel="prev" title>
+              <a href="../../../../09/09/Math/最优化/" rel="prev" title>
                  <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -536,7 +566,7 @@ v =& (1-\gamma P v)^{-1} R
               
                 <a href="https://brezezee.github.io/archives">
               
-                  <span class="site-state-item-count">107</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -547,7 +577,7 @@ v =& (1-\gamma P v)^{-1} R
               
               <div class="site-state-item site-state-categories">
                 <a href="../../../../../categories/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -558,7 +588,7 @@ v =& (1-\gamma P v)^{-1} R
               
               <div class="site-state-item site-state-tags">
                 <a href="../../../../../tags/index.html">
-                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-count">50</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -625,7 +655,7 @@ v =& (1-\gamma P v)^{-1} R
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">160.4k</span>
+    <span title="Site words total count">156.3k</span>
   
 </div>
 
@@ -763,9 +793,9 @@ v =& (1-\gamma P v)^{-1} R
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'https://brezezee.github.io/2020/09/09/Reinforcement Learning/MDP/';
-          this.page.identifier = '2020/09/09/Reinforcement Learning/MDP/';
-          this.page.title = '';
+          this.page.url = 'https://brezezee.github.io/2020/02/12/Reinforcement Learning/MDP/';
+          this.page.identifier = '2020/02/12/Reinforcement Learning/MDP/';
+          this.page.title = '马尔科夫过程';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://.disqus.com/embed.js';
