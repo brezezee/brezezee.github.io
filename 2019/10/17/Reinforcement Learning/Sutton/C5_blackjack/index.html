@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="../../../../../../lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="../../../../../../lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="../../../../../../css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="../../../../../../images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../../../../images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="../../../../../../images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="../../../../../../images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="强化学习,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="C5_blackjack12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989">
+<meta name="keywords" content="强化学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sutton课后习题">
+<meta property="og:url" content="https://brezezee.github.io/2019/10/17/Reinforcement Learning/Sutton/C5_blackjack/index.html">
+<meta property="og:site_name" content="brezezee">
+<meta property="og:description" content="C5_blackjack12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2021-08-24T01:58:26.465Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Sutton课后习题">
+<meta name="twitter:description" content="C5_blackjack12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://brezezee.github.io/2019/10/17/Reinforcement Learning/Sutton/C5_blackjack/">
+
+
+
+
+
+  <title>Sutton课后习题 | brezezee</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">brezezee</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="https://brezezee.github.io" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="https://brezezee.github.io/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="https://brezezee.github.io/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-categories"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="https://brezezee.github.io/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="https://brezezee.github.io/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://brezezee.github.io">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="brezezee">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="../../../../../../images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="brezezee">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Sutton课后习题</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-17T00:00:00+08:00">
+                2019-10-17
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2021-08-24T09:58:26+08:00">
+                2021-08-24
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="../../../../../../categories/meachine-learning/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/10/17/Reinforcement Learning/Sutton/C5_blackjack/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  4.4k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="C5-blackjack"><a href="#C5-blackjack" class="headerlink" title="C5_blackjack"></a>C5_blackjack</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">np.random.seed(<span class="number">0</span>)</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> gym</span><br><span class="line"><span class="keyword">from</span> tqdm <span class="keyword">import</span> tqdm</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line"></span><br><span class="line"><span class="comment">## player , dealer, usable_A, action</span></span><br><span class="line">policy = np.zeros((<span class="number">22</span>, <span class="number">11</span>, <span class="number">2</span>, <span class="number">2</span>))</span><br><span class="line">policy[<span class="number">20</span>:, :, :, <span class="number">0</span>] = <span class="number">1</span> <span class="comment"># &gt;= 20 stop</span></span><br><span class="line">policy[:<span class="number">20</span>, :, :, <span class="number">1</span>] = <span class="number">1</span> <span class="comment"># &lt; 20 continue</span></span><br><span class="line"></span><br><span class="line">env = gym.make(<span class="string">"Blackjack-v0"</span>)</span><br><span class="line">env.seed(<span class="number">0</span>)</span><br><span class="line">print(<span class="string">'observation space = &#123;&#125;'</span>.format(env.observation_space))</span><br><span class="line">print(<span class="string">'action space = &#123;&#125;'</span>.format(env.action_space))</span><br><span class="line">print(<span class="string">'action number = &#123;&#125;'</span>.format(env.action_space.n))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot</span><span class="params">(data)</span>:</span></span><br><span class="line">    fig, ax = plt.subplots(<span class="number">1</span>, <span class="number">2</span>, figsize=(<span class="number">9</span>,<span class="number">4</span>))</span><br><span class="line">    titles  = [<span class="string">'without A'</span>, <span class="string">'with A'</span>]</span><br><span class="line">    have_A = [<span class="number">0</span>, <span class="number">1</span>]</span><br><span class="line">    print(data.shape)</span><br><span class="line">    v = data[<span class="number">12</span>:, <span class="number">1</span>:, :]</span><br><span class="line">    plt.subplots_adjust(wspace=<span class="number">0.1</span>, hspace = <span class="number">0.2</span>)</span><br><span class="line">    ax = ax.flatten()</span><br><span class="line">    v_without_A = v[:, :, <span class="number">0</span>]</span><br><span class="line">    v_with_A = v[:, :, <span class="number">1</span>]</span><br><span class="line">    v = [v_without_A, v_with_A]</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> image, title, axis <span class="keyword">in</span> zip(v, titles, ax):</span><br><span class="line">        fig = sns.heatmap(np.flipud(image), cmap=<span class="string">"YlGnBu"</span>, ax = axis, xticklabels = range(<span class="number">1</span>, <span class="number">11</span>), yticklabels=list(reversed(range(<span class="number">12</span>,<span class="number">22</span>))))</span><br><span class="line">        fig.set_ylabel(<span class="string">'player sum'</span>, fontsize= <span class="number">20</span>)</span><br><span class="line">        fig.set_title(title, fontsize= <span class="number">20</span>)</span><br><span class="line">    plt.show()</span><br><span class="line">    plt.close()</span><br><span class="line">    </span><br><span class="line"><span class="comment"># def plot(data):</span></span><br><span class="line"><span class="comment">#     fig, ax = plt.subplots(1, 2, figsize=(9,4))</span></span><br><span class="line"><span class="comment">#     titles  = ['without A', 'with A']</span></span><br><span class="line"><span class="comment">#     have_A = [0, 1]</span></span><br><span class="line"><span class="comment">#     extent = [12, 22, 1, 11]</span></span><br><span class="line"><span class="comment">#     for title, have_A, axis in zip(titles, have_A, ax):</span></span><br><span class="line"><span class="comment">#         dat = data[extent[0]:extent[1], extent[2]:extent[3], have_A].T</span></span><br><span class="line"><span class="comment">#         axis.imshow(dat, extent= extent, origin='lower')</span></span><br><span class="line"><span class="comment">#         axis.set_xlabel('player sum')</span></span><br><span class="line"><span class="comment">#         axis.set_ylabel('dealer show')</span></span><br><span class="line"><span class="comment">#         axis.set_title(title)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ob_state</span><span class="params">(observation)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> observation[<span class="number">0</span>], observation[<span class="number">1</span>], int(observation[<span class="number">2</span>])</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">evaluate_action_monte_carlo</span><span class="params">(env, policy, episodes = <span class="number">500000</span>)</span>:</span></span><br><span class="line">    v = np.zeros_like(policy)</span><br><span class="line">    count = np.zeros_like(policy)</span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> tqdm(range(episodes)):</span><br><span class="line">        s_a_trajectory = []</span><br><span class="line">        observation = env.reset()</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> observation[<span class="number">0</span>] &lt; <span class="number">12</span>:</span><br><span class="line">            observation, _, _, _ = env.step(<span class="number">1</span>) <span class="comment"># hit</span></span><br><span class="line">           </span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            state = ob_state(observation)</span><br><span class="line">            action = np.random.choice(env.action_space.n, p = policy[state])</span><br><span class="line">            s_a_trajectory.append((state, action))</span><br><span class="line">            observation, reward, done, _ = env.step(action)</span><br><span class="line">            <span class="keyword">if</span> done:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">for</span> state, action <span class="keyword">in</span> s_a_trajectory:</span><br><span class="line">            count[state] += <span class="number">1</span></span><br><span class="line">            v[state]+= (reward - v[state]) / count[state] </span><br><span class="line">    <span class="keyword">return</span> v</span><br><span class="line"></span><br><span class="line">v = evaluate_action_monte_carlo(env, policy)</span><br><span class="line"><span class="comment">#v = (q * policy).sum(axis = -1)</span></span><br><span class="line">print(v.shape)</span><br><span class="line">v = v[:,:,:,<span class="number">0</span>].copy()  <span class="comment">#可以计算直接v，也可以先计算q，再对action求期望</span></span><br><span class="line">print(v.shape)</span><br><span class="line">plot(v)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">monte_carlo_ES</span><span class="params">(env, episodes = <span class="number">500000</span>)</span>:</span></span><br><span class="line">    policy = np.zeros((<span class="number">22</span>, <span class="number">11</span>, <span class="number">2</span>, <span class="number">2</span>))</span><br><span class="line">    policy[:,:,:,<span class="number">1</span>] = <span class="number">1.</span> <span class="comment">#初始化为梭哈</span></span><br><span class="line">    q = np.zeros_like(policy)</span><br><span class="line">    count = np.zeros_like(policy)</span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> tqdm(range(episodes)):</span><br><span class="line">        <span class="comment"># 随机初始化状态和动作</span></span><br><span class="line">        state = (np.random.randint(<span class="number">12</span>, <span class="number">22</span>),</span><br><span class="line">                np.random.randint(<span class="number">1</span>, <span class="number">11</span>),</span><br><span class="line">                np.random.randint(<span class="number">2</span>))</span><br><span class="line">        action = np.random.randint(<span class="number">2</span>)</span><br><span class="line">        <span class="comment"># 开搞</span></span><br><span class="line">        env.reset()</span><br><span class="line">        <span class="comment"># 将随机生成的数据输入到环境中</span></span><br><span class="line">        <span class="keyword">if</span> state[<span class="number">2</span>]:</span><br><span class="line">            env.player = [<span class="number">1</span>, state[<span class="number">0</span>] - <span class="number">11</span>]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">if</span> state[<span class="number">0</span>] == <span class="number">21</span>:</span><br><span class="line">                env.player = [<span class="number">10</span>, <span class="number">5</span>, <span class="number">6</span>]  <span class="comment">#随便找一个合法的</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                env.player = [<span class="number">10</span>, state[<span class="number">0</span>] - <span class="number">10</span>] <span class="comment">#因为范围是12-21，所以可以这样设置</span></span><br><span class="line">        env.dealer[<span class="number">0</span>] = state[<span class="number">1</span>]</span><br><span class="line">        s_a_trajectory = []</span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            s_a_trajectory.append((state, action))</span><br><span class="line">            observation, reward, done, _ = env.step(action)</span><br><span class="line">            <span class="keyword">if</span> done:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            state = ob_state(observation)</span><br><span class="line">            action = np.random.choice(env.action_space.n, p = policy[state]) <span class="comment"># 按策略选择</span></span><br><span class="line">            </span><br><span class="line">        <span class="keyword">for</span> state, action <span class="keyword">in</span> s_a_trajectory:</span><br><span class="line">            count[state][action] += <span class="number">1</span></span><br><span class="line">            q[state][action] += (reward - q[state][action]) / count[state][action]</span><br><span class="line">            a_max = q[state].argmax()</span><br><span class="line">            policy[state] = <span class="number">0</span></span><br><span class="line">            policy[state][a_max] = <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> policy, q</span><br><span class="line"></span><br><span class="line">policy, q = monte_carlo_ES(env)</span><br><span class="line">v = q.max(axis = <span class="number">-1</span>)</span><br><span class="line">plot(policy.argmin(<span class="number">-1</span>))</span><br><span class="line">plot(v)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">monte_carlo_importance_resample</span><span class="params">(env, spisodes = <span class="number">500000</span>)</span>:</span></span><br><span class="line">    policy = np.zeros((<span class="number">22</span>, <span class="number">11</span>, <span class="number">2</span>, <span class="number">2</span>))</span><br><span class="line">    policy[:, :, :, <span class="number">0</span>] = <span class="number">1</span> <span class="comment">#初始化目标策略</span></span><br><span class="line">    behavior_policy = np.ones_like(policy) * <span class="number">0.5</span> <span class="comment"># 柔性策略</span></span><br><span class="line">    q = np.zeros_like(policy)</span><br><span class="line">    count = np.zeros_like(policy)</span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> tqdm(range(spisodes)):</span><br><span class="line">        trajectory = []</span><br><span class="line">        observation = env.reset()</span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            state = ob_state(observation)</span><br><span class="line">            action = np.random.choice(env.action_space.n, p = behavior_policy[state])</span><br><span class="line">            trajectory.append((state, action))</span><br><span class="line">            observation, reward, done, _ = env.step(action)</span><br><span class="line">            <span class="keyword">if</span> done:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            </span><br><span class="line">        rho = <span class="number">1.</span> <span class="comment"># 重要采样比</span></span><br><span class="line">        <span class="keyword">for</span> state, action <span class="keyword">in</span> reversed(trajectory):  <span class="comment">#为了方便计算rho，逆序计算 page 109,mc control</span></span><br><span class="line">            count[state][action] += rho</span><br><span class="line">            q[state][action] += (rho * (reward - q[state][action]) / count[state][action])</span><br><span class="line">            <span class="comment"># improvement</span></span><br><span class="line">            a_max = q[state].argmax()</span><br><span class="line">            policy[state] = <span class="number">0</span></span><br><span class="line">            policy[state][a_max] = <span class="number">1.</span></span><br><span class="line">            <span class="comment"># 获得的新动作不满足目标策略（贪心）时，放弃该幂数据 （rho会等于0），因此非贪心动作多时会学习得比较慢</span></span><br><span class="line">            <span class="keyword">if</span> a_max != action: </span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            rho /= behavior_policy[state][action]</span><br><span class="line">    <span class="keyword">return</span> policy, q</span><br><span class="line"></span><br><span class="line">policy, q = monte_carlo_importance_resample(env)</span><br><span class="line">v = q.max(axis = <span class="number">-1</span>)</span><br><span class="line">plot(policy.argmin(<span class="number">-1</span>))</span><br><span class="line">plot(v)</span><br></pre></td></tr></table></figure>
+<h2 id="C6-TD"><a href="#C6-TD" class="headerlink" title="C6_TD"></a>C6_TD</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gym</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">np.random.seed(<span class="number">0</span>)</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">env = gym.make(<span class="string">'Taxi-v3'</span>)</span><br><span class="line">env.seed(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用方法 </span></span><br><span class="line"><span class="comment"># state = env.reset()</span></span><br><span class="line"><span class="comment"># taxirow, taxicol, passloc, destidx = env.unwrapped.decode(state)</span></span><br><span class="line"><span class="comment"># print(taxirow, taxicol, passloc, destidx)</span></span><br><span class="line"><span class="comment"># print('的士位置 = &#123;&#125;'.format((taxirow, taxicol)))</span></span><br><span class="line"><span class="comment"># print('乘客位置 = &#123;&#125;'.format(env.unwrapped.locs[passloc]))</span></span><br><span class="line"><span class="comment"># print('目标位置 = &#123;&#125;'.format(env.unwrapped.locs[destidx]))</span></span><br><span class="line"><span class="comment"># env.render()</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SarsaAgeng</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, env, gamma = <span class="number">0.9</span>, learning_rate=<span class="number">0.2</span>, epsilon=<span class="number">0.01</span>)</span>:</span></span><br><span class="line">        self.gamma = gamma</span><br><span class="line">        self.learning_rate = learning_rate</span><br><span class="line">        self.epsilon = epsilon   <span class="comment"># soft parameter</span></span><br><span class="line">        self.action_n = env.action_space.n</span><br><span class="line">        self.q = np.zeros((env.observation_space.n, env.action_space.n)) <span class="comment"># q(s, a)  500 * 6</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">choice_action</span><span class="params">(self, state)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> np.random.uniform() &gt; self.epsilon:</span><br><span class="line">            action = self.q[state].argmax()</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            action = np.random.randint(self.action_n)</span><br><span class="line">        <span class="keyword">return</span> action </span><br><span class="line">    </span><br><span class="line">    <span class="comment"># def choice_action(self, state):</span></span><br><span class="line">    <span class="comment">#     if np.random.binomial(1, self.epsilon) == 0:</span></span><br><span class="line">    <span class="comment">#         values_ = self.q[state] </span></span><br><span class="line">    <span class="comment">#         action = np.random.choice([action_ for action_, value_ in enumerate(values_) if value_ == np.max(values_)])</span></span><br><span class="line">    <span class="comment">#     else:</span></span><br><span class="line">    <span class="comment">#         action = np.random.randint(self.action_n)</span></span><br><span class="line">    <span class="comment">#     return action</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">learn</span><span class="params">(self, state, action, reward, next_state, done, next_action)</span>:</span></span><br><span class="line">        u = reward + self.gamma * self.q[next_state, next_action] * (<span class="number">1.</span> - done)</span><br><span class="line">        td_erro = u - self.q[state, action] </span><br><span class="line">        self.q[state, action] += self.learning_rate * td_erro</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sarsa</span><span class="params">(env, agent, train=False, render = False)</span>:</span></span><br><span class="line">    G = <span class="number">0</span></span><br><span class="line">    observation = env.reset()</span><br><span class="line">    action = agent.choice_action(observation)</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">if</span> render:</span><br><span class="line">            env.render()</span><br><span class="line">        next_observation, reward, done, _ = env.step(action)</span><br><span class="line">        G += reward</span><br><span class="line">        next_action = agent.choice_action(next_observation)</span><br><span class="line">        <span class="keyword">if</span> train:</span><br><span class="line">            agent.learn(observation, action, reward, next_observation, done, next_action)</span><br><span class="line">        <span class="keyword">if</span> done:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        observation, action = next_observation, next_action</span><br><span class="line">    <span class="keyword">return</span> G</span><br><span class="line"></span><br><span class="line">agent = SarsaAgeng(env) <span class="comment"># 实例化一个sarsaAgentg对象</span></span><br><span class="line">episodes = <span class="number">3000</span></span><br><span class="line">G = []</span><br><span class="line"><span class="keyword">for</span> episode <span class="keyword">in</span> range(episodes):</span><br><span class="line">    reward = sarsa(env, agent, train=<span class="literal">True</span>)</span><br><span class="line">    G.append(reward)</span><br><span class="line">plt.plot(G)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ExpectedSarasAgent</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, env, gamma=<span class="number">0.9</span>, learning_rate=<span class="number">0.1</span>, epsilon=<span class="number">0.01</span>)</span>:</span></span><br><span class="line">        self.gamma = gamma</span><br><span class="line">        self.learning_rate = learning_rate</span><br><span class="line">        self.epsilon = epsilon</span><br><span class="line">        self.q = np.zeros((env.observation_space.n, env.action_space.n))</span><br><span class="line">        self.action_n = env.action_space.n</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">choice_action</span><span class="params">(self, state)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> np.random.uniform() &gt; self.epsilon:</span><br><span class="line">            action = self.q[state].argmax()</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            action = np.random.randint(self.action_n)</span><br><span class="line">        <span class="keyword">return</span> action</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">learn</span><span class="params">(self, state, action, reward, next_state, done)</span>:</span></span><br><span class="line">        Eq = (self.q[next_state].mean() * self.epsilon + self.q[next_state].max() * (<span class="number">1</span>-self.epsilon))</span><br><span class="line">        u = reward + self.gamma * Eq * (<span class="number">1.</span> - done)</span><br><span class="line">        td_erro = u - self.q[state, action]</span><br><span class="line">        self.q[state, action] += self.learning_rate * td_erro</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">q_learning</span><span class="params">(env, agent, train=False, render=False)</span>:</span></span><br><span class="line">    G = <span class="number">0</span></span><br><span class="line">    observation = env.reset()</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">if</span> render:</span><br><span class="line">            env.render()</span><br><span class="line">        action = agent.choice_action(observation)</span><br><span class="line">        next_observation, reward, done, _ = env.step(action)</span><br><span class="line">        G += reward</span><br><span class="line">        <span class="keyword">if</span> train:</span><br><span class="line">            agent.learn(observation, action, reward, next_observation, done)</span><br><span class="line">        <span class="keyword">if</span> done:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        observation = next_observation</span><br><span class="line">    <span class="keyword">return</span> G</span><br><span class="line"></span><br><span class="line">agent = ExpectedSarasAgent(env)</span><br><span class="line"></span><br><span class="line">episodes = <span class="number">5000</span></span><br><span class="line">Gs = []</span><br><span class="line"><span class="keyword">for</span> episode <span class="keyword">in</span> range(episode):</span><br><span class="line">    G = q_learning(env, agent, train=<span class="literal">True</span>)</span><br><span class="line">    Gs.append(G)</span><br><span class="line">plt.plot(Gs)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">### Q-learning</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">QLearningAgent</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, env, gamma=<span class="number">0.9</span>, learning_rate=<span class="number">0.1</span>, epsilon=<span class="number">0.01</span>)</span>:</span></span><br><span class="line">        self.gamma = gamma</span><br><span class="line">        self.epsilon = epsilon</span><br><span class="line">        self.learning_rate = learning_rate</span><br><span class="line">        self.action_n = env.action_space.n</span><br><span class="line">        self.q = np.zeros((env.observation_space.n, env.action_space.n))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">choice_action</span><span class="params">(self, state)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> np.random.uniform() &gt; self.epsilon:</span><br><span class="line">            action = self.q[state].argmax()</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            action = np.random.randint(self.action_n)</span><br><span class="line">        <span class="keyword">return</span> action </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">learn</span><span class="params">(self, state, action, reward, next_state, done)</span>:</span></span><br><span class="line">        u = reward + self.gamma * self.q[next_state].max() * (<span class="number">1.</span> - done)</span><br><span class="line">        td_erro = u - self.q[state, action]</span><br><span class="line">        self.q[state, action] += self.learning_rate * td_erro</span><br><span class="line"></span><br><span class="line">agent = QLearningAgent(env)</span><br><span class="line"></span><br><span class="line">episodes = <span class="number">4000</span></span><br><span class="line">Gs = [] </span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> range(episodes):</span><br><span class="line">    G = q_learning(env, agent, train=<span class="literal">True</span>)</span><br><span class="line">    Gs.append(G)</span><br><span class="line">plt.plot(Gs)</span><br></pre></td></tr></table></figure>
+<h2 id="C9-semiGTD"><a href="#C9-semiGTD" class="headerlink" title="C9_semiGTD"></a>C9_semiGTD</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 绘制位置和速度图像</span></span><br><span class="line">fig, ax = plt.subplots()</span><br><span class="line">ax.plot(positions, label=<span class="string">'position'</span>)</span><br><span class="line">ax.plot(velocities, label=<span class="string">'velocity'</span>)</span><br><span class="line">ax.legend()</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TileCoder</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, layers, features)</span>:</span></span><br><span class="line">        self.layers = layers</span><br><span class="line">        self.features = features</span><br><span class="line">        self.codebook = &#123;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_feature</span><span class="params">(self, codeword)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> codeword <span class="keyword">in</span> self.codebook:</span><br><span class="line">            <span class="keyword">return</span> self.codebook[codeword]</span><br><span class="line">        count = len(self.codebook)</span><br><span class="line">        <span class="keyword">if</span> count &gt;= self.features: <span class="comment"># 大于特征数量，冲突处理</span></span><br><span class="line">            <span class="keyword">return</span> hash(codeword) % self.features</span><br><span class="line">        self.codebook[codeword] = count</span><br><span class="line">        <span class="keyword">return</span> count</span><br><span class="line"></span><br><span class="line">    <span class="comment">## call 让这个类的实例可当成函数调用，方便更改数据，直接编码</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__call__</span><span class="params">(self, states=<span class="params">()</span>, ints=<span class="params">()</span>)</span>:</span></span><br><span class="line">        dim = len(floats)   <span class="comment"># 2</span></span><br><span class="line">        states = tuple(f * self.layers * self.layers <span class="keyword">for</span> f <span class="keyword">in</span> floats) <span class="comment"># 2 float state</span></span><br><span class="line">        print(<span class="string">'floats &#123;&#125;'</span>.format(states))</span><br><span class="line">        features = []</span><br><span class="line">        <span class="keyword">for</span> layer <span class="keyword">in</span> range(self.layers):</span><br><span class="line">            codeword = (layer,) + tuple(int((s_value + (<span class="number">1</span> + dim * index) * layer) / self.layers) <span class="keyword">for</span> index, s_value <span class="keyword">in</span> enumerate(states)) + ints</span><br><span class="line">            print(codeword)</span><br><span class="line">            feature = self.get_feature(codeword)</span><br><span class="line">            features.append(feature)</span><br><span class="line">        print(<span class="string">'features &#123;&#125;'</span>.format(features)) </span><br><span class="line">        <span class="keyword">return</span> features  <span class="comment"># 8维的特征向量（list）</span></span><br><span class="line">    </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SARSAAgent</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, env, layers=<span class="number">8</span>, features=<span class="number">1893</span>, gamma=<span class="number">1.</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">                learning_rate=<span class="number">0.03</span>, epsilon=<span class="number">0.001</span>)</span>:</span></span><br><span class="line">        self.action_n = env.action_space.n <span class="comment"># 动作数</span></span><br><span class="line">        self.obs_low = env.observation_space.low   <span class="comment"># 2个元素的列表</span></span><br><span class="line">        self.obs_scale = env.observation_space.high - \</span><br><span class="line">                env.observation_space.low <span class="comment"># 观测空间范围</span></span><br><span class="line">        self.encoder = TileCoder(layers, features) <span class="comment"># 砖瓦编码器</span></span><br><span class="line">        self.w = np.zeros(features) <span class="comment"># 权重</span></span><br><span class="line">        self.gamma = gamma <span class="comment"># 折扣</span></span><br><span class="line">        self.learning_rate = learning_rate <span class="comment"># 学习率</span></span><br><span class="line">        self.epsilon = epsilon <span class="comment"># 探索</span></span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">encode</span><span class="params">(self, observation, action)</span>:</span> <span class="comment"># 编码</span></span><br><span class="line">        states = tuple((observation - self.obs_low) / self.obs_scale)  <span class="comment"># 归一化状态</span></span><br><span class="line">        actions = (action,)  <span class="comment"># 元组</span></span><br><span class="line">        <span class="keyword">return</span> self.encoder(states, actions)</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_q</span><span class="params">(self, observation, action)</span>:</span> <span class="comment"># 动作价值</span></span><br><span class="line">        features = self.encode(observation, action)</span><br><span class="line">        <span class="keyword">return</span> self.w[features].sum()</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">decide</span><span class="params">(self, observation)</span>:</span> <span class="comment"># 判决</span></span><br><span class="line">        <span class="keyword">if</span> np.random.rand() &lt; self.epsilon:</span><br><span class="line">            <span class="keyword">return</span> np.random.randint(self.action_n)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            qs = [self.get_q(observation, action) <span class="keyword">for</span> action <span class="keyword">in</span></span><br><span class="line">                    range(self.action_n)]</span><br><span class="line">            <span class="keyword">return</span> np.argmax(qs)</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">learn</span><span class="params">(self, observation, action, reward,</span></span></span><br><span class="line"><span class="function"><span class="params">            next_observation, done, next_action)</span>:</span> <span class="comment"># 学习</span></span><br><span class="line">        u = reward + (<span class="number">1.</span> - done) * self.gamma * \</span><br><span class="line">                self.get_q(next_observation, next_action)</span><br><span class="line">        td_error = u - self.get_q(observation, action)</span><br><span class="line">        features = self.encode(observation, action)</span><br><span class="line">        self.w[features] += (self.learning_rate * td_error)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">play_sarsa</span><span class="params">(env, agent, train=False, render=False)</span>:</span></span><br><span class="line">    episode_reward = <span class="number">0</span></span><br><span class="line">    observation = env.reset()</span><br><span class="line">    action = agent.decide(observation)</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">if</span> render:</span><br><span class="line">            env.render()</span><br><span class="line">        next_observation, reward, done, _ = env.step(action)</span><br><span class="line">        episode_reward += reward</span><br><span class="line">        next_action = agent.decide(next_observation) <span class="comment"># 终止状态时此步无意义</span></span><br><span class="line">        <span class="keyword">if</span> train:</span><br><span class="line">            agent.learn(observation, action, reward, next_observation,</span><br><span class="line">                    done, next_action)</span><br><span class="line">        <span class="keyword">if</span> done:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        observation, action = next_observation, next_action</span><br><span class="line">    <span class="keyword">return</span> episode_reward</span><br><span class="line"></span><br><span class="line">agent = SARSAAgent(env)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 训练</span></span><br><span class="line">episodes = <span class="number">500</span></span><br><span class="line">episode_rewards = []</span><br><span class="line"><span class="keyword">for</span> episode <span class="keyword">in</span> range(episodes):</span><br><span class="line">    episode_reward = play_sarsa(env, agent, train=<span class="literal">True</span>)</span><br><span class="line">    episode_rewards.append(episode_reward)</span><br><span class="line">plt.plot(episode_rewards)</span><br></pre></td></tr></table></figure>
+<h2 id="C9-tile-coding"><a href="#C9-tile-coding" class="headerlink" title="C9_tile_coding"></a>C9_tile_coding</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TileCoder</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, tiles_per_dim, value_limits, tiles, offset=lambda n: <span class="number">2</span> * np.arange<span class="params">(n)</span> + <span class="number">1</span>)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    以 8 * 8 tiling的状态空间，8 个tile覆盖为例</span></span><br><span class="line"><span class="string">    原状态空间被分为8 * 8 的tiling，对其设置不同的offset以获取更多不同的特征数量。而偏移量我们将其限制在1个tiling的范围，于是需要使用9 * 9的tile。</span></span><br><span class="line"><span class="string">    _limits表示状态区间的两个维度的范围，将tiling数量除以对应维度的范围大小，得到规范化的维度(norm_dims)。</span></span><br><span class="line"><span class="string">    _tile_base_ind表示不同tile的索引起始位置，8个tile，每个tile 9*9 </span></span><br><span class="line"><span class="string">    _hash_vec 给出了将二维坐标点映射到1维数值的关系，这里它的实际值是[1, 9] ，若坐标点看作(x, y)，则它在tile中的位置可数值化为9y+x。</span></span><br><span class="line"><span class="string">    于是，编码过程可总结为：</span></span><br><span class="line"><span class="string">        1. 给每个tile设置不同的偏移，这里给第一维偏移设置为1/8， 第二维为3/8，超过1的循环放置。</span></span><br><span class="line"><span class="string">        2. 获取状态坐标(x,y),减去对应维度的下限，再乘以规范化维度得到实际坐标。再加上不同tile对应的不同偏移量，得到每个tile下的坐标</span></span><br><span class="line"><span class="string">        3. 对每个tile，(x,y)的特征分量值为tile起始索引 + 偏移后tile坐标 * hash映射 </span></span><br><span class="line"><span class="string">        4. 得到一个8维特征向量</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    tiling_dims = np.array(np.ceil(tiles_per_dim), dtype=np.int) + <span class="number">1</span> <span class="comment"># 保证覆盖</span></span><br><span class="line">    self._offsets = offset(len(tiles_per_dim)) * np.repeat([np.arange(tilings)], len(tiles_per_dim), <span class="number">0</span>).T / float(tilings) % <span class="number">1</span>   </span><br><span class="line">    self._limits = np.array(value_limits)   <span class="comment"># 2 * 2</span></span><br><span class="line">    self._norm_dims = np.array(tiles_per_dim) / (self._limits[:, <span class="number">1</span>] - self._limits[:, <span class="number">0</span>])</span><br><span class="line">    self._tile_base_ind = np.prod(tiling_dims) * np.arange(tiles)  <span class="comment"># 9 * 9 * [0, 1, ..., 7]</span></span><br><span class="line">    self._hash_vec = np.array([np.prod(tiling_dims[<span class="number">0</span>:i]) <span class="keyword">for</span> i <span class="keyword">in</span> range(len(tiles_per_dim))])</span><br><span class="line">    self._n_tiles = tiles * np.prod(tiling_dims)</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__getitem__</span><span class="params">(self, x)</span>:</span>  <span class="comment">## 使得实例对象t可以索引如 t[key]</span></span><br><span class="line">    off_coords = ((x - self._limits[:, <span class="number">0</span>]) * self._norm_dims + self._offsets).astype(int)</span><br><span class="line">    <span class="keyword">return</span> self._tile_base_ind + np.dot(off_coords, self._hash_vec)</span><br><span class="line"></span><br><span class="line"><span class="meta">  @property</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">n_tiles</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> self._n_tiles</span><br></pre></td></tr></table></figure>
+<h2 id="C13-AC"><a href="#C13-AC" class="headerlink" title="C13_AC"></a>C13_AC</h2><h3 id="朴素AC（TD自举）"><a href="#朴素AC（TD自举）" class="headerlink" title="朴素AC（TD自举）"></a>朴素AC（TD自举）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gym</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">from</span> torch.autograd <span class="keyword">import</span> Variable</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Actor_Critic</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        super().__init__()</span><br><span class="line">        self.fc1 = nn.Linear(<span class="number">4</span>, <span class="number">128</span>)</span><br><span class="line">        self.fc2 = nn.Linear(<span class="number">128</span>, <span class="number">128</span>)</span><br><span class="line">        self.fc3 = nn.Linear(<span class="number">128</span>, <span class="number">2</span>)</span><br><span class="line">        self.fc4 = nn.Linear(<span class="number">128</span>, <span class="number">1</span>)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        x = F.relu(self.fc1(x))</span><br><span class="line">        x = F.relu(self.fc2(x))</span><br><span class="line">        action = F.log_softmax(self.fc3(x), dim=<span class="number">-1</span>)</span><br><span class="line">        V = F.relu(self.fc4(x))</span><br><span class="line">        <span class="keyword">return</span> action, V</span><br><span class="line"></span><br><span class="line">device = <span class="string">'cpu'</span></span><br><span class="line">env = gym.make(<span class="string">'CartPole-v0'</span>)</span><br><span class="line">obs = env.reset()</span><br><span class="line">actor_critic = Actor_Critic()</span><br><span class="line">actor_critic.to(device)</span><br><span class="line">optimizer_a_c = torch.optim.Adam(actor_critic.parameters(), lr = <span class="number">0.0004</span>)</span><br><span class="line">gamma = <span class="number">0.99</span></span><br><span class="line">alpha_c = <span class="number">0.01</span></span><br><span class="line">steps = []</span><br><span class="line">A_loss = []</span><br><span class="line">C_loss = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> episode <span class="keyword">in</span> range(<span class="number">10000</span>):</span><br><span class="line">    I = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> step <span class="keyword">in</span> range(<span class="number">200</span>):</span><br><span class="line">        obs = np.reshape(obs, [<span class="number">1</span>, <span class="number">-1</span>])</span><br><span class="line">        input_obs = Variable(torch.from_numpy(obs).float()).to(device)</span><br><span class="line">        action_probability, V = actor_critic(input_obs)  <span class="comment"># 经过神经网络得到动作策略和价值函数</span></span><br><span class="line">        </span><br><span class="line">        action = np.random.choice(<span class="number">2</span>, p = np.exp(action_probability[<span class="number">0</span>].detach().cpu()).numpy())</span><br><span class="line">        obs, reward, done, info = env.step(action)</span><br><span class="line">        obs = np.reshape(obs, [<span class="number">1</span>, <span class="number">-1</span>])</span><br><span class="line">        next_input_obs = Variable(torch.from_numpy(obs).float()).to(device)  <span class="comment">#获取下步状态</span></span><br><span class="line">        _, next_V = actor_critic(next_input_obs)  <span class="comment">## 单步TD-erro 需要下一步状态的价值估计</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> done:</span><br><span class="line">            delta = reward - V</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            delta = reward + gamma * next_V.detach() - V</span><br><span class="line">        <span class="comment"># 策略损失函数</span></span><br><span class="line">        Actor_loss = -action_probability[<span class="number">0</span>][action] * I * delta.detach()</span><br><span class="line">        A_loss.append(Actor_loss)</span><br><span class="line">        <span class="comment"># 状态价值损失函数</span></span><br><span class="line">        Critic_loss = -alpha_c * delta.detach() * V</span><br><span class="line">        C_loss.append(Critic_loss)</span><br><span class="line">        I *= gamma</span><br><span class="line">        loss = Actor_loss + Critic_loss</span><br><span class="line">        </span><br><span class="line">        actor_critic.zero_grad()</span><br><span class="line">        loss.backward()</span><br><span class="line">        optimizer_a_c.step()</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> done:</span><br><span class="line">            steps.append(step)  <span class="comment"># 该幂收益</span></span><br><span class="line">            print(<span class="string">f'episode <span class="subst">&#123;episode&#125;</span>, step <span class="subst">&#123;step&#125;</span>'</span>, end = <span class="string">'\r'</span>)</span><br><span class="line">            obs = env.reset()</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">if</span> np.mean(steps[<span class="number">-20</span>:]) &gt; <span class="number">180</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">        </span><br><span class="line">mid = []</span><br><span class="line">interval = <span class="number">30</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(steps) - interval):</span><br><span class="line">    mid.append(np.mean(steps[i:i+interval+<span class="number">1</span>]))</span><br><span class="line">plt.figure(figsize=(<span class="number">10</span>,<span class="number">10</span>))</span><br><span class="line">plt.title(<span class="string">'Performace of vanilla Actor-Critic on CartPole_V0'</span>,fontsize = <span class="string">'xx-large'</span>)</span><br><span class="line">plt.xlabel(<span class="string">'Episodes'</span>, fontsize = <span class="string">'xx-large'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'Rewards'</span>,fontsize = <span class="string">'xx-large'</span>)</span><br><span class="line">x_fit = list(range(len(steps) - interval))</span><br><span class="line">plt.plot(x_fit, steps[interval:], <span class="string">'-'</span>, c = <span class="string">'gray'</span>, label=<span class="string">'Episode-Wise data'</span>) </span><br><span class="line">plt.plot(mid, <span class="string">'-'</span>, c= <span class="string">'green'</span>, linewidth = <span class="number">5</span>, label=<span class="string">'Moving Average'</span>)</span><br><span class="line">plt.legend(loc=<span class="string">"best"</span>,prop=&#123;<span class="string">'size'</span>: <span class="number">12</span>&#125;)</span><br><span class="line">plt.show()</span><br><span class="line">plt.figure(figsize=(<span class="number">10</span>,<span class="number">10</span>))</span><br><span class="line">plt.title(<span class="string">'Error Analysis of vanilla Actor-Critic on CartPole_V0'</span>,fontsize = <span class="string">'xx-large'</span>)</span><br><span class="line">plt.xlabel(<span class="string">'Episodes'</span>, fontsize = <span class="string">'xx-large'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'Loss'</span>,fontsize = <span class="string">'xx-large'</span>)</span><br><span class="line">plt.plot(A_loss, c = <span class="string">'blue'</span>, label = <span class="string">'Actor_Loss'</span>)</span><br><span class="line">plt.plot(C_loss, c = <span class="string">'red'</span>, label = <span class="string">'Critic_Loss'</span>)</span><br><span class="line">plt.legend(loc=<span class="string">"best"</span>,prop=&#123;<span class="string">'size'</span>: <span class="number">12</span>&#125;)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h3 id="朴素AC（monte-carlo）"><a href="#朴素AC（monte-carlo）" class="headerlink" title="朴素AC（monte carlo）"></a>朴素AC（monte carlo）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gym </span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"><span class="keyword">from</span> torch.autograd <span class="keyword">import</span> Variable</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Actor_Critit</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        super().__init__()</span><br><span class="line">        self.fc1 = nn.Linear(<span class="number">4</span>, <span class="number">128</span>)</span><br><span class="line">        self.fc2 = nn.Linear(<span class="number">128</span>, <span class="number">128</span>)</span><br><span class="line">        self.fc3 = nn.Linear(<span class="number">128</span>, <span class="number">2</span>)</span><br><span class="line">        self.fc4 = nn.Linear(<span class="number">128</span>, <span class="number">1</span>)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        x = F.relu(self.fc1(x))</span><br><span class="line">        x = F.relu(self.fc2(x))</span><br><span class="line">        action = F.log_softmax(self.fc3(x), dim = <span class="number">-1</span>)</span><br><span class="line">        V = F.relu(self.fc4(x))</span><br><span class="line">        <span class="keyword">return</span> action, V</span><br><span class="line"></span><br><span class="line">device = <span class="string">'cpu'</span></span><br><span class="line">env = gym.make(<span class="string">'CartPole-v0'</span>)</span><br><span class="line">obs = env.reset()</span><br><span class="line">ac = Actor_Critit()</span><br><span class="line">ac.to(device)</span><br><span class="line">optimizer_ac = torch.optim.Adam(ac.parameters(), lr=<span class="number">0.003</span>)</span><br><span class="line">gamma = <span class="number">0.99</span></span><br><span class="line">steps = []</span><br><span class="line">A_loss = []</span><br><span class="line">C_loss = []</span><br><span class="line">eps = np.finfo(np.float32).eps.item()  <span class="comment"># 浮点数下限</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> episode <span class="keyword">in</span> range(<span class="number">1000</span>):</span><br><span class="line">    log_action_trajectory = []</span><br><span class="line">    V_trajectory = []</span><br><span class="line">    <span class="keyword">for</span> step <span class="keyword">in</span> range(<span class="number">200</span>):</span><br><span class="line">        <span class="comment"># 按策略运行，直到done或达到200步，如果done再进行更新(monte carlo)</span></span><br><span class="line">        obs = np.reshape(obs, [<span class="number">1</span>, <span class="number">-1</span>])</span><br><span class="line">        input_obs = Variable(torch.from_numpy(obs).float()).to(device)</span><br><span class="line">        log_action_probability, V = ac(input_obs)</span><br><span class="line">        action = np.random.choice(<span class="number">2</span>, p = np.exp(log_action_probability[<span class="number">0</span>].detach().cpu()).numpy())</span><br><span class="line">        log_action_trajectory.append(log_action_probability[<span class="number">0</span>][action])</span><br><span class="line">        V_trajectory.append(V)</span><br><span class="line">        obs, reward, done, info = env.step(action)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> done:</span><br><span class="line">            ac.zero_grad()</span><br><span class="line">            steps.append(step)</span><br><span class="line">            print(<span class="string">f'episode <span class="subst">&#123;episode&#125;</span>, step <span class="subst">&#123;step&#125;</span>'</span>, end = <span class="string">'\r'</span>)</span><br><span class="line">            obs = env.reset()</span><br><span class="line">            reward_list = np.ones((step + <span class="number">1</span>,))</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(len(reward_list)<span class="number">-2</span>, <span class="number">-1</span>, <span class="number">-1</span>):</span><br><span class="line">                reward_list[i] += reward_list[i+<span class="number">1</span>] * gamma</span><br><span class="line">            reward_list -= np.mean(reward_list)</span><br><span class="line">            reward_list /= (np.std(reward_list) + eps)</span><br><span class="line">            critic_loss = <span class="number">0</span></span><br><span class="line">            Delta = [] </span><br><span class="line">            </span><br><span class="line">		   <span class="comment"># 对蒙特卡洛保存的收益和价值估计进行回溯</span></span><br><span class="line">            <span class="keyword">for</span> discount_G, V <span class="keyword">in</span> zip(reward_list, V_trajectory):</span><br><span class="line">                <span class="comment"># monte carlo获取了折扣回报，因此直接将G、V之差作为loss</span></span><br><span class="line">                critic_loss += F.smooth_l1_loss(V, torch.tensor([discount_G]))</span><br><span class="line">                Delta.append(discount_G - V.detach()) </span><br><span class="line">            Actor_loss = <span class="number">0</span></span><br><span class="line">            <span class="comment"># 对蒙特卡洛保存的动作策略和根据价值函数得到的delta估计进行回溯</span></span><br><span class="line">            <span class="keyword">for</span> delta, log_prob <span class="keyword">in</span> zip(Delta, log_action_trajectory):</span><br><span class="line">                Actor_loss -= log_prob * delta.detach()</span><br><span class="line">            <span class="comment"># 平均误差</span></span><br><span class="line">            </span><br><span class="line"><span class="comment">#             # 对策略loss添加熵正则化项可鼓励探索，</span></span><br><span class="line"><span class="comment">#             entropy = 0</span></span><br><span class="line"><span class="comment">#             beta = 0.01</span></span><br><span class="line"><span class="comment">#             for log_p in action_log_history:</span></span><br><span class="line"><span class="comment">#                 entropy -= log_p * torch.exp(log_p)</span></span><br><span class="line"><span class="comment">#             Actor_Loss = Actor_Loss * (1 - beta) + entropy * beta</span></span><br><span class="line">            </span><br><span class="line">            A_loss.append(Actor_loss.item() / step) </span><br><span class="line">            C_loss.append(critic_loss.item() / step)</span><br><span class="line">            loss = critic_loss + Actor_loss</span><br><span class="line">            <span class="comment"># 计算</span></span><br><span class="line">            loss.backward()</span><br><span class="line">            optimizer_ac.step()</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">if</span> np.mean(steps[<span class="number">-20</span>:]) &gt; <span class="number">190</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">mid = []</span><br><span class="line">interval = <span class="number">30</span></span><br><span class="line">plt.style.use(<span class="string">'dark_background'</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(steps) - interval):</span><br><span class="line">    mid.append(np.mean(steps[i:i+interval+<span class="number">1</span>]))</span><br><span class="line">plt.figure(figsize=(<span class="number">10</span>,<span class="number">10</span>))</span><br><span class="line">plt.title(<span class="string">'Performace of EpisodeWise Adavantage Actor-Critic on CartPole_V0'</span>,fontsize = <span class="string">'xx-large'</span>)</span><br><span class="line">plt.xlabel(<span class="string">'Episodes'</span>, fontsize = <span class="string">'xx-large'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'Rewards'</span>,fontsize = <span class="string">'xx-large'</span>)</span><br><span class="line">x_fit = list(range(len(steps) - interval))</span><br><span class="line">plt.plot(x_fit, steps[interval:], <span class="string">'-'</span>, c = <span class="string">'gray'</span>, label=<span class="string">'Episode-Wise data'</span>) </span><br><span class="line">plt.plot(mid, <span class="string">'-'</span>, c= <span class="string">'green'</span>, linewidth = <span class="number">5</span>, label=<span class="string">'Moving Average'</span>)</span><br><span class="line">plt.legend(loc=<span class="string">"best"</span>,prop=&#123;<span class="string">'size'</span>: <span class="number">12</span>&#125;)</span><br><span class="line">plt.show()</span><br><span class="line">plt.figure(figsize=(<span class="number">10</span>,<span class="number">10</span>))</span><br><span class="line">plt.title(<span class="string">'Error Analysis of EpisodeWise Adavantage Actor-Critic on CartPole_V0'</span>,fontsize = <span class="string">'xx-large'</span>)</span><br><span class="line">plt.xlabel(<span class="string">'Episodes'</span>, fontsize = <span class="string">'xx-large'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'Loss'</span>,fontsize = <span class="string">'xx-large'</span>)</span><br><span class="line">T_loss = [sum(x) <span class="keyword">for</span> x <span class="keyword">in</span> zip(A_loss, C_loss)]</span><br><span class="line">plt.plot(A_loss, c = <span class="string">'blue'</span>, label = <span class="string">'Actor_Loss'</span>)</span><br><span class="line">plt.plot(C_loss, c = <span class="string">'red'</span>, label = <span class="string">'Critic_Loss'</span>)</span><br><span class="line">plt.plot(T_loss, c = <span class="string">'green'</span>, label = <span class="string">'total_Loss'</span>)</span><br><span class="line">plt.legend(loc=<span class="string">"best"</span>,prop=&#123;<span class="string">'size'</span>: <span class="number">12</span>&#125;)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h2 id="C13-PG"><a href="#C13-PG" class="headerlink" title="C13_PG"></a>C13_PG</h2><h3 id="REFORCE-on-policy版"><a href="#REFORCE-on-policy版" class="headerlink" title="REFORCE (on policy版)"></a>REFORCE (on policy版)</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gym</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">import</span> torch.optim <span class="keyword">as</span> optim</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"><span class="keyword">from</span> torch.autograd <span class="keyword">import</span> Variable</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RE_NET</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        super().__init__()</span><br><span class="line">        self.fc1 = nn.Linear(<span class="number">4</span>, <span class="number">24</span>)</span><br><span class="line">        self.fc2 = nn.Linear(<span class="number">24</span>, <span class="number">48</span>)</span><br><span class="line">        self.fc3 = nn.Linear(<span class="number">48</span>, <span class="number">24</span>)</span><br><span class="line">        self.fc4 = nn.Linear(<span class="number">24</span>, <span class="number">2</span>)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        x = F.relu(self.fc1(x))</span><br><span class="line">        x = F.relu(self.fc2(x))</span><br><span class="line">        x = F.relu(self.fc3(x))</span><br><span class="line">        x = F.log_softmax(self.fc4(x), dim=<span class="number">1</span>)  <span class="comment"># 使用log softmax函数，防止数据下溢，在后面用到概率时需要计算指数exp，需要计算梯度的也是对数函数</span></span><br><span class="line">        <span class="keyword">return</span> x</span><br><span class="line"></span><br><span class="line">env = gym.make(<span class="string">'CartPole-v0'</span>)</span><br><span class="line">observation = env.reset()</span><br><span class="line"></span><br><span class="line">model = RE_NET()</span><br><span class="line">optimizer = torch.optim.Adam(model.parameters(), lr=<span class="number">1e-3</span>)</span><br><span class="line">gamma = <span class="number">0.99</span></span><br><span class="line">steps = []</span><br><span class="line"><span class="keyword">for</span> episode <span class="keyword">in</span> range(<span class="number">100000</span>): <span class="comment">## 对每幂循环</span></span><br><span class="line">    obs_list = []</span><br><span class="line">    log_prob = []</span><br><span class="line">    <span class="keyword">for</span> step <span class="keyword">in</span> range(<span class="number">200</span>):  <span class="comment">## 对幂的每一步循环</span></span><br><span class="line">        obs_list.append(observation) </span><br><span class="line">        observation = np.reshape(observation, [<span class="number">1</span>, <span class="number">-1</span>])  <span class="comment">#从np数组到np矩阵</span></span><br><span class="line">        observation = Variable(torch.from_numpy(observation).float())</span><br><span class="line">        action_probability = model(observation)   <span class="comment">## 通过神经网络拟合策略Pi </span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">with</span> torch.no_grad():</span><br><span class="line">            action = np.random.choice(<span class="number">2</span>, p = torch.exp(action_probability)[<span class="number">0</span>].detach().numpy())</span><br><span class="line">            </span><br><span class="line">        log_prob.append(action_probability[<span class="number">0</span>][action])  <span class="comment">#保存所选动作的概率</span></span><br><span class="line">        observation, reward, done, info = env.step(action)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> done:</span><br><span class="line">            steps.append(step)  <span class="comment"># 该幂收益</span></span><br><span class="line">            print(<span class="string">f'episode <span class="subst">&#123;episode&#125;</span>, step <span class="subst">&#123;step&#125;</span>'</span>,end = <span class="string">'\r'</span>)</span><br><span class="line">            reward_list = np.ones((step +<span class="number">1</span>, )) <span class="comment">##每一步收益都为1</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(len(reward_list)<span class="number">-2</span>, <span class="number">-1</span>, <span class="number">-1</span>):</span><br><span class="line">                reward_list[i] += reward_list[i+<span class="number">1</span>] * gamma</span><br><span class="line">            reward_list -= np.mean(reward_list)</span><br><span class="line">            reward_list /= np.std(reward_list)    <span class="comment">## 收益序列标准化，减少方差， 标准化后的SGD可以同时计算全批次更新</span></span><br><span class="line">            </span><br><span class="line">            loss = <span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> a, b <span class="keyword">in</span> zip(log_prob, reward_list):  <span class="comment">#将这两个迭代对象打包成元组传给(a, b)</span></span><br><span class="line">                loss -= a * b</span><br><span class="line">            <span class="comment"># loss </span></span><br><span class="line">            </span><br><span class="line">            model.zero_grad()</span><br><span class="line">            loss.backward()  <span class="comment">## 计算梯度</span></span><br><span class="line">            optimizer.step() <span class="comment">## 更新策略参数</span></span><br><span class="line">            observation = env.reset() <span class="comment">##复位进入下一幂</span></span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">if</span> np.mean(steps[<span class="number">-20</span>:]) &gt; <span class="number">180</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+<h3 id="REFORCE-off-policy版"><a href="#REFORCE-off-policy版" class="headerlink" title="REFORCE (off policy版)"></a>REFORCE (off policy版)</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gym </span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> torch.nn <span class="keyword">import</span> Linear, ReLU </span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"><span class="keyword">from</span> torch.autograd <span class="keyword">import</span> Variable</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">REINFORCE</span><span class="params">(torch.nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        super(REINFORCE,self).__init__()</span><br><span class="line">        self.fc1 = Linear(<span class="number">4</span>, <span class="number">24</span>)</span><br><span class="line">        self.fc2 = Linear(<span class="number">24</span>, <span class="number">48</span>)</span><br><span class="line">        self.fc3 = Linear(<span class="number">48</span>, <span class="number">24</span>)</span><br><span class="line">        self.fc4 = Linear(<span class="number">24</span>, <span class="number">2</span>)</span><br><span class="line">        self.steps = []</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        x = F.relu(self.fc1(x))</span><br><span class="line">        x = F.relu(self.fc2(x))</span><br><span class="line">        x = F.relu(self.fc3(x))</span><br><span class="line">        x = F.log_softmax(self.fc4(x), dim=<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> x</span><br><span class="line">    <span class="comment"># 评估使用目标策略</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">evaluate</span><span class="params">(self)</span>:</span></span><br><span class="line">        env = gym.make(<span class="string">'CartPole-v0'</span>)</span><br><span class="line">        obs = env.reset()</span><br><span class="line">        <span class="keyword">for</span> step <span class="keyword">in</span> range(<span class="number">200</span>):</span><br><span class="line">            obs = np.reshape(obs, [<span class="number">1</span>,<span class="number">-1</span>])</span><br><span class="line">            obs = Variable(torch.from_numpy(obs).float())</span><br><span class="line">            action_probability = model(obs)</span><br><span class="line">            action = np.random.choice(<span class="number">2</span>, p=torch.exp(action_probability)[<span class="number">0</span>].detach().numpy())</span><br><span class="line">            obs, reward, done, info = env.step(action)</span><br><span class="line">            <span class="keyword">if</span> done:</span><br><span class="line">                self.steps.append(step)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">                </span><br><span class="line"></span><br><span class="line">env = gym.make(<span class="string">'CartPole-v0'</span>)</span><br><span class="line">obs = env.reset()</span><br><span class="line">model = REINFORCE()</span><br><span class="line">optimizer = torch.optim.Adam(model.parameters(), lr= <span class="number">0.001</span>)</span><br><span class="line">gamma = <span class="number">0.99</span></span><br><span class="line">steps = []</span><br><span class="line">eps = <span class="number">0.5</span></span><br><span class="line"><span class="keyword">for</span> episode <span class="keyword">in</span> range(<span class="number">100000</span>):</span><br><span class="line">    log_prob = []</span><br><span class="line">    <span class="keyword">for</span> step <span class="keyword">in</span> range(<span class="number">200</span>):</span><br><span class="line">        obs = np.reshape(obs, [<span class="number">1</span>,<span class="number">-1</span>])</span><br><span class="line">        obs = Variable(torch.from_numpy(obs).float())</span><br><span class="line">        action_probability = model(obs)</span><br><span class="line">        <span class="comment">## 使用柔性的行为策略获取动作</span></span><br><span class="line">        <span class="keyword">if</span> np.random.random() &lt; eps:   </span><br><span class="line">            action = np.random.randint(<span class="number">2</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">with</span> torch.no_grad():</span><br><span class="line">                action = np.random.choice(<span class="number">2</span>, p=torch.exp(action_probability)[<span class="number">0</span>].detach().numpy())</span><br><span class="line">        log_prob.append(action_probability[<span class="number">0</span>][action])</span><br><span class="line">        obs, reward, done, info = env.step(action)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> done:</span><br><span class="line">            steps.append(step)</span><br><span class="line">            print(<span class="string">f'episode <span class="subst">&#123;episode&#125;</span>, step <span class="subst">&#123;step&#125;</span>'</span>, end = <span class="string">'\r'</span>)</span><br><span class="line">            reward_list = np.ones((step + <span class="number">1</span>,))</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(len(reward_list)<span class="number">-2</span>, <span class="number">-1</span>, <span class="number">-1</span>):</span><br><span class="line">                reward_list[i] += reward_list[i+<span class="number">1</span>] * gamma</span><br><span class="line">            reward_list -= np.mean(reward_list)</span><br><span class="line">            reward_list /= np.std(reward_list)</span><br><span class="line">            <span class="comment"># ------calculate loss start------</span></span><br><span class="line">            loss = <span class="number">0</span></span><br><span class="line">            <span class="comment"># We are computing Log(pi) and sum it together here.</span></span><br><span class="line">            <span class="comment"># Note the loss is negative. Since we need gradient Ascent.</span></span><br><span class="line">            <span class="keyword">for</span> a, b <span class="keyword">in</span> zip(log_prob, reward_list):</span><br><span class="line">                p = np.exp(a.detach())  <span class="comment"># 目标策略选取该动作的概率</span></span><br><span class="line">                rho = p/(eps*p+(<span class="number">1</span>-eps)*<span class="number">0.5</span>)   <span class="comment"># 重要度</span></span><br><span class="line">                loss -= rho*a*b  <span class="comment">## 梯度上升，所以将损失函数取负</span></span><br><span class="line">            <span class="comment"># ------calculate loss end------</span></span><br><span class="line">            model.zero_grad()</span><br><span class="line">            loss.backward()</span><br><span class="line">            optimizer.step()</span><br><span class="line">            <span class="comment"># ------evaluate------</span></span><br><span class="line">            <span class="keyword">with</span> torch.no_grad():</span><br><span class="line">                model.evaluate()</span><br><span class="line">            obs = env.reset()</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">if</span> np.mean(model.steps[<span class="number">-20</span>:]) &gt; <span class="number">190</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">mid = []</span><br><span class="line">interval = <span class="number">30</span></span><br><span class="line">print(steps)</span><br><span class="line">print(model.steps)</span><br><span class="line"><span class="comment">#plt.style.use('dark_background')</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(steps) - interval):</span><br><span class="line">    mid.append(np.mean(steps[i:i+interval+<span class="number">1</span>]))</span><br><span class="line">plt.figure(figsize=(<span class="number">10</span>,<span class="number">10</span>))</span><br><span class="line">plt.title(<span class="string">'Behaviour Policy in off-policy REINFORCE on CartPole_V0'</span>,fontsize = <span class="string">'xx-large'</span>)</span><br><span class="line">plt.xlabel(<span class="string">'Episodes'</span>, fontsize = <span class="string">'xx-large'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'Rewards'</span>,fontsize = <span class="string">'xx-large'</span>)</span><br><span class="line">x_fit = list(range(len(steps) - interval))</span><br><span class="line">plt.plot(x_fit, steps[interval:], <span class="string">'-'</span>, c = <span class="string">'gray'</span>, label = <span class="string">'Episode-Wise data'</span>) </span><br><span class="line">plt.plot(mid, <span class="string">'-'</span>, c= <span class="string">'green'</span>, linewidth = <span class="number">5</span>,label = <span class="string">'Moving Average'</span>)</span><br><span class="line">plt.legend(loc=<span class="string">"best"</span>,prop=&#123;<span class="string">'size'</span>: <span class="number">12</span>&#125;)</span><br><span class="line">plt.show()</span><br><span class="line"><span class="comment">#-------below is evaluation graph</span></span><br><span class="line">mid = []</span><br><span class="line">interval = <span class="number">30</span></span><br><span class="line"><span class="comment">#plt.style.use('dark_background')</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(model.steps) - interval):</span><br><span class="line">    mid.append(np.mean(model.steps[i:i+interval+<span class="number">1</span>]))</span><br><span class="line">plt.figure(figsize=(<span class="number">10</span>,<span class="number">10</span>))</span><br><span class="line">plt.title(<span class="string">'Target Policy off-policy REINFORCE on CartPole_V0'</span>,fontsize = <span class="string">'xx-large'</span>)</span><br><span class="line">plt.xlabel(<span class="string">'Episodes'</span>, fontsize = <span class="string">'xx-large'</span>)</span><br><span class="line">plt.ylabel(<span class="string">'Rewards'</span>,fontsize = <span class="string">'xx-large'</span>)</span><br><span class="line">x_fit = list(range(len(model.steps) - interval))</span><br><span class="line">plt.plot(x_fit, model.steps[interval:], <span class="string">'-'</span>, c = <span class="string">'gray'</span>, label = <span class="string">'Episode-Wise data'</span>) </span><br><span class="line">plt.plot(mid, <span class="string">'-'</span>, c= <span class="string">'green'</span>, linewidth = <span class="number">5</span>,label = <span class="string">'Moving Average'</span>)</span><br><span class="line">plt.legend(loc=<span class="string">"best"</span>,prop=&#123;<span class="string">'size'</span>: <span class="number">12</span>&#125;)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="../../../../../../tags/强化学习/" rel="tag"># 强化学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="../../../../15/algorithm/Acwing/2. 数据结构+STL/" rel="next" title="模板(数据结构)">
+                <i class="fa fa-chevron-left"></i> 模板(数据结构)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="../../../ML/PLSA/PLSA/" rel="prev" title="概率潜在语义分析(PLSA)">
+                概率潜在语义分析(PLSA) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">brezezee</p>
+              <p class="site-description motion-element" itemprop="description">靡不有初，鲜克有终</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="https://brezezee.github.io/archives">
+              
+                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="../../../../../../categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="../../../../../../tags/index.html">
+                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#C5-blackjack"><span class="nav-text">C5_blackjack</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C6-TD"><span class="nav-text">C6_TD</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C9-semiGTD"><span class="nav-text">C9_semiGTD</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C9-tile-coding"><span class="nav-text">C9_tile_coding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C13-AC"><span class="nav-text">C13_AC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#朴素AC（TD自举）"><span class="nav-text">朴素AC（TD自举）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#朴素AC（monte-carlo）"><span class="nav-text">朴素AC（monte carlo）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C13-PG"><span class="nav-text">C13_PG</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#REFORCE-on-policy版"><span class="nav-text">REFORCE (on policy版)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#REFORCE-off-policy版"><span class="nav-text">REFORCE (off policy版)</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">brezezee</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">155.9k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../../../js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="../../../../../../js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="../../../../../../js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="../../../../../../js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../../../js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://brezezee.github.io/2019/10/17/Reinforcement Learning/Sutton/C5_blackjack/';
+          this.page.identifier = '2019/10/17/Reinforcement Learning/Sutton/C5_blackjack/';
+          this.page.title = 'Sutton课后习题';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

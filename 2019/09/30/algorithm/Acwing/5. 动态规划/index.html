@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="../../../../../../lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="../../../../../../lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="../../../../../../css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="../../../../../../images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../../../../images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="../../../../../../images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="../../../../../../images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="基础背包,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="背包问题01背包  01背包主要解决的问题就是选or不选的情况。枚举选了当前物品后的状态转移，而选当前物品之前的状态可以通过减去当前体积得到。  01背包分为两种，一种是固定容量，求能得到的最大价值。一种是确定最小价值，求可能的方案数量。有些类似对偶问题。 1. 最大价值解模板题 物品只能使用一次，每个物品有不同的价值和体积，如何在给定容量选取物品得到最大价值。  关键点：  状态如何定义 子问题">
+<meta name="keywords" content="基础背包">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基础背包问题">
+<meta property="og:url" content="https://brezezee.github.io/2019/09/30/algorithm/Acwing/5. 动态规划/index.html">
+<meta property="og:site_name" content="brezezee">
+<meta property="og:description" content="背包问题01背包  01背包主要解决的问题就是选or不选的情况。枚举选了当前物品后的状态转移，而选当前物品之前的状态可以通过减去当前体积得到。  01背包分为两种，一种是固定容量，求能得到的最大价值。一种是确定最小价值，求可能的方案数量。有些类似对偶问题。 1. 最大价值解模板题 物品只能使用一次，每个物品有不同的价值和体积，如何在给定容量选取物品得到最大价值。  关键点：  状态如何定义 子问题">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2021-08-24T02:04:32.980Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基础背包问题">
+<meta name="twitter:description" content="背包问题01背包  01背包主要解决的问题就是选or不选的情况。枚举选了当前物品后的状态转移，而选当前物品之前的状态可以通过减去当前体积得到。  01背包分为两种，一种是固定容量，求能得到的最大价值。一种是确定最小价值，求可能的方案数量。有些类似对偶问题。 1. 最大价值解模板题 物品只能使用一次，每个物品有不同的价值和体积，如何在给定容量选取物品得到最大价值。  关键点：  状态如何定义 子问题">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://brezezee.github.io/2019/09/30/algorithm/Acwing/5. 动态规划/">
+
+
+
+
+
+  <title>基础背包问题 | brezezee</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">brezezee</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="https://brezezee.github.io" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="https://brezezee.github.io/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="https://brezezee.github.io/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-categories"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="https://brezezee.github.io/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="https://brezezee.github.io/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://brezezee.github.io">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="brezezee">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="../../../../../../images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="brezezee">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">基础背包问题</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-30T00:00:00+08:00">
+                2019-09-30
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2021-08-24T10:04:32+08:00">
+                2021-08-24
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="../../../../../../categories/code-practice/" itemprop="url" rel="index">
+                    <span itemprop="name">刷题</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/09/30/algorithm/Acwing/5. 动态规划/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2.5k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="背包问题"><a href="#背包问题" class="headerlink" title="背包问题"></a>背包问题</h2><h3 id="01背包"><a href="#01背包" class="headerlink" title="01背包"></a>01背包</h3><blockquote>
+<p> 01背包主要解决的问题就是选or不选的情况。枚举选了当前物品后的状态转移，而选当前物品之前的状态可以通过减去当前体积得到。</p>
+</blockquote>
+<p>01背包分为两种，一种是固定容量，求能得到的<strong>最大价值</strong>。一种是确定最小价值，求可能的<strong>方案数量</strong>。有些类似对偶问题。</p>
+<h4 id="1-最大价值解"><a href="#1-最大价值解" class="headerlink" title="1. 最大价值解"></a>1. 最大价值解</h4><h5 id="模板题"><a href="#模板题" class="headerlink" title="模板题"></a>模板题</h5><blockquote>
+<p>物品只能使用一次，每个物品有不同的价值和体积，如何在给定容量选取物品得到最大价值。</p>
+</blockquote>
+<p>关键点：</p>
+<ol>
+<li>状态如何定义</li>
+<li>子问题确定</li>
+<li>如何枚举</li>
+</ol>
+<p>物品的最大价值是需要求的，最大价值与选取哪些物品有关，而物品有两种属性(体积、价值)。令总价值为状态的值，而背包的容量为状态变量，其含义为容量为v的背包的最大价值。因为需要枚举物品，因此增加一维表示物品。</p>
+<p>那么其子问题就是在前面<code>n-1</code>个物品使用<code>v</code>个体积所能达到的最大价值。</p>
+<p>枚举的时候需要<strong>枚举容量</strong>，当前物品若能放下，则其转移为：</p>
+<script type="math/tex; mode=display">
+dp(i, v) = max(dp(i - 1, v), dp(i-1, v-v[i]) + w[i])</script><ul>
+<li>一维优化</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++ i) <span class="built_in">cin</span> &gt;&gt; v[i] &gt;&gt; w[i];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++ i) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; ++ j) &#123;</span><br><span class="line">        f[i][j] = f[i - <span class="number">1</span>][j]; <span class="comment">// 新加入物品后他的最大价值至少是之前的最大价值</span></span><br><span class="line">        <span class="keyword">if</span> (j &gt;= v[i]) &#123;       <span class="comment">// 如果当前物品的体积小于该状态的总体积（能放下）</span></span><br><span class="line">            f[i][j] = max(f[i][j], f[i - <span class="number">1</span>][j - v[i]] + w[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>二维空间</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++ i) <span class="built_in">cin</span> &gt;&gt; v[i] &gt;&gt; w[i];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++ i) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = m; j &gt;= v[i]; -- j) &#123; <span class="comment">// 内循环中v[i]是固定的，且只用到上一层</span></span><br><span class="line">    	f[j] = max(f[j], f[j - v[i]] + w[i]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; f[m] &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+<h5 id="分割等和子集"><a href="#分割等和子集" class="headerlink" title="分割等和子集"></a>分割等和子集</h5><blockquote>
+<p>给定一个<strong>只包含正整数</strong>的<strong>非空</strong>数组。是否可以将这个数组分割成两个子集，使得两个子集的元素和相等。</p>
+</blockquote>
+<ul>
+<li>关键点</li>
+</ul>
+<p>首先需要根据题目推出 目标是求一个子序列满足 其和为总和的一半。那么这个问题可以看作体积与价值相同的背包问题，并且容量是总和的一半。体积与价值相同便限制了加入背包的数之和（体积用于限制和，价值用于接近和）。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">canPartition</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 等和首先需要推出 目标为总和的一半，然后在数组中选数字看能否得到这个目标</span></span><br><span class="line">    <span class="keyword">int</span> n = nums.size();</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> x : nums)  sum += x;</span><br><span class="line">    <span class="keyword">if</span> (sum % <span class="number">2</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    sum /= <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dp(sum + <span class="number">1</span>); </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; ++ i) &#123;  <span class="comment">// 枚举n个数,这儿没有枚举到最后一个数是因为如果有答案一定是需要分两组，而前n-1个数中必定有答案了</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = sum; j &gt;= nums[i - <span class="number">1</span>]; -- j) &#123;  <span class="comment">// 将容量限制到sum来枚举，得到sum以内的所有可能</span></span><br><span class="line">            <span class="keyword">if</span> (sum == dp[sum]) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            dp[j] = max(dp[j], dp[j - nums[i - <span class="number">1</span>]] + nums[i - <span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum == dp[sum];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="一和零"><a href="#一和零" class="headerlink" title="一和零"></a>一和零</h5><blockquote>
+<p>给你一个二进制字符串数组 strs 和两个整数 m 和 n 。</p>
+<p>请你找出并返回 strs 的最大子集的大小，该子集中 最多 有 m 个 0 和 n 个 1 。</p>
+<p>如果 x 的所有元素也是 y 的元素，集合 x 是集合 y 的 子集 。</p>
+</blockquote>
+<p>即给出一些物品，它们包含一和零，给出1和0的容量m，n。求最多物品的数量。相比于模板01背包，多了一维容量。直接当成二维来做就好了。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">findMaxForm</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; strs, <span class="keyword">int</span> m, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 给出了两个容量</span></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; dp(m + <span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(n + <span class="number">1</span>, <span class="number">0</span>));</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">const</span> <span class="built_in">string</span>&amp; s : strs) &#123;</span><br><span class="line">        <span class="keyword">int</span> cnt0 = <span class="number">0</span>, cnt1 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">const</span> <span class="keyword">char</span> c : s) &#123;</span><br><span class="line">            <span class="keyword">if</span> (c == <span class="string">'0'</span>) ++ cnt0;</span><br><span class="line">            <span class="keyword">else</span> ++ cnt1;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = m; i &gt;= cnt0; -- i) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = n; j &gt;= cnt1; -- j) &#123;</span><br><span class="line">                dp[i][j] = max(dp[i][j], dp[i - cnt0][j - cnt1] + <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[m][n];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="最后一块石头的重量II"><a href="#最后一块石头的重量II" class="headerlink" title="最后一块石头的重量II"></a>最后一块石头的重量II</h5><blockquote>
+<p>有一堆石头，每块石头的重量都是正整数。</p>
+<p>每一回合，从中选出任意两块石头，然后将它们一起粉碎。假设石头的重量分别为 x 和 y，且 x &lt;= y。那么粉碎的可能结果如下：</p>
+<p>如果 x == y，那么两块石头都会被完全粉碎；<br>如果 x != y，那么重量为 x 的石头将会完全粉碎，而重量为 y 的石头新重量为 y-x。<br>最后，最多只会剩下一块石头。返回此石头最小的可能重量。如果没有石头剩下，就返回 0。</p>
+</blockquote>
+<p>使得消除后的石头重量最小，实际上也就是将它们分为质量最相近的两份，那么与分割等和子集就差不多了。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lastStoneWeightII</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; stones)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = stones.size();</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>, ord = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> x : stones) sum += x;</span><br><span class="line">    <span class="keyword">if</span> (sum % <span class="number">2</span>) ord = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> target = sum / <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dp(target + <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++ i) &#123;  <span class="comment">// 必须遍历每一个石头</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = target; j &gt;= stones[i]; -- j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (target == dp[target]) <span class="keyword">return</span> ord;    <span class="comment">// 小优化</span></span><br><span class="line">            dp[j] = max(dp[j], dp[j - stones[i]] + stones[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum - <span class="number">2</span> * dp[target];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-最优解的方案数"><a href="#2-最优解的方案数" class="headerlink" title="2. 最优解的方案数"></a>2. 最优解的方案数</h4><h5 id="组合总和IV"><a href="#组合总和IV" class="headerlink" title="组合总和IV"></a>组合总和IV</h5><blockquote>
+<p>给定一个由正整数组成且不存在重复数字的数组，找出和为给定目标正整数的组合的个数。</p>
+</blockquote>
+<p>题目即求和为target的子序列的方案数，做法就是枚举1到target之间的所有可能值，计算其方案数，当前的目标值的方案数 += 选择当前数 之前的状态方案数，类似记忆化搜索。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">combinationSum4</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = nums.size();</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span>&gt; dp(target + <span class="number">1</span>);</span><br><span class="line">    dp[<span class="number">0</span>] = <span class="number">1</span>; <span class="comment">// 目标为0 的方案有1个</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= target; ++ i) &#123; <span class="comment">// 枚举容量</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; ++ j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i &gt;= nums[j]) </span><br><span class="line">                dp[i] += dp[i - nums[j]];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[target];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="目标和"><a href="#目标和" class="headerlink" title="目标和"></a>目标和</h5><blockquote>
+<p>给定一个非负整数数组，a1, a2, …, an, 和一个目标数，S。现在你有两个符号 + 和 -。对于数组中的任意一个整数，你都可以从 + 或 -中选择一个符号添加在前面。</p>
+<p>返回可以使最终数组和为目标数 S 的所有添加符号的方法数。</p>
+</blockquote>
+<p>题目要求在数组中为一部分选择+，一部分选择 - ，那么每个物品有三种选择：1. 不选， 2. 选+ ，3. 选 - 。这样不好处理。将问题变换一下，令选择 + 的部分为a， 选择 - 的部分为 b，那么：</p>
+<script type="math/tex; mode=display">
+a - b = S\\
+a + b = 2 \times a - S\\
+sum = 2 \times a - S\\
+a = \frac {sum + S}{2}</script><p>同时，若a确定，则b确定，因此可将目标设为求 a ，这样就转化为了分割等和子集。稍有区别的是它求的是方案数，但枚举方法是一样的，类似记忆化，需要用到上一个物品选择后的dp状态，因此内层容量倒序枚举。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">findTargetSumWays</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> S)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = nums.size();</span><br><span class="line">    <span class="keyword">long</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> x : nums) sum += x;</span><br><span class="line">    <span class="keyword">long</span> target = sum + S;</span><br><span class="line">    <span class="keyword">if</span> (target % <span class="number">2</span> || sum &lt; S) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    target /= <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span>&gt; dp(target + <span class="number">1</span>);</span><br><span class="line">    dp[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++ i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = target; j &gt;= nums[i]; -- j) &#123;</span><br><span class="line">            dp[j] += dp[j - nums[i]];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[target];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="盈利计划"><a href="#盈利计划" class="headerlink" title="盈利计划"></a>盈利计划</h5><blockquote>
+<p>集团里有 n 名员工，他们可以完成各种各样的工作创造利润。</p>
+<p>第 i 种工作会产生 profit[i] 的利润，它要求 group[i] 名成员共同参与。如果成员参与了其中一项工作，就不能参与另一项工作。</p>
+<p>工作的任何至少产生 minProfit 利润的子集称为盈利计划。并且工作的成员总数最多为 n 。</p>
+<p>有多少种计划可以选择？因为答案很大，所以 返回结果模 10^9 + 7 的值。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">profitableSchemes</span><span class="params">(<span class="keyword">int</span> G, <span class="keyword">int</span> P, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; group, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; profit)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">long</span> mod = <span class="number">1e9</span> + <span class="number">7</span>;</span><br><span class="line">    <span class="keyword">int</span> n = profit.size();</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt; dp(G + <span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(P + <span class="number">1</span>));</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= G; ++ i) dp[i][<span class="number">0</span>] = <span class="number">1</span>;     <span class="comment">// 每个团队0利润的方案为1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++ i) &#123;                  <span class="comment">// 枚举n个团队</span></span><br><span class="line">        <span class="keyword">int</span> g = group[i], p = profit[i];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = G; j &gt;= g; -- j) &#123;             <span class="comment">// 枚举两个容量， 人数 和 收益</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> k = P; k &gt;= <span class="number">0</span>; -- k) &#123;         <span class="comment">//</span></span><br><span class="line">                dp[j][k] += dp[j - g][max(k - p, <span class="number">0</span>)];</span><br><span class="line">                dp[j][k] %= mod;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[G][P];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="其他背包"><a href="#其他背包" class="headerlink" title="其他背包"></a>其他背包</h3><h4 id="完全背包"><a href="#完全背包" class="headerlink" title="完全背包"></a>完全背包</h4><blockquote>
+<p>物品可无限使用</p>
+</blockquote>
+<p>物品可选无限次，那么dp更新的时候公式就变化了</p>
+<script type="math/tex; mode=display">
+dp(i, j) = max(dp(i-1,j),dp(i-1, j-v)+w,dp(i-1,j-2v)+2w,...)</script><p>而注意到</p>
+<script type="math/tex; mode=display">
+dp(i, j-v) = max(dp(i-1,j-v), dp(i-1,j-2v)+w, dp(i-1,j-3v)+2w, ...)</script><p>可以看出二式相比于一式的后面只少了w，因此</p>
+<script type="math/tex; mode=display">
+dp(i,j) = max(dp(i-1, j), dp(i,j-v)+w)</script><p>完全背包与01背包公式不同的地方只是在更新的时候用的是本层的物品$i$，所以他们的枚举方式有细微区别，完全背包从前往后枚举即可。</p>
+<blockquote>
+<p>对比01背包公式：</p>
+<script type="math/tex; mode=display">
+dp(i, v) = max(dp(i - 1, v), dp(i-1, v-v[i]) + w[i])</script></blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++ i) <span class="built_in">cin</span> &gt;&gt; v[i] &gt;&gt; w[i];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++ i) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = v[i]; j &lt;= m; ++ j) &#123;  <span class="comment">// 01 ： for (j = m; j &gt;= v[i]; --j)</span></span><br><span class="line">    	f[j] = max(f[j], f[j - v[i]] + w[i]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; f[m] &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="多重背包"><a href="#多重背包" class="headerlink" title="多重背包"></a>多重背包</h4><blockquote>
+<p>物品限制了件数</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="../../../../../../tags/基础背包/" rel="tag"># 基础背包</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="../树遍历/" rel="next" title="树的迭代遍历">
+                <i class="fa fa-chevron-left"></i> 树的迭代遍历
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="../4. 数学相关/" rel="prev" title="质因数">
+                质因数 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">brezezee</p>
+              <p class="site-description motion-element" itemprop="description">靡不有初，鲜克有终</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="https://brezezee.github.io/archives">
+              
+                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="../../../../../../categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="../../../../../../tags/index.html">
+                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背包问题"><span class="nav-text">背包问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#01背包"><span class="nav-text">01背包</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-最大价值解"><span class="nav-text">1. 最大价值解</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#模板题"><span class="nav-text">模板题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#分割等和子集"><span class="nav-text">分割等和子集</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#一和零"><span class="nav-text">一和零</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#最后一块石头的重量II"><span class="nav-text">最后一块石头的重量II</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-最优解的方案数"><span class="nav-text">2. 最优解的方案数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#组合总和IV"><span class="nav-text">组合总和IV</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#目标和"><span class="nav-text">目标和</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#盈利计划"><span class="nav-text">盈利计划</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他背包"><span class="nav-text">其他背包</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#完全背包"><span class="nav-text">完全背包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多重背包"><span class="nav-text">多重背包</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">brezezee</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">155.9k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../../../js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="../../../../../../js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="../../../../../../js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="../../../../../../js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../../../js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://brezezee.github.io/2019/09/30/algorithm/Acwing/5. 动态规划/';
+          this.page.identifier = '2019/09/30/algorithm/Acwing/5. 动态规划/';
+          this.page.title = '基础背包问题';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
