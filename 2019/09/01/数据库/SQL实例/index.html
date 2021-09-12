@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="../../../../../lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="../../../../../lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="../../../../../css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="../../../../../images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../../../images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="../../../../../images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="../../../../../images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="SQL,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="分组计算在使用count, sum等聚合函数时，如果不加限制就是统计所有结果行，但有时这不是预期的结果。如果要分类统计的话，需要使用group by将结果分类，这样它们便会按照分类进行计算。 如统计不同学校不同型别的人数： 123select gender,university, count(id) as user_num,from user_profilegroup by university,">
+<meta name="keywords" content="SQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL查询实例">
+<meta property="og:url" content="https://brezezee.github.io/2019/09/01/数据库/SQL实例/index.html">
+<meta property="og:site_name" content="brezezee">
+<meta property="og:description" content="分组计算在使用count, sum等聚合函数时，如果不加限制就是统计所有结果行，但有时这不是预期的结果。如果要分类统计的话，需要使用group by将结果分类，这样它们便会按照分类进行计算。 如统计不同学校不同型别的人数： 123select gender,university, count(id) as user_num,from user_profilegroup by university,">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2021-09-12T06:44:19.239Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SQL查询实例">
+<meta name="twitter:description" content="分组计算在使用count, sum等聚合函数时，如果不加限制就是统计所有结果行，但有时这不是预期的结果。如果要分类统计的话，需要使用group by将结果分类，这样它们便会按照分类进行计算。 如统计不同学校不同型别的人数： 123select gender,university, count(id) as user_num,from user_profilegroup by university,">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://brezezee.github.io/2019/09/01/数据库/SQL实例/">
+
+
+
+
+
+  <title>SQL查询实例 | brezezee</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">brezezee</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="https://brezezee.github.io" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="https://brezezee.github.io/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="https://brezezee.github.io/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-categories"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="https://brezezee.github.io/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="https://brezezee.github.io/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://brezezee.github.io">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="brezezee">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="../../../../../images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="brezezee">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SQL查询实例</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-01T00:00:00+08:00">
+                2019-09-01
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2021-09-12T14:44:19+08:00">
+                2021-09-12
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="../../../../../categories/SQL/" itemprop="url" rel="index">
+                    <span itemprop="name">SQL</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/09/01/数据库/SQL实例/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  748
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="分组计算"><a href="#分组计算" class="headerlink" title="分组计算"></a>分组计算</h4><p>在使用<code>count</code>, <code>sum</code>等聚合函数时，如果不加限制就是统计所有结果行，但有时这不是预期的结果。如果要分类统计的话，需要使用<code>group by</code>将结果分类，这样它们便会按照分类进行计算。</p>
+<p>如统计不同学校不同型别的人数：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> gender,university, <span class="keyword">count</span>(<span class="keyword">id</span>) <span class="keyword">as</span> user_num,</span><br><span class="line"><span class="keyword">from</span> user_profile</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> university,gender   <span class="comment">-- 将结果按照学校和型别分组，这样聚合函数才会以组为单位计算</span></span><br></pre></td></tr></table></figure>
+<h4 id="分组过滤-聚合函数作为约束需要用having"><a href="#分组过滤-聚合函数作为约束需要用having" class="headerlink" title="分组过滤(聚合函数作为约束需要用having)"></a>分组过滤(聚合函数作为约束需要用having)</h4><p>如果要过滤聚合函数计算出来的结果，只能用having子句，不能使用where。同时注意having子句需要放在group by之后。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> university, <span class="keyword">avg</span>(question_cnt) <span class="keyword">as</span> ac, <span class="keyword">avg</span>(answer_cnt) <span class="keyword">as</span> qc</span><br><span class="line"><span class="keyword">from</span> user_profile</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> university</span><br><span class="line"><span class="keyword">having</span> ac &lt; <span class="number">5</span> <span class="keyword">or</span> qc &lt; <span class="number">20</span></span><br></pre></td></tr></table></figure>
+<h4 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h4><p>查询需要的约束条件在另一个表中，使用select子句返回约束结果。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> device_id, question_id, <span class="keyword">result</span></span><br><span class="line"><span class="keyword">from</span> question_practice_detail</span><br><span class="line"><span class="keyword">where</span> device_id <span class="keyword">in</span> </span><br><span class="line">(</span><br><span class="line">    <span class="keyword">select</span> device_id <span class="keyword">from</span> user_profile </span><br><span class="line">    <span class="keyword">where</span> university = <span class="string">'浙江大学'</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h4 id="三表查询"><a href="#三表查询" class="headerlink" title="三表查询"></a>三表查询</h4><p>需要查询的数据在表之间互相依赖，使用<code>join</code>将表先连接起来再查询。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> university, difficult_level, (<span class="keyword">count</span>(d.question_id) / <span class="keyword">count</span>(<span class="keyword">distinct</span>(u.device_id)))</span><br><span class="line"><span class="keyword">from</span> user_profile <span class="keyword">as</span> u</span><br><span class="line"><span class="keyword">join</span> question_practice_detail <span class="keyword">as</span> q </span><br><span class="line"><span class="keyword">on</span> u.device_id = q.device_id</span><br><span class="line"><span class="keyword">join</span> question_detail d <span class="keyword">on</span> d.question_id = q.question_id</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> university, difficult_level;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> university, difficult_level, (<span class="keyword">count</span>(q.question_id) / <span class="keyword">count</span>(<span class="keyword">distinct</span>(q.device_id)))</span><br><span class="line"><span class="keyword">FROM</span> user_profile u</span><br><span class="line"></span><br><span class="line"><span class="keyword">join</span> question_practice_detail q </span><br><span class="line"><span class="keyword">on</span> u.device_id = q.device_id</span><br><span class="line"><span class="keyword">join</span> question_detail d</span><br><span class="line"><span class="keyword">on</span> q.question_id = d.question_id   <span class="comment">-- 连成一个表</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">where</span> university = <span class="string">'山东大学'</span>        <span class="comment">-- 现在在上面合成的表中查询</span></span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> difficult_level</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> difficult_level</span><br></pre></td></tr></table></figure>
+<h4 id="多表查询（约束为func）"><a href="#多表查询（约束为func）" class="headerlink" title="多表查询（约束为func）"></a>多表查询（约束为func）</h4><p><strong>获取每个部门中当前员工薪水最高的相关信息</strong> : 不仅需要获取部门内最高薪水，还需要获取最高薪水的员工是谁。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 这题的关键是需要确定最大薪水的员工是谁</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> d.dept_no,d.emp_no,s.salary <span class="keyword">AS</span> maxSalary</span><br><span class="line">    <span class="keyword">FROM</span> dept_emp d</span><br><span class="line">    <span class="keyword">INNER</span> <span class="keyword">JOIN</span> salaries s</span><br><span class="line">    <span class="keyword">ON</span> d.emp_no = s.emp_no</span><br><span class="line">    <span class="keyword">WHERE</span> (d.dept_no,s.salary) <span class="comment">-- 选出员工薪水等于 临时表中最大薪水的记录</span></span><br><span class="line">        <span class="keyword">IN</span> (<span class="keyword">SELECT</span> d.dept_no, <span class="keyword">MAX</span>(s.salary) <span class="keyword">AS</span> maxsal  <span class="comment">-- 临时表用于查询最大薪水是多少</span></span><br><span class="line">            <span class="keyword">FROM</span> dept_emp d <span class="keyword">INNER</span> <span class="keyword">JOIN</span> salaries s</span><br><span class="line">            <span class="keyword">ON</span> d.emp_no = s.emp_no</span><br><span class="line">            <span class="keyword">GROUP</span> <span class="keyword">BY</span> d.dept_no)</span><br><span class="line">    <span class="keyword">ORDER</span> <span class="keyword">BY</span> d.dept_no <span class="keyword">ASC</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="联合查询"><a href="#联合查询" class="headerlink" title="联合查询"></a>联合查询</h4><p>满足任意一种条件的都可以，并且不去重</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> device_id, gender, age, gpa <span class="keyword">from</span> user_profile</span><br><span class="line"><span class="keyword">where</span> university = <span class="string">'山东大学'</span> </span><br><span class="line"><span class="keyword">union</span> <span class="keyword">ALL</span></span><br><span class="line"><span class="keyword">SELECT</span> device_id, gender, age, gpa <span class="keyword">from</span> user_profile</span><br><span class="line"><span class="keyword">where</span> gender = <span class="string">'male'</span></span><br></pre></td></tr></table></figure>
+<h4 id="结果分类"><a href="#结果分类" class="headerlink" title="结果分类"></a>结果分类</h4><p>对于查询结果，按照是否满足某个条件或在某个范围内 分别对应不同的结果。</p>
+<p>对与二分类，可方便的使用if，case when也可以</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 统计大于和小于25岁人的数量</span></span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line"><span class="keyword">if</span> (age &gt;= <span class="number">25</span>, <span class="string">'25岁以及上'</span>, <span class="string">'25岁以下'</span>) <span class="keyword">as</span> age_cnt, <span class="keyword">count</span>(device_id) <span class="keyword">as</span> <span class="built_in">number</span></span><br><span class="line"><span class="keyword">from</span> user_profile</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> age_cnt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line"><span class="keyword">case</span> </span><br><span class="line"><span class="keyword">when</span> age &gt;= <span class="number">25</span> <span class="keyword">then</span> <span class="string">'25岁以及上'</span></span><br><span class="line"><span class="keyword">else</span> <span class="string">'25岁以下'</span> </span><br><span class="line"><span class="keyword">END</span> <span class="keyword">as</span> age_cnt,</span><br><span class="line"><span class="keyword">count</span>(device_id) <span class="keyword">as</span> <span class="built_in">number</span> </span><br><span class="line"><span class="keyword">from</span> user_profile</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> age_cnt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 统计每个人分别属于哪个年龄段</span></span><br><span class="line"><span class="keyword">SELECT</span> device_id, gender, </span><br><span class="line"><span class="keyword">case</span> </span><br><span class="line"><span class="keyword">when</span> age &lt; <span class="number">20</span> <span class="keyword">then</span> <span class="string">'20岁以下'</span></span><br><span class="line"><span class="keyword">when</span> age &gt;= <span class="number">20</span> <span class="keyword">and</span> age &lt;= <span class="number">24</span> <span class="keyword">then</span> <span class="string">'20-24岁'</span></span><br><span class="line"><span class="keyword">when</span> age &gt;= <span class="number">25</span> <span class="keyword">then</span> <span class="string">'25岁以上'</span></span><br><span class="line"><span class="keyword">else</span> <span class="string">'其他'</span></span><br><span class="line"><span class="keyword">END</span> <span class="keyword">as</span> age_cnt</span><br><span class="line"><span class="keyword">from</span> user_profile;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="../../../../../tags/SQL/" rel="tag"># SQL</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="../分页查询优化/" rel="next" title="SQL分页优化">
+                <i class="fa fa-chevron-left"></i> SQL分页优化
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="../SQL命令一览/" rel="prev" title="SQL命令一览">
+                SQL命令一览 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">brezezee</p>
+              <p class="site-description motion-element" itemprop="description">靡不有初，鲜克有终</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="https://brezezee.github.io/archives">
+              
+                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="../../../../../categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="../../../../../tags/index.html">
+                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#分组计算"><span class="nav-text">分组计算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分组过滤-聚合函数作为约束需要用having"><span class="nav-text">分组过滤(聚合函数作为约束需要用having)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多表查询"><span class="nav-text">多表查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三表查询"><span class="nav-text">三表查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多表查询（约束为func）"><span class="nav-text">多表查询（约束为func）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#联合查询"><span class="nav-text">联合查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#结果分类"><span class="nav-text">结果分类</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">brezezee</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">154.8k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../../js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="../../../../../js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="../../../../../js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="../../../../../js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../../js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://brezezee.github.io/2019/09/01/数据库/SQL实例/';
+          this.page.identifier = '2019/09/01/数据库/SQL实例/';
+          this.page.title = 'SQL查询实例';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

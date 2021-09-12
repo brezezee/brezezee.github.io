@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="../../../../../lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="../../../../../lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="../../../../../css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="../../../../../images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../../../images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="../../../../../images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="../../../../../images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="SQL,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="语法基础语法查找某列 select12SELECT 列名称[, 列名] FROM 表名称SELECT * FROM 表名称  -- 查找表中所有列 去重 distinct1SELECT DISTINCT 列名称 FROM 表名称 条件约束 where为select添加约束条件，可用如下运算符     操作符 描述     = 等于   &amp;lt;&amp;gt; 不等于   &amp;gt; 大于   &amp;lt; 小">
+<meta name="keywords" content="SQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL命令一览">
+<meta property="og:url" content="https://brezezee.github.io/2019/09/01/数据库/SQL命令一览/index.html">
+<meta property="og:site_name" content="brezezee">
+<meta property="og:description" content="语法基础语法查找某列 select12SELECT 列名称[, 列名] FROM 表名称SELECT * FROM 表名称  -- 查找表中所有列 去重 distinct1SELECT DISTINCT 列名称 FROM 表名称 条件约束 where为select添加约束条件，可用如下运算符     操作符 描述     = 等于   &amp;lt;&amp;gt; 不等于   &amp;gt; 大于   &amp;lt; 小">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2021-09-12T06:43:52.464Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SQL命令一览">
+<meta name="twitter:description" content="语法基础语法查找某列 select12SELECT 列名称[, 列名] FROM 表名称SELECT * FROM 表名称  -- 查找表中所有列 去重 distinct1SELECT DISTINCT 列名称 FROM 表名称 条件约束 where为select添加约束条件，可用如下运算符     操作符 描述     = 等于   &amp;lt;&amp;gt; 不等于   &amp;gt; 大于   &amp;lt; 小">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://brezezee.github.io/2019/09/01/数据库/SQL命令一览/">
+
+
+
+
+
+  <title>SQL命令一览 | brezezee</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">brezezee</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="https://brezezee.github.io" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="https://brezezee.github.io/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="https://brezezee.github.io/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-categories"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="https://brezezee.github.io/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="https://brezezee.github.io/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://brezezee.github.io">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="brezezee">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="../../../../../images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="brezezee">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SQL命令一览</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-01T00:00:00+08:00">
+                2019-09-01
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2021-09-12T14:43:52+08:00">
+                2021-09-12
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="../../../../../categories/SQL/" itemprop="url" rel="index">
+                    <span itemprop="name">SQL</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/09/01/数据库/SQL命令一览/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2.2k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><h4 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h4><h5 id="查找某列-select"><a href="#查找某列-select" class="headerlink" title="查找某列 select"></a>查找某列 <code>select</code></h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> 列名称[, 列名] <span class="keyword">FROM</span> 表名称</span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> 表名称  <span class="comment">-- 查找表中所有列</span></span><br></pre></td></tr></table></figure>
+<h5 id="去重-distinct"><a href="#去重-distinct" class="headerlink" title="去重 distinct"></a>去重 <code>distinct</code></h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> 列名称 <span class="keyword">FROM</span> 表名称</span><br></pre></td></tr></table></figure>
+<h5 id="条件约束-where"><a href="#条件约束-where" class="headerlink" title="条件约束 where"></a>条件约束 <code>where</code></h5><p>为<code>select</code>添加约束条件，可用如下运算符</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">操作符</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">=</td>
+<td style="text-align:left">等于</td>
+</tr>
+<tr>
+<td style="text-align:left">&lt;&gt;</td>
+<td style="text-align:left">不等于</td>
+</tr>
+<tr>
+<td style="text-align:left">&gt;</td>
+<td style="text-align:left">大于</td>
+</tr>
+<tr>
+<td style="text-align:left">&lt;</td>
+<td style="text-align:left">小于</td>
+</tr>
+<tr>
+<td style="text-align:left">&gt;=</td>
+<td style="text-align:left">大于等于</td>
+</tr>
+<tr>
+<td style="text-align:left">&lt;=</td>
+<td style="text-align:left">小于等于</td>
+</tr>
+<tr>
+<td style="text-align:left">BETWEEN</td>
+<td style="text-align:left">在某个范围内</td>
+</tr>
+<tr>
+<td style="text-align:left">LIKE</td>
+<td style="text-align:left">搜索某种模式</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> 列名称 <span class="keyword">FROM</span> 表名称 <span class="keyword">WHERE</span> 列 运算符 值</span><br></pre></td></tr></table></figure>
+<h5 id="结合多个约束-AND-amp-OR"><a href="#结合多个约束-AND-amp-OR" class="headerlink" title="结合多个约束 AND &amp; OR"></a>结合多个约束 <code>AND &amp; OR</code></h5><p>在<code>where</code>子句中组合多个条件</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> 列名称 <span class="keyword">FROM</span> 表名称 <span class="keyword">WHERE</span> 列 运算符 值 <span class="keyword">AND</span>/<span class="keyword">OR</span> 列 运算符 值</span><br></pre></td></tr></table></figure>
+<h5 id="对结果排序-ORDER-BY"><a href="#对结果排序-ORDER-BY" class="headerlink" title="对结果排序 ORDER BY"></a>对结果排序 <code>ORDER BY</code></h5><p>逆序排列在语句后追加<code>DESC</code>，按多个列排列用逗号分割</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> Company, OrderNumber <span class="keyword">FROM</span> Orders <span class="keyword">ORDER</span> <span class="keyword">BY</span> Company <span class="keyword">DESC</span>, OrderNumber <span class="keyword">ASC</span></span><br></pre></td></tr></table></figure>
+<p>其中company 按降序排列，ordernumber按升序排列。</p>
+<h5 id="合并列中相同的行-GROUP-BY"><a href="#合并列中相同的行-GROUP-BY" class="headerlink" title="合并列中相同的行 GROUP BY"></a>合并列中相同的行 <code>GROUP BY</code></h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> Customer,<span class="keyword">SUM</span>(OrderPrice) <span class="keyword">FROM</span> Orders</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> Customer</span><br></pre></td></tr></table></figure>
+<p>按<code>customer</code>分类合并。</p>
+<h5 id="HAVING子句"><a href="#HAVING子句" class="headerlink" title="HAVING子句"></a><code>HAVING</code>子句</h5><p><code>having</code>的作用主要是<code>where</code>无法和聚合函数一起使用。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> Customer,<span class="keyword">SUM</span>(OrderPrice) <span class="keyword">FROM</span> Orders</span><br><span class="line"><span class="keyword">WHERE</span> Customer=<span class="string">'Bush'</span> <span class="keyword">OR</span> Customer=<span class="string">'Adams'</span></span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> Customer</span><br><span class="line"><span class="keyword">HAVING</span> <span class="keyword">SUM</span>(OrderPrice)&gt;<span class="number">1500</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>having常常与group by子句一起使用，若出现group by，则having需放在其后面。</p>
+</blockquote>
+<h5 id="插入新行INSERT-INTO"><a href="#插入新行INSERT-INTO" class="headerlink" title="插入新行INSERT INTO"></a>插入新行<code>INSERT INTO</code></h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> table_name [列<span class="number">1</span>, 列<span class="number">2</span>,...] <span class="keyword">VALUES</span> (值<span class="number">1</span>, 值<span class="number">2</span>,....)</span><br></pre></td></tr></table></figure>
+<h5 id="更新数据-UPDATE-SET"><a href="#更新数据-UPDATE-SET" class="headerlink" title="更新数据 UPDATE SET"></a>更新数据 <code>UPDATE SET</code></h5><p>将根据条件查找到的数据更新为新的值</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> Person <span class="keyword">SET</span> Address = <span class="string">'Zhongshan 23'</span>, City = <span class="string">'Nanjing'</span></span><br><span class="line"><span class="keyword">WHERE</span> LastName = <span class="string">'Wilson'</span></span><br></pre></td></tr></table></figure>
+<h5 id="删除数据-DELETE"><a href="#删除数据-DELETE" class="headerlink" title="删除数据 DELETE"></a>删除数据 <code>DELETE</code></h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> 表名称 <span class="keyword">WHERE</span> 列名称 = 值  <span class="comment">-- 删除满足条件的行</span></span><br><span class="line"><span class="keyword">DELETE</span> * <span class="keyword">FROM</span> table_name  <span class="comment">-- 删除所有行，但保留表结构、属性、索引</span></span><br></pre></td></tr></table></figure>
+<h4 id="其他关键字"><a href="#其他关键字" class="headerlink" title="其他关键字"></a>其他关键字</h4><h5 id="分页-LIMIT"><a href="#分页-LIMIT" class="headerlink" title="分页 LIMIT"></a>分页 <code>LIMIT</code></h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> table_name <span class="keyword">LIMIT</span> [<span class="keyword">offset</span>,] <span class="keyword">rows</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> table_name <span class="keyword">LIMIT</span> <span class="keyword">rows</span> <span class="keyword">OFFSET</span> <span class="keyword">offset</span></span><br></pre></td></tr></table></figure>
+<h5 id="模式搜索-LIKE"><a href="#模式搜索-LIKE" class="headerlink" title="模式搜索 LIKE"></a>模式搜索 <code>LIKE</code></h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> column_name(s) <span class="keyword">FROM</span> table_name <span class="keyword">WHERE</span> column_name <span class="keyword">LIKE</span> pattern</span><br></pre></td></tr></table></figure>
+<p>其中模式可用如下通配符</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">通配符</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">%</td>
+<td style="text-align:left">代表零个或多个字符</td>
+</tr>
+<tr>
+<td style="text-align:left">_</td>
+<td style="text-align:left">仅替代一个字符</td>
+</tr>
+<tr>
+<td style="text-align:left">[charlist]</td>
+<td style="text-align:left">字符列中的任何单一字符</td>
+</tr>
+<tr>
+<td style="text-align:left"><sup><a href="#fn_charlist" id="reffn_charlist">charlist</a></sup>或者[!charlist]</td>
+<td style="text-align:left">不在字符列中的任何单一字符</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h5 id="指定多个值-IN"><a href="#指定多个值-IN" class="headerlink" title="指定多个值 IN"></a>指定多个值 <code>IN</code></h5><p>用于在<code>where</code>子句中指定多个值</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> column_name(s) <span class="keyword">FROM</span> table_name <span class="keyword">WHERE</span> column_name <span class="keyword">IN</span> (value1,value2,...)</span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> Persons <span class="keyword">WHERE</span> LastName <span class="keyword">IN</span> (<span class="string">'Adams'</span>,<span class="string">'Carter'</span>) <span class="comment">-- 选取姓氏为这两个的人</span></span><br></pre></td></tr></table></figure>
+<h5 id="指定范围-BETWEEN-AND"><a href="#指定范围-BETWEEN-AND" class="headerlink" title="指定范围 BETWEEN AND"></a>指定范围 <code>BETWEEN AND</code></h5><p>指定选取的数据范围，可在<code>BETWEEN</code>前加<code>NOT</code>反向选择</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> column_name(s) <span class="keyword">FROM</span> table_name <span class="keyword">WHERE</span> column_name <span class="keyword">BETWEEN</span> value1 <span class="keyword">AND</span> value2</span><br></pre></td></tr></table></figure>
+<h5 id="指定别名-AS"><a href="#指定别名-AS" class="headerlink" title="指定别名 AS"></a>指定别名 <code>AS</code></h5><p>可为列名和表名指定别名</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> column_name <span class="keyword">AS</span> alias_colname <span class="keyword">FROM</span> table_name <span class="keyword">AS</span> alias_tabname</span><br></pre></td></tr></table></figure>
+<h5 id="连接表-JOIN-ON"><a href="#连接表-JOIN-ON" class="headerlink" title="连接表 JOIN ON"></a>连接表 <code>JOIN ON</code></h5><p>用于将多个表中的内容连接起来，也可以手动将列选出来，使用<code>where</code>筛选。</p>
+<p>使用<code>where</code>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> Persons.LastName, Persons.FirstName, Orders.OrderNo</span><br><span class="line"><span class="keyword">FROM</span> Persons, Orders</span><br><span class="line"><span class="keyword">WHERE</span> Persons.Id_P = Orders.Id_P</span><br></pre></td></tr></table></figure>
+<p>使用<code>JOIN ON</code></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> Persons.LastName, Persons.FirstName, Orders.OrderNo</span><br><span class="line"><span class="keyword">FROM</span> Persons</span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> Orders</span><br><span class="line"><span class="keyword">ON</span> Persons.Id_P = Orders.Id_P</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> Persons.LastName</span><br></pre></td></tr></table></figure>
+<p><code>join</code>的四个类别</p>
+<ul>
+<li>JOIN: 只返回匹配的行</li>
+<li>LEFT JOIN: 即使右表中没有匹配，也从左表返回所有的行</li>
+<li>RIGHT JOIN: 即使左表中没有匹配，也从右表返回所有的行</li>
+<li>FULL JOIN: 只要其中一个表中存在匹配，就返回行</li>
+</ul>
+<p><code>JOIN</code>默认是<code>INNER JOIN</code></p>
+<h5 id="合并查询结果-UNIOS"><a href="#合并查询结果-UNIOS" class="headerlink" title="合并查询结果 UNIOS"></a>合并查询结果 <code>UNIOS</code></h5><p><code>union</code>合并的查询结果必须有相同数量的列，列也需要有相似的数据类型。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> column_name(s) <span class="keyword">FROM</span> table_name1</span><br><span class="line"><span class="keyword">UNION</span> [<span class="keyword">ALL</span>]</span><br><span class="line"><span class="keyword">SELECT</span> column_name(s) <span class="keyword">FROM</span> table_name2</span><br></pre></td></tr></table></figure>
+<p>使用 <code>UNION ALL</code>表示允许重复。</p>
+<h5 id="备份表-SELECT-INTO"><a href="#备份表-SELECT-INTO" class="headerlink" title="备份表 SELECT INTO"></a>备份表 <code>SELECT INTO</code></h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> column_name(s)</span><br><span class="line"><span class="keyword">INTO</span> new_table_name [<span class="keyword">IN</span> externaldatabase] </span><br><span class="line"><span class="keyword">FROM</span> old_tablename</span><br></pre></td></tr></table></figure>
+<h5 id="创建数据库-CREATE-DATABASE"><a href="#创建数据库-CREATE-DATABASE" class="headerlink" title="创建数据库 CREATE DATABASE"></a>创建数据库 <code>CREATE DATABASE</code></h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> database_name</span><br></pre></td></tr></table></figure>
+<h5 id="创建数据表-CREATE-TABLE"><a href="#创建数据表-CREATE-TABLE" class="headerlink" title="创建数据表 CREATE TABLE"></a>创建数据表 <code>CREATE TABLE</code></h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> 表名称</span><br><span class="line">(</span><br><span class="line">列名称<span class="number">1</span> 数据类型,</span><br><span class="line">列名称<span class="number">2</span> 数据类型,</span><br><span class="line">列名称<span class="number">3</span> 数据类型,</span><br><span class="line">....</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>支持的数据类型有：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">数据类型</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">integer(size)int(size)smallint(size)tinyint(size)</td>
+<td style="text-align:left">仅容纳整数。在括号内规定数字的最大位数。</td>
+</tr>
+<tr>
+<td style="text-align:left">decimal(size,d)numeric(size,d)</td>
+<td style="text-align:left">容纳带有小数的数字。”size” 规定数字的最大位数。”d” 规定小数点右侧的最大位数。</td>
+</tr>
+<tr>
+<td style="text-align:left">char(size)</td>
+<td style="text-align:left">容纳固定长度的字符串（可容纳字母、数字以及特殊字符）。在括号中规定字符串的长度。</td>
+</tr>
+<tr>
+<td style="text-align:left">varchar(size)</td>
+<td style="text-align:left">容纳可变长度的字符串（可容纳字母、数字以及特殊的字符）。在括号中规定字符串的最大长度。</td>
+</tr>
+<tr>
+<td style="text-align:left">date(yyyymmdd)</td>
+<td style="text-align:left">容纳日期。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h5 id="为表添加约束"><a href="#为表添加约束" class="headerlink" title="为表添加约束"></a>为表添加约束</h5><p>约束类型有：</p>
+<ul>
+<li>NOT NULL                         非空约束</li>
+<li>UNIQUE                            唯一性约束</li>
+<li>PRIMARY KEY                   主键约束</li>
+<li>FOREIGN KEY                   外键约束</li>
+<li>CHECK                              特定值约束(&gt;0等)</li>
+<li>DEFAULT                          指定默认值</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line">(</span><br><span class="line">Id_P <span class="built_in">int</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,             <span class="comment">-- 限制该列不接收空值</span></span><br><span class="line">LastName <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">FirstName <span class="built_in">varchar</span>(<span class="number">255</span>),</span><br><span class="line">Address <span class="built_in">varchar</span>(<span class="number">255</span>),</span><br><span class="line">City <span class="built_in">varchar</span>(<span class="number">255</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line">(</span><br><span class="line">Id_P <span class="built_in">int</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">LastName <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">FirstName <span class="built_in">varchar</span>(<span class="number">255</span>),</span><br><span class="line">Address <span class="built_in">varchar</span>(<span class="number">255</span>),</span><br><span class="line">City <span class="built_in">varchar</span>(<span class="number">255</span>),</span><br><span class="line">PRIMARY <span class="keyword">KEY</span> (Id_P)  <span class="comment">-- 尾部加入</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line">(</span><br><span class="line">Id_P <span class="built_in">int</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> PRIMARY <span class="keyword">KEY</span>,  <span class="comment">-- 直接指明</span></span><br><span class="line">LastName <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">FirstName <span class="built_in">varchar</span>(<span class="number">255</span>),</span><br><span class="line">Address <span class="built_in">varchar</span>(<span class="number">255</span>),</span><br><span class="line">City <span class="built_in">varchar</span>(<span class="number">255</span>)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line">(</span><br><span class="line">Id_P <span class="built_in">int</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">LastName <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">FirstName <span class="built_in">varchar</span>(<span class="number">255</span>),</span><br><span class="line">Address <span class="built_in">varchar</span>(<span class="number">255</span>),</span><br><span class="line">City <span class="built_in">varchar</span>(<span class="number">255</span>),</span><br><span class="line"><span class="keyword">CONSTRAINT</span> pk_PersonID PRIMARY <span class="keyword">KEY</span> (Id_P,LastName)  <span class="comment">-- 指明多个列</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>约束也可以在创建后修改，使用<code>ALTER TABLE</code></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line"><span class="keyword">ADD</span> PRIMARY <span class="keyword">KEY</span> (Id_P)</span><br><span class="line"></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line"><span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> pk_PersonID PRIMARY <span class="keyword">KEY</span> (Id_P,LastName)</span><br></pre></td></tr></table></figure>
+<p>使用<code>DROP</code>删除约束</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line"><span class="keyword">DROP</span> PRIMARY <span class="keyword">KEY</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">CONSTRAINT</span> pk_PersonID</span><br></pre></td></tr></table></figure>
+<h5 id="创建索引-CREATE-INDEX"><a href="#创建索引-CREATE-INDEX" class="headerlink" title="创建索引 CREATE INDEX"></a>创建索引 <code>CREATE INDEX</code></h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> [<span class="keyword">UNIQUE</span>] <span class="keyword">INDEX</span> index_name</span><br><span class="line"><span class="keyword">ON</span> table_name (column_name)</span><br></pre></td></tr></table></figure>
+<h5 id="删除索引-DROP-INDEX"><a href="#删除索引-DROP-INDEX" class="headerlink" title="删除索引 DROP INDEX"></a>删除索引 <code>DROP INDEX</code></h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> table_name <span class="keyword">DROP</span> <span class="keyword">INDEX</span> index_name</span><br></pre></td></tr></table></figure>
+<h5 id="设置自增属性"><a href="#设置自增属性" class="headerlink" title="设置自增属性"></a>设置自增属性</h5><p>一般用于为主键设置自增属性</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">MySQL</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line">(</span><br><span class="line">P_Id <span class="built_in">int</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,   <span class="comment">-- 关键字</span></span><br><span class="line">LastName <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">FirstName <span class="built_in">varchar</span>(<span class="number">255</span>),</span><br><span class="line">Address <span class="built_in">varchar</span>(<span class="number">255</span>),</span><br><span class="line">City <span class="built_in">varchar</span>(<span class="number">255</span>),</span><br><span class="line">PRIMARY <span class="keyword">KEY</span> (P_Id)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">SQL</span> <span class="keyword">Server</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line">(</span><br><span class="line">P_Id <span class="built_in">int</span> PRIMARY <span class="keyword">KEY</span> <span class="keyword">IDENTITY</span>,      <span class="comment">-- 关键字</span></span><br><span class="line">LastName <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">FirstName <span class="built_in">varchar</span>(<span class="number">255</span>),</span><br><span class="line">Address <span class="built_in">varchar</span>(<span class="number">255</span>),</span><br><span class="line">City <span class="built_in">varchar</span>(<span class="number">255</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h5 id="空值处理"><a href="#空值处理" class="headerlink" title="空值处理"></a>空值处理</h5><p>sql的空值<code>NULL</code>不能直接比较，需要用<code>is null</code>或<code>is not null</code>和<code>ifnull()</code>函数来比较</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> LastName,FirstName,Address <span class="keyword">FROM</span> Persons</span><br><span class="line"><span class="keyword">WHERE</span> Address <span class="keyword">IS</span> <span class="literal">NULL</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> ProductName,UnitPrice*(UnitsInStock+<span class="keyword">IFNULL</span>(UnitsOnOrder,<span class="number">0</span>))</span><br><span class="line"><span class="keyword">FROM</span> Products</span><br></pre></td></tr></table></figure>
+<h4 id="函数用法"><a href="#函数用法" class="headerlink" title="函数用法"></a>函数用法</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">function</span>(列) <span class="keyword">FROM</span> 表</span><br></pre></td></tr></table></figure>
+<p>函数的基本类型有两种，聚合函数和标量函数。其中聚合函数的输入可以是多个列，而标量函数只能是一列。</p>
+<p>聚合函数：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">函数</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><a href="https://www.w3school.com.cn/sql/sql_func_avg.asp" target="_blank" rel="noopener">AVG(column)</a></td>
+<td style="text-align:left">返回某列的平均值</td>
+</tr>
+<tr>
+<td style="text-align:left">BINARY_CHECKSUM</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">CHECKSUM</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">CHECKSUM_AGG</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://www.w3school.com.cn/sql/sql_func_count.asp" target="_blank" rel="noopener">COUNT(column)</a></td>
+<td style="text-align:left">返回某列的行数（不包括NULL值）</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://www.w3school.com.cn/sql/sql_func_count_ast.asp" target="_blank" rel="noopener">COUNT(*)</a></td>
+<td style="text-align:left">返回被选行数</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://www.w3school.com.cn/sql/sql_func_count_distinct.asp" target="_blank" rel="noopener">COUNT(DISTINCT column)</a></td>
+<td style="text-align:left">返回相异结果的数目</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://www.w3school.com.cn/sql/sql_func_first.asp" target="_blank" rel="noopener">FIRST(column)</a></td>
+<td style="text-align:left">返回在指定的域中第一个记录的值（SQLServer2000 不支持）</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://www.w3school.com.cn/sql/sql_func_last.asp" target="_blank" rel="noopener">LAST(column)</a></td>
+<td style="text-align:left">返回在指定的域中最后一个记录的值（SQLServer2000 不支持）</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://www.w3school.com.cn/sql/sql_func_max.asp" target="_blank" rel="noopener">MAX(column)</a></td>
+<td style="text-align:left">返回某列的最高值</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://www.w3school.com.cn/sql/sql_func_min.asp" target="_blank" rel="noopener">MIN(column)</a></td>
+<td style="text-align:left">返回某列的最低值</td>
+</tr>
+<tr>
+<td style="text-align:left">STDEV(column)</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">STDEVP(column)</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://www.w3school.com.cn/sql/sql_func_sum.asp" target="_blank" rel="noopener">SUM(column)</a></td>
+<td style="text-align:left">返回某列的总和</td>
+</tr>
+<tr>
+<td style="text-align:left">VAR(column)</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">VARP(column)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>标量函数：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">函数</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">UCASE(c)</td>
+<td style="text-align:left">将某个域转换为大写</td>
+</tr>
+<tr>
+<td style="text-align:left">LCASE(c)</td>
+<td style="text-align:left">将某个域转换为小写</td>
+</tr>
+<tr>
+<td style="text-align:left">MID(c,start[,end])</td>
+<td style="text-align:left">从某个文本域提取字符</td>
+</tr>
+<tr>
+<td style="text-align:left">LEN(c)</td>
+<td style="text-align:left">返回某个文本域的长度</td>
+</tr>
+<tr>
+<td style="text-align:left">INSTR(c,char)</td>
+<td style="text-align:left">返回在某个文本域中指定字符的数值位置</td>
+</tr>
+<tr>
+<td style="text-align:left">LEFT(c,number_of_char)</td>
+<td style="text-align:left">返回某个被请求的文本域的左侧部分</td>
+</tr>
+<tr>
+<td style="text-align:left">RIGHT(c,number_of_char)</td>
+<td style="text-align:left">返回某个被请求的文本域的右侧部分</td>
+</tr>
+<tr>
+<td style="text-align:left">ROUND(c,decimals)</td>
+<td style="text-align:left">对某个数值域进行指定小数位数的四舍五入</td>
+</tr>
+<tr>
+<td style="text-align:left">MOD(x,y)</td>
+<td style="text-align:left">返回除法操作的余数</td>
+</tr>
+<tr>
+<td style="text-align:left">NOW()</td>
+<td style="text-align:left">返回当前的系统日期</td>
+</tr>
+<tr>
+<td style="text-align:left">FORMAT(c,format)</td>
+<td style="text-align:left">改变某个域的显示方式</td>
+</tr>
+<tr>
+<td style="text-align:left">DATEDIFF(d,date1,date2)</td>
+<td style="text-align:left">用于执行日期计算</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h5 id="count"><a href="#count" class="headerlink" title="count"></a>count</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">COUNT</span>(<span class="keyword">DISTINCT</span> column_name) <span class="keyword">FROM</span> table_name  <span class="comment">-- distinct 指定统计不同的数量</span></span><br></pre></td></tr></table></figure>
+<h5 id="first、last"><a href="#first、last" class="headerlink" title="first、last"></a>first、last</h5><p>返回第一个/最后一个记录的值</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">LAST</span>(OrderPrice) <span class="keyword">AS</span> LastOrderPrice <span class="keyword">FROM</span> Orders</span><br></pre></td></tr></table></figure>
+<h5 id="max-min"><a href="#max-min" class="headerlink" title="max/min"></a>max/min</h5><h5 id="avg"><a href="#avg" class="headerlink" title="avg"></a>avg</h5><h5 id="sum"><a href="#sum" class="headerlink" title="sum"></a>sum</h5><h5 id="ucase"><a href="#ucase" class="headerlink" title="ucase"></a>ucase</h5><p>将字段的值转为大写。</p>
+<h5 id="mid"><a href="#mid" class="headerlink" title="mid"></a>mid</h5><p>用于在文本中提取字符。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">MID</span>(column_name,<span class="keyword">start</span>[,<span class="keyword">length</span>]) <span class="keyword">FROM</span> table_name</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">MID</span>(City,<span class="number">1</span>,<span class="number">3</span>) <span class="keyword">as</span> SmallCity <span class="keyword">FROM</span> Persons</span><br></pre></td></tr></table></figure>
+<p>其中<code>column_name</code>和<code>start</code>（起始为1）是必须的，<code>length</code>忽略则返回剩余的全部。</p>
+<h5 id="len"><a href="#len" class="headerlink" title="len"></a>len</h5><p>获取列中值的长度。</p>
+<h5 id="round"><a href="#round" class="headerlink" title="round"></a>round</h5><p>限制浮点数范围</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">ROUND</span>(column_name,decimals) <span class="keyword">FROM</span> table_name</span><br></pre></td></tr></table></figure>
+<p><code>decimals</code>指定小数的位数。</p>
+<h5 id="format"><a href="#format" class="headerlink" title="format"></a>format</h5><p>修改显示格式</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> ProductName, UnitPrice, <span class="keyword">FORMAT</span>(<span class="keyword">Now</span>(),<span class="string">'YYYY-MM-DD'</span>) <span class="keyword">as</span> PerDate</span><br><span class="line"><span class="keyword">FROM</span> Products</span><br></pre></td></tr></table></figure>
+<h5 id="day-month-year-日期函数"><a href="#day-month-year-日期函数" class="headerlink" title="day,month,year(日期函数)"></a>day,month,year(日期函数)</h5><p>eg: 统计2021-08月的每天的数据</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">day</span>(<span class="built_in">date</span>) <span class="keyword">as</span> d</span><br><span class="line"><span class="keyword">from</span> <span class="keyword">table</span></span><br><span class="line"><span class="keyword">where</span> <span class="keyword">month</span>(<span class="built_in">date</span>) = <span class="string">'08'</span> <span class="keyword">and</span> <span class="keyword">year</span>(<span class="built_in">date</span>) = <span class="number">2021</span></span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> <span class="keyword">day</span></span><br></pre></td></tr></table></figure>
+<h3 id="快速参考"><a href="#快速参考" class="headerlink" title="快速参考"></a>快速参考</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">语句</th>
+<th style="text-align:left">语法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">AND / OR</td>
+<td style="text-align:left">SELECT column_name(s) FROM table_name WHERE condition AND\</td>
+<td>OR condition</td>
+</tr>
+<tr>
+<td style="text-align:left">ALTER TABLE (add column)</td>
+<td style="text-align:left">ALTER TABLE table_name ADD column_name datatype</td>
+</tr>
+<tr>
+<td style="text-align:left">ALTER TABLE (drop column)</td>
+<td style="text-align:left">ALTER TABLE table_name DROP COLUMN column_name</td>
+</tr>
+<tr>
+<td style="text-align:left">AS (alias for column)</td>
+<td style="text-align:left">SELECT column_name AS column_alias FROM table_name</td>
+</tr>
+<tr>
+<td style="text-align:left">AS (alias for table)</td>
+<td style="text-align:left">SELECT column_name FROM table_name  AS table_alias</td>
+</tr>
+<tr>
+<td style="text-align:left">BETWEEN</td>
+<td style="text-align:left">SELECT column_name(s) FROM table_name WHERE column_name BETWEEN value1 AND value2</td>
+</tr>
+<tr>
+<td style="text-align:left">CREATE DATABASE</td>
+<td style="text-align:left">CREATE DATABASE database_name</td>
+</tr>
+<tr>
+<td style="text-align:left">CREATE INDEX</td>
+<td style="text-align:left">CREATE INDEX index_name ON table_name (column_name)</td>
+</tr>
+<tr>
+<td style="text-align:left">CREATE TABLE</td>
+<td style="text-align:left">CREATE TABLE table_name ( column_name1 data_type, column_name2 data_type, ……. )</td>
+</tr>
+<tr>
+<td style="text-align:left">CREATE UNIQUE INDEX</td>
+<td style="text-align:left">CREATE UNIQUE INDEX index_name ON table_name (column_name)</td>
+</tr>
+<tr>
+<td style="text-align:left">CREATE VIEW</td>
+<td style="text-align:left">CREATE VIEW view_name AS SELECT column_name(s) FROM table_name WHERE condition</td>
+</tr>
+<tr>
+<td style="text-align:left">DELETE FROM</td>
+<td style="text-align:left">DELETE FROM table_name (<strong>Note:</strong> Deletes the entire table!!)<em>or</em>DELETE FROM table_name WHERE condition</td>
+</tr>
+<tr>
+<td style="text-align:left">DROP DATABASE</td>
+<td style="text-align:left">DROP DATABASE database_name</td>
+</tr>
+<tr>
+<td style="text-align:left">DROP INDEX</td>
+<td style="text-align:left">DROP INDEX table_name.index_name</td>
+</tr>
+<tr>
+<td style="text-align:left">DROP TABLE</td>
+<td style="text-align:left">DROP TABLE table_name</td>
+</tr>
+<tr>
+<td style="text-align:left">GROUP BY</td>
+<td style="text-align:left">SELECT column_name1,SUM(column_name2) FROM table_name GROUP BY column_name1</td>
+</tr>
+<tr>
+<td style="text-align:left">HAVING</td>
+<td style="text-align:left">SELECT column_name1,SUM(column_name2) FROM table_name GROUP BY column_name1 HAVING SUM(column_name2) condition value</td>
+</tr>
+<tr>
+<td style="text-align:left">IN</td>
+<td style="text-align:left">SELECT column_name(s) FROM table_name WHERE column_name IN (value1,value2,..)</td>
+</tr>
+<tr>
+<td style="text-align:left">INSERT INTO</td>
+<td style="text-align:left">INSERT INTO table_name VALUES (value1, value2,….)<em>or</em>INSERT INTO table_name (column_name1, column_name2,…) VALUES (value1, value2,….)</td>
+</tr>
+<tr>
+<td style="text-align:left">LIKE</td>
+<td style="text-align:left">SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern</td>
+</tr>
+<tr>
+<td style="text-align:left">ORDER BY</td>
+<td style="text-align:left">SELECT column_name(s) FROM table_name ORDER BY column_name [ASC\</td>
+<td>DESC]</td>
+</tr>
+<tr>
+<td style="text-align:left">SELECT</td>
+<td style="text-align:left">SELECT column_name(s) FROM table_name</td>
+</tr>
+<tr>
+<td style="text-align:left">SELECT *</td>
+<td style="text-align:left">SELECT * FROM table_name</td>
+</tr>
+<tr>
+<td style="text-align:left">SELECT DISTINCT</td>
+<td style="text-align:left">SELECT DISTINCT column_name(s) FROM table_name</td>
+</tr>
+<tr>
+<td style="text-align:left">SELECT INTO (used to create backup copies of tables)</td>
+<td style="text-align:left">SELECT <em> INTO new_table_name FROM original_table_name</em>or*SELECT column_name(s) INTO new_table_name FROM original_table_name</td>
+</tr>
+<tr>
+<td style="text-align:left">TRUNCATE TABLE (deletes only the data inside the table)</td>
+<td style="text-align:left">TRUNCATE TABLE table_name</td>
+</tr>
+<tr>
+<td style="text-align:left">UPDATE</td>
+<td style="text-align:left">UPDATE table_name SET column_name=new_value [, column_name=new_value] WHERE column_name=some_value</td>
+</tr>
+<tr>
+<td style="text-align:left">WHERE</td>
+<td style="text-align:left">SELECT column_name(s) FROM table_name WHERE condition</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="../../../../../tags/SQL/" rel="tag"># SQL</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="../SQL实例/" rel="next" title="SQL查询实例">
+                <i class="fa fa-chevron-left"></i> SQL查询实例
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="../../framework/DL with pytorch/7.卷积网络/" rel="prev" title="卷积网络搭建">
+                卷积网络搭建 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">brezezee</p>
+              <p class="site-description motion-element" itemprop="description">靡不有初，鲜克有终</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="https://brezezee.github.io/archives">
+              
+                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="../../../../../categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="../../../../../tags/index.html">
+                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#语法"><span class="nav-text">语法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基础语法"><span class="nav-text">基础语法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#查找某列-select"><span class="nav-text">查找某列 select</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#去重-distinct"><span class="nav-text">去重 distinct</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#条件约束-where"><span class="nav-text">条件约束 where</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#结合多个约束-AND-amp-OR"><span class="nav-text">结合多个约束 AND &amp; OR</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#对结果排序-ORDER-BY"><span class="nav-text">对结果排序 ORDER BY</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#合并列中相同的行-GROUP-BY"><span class="nav-text">合并列中相同的行 GROUP BY</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#HAVING子句"><span class="nav-text">HAVING子句</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#插入新行INSERT-INTO"><span class="nav-text">插入新行INSERT INTO</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#更新数据-UPDATE-SET"><span class="nav-text">更新数据 UPDATE SET</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#删除数据-DELETE"><span class="nav-text">删除数据 DELETE</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其他关键字"><span class="nav-text">其他关键字</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#分页-LIMIT"><span class="nav-text">分页 LIMIT</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#模式搜索-LIKE"><span class="nav-text">模式搜索 LIKE</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#指定多个值-IN"><span class="nav-text">指定多个值 IN</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#指定范围-BETWEEN-AND"><span class="nav-text">指定范围 BETWEEN AND</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#指定别名-AS"><span class="nav-text">指定别名 AS</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#连接表-JOIN-ON"><span class="nav-text">连接表 JOIN ON</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#合并查询结果-UNIOS"><span class="nav-text">合并查询结果 UNIOS</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#备份表-SELECT-INTO"><span class="nav-text">备份表 SELECT INTO</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#创建数据库-CREATE-DATABASE"><span class="nav-text">创建数据库 CREATE DATABASE</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#创建数据表-CREATE-TABLE"><span class="nav-text">创建数据表 CREATE TABLE</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#为表添加约束"><span class="nav-text">为表添加约束</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#创建索引-CREATE-INDEX"><span class="nav-text">创建索引 CREATE INDEX</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#删除索引-DROP-INDEX"><span class="nav-text">删除索引 DROP INDEX</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#设置自增属性"><span class="nav-text">设置自增属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#空值处理"><span class="nav-text">空值处理</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数用法"><span class="nav-text">函数用法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#count"><span class="nav-text">count</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#first、last"><span class="nav-text">first、last</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#max-min"><span class="nav-text">max/min</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#avg"><span class="nav-text">avg</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#sum"><span class="nav-text">sum</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ucase"><span class="nav-text">ucase</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mid"><span class="nav-text">mid</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#len"><span class="nav-text">len</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#round"><span class="nav-text">round</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#format"><span class="nav-text">format</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#day-month-year-日期函数"><span class="nav-text">day,month,year(日期函数)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#快速参考"><span class="nav-text">快速参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">brezezee</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">154.8k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../../js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="../../../../../js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="../../../../../js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="../../../../../js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../../js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://brezezee.github.io/2019/09/01/数据库/SQL命令一览/';
+          this.page.identifier = '2019/09/01/数据库/SQL命令一览/';
+          this.page.title = 'SQL命令一览';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

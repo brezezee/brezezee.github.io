@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="brezezee">
 <meta property="og:description" content="质因数判定（试除法）一个数可质因子分解为两个数相乘，假设$d$为$n$的较小的那个质因子，则满足 $d \le \frac n d$，即$d \le \sqrt n$。因此用试除法枚举质因子时只需要枚举到根号n即可。 1234567bool prim(int n) &amp;#123;    if (n &amp;lt; 2) return false;    for (int i = 2; i &amp;lt;= n">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-08-24T02:03:53.888Z">
+<meta property="og:updated_time" content="2021-09-12T05:47:17.165Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="质因数">
 <meta name="twitter:description" content="质因数判定（试除法）一个数可质因子分解为两个数相乘，假设$d$为$n$的较小的那个质因子，则满足 $d \le \frac n d$，即$d \le \sqrt n$。因此用试除法枚举质因子时只需要枚举到根号n即可。 1234567bool prim(int n) &amp;#123;    if (n &amp;lt; 2) return false;    for (int i = 2; i &amp;lt;= n">
@@ -308,8 +308,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2021-08-24T10:03:53+08:00">
-                2021-08-24
+              <time title="Post modified" itemprop="dateModified" datetime="2021-09-12T13:47:17+08:00">
+                2021-09-12
               </time>
             
           </span>
@@ -368,7 +368,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1.1k
+                  755
                 </span>
               
 
@@ -406,10 +406,6 @@ a^k = (a^{2^0}\times 0) \times (a^{2^1} \times 1)\times (a^{2^2} \times 1)</scri
 <blockquote>
 <p> 未考虑溢出</p>
 </blockquote>
-<h3 id="DFS与BFS"><a href="#DFS与BFS" class="headerlink" title="DFS与BFS"></a>DFS与BFS</h3><p>DFS模板</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (get a result) &#123;</span><br><span class="line">        store the result;</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (enumerate all possible states)&#123;</span><br><span class="line">        <span class="keyword">if</span> (have been visited) <span class="keyword">continue</span>;</span><br><span class="line">        visited[state] = <span class="literal">true</span>;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="八数码"><a href="#八数码" class="headerlink" title="八数码"></a>八数码</h3><p>该题的一个关键是状态表示，如何判断9个数字都归位了，这里用的方法是将它们压缩到一个string中，通过判断string是否相等来确认是否归位。通过哈希表来保存每个状态的最少交换次数，string是一维的，而实际上其中的数字具有二维的空间关系，使用除和余来提取这种关系。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bfs</span><span class="params">(<span class="built_in">string</span> &amp;start)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">queue</span>&lt;<span class="built_in">string</span>&gt; q;</span><br><span class="line">    <span class="built_in">unordered_map</span>&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt; dist;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">string</span> end = <span class="string">"12345678x"</span>;</span><br><span class="line">    <span class="keyword">int</span> dx[] = &#123;<span class="number">-1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>&#125;, dy[] = &#123;<span class="number">0</span>, <span class="number">-1</span>, <span class="number">0</span>, <span class="number">1</span>&#125;;</span><br><span class="line">    q.push(start);</span><br><span class="line">    dist[start] = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> (!q.empty()) &#123;</span><br><span class="line">        <span class="built_in">string</span> cur = q.front();  <span class="comment">// 状态表示，使用string来表示9个位置</span></span><br><span class="line">        q.pop();</span><br><span class="line">        <span class="keyword">if</span> (cur == end) <span class="keyword">return</span> dist[cur];</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> pos = cur.find(<span class="string">'x'</span>);</span><br><span class="line">        <span class="keyword">int</span> x = pos / <span class="number">3</span>, y = pos % <span class="number">3</span>;   <span class="comment">// 获取x的位置的二维表示</span></span><br><span class="line">        <span class="keyword">int</span> distant = dist[cur];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; ++ i ) &#123;</span><br><span class="line">            <span class="keyword">int</span> a = x + dx[i], b = y + dy[i];</span><br><span class="line">            <span class="keyword">if</span> (a &lt; <span class="number">3</span> &amp;&amp; a &gt;= <span class="number">0</span> &amp;&amp; b &lt; <span class="number">3</span> &amp;&amp; b &gt;= <span class="number">0</span>) &#123; <span class="comment">// 交换的位置是否合法</span></span><br><span class="line">                <span class="comment">// 交换</span></span><br><span class="line">                swap(cur[a * <span class="number">3</span> + b], cur[pos]);</span><br><span class="line">                <span class="keyword">if</span> (!dist.count(cur)) &#123;</span><br><span class="line">                    q.push(cur);</span><br><span class="line">                    dist[cur] = distant + <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 还原</span></span><br><span class="line">                swap(cur[a * <span class="number">3</span> + b], cur[pos]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;   <span class="comment">// 失败</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span> c[<span class="number">2</span>];</span><br><span class="line">    <span class="built_in">string</span> s;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">9</span>; ++ i) &#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; c;</span><br><span class="line">        s += *c;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; bfs(s) ;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -539,7 +535,7 @@ a^k = (a^{2^0}\times 0) \times (a^{2^1} \times 1)\times (a^{2^2} \times 1)</scri
               
                 <a href="https://brezezee.github.io/archives">
               
-                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -550,7 +546,7 @@ a^k = (a^{2^0}\times 0) \times (a^{2^1} \times 1)\times (a^{2^2} \times 1)</scri
               
               <div class="site-state-item site-state-categories">
                 <a href="../../../../../../categories/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -561,7 +557,7 @@ a^k = (a^{2^0}\times 0) \times (a^{2^1} \times 1)\times (a^{2^2} \times 1)</scri
               
               <div class="site-state-item site-state-tags">
                 <a href="../../../../../../tags/index.html">
-                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-count">74</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -594,7 +590,7 @@ a^k = (a^{2^0}\times 0) \times (a^{2^1} \times 1)\times (a^{2^2} \times 1)</scri
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#质因数判定（试除法）"><span class="nav-text">质因数判定（试除法）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#质因子分解（试除法）"><span class="nav-text">质因子分解（试除法）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#质数筛选"><span class="nav-text">质数筛选</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#快速幂"><span class="nav-text">快速幂</span></a></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#DFS与BFS"><span class="nav-text">DFS与BFS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#八数码"><span class="nav-text">八数码</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#质因数判定（试除法）"><span class="nav-text">质因数判定（试除法）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#质因子分解（试除法）"><span class="nav-text">质因子分解（试除法）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#质数筛选"><span class="nav-text">质数筛选</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#快速幂"><span class="nav-text">快速幂</span></a></li></ol></div>
             
 
           </div>
@@ -628,7 +624,7 @@ a^k = (a^{2^0}\times 0) \times (a^{2^1} \times 1)\times (a^{2^2} \times 1)</scri
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">155.9k</span>
+    <span title="Site words total count">154.8k</span>
   
 </div>
 

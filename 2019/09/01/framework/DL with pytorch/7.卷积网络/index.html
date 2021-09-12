@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="../../../../../../lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="../../../../../../lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="../../../../../../css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="../../../../../../images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="../../../../../../images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="../../../../../../images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="../../../../../../images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="pytorch,卷积网络,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="基础互相关运算与卷积在深度学习中的卷积运算常常使用的是互相关来替代，免去了翻转卷积核的过程。  在二维互相关运算中，卷积窗口从输入数组的最左上方开始，按从左往右、从上往下的顺序，依次在输入数组上滑动。当卷积窗口滑动到某一位置时，窗口中的输入子数组与核数组按元素相乘并求和，得到输出数组中相应位置的元素。图5.1中的输出数组高和宽分别为2，其中的4个元素由二维互相关运算得出： 下面函数实现了这个互相关">
+<meta name="keywords" content="pytorch,卷积网络">
+<meta property="og:type" content="article">
+<meta property="og:title" content="卷积网络搭建">
+<meta property="og:url" content="https://brezezee.github.io/2019/09/01/framework/DL with pytorch/7.卷积网络/index.html">
+<meta property="og:site_name" content="brezezee">
+<meta property="og:description" content="基础互相关运算与卷积在深度学习中的卷积运算常常使用的是互相关来替代，免去了翻转卷积核的过程。  在二维互相关运算中，卷积窗口从输入数组的最左上方开始，按从左往右、从上往下的顺序，依次在输入数组上滑动。当卷积窗口滑动到某一位置时，窗口中的输入子数组与核数组按元素相乘并求和，得到输出数组中相应位置的元素。图5.1中的输出数组高和宽分别为2，其中的4个元素由二维互相关运算得出： 下面函数实现了这个互相关">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://i.loli.net/2021/09/12/w1NmcI4ftzb8jpW.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/12/kW4ohYjrDRfIaZ1.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/12/SXkQDzgN8miCZw6.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/12/Bv6qEdaxh7zCZQe.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/12/eUnvHXM9Dbp5omP.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/12/W4rx7QjsaiZDOge.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/12/3oquMx2dlQ8TJga.png">
+<meta property="og:image" content="https://i.loli.net/2021/09/12/7BntVIOLba9feP5.png">
+<meta property="og:updated_time" content="2021-09-12T06:34:44.565Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="卷积网络搭建">
+<meta name="twitter:description" content="基础互相关运算与卷积在深度学习中的卷积运算常常使用的是互相关来替代，免去了翻转卷积核的过程。  在二维互相关运算中，卷积窗口从输入数组的最左上方开始，按从左往右、从上往下的顺序，依次在输入数组上滑动。当卷积窗口滑动到某一位置时，窗口中的输入子数组与核数组按元素相乘并求和，得到输出数组中相应位置的元素。图5.1中的输出数组高和宽分别为2，其中的4个元素由二维互相关运算得出： 下面函数实现了这个互相关">
+<meta name="twitter:image" content="https://i.loli.net/2021/09/12/w1NmcI4ftzb8jpW.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://brezezee.github.io/2019/09/01/framework/DL with pytorch/7.卷积网络/">
+
+
+
+
+
+  <title>卷积网络搭建 | brezezee</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">brezezee</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="https://brezezee.github.io" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="https://brezezee.github.io/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="https://brezezee.github.io/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-categories"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="https://brezezee.github.io/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="https://brezezee.github.io/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://brezezee.github.io">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="brezezee">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="../../../../../../images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="brezezee">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">卷积网络搭建</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-01T00:00:00+08:00">
+                2019-09-01
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2021-09-12T14:34:44+08:00">
+                2021-09-12
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="../../../../../../categories/pytorch/" itemprop="url" rel="index">
+                    <span itemprop="name">pytorch</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/09/01/framework/DL with pytorch/7.卷积网络/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  8.2k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><h3 id="互相关运算与卷积"><a href="#互相关运算与卷积" class="headerlink" title="互相关运算与卷积"></a>互相关运算与卷积</h3><p>在深度学习中的卷积运算常常使用的是互相关来替代，免去了翻转卷积核的过程。</p>
+<p><img src="https://i.loli.net/2021/09/12/w1NmcI4ftzb8jpW.png" alt="1593424760272.png"></p>
+<p>在二维互相关运算中，卷积窗口从输入数组的最左上方开始，按从左往右、从上往下的顺序，依次在输入数组上滑动。当卷积窗口滑动到某一位置时，窗口中的输入子数组与核数组按元素相乘并求和，得到输出数组中相应位置的元素。图5.1中的输出数组高和宽分别为2，其中的4个元素由二维互相关运算得出：</p>
+<p>下面函数实现了这个互相关运算：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch </span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">corr2d</span><span class="params">(X, K)</span>:</span>  <span class="comment"># </span></span><br><span class="line">    h, w = K.shape</span><br><span class="line">    Y = torch.zeros((X.shape[<span class="number">0</span>] - h + <span class="number">1</span>, X.shape[<span class="number">1</span>] - w + <span class="number">1</span>))  <span class="comment"># 卷积输出形状</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(Y.shape[<span class="number">0</span>]):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(Y.shape[<span class="number">1</span>]):</span><br><span class="line">            Y[i, j] = (X[i: i + h, j: j + w] * K).sum()        </span><br><span class="line">            <span class="comment"># 对应点相乘再求和</span></span><br><span class="line">            <span class="comment"># Y[i, j] = X[i:i + h, j: j + w].mul(K).sum()       </span></span><br><span class="line">            <span class="comment"># mul 原是矩阵和标量相乘，广播到原形状，这里使用相同形状的矩阵相当于对应位置相乘， 上面*与它相同</span></span><br><span class="line">    <span class="keyword">return</span> Y</span><br><span class="line"></span><br><span class="line">X = torch.tensor([[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>], [<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>], [<span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>]])</span><br><span class="line">K = torch.tensor([[<span class="number">0</span>, <span class="number">1</span>], [<span class="number">2</span>, <span class="number">3</span>]])</span><br><span class="line">corr2d(X, K)</span><br></pre></td></tr></table></figure>
+<h3 id="卷积层"><a href="#卷积层" class="headerlink" title="卷积层"></a>卷积层</h3><p>继承Module定义一个卷积层</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Conv2D</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, kernel_size)</span>:</span></span><br><span class="line">        super(Conv2D, self).__init__()</span><br><span class="line">        self.weight = nn.Parameter(torch.randn(kernel_size))</span><br><span class="line">        self.bias = nn.Parameter(torch.randn(<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> corr2d(x, self.weight) + self.bias</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="comment"># 测试一个竖直方向的边缘检测核</span></span><br><span class="line">X = torch.ones(<span class="number">6</span>, <span class="number">8</span>)</span><br><span class="line">X[:, <span class="number">2</span>:<span class="number">6</span>] = <span class="number">0</span></span><br><span class="line">X</span><br><span class="line"></span><br><span class="line">K = torch.tensor([[<span class="number">1</span>, <span class="number">-1</span>]])  <span class="comment"># 当水平相邻的数相等时得到0</span></span><br><span class="line"></span><br><span class="line">Y = corr2d(X, K)</span><br><span class="line">Y</span><br></pre></td></tr></table></figure>
+<p>尝试通过Y训练来得到这个检测核</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 构造一个核数组形状是(1, 2)的二维卷积层实例</span></span><br><span class="line">conv2d = Conv2D(kernel_size=(<span class="number">1</span>, <span class="number">2</span>))</span><br><span class="line"></span><br><span class="line">step = <span class="number">20</span></span><br><span class="line">lr = <span class="number">0.01</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(step):</span><br><span class="line">    Y_hat = conv2d(X)                     <span class="comment"># </span></span><br><span class="line">    l = ((Y_hat - Y) ** <span class="number">2</span>).sum()         <span class="comment"># loss</span></span><br><span class="line">    l.backward()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 梯度下降 更新卷积层参数</span></span><br><span class="line">    conv2d.weight.data -= lr * conv2d.weight.grad</span><br><span class="line">    conv2d.bias.data -= lr * conv2d.bias.grad</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 梯度清0</span></span><br><span class="line">    conv2d.weight.grad.fill_(<span class="number">0</span>)</span><br><span class="line">    conv2d.bias.grad.fill_(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">if</span> (i + <span class="number">1</span>) % <span class="number">5</span> == <span class="number">0</span>:</span><br><span class="line">        print(<span class="string">'Step %d, loss %.3f'</span> % (i + <span class="number">1</span>, l.item()))</span><br><span class="line"></span><br><span class="line">print(<span class="string">"weight: "</span>, conv2d.weight.data)</span><br><span class="line">print(<span class="string">"bias: "</span>, conv2d.bias.data)</span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;Step 5, loss 12.517</span><br><span class="line">&gt;Step 10, loss 2.785</span><br><span class="line">&gt;Step 15, loss 0.698</span><br><span class="line">&gt;Step 20, loss 0.186</span><br><span class="line">&gt;weight:  tensor([[ 0.9031, -0.8815]])</span><br><span class="line">&gt;bias:  tensor([-0.0121])</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>得到weight参数接近前面定义的[1,  -1] 卷积核</p>
+<h3 id="填充和步幅"><a href="#填充和步幅" class="headerlink" title="填充和步幅"></a>填充和步幅</h3><ul>
+<li>填充</li>
+</ul>
+<p>对于n <em> n 的数据和 k </em> k的卷积核，计算结果是 (n - k + 1) * (n - k + 1)的输出特征，也就是在每个维度会少k - 1个，当k是奇数时，少的就是偶数个。深度学习中常用的卷积核都是奇数的，正好可以在两端填充 (k - 1) / 2 个数据（常为0）来使得输出特征和原数据保持相同维度。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义一个函数来计算卷积层。它对输入和输出做相应的升维和降维</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">comp_conv2d</span><span class="params">(conv2d, X)</span>:</span></span><br><span class="line">    <span class="comment"># (1, 1)代表批量大小和通道数（“多输入通道和多输出通道”一节将介绍）均为1</span></span><br><span class="line">    X = X.view((<span class="number">1</span>, <span class="number">1</span>) + X.shape)   <span class="comment"># 元组可直接相加</span></span><br><span class="line">    Y = conv2d(X)</span><br><span class="line">    <span class="keyword">return</span> Y.view(Y.shape[<span class="number">2</span>:])  <span class="comment"># 排除不关心的前两维：批量和通道</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 注意这里是两侧分别填充1行或列，所以在两侧一共填充2行或列</span></span><br><span class="line">conv2d = nn.Conv2d(in_channels=<span class="number">1</span>, out_channels=<span class="number">1</span>, kernel_size=<span class="number">3</span>, padding=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">X = torch.rand(<span class="number">8</span>, <span class="number">8</span>)</span><br><span class="line">print(comp_conv2d(conv2d, X).shape)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用高为5、宽为3的卷积核。在高和宽两侧的填充数分别为2和1</span></span><br><span class="line">conv2d = nn.Conv2d(in_channels=<span class="number">1</span>, out_channels=<span class="number">1</span>, kernel_size=(<span class="number">5</span>, <span class="number">3</span>), padding=(<span class="number">2</span>, <span class="number">1</span>))</span><br><span class="line">print(comp_conv2d(conv2d, X).shape)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>步幅</li>
+</ul>
+<p>对于n <em> n数据、k </em> k卷积核、填充为k、步幅为s的一般情况，输出形状为：</p>
+<script type="math/tex; mode=display">
+\left \lfloor (n - k + p + s)/ s \right \rfloor \times \left \lfloor (n - k + p + s)/ s \right \rfloor</script><p>若置p为常用的k - 1，则输出形状简化为：</p>
+<script type="math/tex; mode=display">
+\left \lfloor (n + s - 1)/ s \right \rfloor \times \left \lfloor (n + s - 1)/ s \right \rfloor</script><p>如果输入的n 能被 s整除，那么形状为：</p>
+<script type="math/tex; mode=display">
+(n / s) \times (n/s)</script><p>对于一般情况下，分子减去k加上步幅s可以理解为：初始便占用了k个大小的数据，它的输出为1个，加上步幅s便能让整除s后多1个。</p>
+<p>例：</p>
+<p>满足p = k -  1，（注意这里padding=1表示两边都添加1，因此k = 2 * padding），且s 能被 n整除，于是输出形状为 8 / 2 = 4</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conv2d = nn.Conv2d(<span class="number">1</span>, <span class="number">1</span>, kernel_size=<span class="number">3</span>, padding=<span class="number">1</span>, stride=<span class="number">2</span>)</span><br><span class="line">comp_conv2d(conv2d, X).shape</span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+<blockquote>
+<p>torch.Size([4, 4])</p>
+</blockquote>
+<p>按照一般情况的公式，第一维: (n - k + p - s) / s = (8 - 3 + 0 + 3) / 3 = 8 / 3 ，下取整得2 ，第二维同理。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conv2d = nn.Conv2d(<span class="number">1</span>, <span class="number">1</span>, kernel_size=(<span class="number">3</span>, <span class="number">5</span>), padding=(<span class="number">0</span>, <span class="number">1</span>), stride=(<span class="number">3</span>, <span class="number">4</span>))</span><br><span class="line">comp_conv2d(conv2d, X).shape</span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+<blockquote>
+<p>torch.Size([2, 2])</p>
+</blockquote>
+<h3 id="多通道"><a href="#多通道" class="headerlink" title="多通道"></a>多通道</h3><ul>
+<li>多通道输入</li>
+</ul>
+<p>当输入数据含多个通道时，我们需要构造一个输入通道数与输入数据的通道数相同的卷积核，从而能够与含多通道的输入数据做互相关运算。例如彩色图像具有3个通道。多通道卷积核只需将每个通道与对应的数据分别计算，最后将不同通道的特征对应相加即可。</p>
+<p><img src="https://i.loli.net/2021/09/12/kW4ohYjrDRfIaZ1.png" alt="1593444829228.png"></p>
+<p>多输入通道的互相关计算：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">corr2d_multi_in</span><span class="params">(X, K)</span>:</span></span><br><span class="line">    <span class="comment"># 沿着X和K的第0维（通道维）分别计算再相加</span></span><br><span class="line">    res = corr2d(X[<span class="number">0</span>, :, :], K[<span class="number">0</span>, :, :])</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, X.shape[<span class="number">0</span>]):</span><br><span class="line">        res += corr2d(X[i, :, :], K[i, :, :])</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line">X = torch.tensor([[[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>], [<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>], [<span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>]],</span><br><span class="line">              [[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>], [<span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]]])</span><br><span class="line">K = torch.tensor([[[<span class="number">0</span>, <span class="number">1</span>], [<span class="number">2</span>, <span class="number">3</span>]], [[<span class="number">1</span>, <span class="number">2</span>], [<span class="number">3</span>, <span class="number">4</span>]]])</span><br><span class="line"></span><br><span class="line">corr2d_multi_in(X, K)</span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+<blockquote>
+<p>tensor([[ 56.,  72.],<br>        [104., 120.]])</p>
+</blockquote>
+<ul>
+<li>多输出通道</li>
+</ul>
+<p>无论输入通道是多少维，输出都是1维通道。若要得到Co维的多通道的输出，则需在多输入通道卷积核的基础上，创建Co个多输入通道卷积核。将它们得到1维通道叠加得到Co维的多通道输出。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">corr2d_multi_in_out</span><span class="params">(X, K)</span>:</span></span><br><span class="line">    <span class="comment"># 对K的第0维遍历，每次同输入X做互相关计算。所有结果使用stack函数合并在一起</span></span><br><span class="line">    <span class="keyword">return</span> torch.stack([corr2d_multi_in(X, k) <span class="keyword">for</span> k <span class="keyword">in</span> K])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 简单将卷积核依次+1得到3个不同的多输入卷积核</span></span><br><span class="line">K = torch.stack([K, K + <span class="number">1</span>, K + <span class="number">2</span>]) </span><br><span class="line">K.shape           <span class="comment"># torch.Size([3, 2, 2, 2])    </span></span><br><span class="line"></span><br><span class="line">corr2d_multi_in_out(X, K)</span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt; tensor([[[ 56.,  72.],</span><br><span class="line">&gt;          [104., 120.]],</span><br><span class="line">&gt; </span><br><span class="line">&gt;         [[ 76., 100.],</span><br><span class="line">&gt;          [148., 172.]],</span><br><span class="line">&gt; </span><br><span class="line">&gt;         [[ 96., 128.],</span><br><span class="line">&gt;          [192., 224.]]])</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<ul>
+<li>$1 \times 1$卷积层</li>
+</ul>
+<p>$1 \times 1$卷积层常用与多通道情况，相当于把不同通道对应位置按权重加在一起。如果将不同通道看作特征维度，而输入h * w的数据看作一个单位样本，则$1 \times 1$ 卷积层相当于全连接层。</p>
+<p>按照全连接层的思路，将输入通道看作特征维度，以全连接层的矩阵乘法来实现：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">corr2d_multi_in_out_1x1</span><span class="params">(X, K)</span>:</span></span><br><span class="line">    c_i, h, w = X.shape</span><br><span class="line">    c_o = K.shape[<span class="number">0</span>]</span><br><span class="line">    X = X.view(c_i, h * w)</span><br><span class="line">    K = K.view(c_o, c_i)</span><br><span class="line">    Y = torch.mm(K, X)  <span class="comment"># 全连接层的矩阵乘法, (c_o, c_i) * (c_i, h*w)，矩阵乘法在C_i维度上求和。</span></span><br><span class="line">    <span class="keyword">return</span> Y.view(c_o, h, w)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">X = torch.rand(<span class="number">3</span>, <span class="number">3</span>, <span class="number">3</span>)</span><br><span class="line">K = torch.rand(<span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">Y1 = corr2d_multi_in_out_1x1(X, K)</span><br><span class="line">Y2 = corr2d_multi_in_out(X, K)</span><br><span class="line"></span><br><span class="line">(Y1 - Y2).norm().item() &lt; <span class="number">1e-6</span></span><br></pre></td></tr></table></figure>
+<p>输出是True，可以看出由全连接方式和1* 1卷积核得到结果是相同的。</p>
+<p>因此，$1\times 1$卷积层可以被当作保持高和宽维度形状不变的全连接层使用。于是，我们可以通过调整网络层之间的通道数，控制模型复杂度。</p>
+<h3 id="池化层"><a href="#池化层" class="headerlink" title="池化层"></a>池化层</h3><p>池化的计算与卷积类似，不过在池化窗口中求最大或均值。仿照corr2d实现一个二维池化：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">pool2d</span><span class="params">(X, pool_size, mode=<span class="string">'max'</span>)</span>:</span></span><br><span class="line">    X = X.float()</span><br><span class="line">    p_h, p_w = pool_size</span><br><span class="line">    Y = torch.zeros(X.shape[<span class="number">0</span>] - p_h + <span class="number">1</span>, X.shape[<span class="number">1</span>] - p_w + <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(Y.shape[<span class="number">0</span>]):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(Y.shape[<span class="number">1</span>]):</span><br><span class="line">            <span class="keyword">if</span> mode == <span class="string">'max'</span>:</span><br><span class="line">                Y[i, j] = X[i: i + p_h, j: j + p_w].max()</span><br><span class="line">            <span class="keyword">elif</span> mode == <span class="string">'avg'</span>:</span><br><span class="line">                Y[i, j] = X[i: i + p_h, j: j + p_w].mean()       </span><br><span class="line">    <span class="keyword">return</span> Y</span><br><span class="line"></span><br><span class="line">X = torch.tensor([[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>], [<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>], [<span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>]])</span><br><span class="line">pool2d(X, (<span class="number">2</span>, <span class="number">2</span>))</span><br></pre></td></tr></table></figure>
+<p>下面是使用nn模块中的最大池化：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">X = torch.arange(<span class="number">16</span>, dtype=torch.float).view((<span class="number">1</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">4</span>))</span><br><span class="line">X</span><br><span class="line"></span><br><span class="line">pool2d = nn.MaxPool2d(<span class="number">3</span>)  <span class="comment"># 默认为（3,3）的池化窗口使用(3,3)的步幅</span></span><br><span class="line">print(pool2d(X))</span><br><span class="line"></span><br><span class="line">pool2d = nn.MaxPool2d(<span class="number">3</span>, padding=<span class="number">1</span>, stride=<span class="number">2</span>)</span><br><span class="line">print(pool2d(X))</span><br><span class="line"></span><br><span class="line">pool2d = nn.MaxPool2d((<span class="number">2</span>, <span class="number">4</span>), padding=(<span class="number">1</span>, <span class="number">2</span>), stride=(<span class="number">2</span>, <span class="number">3</span>))</span><br><span class="line">print(pool2d(X))</span><br></pre></td></tr></table></figure>
+<ul>
+<li>多通道</li>
+</ul>
+<p>池化中的多通道与卷积层不同，它的输出通道与输入通道保持一致，不会在不同通道之间求和：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 多通道</span></span><br><span class="line">X = torch.cat((X, X + <span class="number">1</span>), dim=<span class="number">1</span>)</span><br><span class="line">X</span><br><span class="line"></span><br><span class="line">pool2d = nn.MaxPool2d(<span class="number">3</span>, padding=<span class="number">1</span>, stride=<span class="number">2</span>)</span><br><span class="line">pool2d(X)</span><br></pre></td></tr></table></figure>
+<p>输出通道仍是2：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tensor([[[[ 5.,  7.],</span><br><span class="line">          [13., 15.]],</span><br><span class="line"></span><br><span class="line">         [[ 6.,  8.],</span><br><span class="line">          [14., 16.]]]])</span><br></pre></td></tr></table></figure>
+<h2 id="卷积神经网络-LeNet"><a href="#卷积神经网络-LeNet" class="headerlink" title="卷积神经网络(LeNet)"></a>卷积神经网络(LeNet)</h2><p>LeNet的网络结构如下：</p>
+<p><img src="https://i.loli.net/2021/09/12/SXkQDzgN8miCZw6.png" alt="1593483283502.png"></p>
+<p>​        卷积层块里的基本单位是卷积层后接最大池化层：卷积层用来识别图像里的空间模式，如线条和物体局部，之后的最大池化层则用来降低卷积层对位置的敏感性。卷积层块由两个这样的基本单位重复堆叠构成。在卷积层块中，每个卷积层都使用5×5的窗口，并在输出上使用sigmoid激活函数。第一个卷积层输出通道数为6，第二个卷积层输出通道数则增加到16。这是因为第二个卷积层比第一个卷积层的输入的高和宽要小，所以增加输出通道使两个卷积层的参数尺寸类似。卷积层块的两个最大池化层的窗口形状均为2×2，且步幅为2。由于池化窗口与步幅形状相同，池化窗口在输入上每次滑动所覆盖的区域互不重叠。</p>
+<p>​        卷积层块的输出形状为(批量大小, 通道, 高, 宽)。当卷积层块的输出传入全连接层块时，全连接层块会将小批量中每个样本变平（flatten）。也就是说，全连接层的输入形状将变成二维，其中第一维是小批量中的样本，第二维是每个样本变平后的向量表示，且向量长度为通道、高和宽的乘积。全连接层块含3个全连接层。它们的输出个数分别是120、84和10，其中10为输出的类别个数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn, optim</span><br><span class="line"></span><br><span class="line">device = torch.device(<span class="string">'cuda'</span> <span class="keyword">if</span> torch.cuda.is_available() <span class="keyword">else</span> <span class="string">'cpu'</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LeNet</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        super().__init__()</span><br><span class="line">        self.conv = nn.Sequential(</span><br><span class="line">            nn.Conv2d(<span class="number">1</span>, <span class="number">6</span>, <span class="number">5</span>), <span class="comment"># in_channels, out_ch, kernel_size</span></span><br><span class="line">            nn.Sigmoid(),       <span class="comment"># activate</span></span><br><span class="line">            nn.MaxPool2d(<span class="number">2</span>, <span class="number">2</span>), <span class="comment"># kelnel_size, stride</span></span><br><span class="line">            nn.Conv2d(<span class="number">6</span>, <span class="number">16</span>, <span class="number">5</span>),</span><br><span class="line">            nn.Sigmoid(),</span><br><span class="line">            nn.MaxPool2d(<span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">        )</span><br><span class="line">        self.fc = nn.Sequential(</span><br><span class="line">            nn.Linear(<span class="number">16</span> * <span class="number">4</span> * <span class="number">4</span>, <span class="number">120</span>),   <span class="comment"># 此处用的输入图像是28*28,</span></span><br><span class="line">            nn.Sigmoid(),</span><br><span class="line">            nn.Linear(<span class="number">120</span>, <span class="number">84</span>),</span><br><span class="line">            nn.Sigmoid(),</span><br><span class="line">            nn.Linear(<span class="number">84</span>, <span class="number">10</span>)</span><br><span class="line">        )</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, img)</span>:</span></span><br><span class="line">        feature = self.conv(img)</span><br><span class="line">        output = self.fc(feature.view(img.shape[<span class="number">0</span>], <span class="number">-1</span>))</span><br><span class="line">        <span class="keyword">return</span> output</span><br><span class="line">    </span><br><span class="line">net = LeNet()</span><br><span class="line">print(net)</span><br></pre></td></tr></table></figure>
+<p>PS：这里解释下在创建网络时，使用nn下的类和nn.functional下的函数的区别，一般来说，nn中 的类会自动帮我们维护模型需要训练的参数（weight、bias、stride等），而functional只是实现了对应的函数计算。因此functional更灵活，nn类会帮你管理参数。通常情况下，需要参数的(如conv2d, linear, batch_norm)用nn类，而不需要参数的(如maxpool, loss func, activation func）用functional。而dropout最好用nn，虽然它只是计算不包含参数，但是在nn定义下的model.eval()属性可以控制它的开关。</p>
+<p>所以常常在net的继承Module方式搭建中看到nn被写在<strong>init</strong>()中，而functional方法被写在forward中。而对于使用Sequential方法搭建的网络，必须都是Module子类，所以只能用nn类。</p>
+<p>数据读取，与之前相同</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> torchvision</span><br><span class="line"><span class="keyword">import</span> torchvision.transforms <span class="keyword">as</span> transforms</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_data_fashion_mnist</span><span class="params">(batch_size, resize=None, root=<span class="string">'~/Datasets/FashionMNIST'</span>)</span>:</span></span><br><span class="line">    <span class="string">"""Download the fashion mnist dataset and then load into memory."""</span></span><br><span class="line">    trans = []</span><br><span class="line">    <span class="keyword">if</span> resize:</span><br><span class="line">        trans.append(torchvision.transforms.Resize(size=resize))</span><br><span class="line">    trans.append(torchvision.transforms.ToTensor())</span><br><span class="line"></span><br><span class="line">    transform = torchvision.transforms.Compose(trans)</span><br><span class="line">    mnist_train = torchvision.datasets.FashionMNIST(root=root, train=<span class="literal">True</span>, download=<span class="literal">True</span>, transform=transform)</span><br><span class="line">    mnist_test = torchvision.datasets.FashionMNIST(root=root, train=<span class="literal">False</span>, download=<span class="literal">True</span>, transform=transform)</span><br><span class="line"></span><br><span class="line">    train_iter = torch.utils.data.DataLoader(mnist_train, batch_size=batch_size, shuffle=<span class="literal">True</span>, num_workers=<span class="number">4</span>)</span><br><span class="line">    test_iter = torch.utils.data.DataLoader(mnist_test, batch_size=batch_size, shuffle=<span class="literal">False</span>, num_workers=<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> train_iter, test_iter</span><br><span class="line"></span><br><span class="line">batch_size = <span class="number">256</span></span><br><span class="line">train_iter, test_iter = load_data_fashion_mnist(batch_size)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>模型评估和训练</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 模型评估</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">evaluate_accuracy</span><span class="params">(data_iter, net, device=None)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> device <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">and</span> isinstance(net, torch.nn.Module):</span><br><span class="line">        <span class="comment"># 如果没指定device就使用net的device</span></span><br><span class="line">        device = list(net.parameters())[<span class="number">0</span>].device</span><br><span class="line">    acc_sum, n = <span class="number">0.0</span>, <span class="number">0</span></span><br><span class="line">    <span class="keyword">with</span> torch.no_grad():</span><br><span class="line">        <span class="keyword">for</span> X, y <span class="keyword">in</span> data_iter:</span><br><span class="line">            </span><br><span class="line">            net.eval() <span class="comment"># 评估模式, 这会关闭dropout</span></span><br><span class="line">            acc_sum += (net(X.to(device)).argmax(dim=<span class="number">1</span>) == y.to(device)).float().sum().cpu().item()</span><br><span class="line">            net.train() <span class="comment"># 改回训练模式</span></span><br><span class="line">            </span><br><span class="line">            n += y.shape[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">return</span> acc_sum / n</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 模型训练</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">train_ch5</span><span class="params">(net, train_iter, test_iter, batch_size, optimizer, device, num_epochs)</span>:</span></span><br><span class="line">    net = net.to(device)         <span class="comment"># 模型移动到对应设备</span></span><br><span class="line">    print(<span class="string">"training on "</span>, device)</span><br><span class="line">    loss = torch.nn.CrossEntropyLoss()</span><br><span class="line">    <span class="keyword">for</span> epoch <span class="keyword">in</span> range(num_epochs):</span><br><span class="line">        train_l_sum, train_acc_sum, n, batch_count, start = <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0</span>, <span class="number">0</span>, time.time()</span><br><span class="line">        <span class="keyword">for</span> X, y <span class="keyword">in</span> train_iter:</span><br><span class="line">            X = X.to(device)     <span class="comment"># 计算数据移动到对应设备</span></span><br><span class="line">            y = y.to(device)</span><br><span class="line">            y_hat = net(X)</span><br><span class="line">            l = loss(y_hat, y)</span><br><span class="line">            optimizer.zero_grad()</span><br><span class="line">            l.backward()</span><br><span class="line">            optimizer.step()</span><br><span class="line">            train_l_sum += l.cpu().item()  </span><br><span class="line">            train_acc_sum += (y_hat.argmax(dim=<span class="number">1</span>) == y).sum().cpu().item()</span><br><span class="line">            n += y.shape[<span class="number">0</span>]</span><br><span class="line">            batch_count += <span class="number">1</span></span><br><span class="line">        test_acc = evaluate_accuracy(test_iter, net) <span class="comment"># 评估</span></span><br><span class="line">        print(<span class="string">'epoch %d, loss %.4f, train acc %.3f, test acc %.3f, time %.1f sec'</span></span><br><span class="line">              % (epoch + <span class="number">1</span>, train_l_sum / batch_count, train_acc_sum / n, test_acc, time.time() - start))</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">lr, num_epochs = <span class="number">0.001</span>, <span class="number">40</span></span><br><span class="line">optimizer = torch.optim.Adam(net.parameters(), lr=lr)</span><br><span class="line">train_ch5(net, train_iter, test_iter, batch_size, optimizer, device, num_epochs)</span><br></pre></td></tr></table></figure>
+<h2 id="VGG网络"><a href="#VGG网络" class="headerlink" title="VGG网络"></a>VGG网络</h2><p><img src="https://i.loli.net/2021/09/12/Bv6qEdaxh7zCZQe.png" alt="1593512753698.png"></p>
+<p>VGG块的组成规律是：连续使用数个相同的填充为1、窗口形状为3×33\times 33×3的卷积层后接上一个步幅为2、窗口形状为2×22\times 22×2的最大池化层。卷积层保持输入的高和宽不变，而池化层则对其减半。我们使用<code>vgg_block</code>函数来实现这个基础的VGG块，它可以指定卷积层的数量和输入输出通道数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">def</span> <span class="title">vgg_block</span><span class="params">(num_convs, in_channels, out_channels)</span>:</span></span><br><span class="line">        blk = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(num_convs):</span><br><span class="line">            <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">                blk.append(nn.Conv2d(in_channels, out_channels, kernel_size = <span class="number">3</span>, padding = <span class="number">1</span>))</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                blk.append(nn.Conv2d(out_channels, out_channels, kernel_size = <span class="number">3</span>, padding = <span class="number">1</span>))</span><br><span class="line">            blk.append(nn.ReLU())</span><br><span class="line">        blk.append(nn.MaxPool2d(<span class="number">2</span>, <span class="number">2</span>))</span><br><span class="line">        <span class="keyword">return</span> nn.Sequential(*blk)</span><br><span class="line"></span><br><span class="line">conv_arch = ((<span class="number">1</span>, <span class="number">1</span>, <span class="number">64</span>), (<span class="number">1</span>, <span class="number">64</span>, <span class="number">128</span>), (<span class="number">2</span>, <span class="number">128</span>, <span class="number">256</span>), (<span class="number">2</span>, <span class="number">256</span>, <span class="number">512</span>), (<span class="number">2</span>, <span class="number">512</span>, <span class="number">512</span>))</span><br><span class="line"><span class="comment"># 经过5个vgg_block, 宽高会减半5次, 变成 224/32 = 7</span></span><br><span class="line">fc_features = <span class="number">512</span> * <span class="number">7</span> * <span class="number">7</span> <span class="comment"># c * w * h</span></span><br><span class="line">fc_hidden_units = <span class="number">4096</span> <span class="comment"># 任意</span></span><br></pre></td></tr></table></figure>
+<p>VGG块就是VGG网络的主要特点，前面通过几个VGG块，后面添加全连接层便组成了VGG网络。</p>
+<p>VGG网络：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FlattenLayer</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        super().__init__()</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span> <span class="comment"># x shape: (batch, *, *, ...)</span></span><br><span class="line">        <span class="keyword">return</span> x.view(x.shape[<span class="number">0</span>], <span class="number">-1</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">vgg</span><span class="params">(conv_arch, fc_features, fc_hidden_units=<span class="number">4096</span>)</span>:</span></span><br><span class="line">    net = nn.Sequential()</span><br><span class="line">    <span class="keyword">for</span> i, (num_convs, in_channels, out_channels) <span class="keyword">in</span> enumerate(conv_arch):</span><br><span class="line">        <span class="comment"># 每个vgg_blck会使高宽减半</span></span><br><span class="line">        net.add_module(<span class="string">"vgg_block_"</span> + str(i + <span class="number">1</span>), vgg_block(num_convs, in_channels, out_channels))</span><br><span class="line">    <span class="comment"># fc</span></span><br><span class="line">    net.add_module(<span class="string">"fc"</span>, nn.Sequential(</span><br><span class="line">                            FlattenLayer(),</span><br><span class="line">                            nn.Linear(fc_features, fc_hidden_units),</span><br><span class="line">                            nn.ReLU(),</span><br><span class="line">                            nn.Dropout(<span class="number">0.5</span>),</span><br><span class="line">                            nn.Linear(fc_hidden_units, fc_hidden_units),</span><br><span class="line">                            nn.ReLU(),</span><br><span class="line">                            nn.Dropout(<span class="number">0.5</span>),</span><br><span class="line">                            nn.Linear(fc_hidden_units, <span class="number">10</span>)</span><br><span class="line">                            ))</span><br><span class="line">    <span class="keyword">return</span> net</span><br><span class="line"></span><br><span class="line">net = vgg(conv_arch, fc_features, fc_hidden_units)</span><br><span class="line">X = torch.rand(<span class="number">1</span>, <span class="number">1</span>, <span class="number">224</span>, <span class="number">224</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># named_children获取一级子模块及其名字(named_modules会返回所有子模块,包括子模块的子模块)</span></span><br><span class="line"><span class="keyword">for</span> name, blk <span class="keyword">in</span> net.named_children(): </span><br><span class="line">    X = blk(X)</span><br><span class="line">    print(name, <span class="string">'output shape: '</span>, X.shape)</span><br><span class="line"></span><br><span class="line">net</span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">vgg_block_1 output shape:  torch.Size([1, 64, 112, 112])</span><br><span class="line">vgg_block_2 output shape:  torch.Size([1, 128, 56, 56])</span><br><span class="line">vgg_block_3 output shape:  torch.Size([1, 256, 28, 28])</span><br><span class="line">vgg_block_4 output shape:  torch.Size([1, 512, 14, 14])</span><br><span class="line">vgg_block_5 output shape:  torch.Size([1, 512, 7, 7])</span><br><span class="line">fc output shape:  torch.Size([1, 10])</span><br><span class="line"></span><br><span class="line">Sequential(</span><br><span class="line">  (vgg_block_1): Sequential(</span><br><span class="line">    (0): Conv2d(1, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))</span><br><span class="line">    (1): ReLU()</span><br><span class="line">    (2): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)</span><br><span class="line">  )</span><br><span class="line">  (vgg_block_2): Sequential(</span><br><span class="line">    (0): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))</span><br><span class="line">    (1): ReLU()</span><br><span class="line">    (2): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)</span><br><span class="line">  )</span><br><span class="line">  (vgg_block_3): Sequential(</span><br><span class="line">    (0): Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))</span><br><span class="line">    (1): ReLU()</span><br><span class="line">    (2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))</span><br><span class="line">    (3): ReLU()</span><br><span class="line">    (4): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)</span><br><span class="line">  )</span><br><span class="line">  (vgg_block_4): Sequential(</span><br><span class="line">    (0): Conv2d(256, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))</span><br><span class="line">    (1): ReLU()</span><br><span class="line">    (2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))</span><br><span class="line">    (3): ReLU()</span><br><span class="line">    (4): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)</span><br><span class="line">  )</span><br><span class="line">  (vgg_block_5): Sequential(</span><br><span class="line">    (0): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))</span><br><span class="line">    (1): ReLU()</span><br><span class="line">    (2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))</span><br><span class="line">    (3): ReLU()</span><br><span class="line">    (4): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)</span><br><span class="line">  )</span><br><span class="line">  (fc): Sequential(</span><br><span class="line">    (0): FlattenLayer()</span><br><span class="line">    (1): Linear(in_features=25088, out_features=4096, bias=True)</span><br><span class="line">    (2): ReLU()</span><br><span class="line">    (3): Dropout(p=0.5, inplace=False)</span><br><span class="line">    (4): Linear(in_features=4096, out_features=4096, bias=True)</span><br><span class="line">    (5): ReLU()</span><br><span class="line">    (6): Dropout(p=0.5, inplace=False)</span><br><span class="line">    (7): Linear(in_features=4096, out_features=10, bias=True)</span><br><span class="line">  )</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>训练方法与之前相同</p>
+<h2 id="NiN网络"><a href="#NiN网络" class="headerlink" title="NiN网络"></a>NiN网络</h2><p>卷积层的输入和输出通常是四维数组（样本，通道，高，宽），而全连接层的输入和输出则通常是二维数组（样本，特征）。如果想在全连接层后再接上卷积层，则需要将全连接层的输出变换为四维。前面说过1×1卷积层可以看成全连接层，其中空间维度（高和宽）上的每个元素相当于样本，通道相当于特征。因此，NiN使用1×1卷积层来替代全连接层，从而使空间信息能够自然传递到后面的层中去。下图对比了NiN同AlexNet和VGG等网络在结构上的主要区别。</p>
+<p><img src="https://i.loli.net/2021/09/12/eUnvHXM9Dbp5omP.png" alt="1593513068342.png"></p>
+<p>与VGG类似，NiN也有组成它的基础块，由一个卷积层加两个充当全连接层的1×1卷积层串联而成。其中第一个卷积层的超参数可以自行设置，而第二和第三个卷积层的超参数一般是固定的。</p>
+<ul>
+<li>NiN块</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">nin_block</span><span class="params">(in_channels, out_channels, kernel_size, stride, padding)</span>:</span></span><br><span class="line">    blk = nn.Sequential(nn.Conv2d(in_channels, out_channels, kernel_size, stride, padding),</span><br><span class="line">                       nn.ReLU(),</span><br><span class="line">                       nn.Conv2d(out_channels, out_channels, kernel_size = <span class="number">1</span>),  <span class="comment"># 后面两个1 * 1 卷积</span></span><br><span class="line">                       nn.ReLU(),</span><br><span class="line">                       nn.Conv2d(out_channels, out_channels, kernel_size = <span class="number">1</span>),</span><br><span class="line">                       nn.ReLU()</span><br><span class="line">                       )</span><br><span class="line">    <span class="keyword">return</span> blk</span><br></pre></td></tr></table></figure>
+<ul>
+<li>NiN网络</li>
+</ul>
+<p>NiN是在AlexNet问世不久后提出的。它们的卷积层设定有类似之处。NiN使用卷积窗口形状分别为11×11、5×5和3×3的卷积层，相应的输出通道数也与AlexNet中的一致。每个NiN块后接一个步幅为2、窗口形状为3×3的最大池化层。</p>
+<p>除使用NiN块以外，NiN还有一个设计与AlexNet显著不同：NiN去掉了AlexNet最后的3个全连接层，取而代之地，NiN使用了输出通道数等于标签类别数的NiN块，然后使用全局平均池化层对每个通道中所有元素求平均并直接用于分类。这里的全局平均池化层即<strong>窗口形状等于输入空间维形状的平均池化层</strong>。NiN的这个设计的好处是可以显著减小模型参数尺寸，从而缓解过拟合。然而，该设计有时会造成获得有效模型的训练时间的增加。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GlobalAvgPool2d</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="comment"># 全局平均池化层可通过将池化窗口形状设置成输入的高和宽实现</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        super(GlobalAvgPool2d, self).__init__()</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> F.avg_pool2d(x, kernel_size=x.size()[<span class="number">2</span>:]) <span class="comment">## 后两维即h * w</span></span><br><span class="line"></span><br><span class="line">net = nn.Sequential(</span><br><span class="line">    nin_block(<span class="number">1</span>, <span class="number">96</span>, kernel_size=<span class="number">11</span>, stride=<span class="number">4</span>, padding=<span class="number">0</span>),</span><br><span class="line">    nn.MaxPool2d(kernel_size=<span class="number">3</span>, stride=<span class="number">2</span>),</span><br><span class="line">    nin_block(<span class="number">96</span>, <span class="number">256</span>, kernel_size=<span class="number">5</span>, stride=<span class="number">1</span>, padding=<span class="number">2</span>),</span><br><span class="line">    nn.MaxPool2d(kernel_size=<span class="number">3</span>, stride=<span class="number">2</span>),</span><br><span class="line">    nin_block(<span class="number">256</span>, <span class="number">384</span>, kernel_size=<span class="number">3</span>, stride=<span class="number">1</span>, padding=<span class="number">1</span>),</span><br><span class="line">    nn.MaxPool2d(kernel_size=<span class="number">3</span>, stride=<span class="number">2</span>), </span><br><span class="line">    nn.Dropout(<span class="number">0.5</span>),</span><br><span class="line">    <span class="comment"># 标签类别数是10</span></span><br><span class="line">    nin_block(<span class="number">384</span>, <span class="number">10</span>, kernel_size=<span class="number">3</span>, stride=<span class="number">1</span>, padding=<span class="number">1</span>),</span><br><span class="line">    GlobalAvgPool2d(),   <span class="comment"># 对10个通道做全局平均池化进行分类</span></span><br><span class="line">    <span class="comment"># 将四维的输出转成二维的输出，其形状为(批量大小, 10)</span></span><br><span class="line">    FlattenLayer())</span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">0 output shape:  torch.Size([1, 96, 54, 54])</span><br><span class="line">1 output shape:  torch.Size([1, 96, 26, 26])</span><br><span class="line">2 output shape:  torch.Size([1, 256, 26, 26])</span><br><span class="line">3 output shape:  torch.Size([1, 256, 12, 12])</span><br><span class="line">4 output shape:  torch.Size([1, 384, 12, 12])</span><br><span class="line">5 output shape:  torch.Size([1, 384, 5, 5])</span><br><span class="line">6 output shape:  torch.Size([1, 384, 5, 5])</span><br><span class="line">7 output shape:  torch.Size([1, 10, 5, 5])</span><br><span class="line">8 output shape:  torch.Size([1, 10, 1, 1])</span><br><span class="line">9 output shape:  torch.Size([1, 10])</span><br></pre></td></tr></table></figure>
+<p>训练方法同上</p>
+<h2 id="GoogleNet"><a href="#GoogleNet" class="headerlink" title="GoogleNet"></a>GoogleNet</h2><p>GoogleNet借鉴NiN串联网络的思想，提出了一种并联网络，它同样有一种基础块，叫做Inception块。如图：</p>
+<p><img src="https://i.loli.net/2021/09/12/W4rx7QjsaiZDOge.png" alt="1593522526004.png"></p>
+<p>Inception块里有4条并行的线路。前3条线路使用窗口大小分别是1×1、3×3和5×5的卷积层来抽取不同空间尺寸下的信息，其中中间2个线路会对输入先做1×1卷积来减少输入通道数，以降低模型复杂度。第四条线路则使用3×3最大池化层，后接1×1卷积层来改变通道数。4条线路都使用了合适的填充来使输入与输出的高和宽一致。最后我们将每条线路的输出在通道维上连结，并输入接下来的层中去。</p>
+<p>Inception块中可以自定义的超参数是每个层的输出通道数，我们以此来控制模型复杂度。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"></span><br><span class="line">device = torch.device(<span class="string">'cuda'</span> <span class="keyword">if</span> torch.cuda.is_available() <span class="keyword">else</span> <span class="string">'cpu'</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Inception</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="comment"># c1 - c4为每条线路里的层的输出通道数</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, in_c, c1, c2, c3, c4)</span>:</span></span><br><span class="line">        super(Inception, self).__init__()</span><br><span class="line">        <span class="comment"># 线路1，单1 x 1卷积层</span></span><br><span class="line">        self.p1_1 = nn.Conv2d(in_c, c1, kernel_size=<span class="number">1</span>)</span><br><span class="line">        <span class="comment"># 线路2，1 x 1卷积层后接3 x 3卷积层</span></span><br><span class="line">        self.p2_1 = nn.Conv2d(in_c, c2[<span class="number">0</span>], kernel_size=<span class="number">1</span>)   <span class="comment"># 1×1卷积改变通道数</span></span><br><span class="line">        self.p2_2 = nn.Conv2d(c2[<span class="number">0</span>], c2[<span class="number">1</span>], kernel_size=<span class="number">3</span>, padding=<span class="number">1</span>)</span><br><span class="line">        <span class="comment"># 线路3，1 x 1卷积层后接5 x 5卷积层</span></span><br><span class="line">        self.p3_1 = nn.Conv2d(in_c, c3[<span class="number">0</span>], kernel_size=<span class="number">1</span>)</span><br><span class="line">        self.p3_2 = nn.Conv2d(c3[<span class="number">0</span>], c3[<span class="number">1</span>], kernel_size=<span class="number">5</span>, padding=<span class="number">2</span>)</span><br><span class="line">        <span class="comment"># 线路4，3 x 3最大池化层后接1 x 1卷积层</span></span><br><span class="line">        self.p4_1 = nn.MaxPool2d(kernel_size=<span class="number">3</span>, stride=<span class="number">1</span>, padding=<span class="number">1</span>)</span><br><span class="line">        self.p4_2 = nn.Conv2d(in_c, c4, kernel_size=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        <span class="comment"># 并联结构</span></span><br><span class="line">        p1 = F.relu(self.p1_1(x))</span><br><span class="line">        p2 = F.relu(self.p2_2(F.relu(self.p2_1(x))))</span><br><span class="line">        p3 = F.relu(self.p3_2(F.relu(self.p3_1(x))))</span><br><span class="line">        p4 = F.relu(self.p4_2(self.p4_1(x)))</span><br><span class="line">        <span class="keyword">return</span> torch.cat((p1, p2, p3, p4), dim=<span class="number">1</span>)  <span class="comment"># 在通道维上连结输出</span></span><br></pre></td></tr></table></figure>
+<p>完整的GoogleNet网络包括了5个模块，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 第一模块使用一个64通道的7×7卷积层。</span></span><br><span class="line">b1 = nn.Sequential(nn.Conv2d(<span class="number">1</span>, <span class="number">64</span>, kernel_size=<span class="number">7</span>, stride=<span class="number">2</span>, padding=<span class="number">3</span>),</span><br><span class="line">             nn.ReLU(),</span><br><span class="line">             nn.MaxPool2d(kernel_size=<span class="number">3</span>, stride=<span class="number">2</span>, padding = <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 第二模块使用2个卷积层：首先是64通道的1×1卷积层，然后是将通道增大3倍的3×3卷积层。它对应Inception块中的第二条线路。</span></span><br><span class="line">b2 = nn.Sequential(nn.Conv2d(<span class="number">64</span>, <span class="number">64</span>, kernel_size = <span class="number">1</span>), </span><br><span class="line">                  nn.Conv2d(<span class="number">64</span>, <span class="number">192</span>, kernel_size = <span class="number">3</span>, padding = <span class="number">1</span>),</span><br><span class="line">                  nn.MaxPool2d(kernel_size = <span class="number">3</span>, stride = <span class="number">2</span>, padding = <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 第三模块串联2个完整的Inception块</span></span><br><span class="line">b3 = nn.Sequential(Inception(<span class="number">192</span>, <span class="number">64</span>, (<span class="number">96</span>, <span class="number">128</span>), (<span class="number">16</span>, <span class="number">32</span>), <span class="number">32</span>),</span><br><span class="line">                   Inception(<span class="number">256</span>, <span class="number">128</span>, (<span class="number">128</span>, <span class="number">192</span>), (<span class="number">32</span>, <span class="number">96</span>), <span class="number">64</span>),</span><br><span class="line">                   nn.MaxPool2d(kernel_size=<span class="number">3</span>, stride=<span class="number">2</span>, padding=<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">b4 = nn.Sequential(Inception(<span class="number">480</span>, <span class="number">192</span>, (<span class="number">96</span>, <span class="number">208</span>), (<span class="number">16</span>, <span class="number">48</span>), <span class="number">64</span>),</span><br><span class="line">                   Inception(<span class="number">512</span>, <span class="number">160</span>, (<span class="number">112</span>, <span class="number">224</span>), (<span class="number">24</span>, <span class="number">64</span>), <span class="number">64</span>),</span><br><span class="line">                   Inception(<span class="number">512</span>, <span class="number">128</span>, (<span class="number">128</span>, <span class="number">256</span>), (<span class="number">24</span>, <span class="number">64</span>), <span class="number">64</span>),</span><br><span class="line">                   Inception(<span class="number">512</span>, <span class="number">112</span>, (<span class="number">144</span>, <span class="number">288</span>), (<span class="number">32</span>, <span class="number">64</span>), <span class="number">64</span>),</span><br><span class="line">                   Inception(<span class="number">528</span>, <span class="number">256</span>, (<span class="number">160</span>, <span class="number">320</span>), (<span class="number">32</span>, <span class="number">128</span>), <span class="number">128</span>),</span><br><span class="line">                   nn.MaxPool2d(kernel_size=<span class="number">3</span>, stride=<span class="number">2</span>, padding=<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">b5 = nn.Sequential(Inception(<span class="number">832</span>, <span class="number">256</span>, (<span class="number">160</span>, <span class="number">320</span>), (<span class="number">32</span>, <span class="number">128</span>), <span class="number">128</span>),</span><br><span class="line">                   Inception(<span class="number">832</span>, <span class="number">384</span>, (<span class="number">192</span>, <span class="number">384</span>), (<span class="number">48</span>, <span class="number">128</span>), <span class="number">128</span>),</span><br><span class="line">                   GlobalAvgPool2d())</span><br><span class="line"></span><br><span class="line">net = nn.Sequential(b1, b2, b3, b4, b5, </span><br><span class="line">                    FlattenLayer(), nn.Linear(<span class="number">1024</span>, <span class="number">10</span>))</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">net = nn.Sequential(b1, b2, b3, b4, b5, FlattenLayer(), nn.Linear(<span class="number">1024</span>, <span class="number">10</span>))</span><br><span class="line">X = torch.rand(<span class="number">1</span>, <span class="number">1</span>, <span class="number">96</span>, <span class="number">96</span>)   <span class="comment"># 这里更改模型参数比较麻烦，因此改图像大小为96×96</span></span><br><span class="line"><span class="keyword">for</span> blk <span class="keyword">in</span> net.children(): </span><br><span class="line">    X = blk(X)</span><br><span class="line">    print(<span class="string">'output shape: '</span>, X.shape)</span><br></pre></td></tr></table></figure>
+<p>输出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">output shape:  torch.Size([1, 64, 24, 24])</span><br><span class="line">output shape:  torch.Size([1, 192, 12, 12])</span><br><span class="line">output shape:  torch.Size([1, 480, 6, 6])</span><br><span class="line">output shape:  torch.Size([1, 832, 3, 3])</span><br><span class="line">output shape:  torch.Size([1, 1024, 1, 1])</span><br><span class="line">output shape:  torch.Size([1, 1024])</span><br><span class="line">output shape:  torch.Size([1, 10])</span><br></pre></td></tr></table></figure>
+<h2 id="批量归一化-batch-normalization"><a href="#批量归一化-batch-normalization" class="headerlink" title="批量归一化(batch normalization)"></a>批量归一化(batch normalization)</h2><p>批量归一化层常用于激活函数之前，对全连接层来说，它位于仿射变换和激活函数之间。实际上就是先对一个批次的样本进行标准化后，再使用两个可学习的模型参数（拉伸和偏移），其形状与标准化后的数据相同。拉伸参数与数据按元素相乘，而偏移相加。全连接层和卷积层的标准化稍有不同，FC层标准化对于每个特征的所有样本，即对每个特征进行求均值和方差。而卷积层的通道相当于全连接层的特征，因此卷积层对通道进行求均值和方差，这就需要对样本、高、宽数据都进行求和。</p>
+<h3 id="手动实现BN"><a href="#手动实现BN" class="headerlink" title="手动实现BN"></a>手动实现BN</h3><ul>
+<li>实现batch_norm函数，定义了BN计算，其中moving参数用于预测时作为全局均值和方差</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn, optim</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line">device = torch.device(<span class="string">'cuda'</span> <span class="keyword">if</span> torch.cuda.is_available() <span class="keyword">else</span> <span class="string">'cpu'</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">batch_norm</span><span class="params">(is_training, X, gamma, beta, moving_mean, moving_var, eps, momentum)</span>:</span></span><br><span class="line">    <span class="comment"># 判断当前模式是训练模式还是预测模式</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> is_training:</span><br><span class="line">        <span class="comment"># 如果是在预测模式下，直接使用传入的移动平均所得的均值和方差</span></span><br><span class="line">        X_hat = (X - moving_mean) / torch.sqrt(moving_var + eps)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">assert</span> len(X.shape) <span class="keyword">in</span> (<span class="number">2</span>, <span class="number">4</span>)   <span class="comment"># 二维是全连接，四维是卷积</span></span><br><span class="line">        <span class="keyword">if</span> len(X.shape) == <span class="number">2</span>:c</span><br><span class="line">            <span class="comment"># 使用全连接层的情况，计算特征维(dim=1)上的均值和方差,即每个特征对应所有样本的均值</span></span><br><span class="line">            mean = X.mean(dim=<span class="number">0</span>)</span><br><span class="line">            var = ((X - mean) ** <span class="number">2</span>).mean(dim=<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 使用二维卷积层的情况，计算通道维上（axis=1）的均值和方差。这里我们需要保持</span></span><br><span class="line">            <span class="comment"># X的形状以便后面可以做广播运算</span></span><br><span class="line">            mean = X.mean(dim=<span class="number">0</span>, keepdim=<span class="literal">True</span>).mean(dim=<span class="number">2</span>, keepdim=<span class="literal">True</span>).mean(dim=<span class="number">3</span>, keepdim=<span class="literal">True</span>)</span><br><span class="line">            var = ((X - mean) ** <span class="number">2</span>).mean(dim=<span class="number">0</span>, keepdim=<span class="literal">True</span>).mean(dim=<span class="number">2</span>, keepdim=<span class="literal">True</span>).mean(dim=<span class="number">3</span>, keepdim=<span class="literal">True</span>)</span><br><span class="line">        <span class="comment"># 训练模式下用当前的均值和方差做标准化</span></span><br><span class="line">        X_hat = (X - mean) / torch.sqrt(var + eps)</span><br><span class="line">        <span class="comment"># 更新移动平均的均值和方差</span></span><br><span class="line">        moving_mean = momentum * moving_mean + (<span class="number">1.0</span> - momentum) * mean</span><br><span class="line">        moving_var = momentum * moving_var + (<span class="number">1.0</span> - momentum) * var</span><br><span class="line">    Y = gamma * X_hat + beta  <span class="comment"># 拉伸和偏移</span></span><br><span class="line">    <span class="keyword">return</span> Y, moving_mean, moving_var</span><br></pre></td></tr></table></figure>
+<ul>
+<li>BN网络模型，定义可训练参数</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BatchNorm</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, num_features, num_dims)</span>:</span>  <span class="comment"># 输出特征数、维度（指全连接或卷积）2或4</span></span><br><span class="line">        super(BatchNorm, self).__init__()</span><br><span class="line">        <span class="keyword">if</span> num_dims == <span class="number">2</span>:</span><br><span class="line">            shape = (<span class="number">1</span>, num_features)            <span class="comment"># BN参数只对于特征和通道</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            shape = (<span class="number">1</span>, num_features, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="comment"># 参与求梯度和迭代的拉伸和偏移参数，分别初始化成0和1</span></span><br><span class="line">        self.gamma = nn.Parameter(torch.ones(shape))</span><br><span class="line">        self.beta = nn.Parameter(torch.zeros(shape))</span><br><span class="line">        <span class="comment"># 不参与求梯度和迭代的变量，全在内存上初始化成0</span></span><br><span class="line">        self.moving_mean = torch.zeros(shape)</span><br><span class="line">        self.moving_var = torch.zeros(shape)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, X)</span>:</span></span><br><span class="line">        <span class="comment"># 如果X不在内存上，将moving_mean和moving_var复制到X所在显存上</span></span><br><span class="line">        <span class="keyword">if</span> self.moving_mean.device != X.device:</span><br><span class="line">            self.moving_mean = self.moving_mean.to(X.device)</span><br><span class="line">            self.moving_var = self.moving_var.to(X.device)</span><br><span class="line">        <span class="comment"># 保存更新过的moving_mean和moving_var, Module实例的traning属性默认为true, 调用.eval()后设成false</span></span><br><span class="line">        Y, self.moving_mean, self.moving_var = batch_norm(self.training, </span><br><span class="line">            X, self.gamma, self.beta, self.moving_mean,</span><br><span class="line">            self.moving_var, eps=<span class="number">1e-5</span>, momentum=<span class="number">0.9</span>)</span><br><span class="line">        <span class="keyword">return</span> Y</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FlattenLayer</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        super().__init__()</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span> <span class="comment"># x shape: (batch, *, *, ...)</span></span><br><span class="line">        <span class="keyword">return</span> x.view(x.shape[<span class="number">0</span>], <span class="number">-1</span>)</span><br><span class="line"><span class="comment"># 在LeNet中加入BN</span></span><br><span class="line">net = nn.Sequential(</span><br><span class="line">            nn.Conv2d(<span class="number">1</span>, <span class="number">6</span>, <span class="number">5</span>), <span class="comment"># in_channels, out_channels, kernel_size</span></span><br><span class="line">            BatchNorm(<span class="number">6</span>, num_dims=<span class="number">4</span>),</span><br><span class="line">            nn.Sigmoid(),</span><br><span class="line">            nn.MaxPool2d(<span class="number">2</span>, <span class="number">2</span>), <span class="comment"># kernel_size, stride</span></span><br><span class="line">            nn.Conv2d(<span class="number">6</span>, <span class="number">16</span>, <span class="number">5</span>),</span><br><span class="line">            BatchNorm(<span class="number">16</span>, num_dims=<span class="number">4</span>),</span><br><span class="line">            nn.Sigmoid(),</span><br><span class="line">            nn.MaxPool2d(<span class="number">2</span>, <span class="number">2</span>),</span><br><span class="line">            FlattenLayer(),</span><br><span class="line">            nn.Linear(<span class="number">16</span>*<span class="number">4</span>*<span class="number">4</span>, <span class="number">120</span>),</span><br><span class="line">            BatchNorm(<span class="number">120</span>, num_dims=<span class="number">2</span>),</span><br><span class="line">            nn.Sigmoid(),</span><br><span class="line">            nn.Linear(<span class="number">120</span>, <span class="number">84</span>),</span><br><span class="line">            BatchNorm(<span class="number">84</span>, num_dims=<span class="number">2</span>),</span><br><span class="line">            nn.Sigmoid(),</span><br><span class="line">            nn.Linear(<span class="number">84</span>, <span class="number">10</span>)</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">batch_size = <span class="number">256</span></span><br><span class="line">train_iter, test_iter = load_data_fashion_mnist(batch_size=batch_size)</span><br><span class="line"></span><br><span class="line">lr, num_epochs = <span class="number">0.001</span>, <span class="number">5</span></span><br><span class="line">optimizer = torch.optim.Adam(net.parameters(), lr=lr)</span><br><span class="line">train_ch5(net, train_iter, test_iter, batch_size, optimizer, device, num_epochs)</span><br><span class="line"></span><br><span class="line">net[<span class="number">1</span>].gamma.view((<span class="number">-1</span>,)), net[<span class="number">1</span>].beta.view((<span class="number">-1</span>,))</span><br></pre></td></tr></table></figure>
+<p>输出：第一层学到的拉伸和偏移参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(tensor([1.1579, 1.0431, 1.1592, 1.0162, 1.1995, 1.1381], device=&apos;cuda:0&apos;,</span><br><span class="line">        grad_fn=&lt;ViewBackward&gt;),</span><br><span class="line"> tensor([ 0.0797, -0.0031,  0.3353, -0.4526,  0.0626,  0.2471], device=&apos;cuda:0&apos;,</span><br><span class="line">        grad_fn=&lt;ViewBackward&gt;))</span><br></pre></td></tr></table></figure>
+<h3 id="简洁实现"><a href="#简洁实现" class="headerlink" title="简洁实现"></a>简洁实现</h3><p>，Pytorch中<code>nn</code>模块定义的<code>BatchNorm1d</code>和<code>BatchNorm2d</code>类使用起来更加简单，二者分别用于全连接层和卷积层，都需要指定输入的<code>num_features</code>参数值。下面我们用PyTorch实现使用批量归一化的LeNet。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">net = nn.Sequential(</span><br><span class="line">            nn.Conv2d(<span class="number">1</span>, <span class="number">6</span>, <span class="number">5</span>), <span class="comment"># in_channels, out_channels, kernel_size</span></span><br><span class="line">            nn.BatchNorm2d(<span class="number">6</span>),</span><br><span class="line">            nn.Sigmoid(),</span><br><span class="line">            nn.MaxPool2d(<span class="number">2</span>, <span class="number">2</span>), <span class="comment"># kernel_size, stride</span></span><br><span class="line">            nn.Conv2d(<span class="number">6</span>, <span class="number">16</span>, <span class="number">5</span>),</span><br><span class="line">            nn.BatchNorm2d(<span class="number">16</span>),</span><br><span class="line">            nn.Sigmoid(),</span><br><span class="line">            nn.MaxPool2d(<span class="number">2</span>, <span class="number">2</span>),</span><br><span class="line">            d2l.FlattenLayer(),</span><br><span class="line">            nn.Linear(<span class="number">16</span>*<span class="number">4</span>*<span class="number">4</span>, <span class="number">120</span>),</span><br><span class="line">            nn.BatchNorm1d(<span class="number">120</span>),</span><br><span class="line">            nn.Sigmoid(),</span><br><span class="line">            nn.Linear(<span class="number">120</span>, <span class="number">84</span>),</span><br><span class="line">            nn.BatchNorm1d(<span class="number">84</span>),</span><br><span class="line">            nn.Sigmoid(),</span><br><span class="line">            nn.Linear(<span class="number">84</span>, <span class="number">10</span>)</span><br><span class="line">        )</span><br></pre></td></tr></table></figure>
+<h2 id="ResNet（残差网络）"><a href="#ResNet（残差网络）" class="headerlink" title="ResNet（残差网络）"></a>ResNet（残差网络）</h2><p><img src="https://i.loli.net/2021/09/12/3oquMx2dlQ8TJga.png" alt="1593535171504.png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Residual</span><span class="params">(nn.Module)</span>:</span>  <span class="comment"># 本类已保存在d2lzh_pytorch包中方便以后使用</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, in_channels, out_channels, use_1x1conv=False, stride=<span class="number">1</span>)</span>:</span></span><br><span class="line">        super(Residual, self).__init__()</span><br><span class="line">        self.conv1 = nn.Conv2d(in_channels, out_channels, kernel_size=<span class="number">3</span>, padding=<span class="number">1</span>, stride=stride)</span><br><span class="line">        self.conv2 = nn.Conv2d(out_channels, out_channels, kernel_size=<span class="number">3</span>, padding=<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">if</span> use_1x1conv:</span><br><span class="line">            self.conv3 = nn.Conv2d(in_channels, out_channels, kernel_size=<span class="number">1</span>, stride=stride)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.conv3 = <span class="literal">None</span></span><br><span class="line">        self.bn1 = nn.BatchNorm2d(out_channels)</span><br><span class="line">        self.bn2 = nn.BatchNorm2d(out_channels)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, X)</span>:</span></span><br><span class="line">        Y = F.relu(self.bn1(self.conv1(X)))   <span class="comment"># 参考上图</span></span><br><span class="line">        Y = self.bn2(self.conv2(Y))</span><br><span class="line">        <span class="keyword">if</span> self.conv3:</span><br><span class="line">            X = self.conv3(X)   <span class="comment"># Y的形状变化，则可用它来使X与它保持一致</span></span><br><span class="line">        <span class="keyword">return</span> F.relu(Y - X)</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 可选择是否保持原输入形状，若不保持需用1*1卷积改变其形状（stride）</span></span><br><span class="line">blk = Residual(<span class="number">3</span>, <span class="number">3</span>)</span><br><span class="line">X = torch.rand((<span class="number">4</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">6</span>))</span><br><span class="line">blk(X).shape <span class="comment"># torch.Size([4, 3, 6, 6])</span></span><br><span class="line"></span><br><span class="line">blk = Residual(<span class="number">3</span>, <span class="number">6</span>, use_1x1conv=<span class="literal">True</span>, stride=<span class="number">2</span>)</span><br><span class="line">blk(X).shape <span class="comment"># torch.Size([4, 6, 3, 3])</span></span><br></pre></td></tr></table></figure>
+<p>ResNet构造与GoogleNet差不多，包含多个模块，其中前两个是正常模块，中间是由残差模块组成的，其中第一个模块输入输出通道相同，后面的模块依次让通道翻倍，高宽缩小一倍。且每个残差模块由2个残差网络组成。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">net = nn.Sequential(</span><br><span class="line">        nn.Conv2d(<span class="number">1</span>, <span class="number">64</span>, kernel_size=<span class="number">7</span>, stride=<span class="number">2</span>, padding=<span class="number">3</span>),</span><br><span class="line">        nn.BatchNorm2d(<span class="number">64</span>), </span><br><span class="line">        nn.ReLU(),</span><br><span class="line">        nn.MaxPool2d(kernel_size=<span class="number">3</span>, stride=<span class="number">2</span>, padding=<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">resnet_block</span><span class="params">(in_channels, out_channels, num_residuals, first_block=False)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> first_block:</span><br><span class="line">        <span class="keyword">assert</span> in_channels == out_channels <span class="comment"># 第一个模块的通道数同输入通道数一致</span></span><br><span class="line">    blk = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(num_residuals):</span><br><span class="line">        <span class="keyword">if</span> i == <span class="number">0</span> <span class="keyword">and</span> <span class="keyword">not</span> first_block:</span><br><span class="line">            blk.append(Residual(in_channels, out_channels, use_1x1conv=<span class="literal">True</span>, stride=<span class="number">2</span>))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            blk.append(Residual(out_channels, out_channels))</span><br><span class="line">    <span class="keyword">return</span> nn.Sequential(*blk)</span><br><span class="line"></span><br><span class="line">net.add_module(<span class="string">"resnet_block1"</span>, resnet_block(<span class="number">64</span>, <span class="number">64</span>, <span class="number">2</span>, first_block=<span class="literal">True</span>))</span><br><span class="line">net.add_module(<span class="string">"resnet_block2"</span>, resnet_block(<span class="number">64</span>, <span class="number">128</span>, <span class="number">2</span>))</span><br><span class="line">net.add_module(<span class="string">"resnet_block3"</span>, resnet_block(<span class="number">128</span>, <span class="number">256</span>, <span class="number">2</span>))</span><br><span class="line">net.add_module(<span class="string">"resnet_block4"</span>, resnet_block(<span class="number">256</span>, <span class="number">512</span>, <span class="number">2</span>))</span><br><span class="line"></span><br><span class="line">net.add_module(<span class="string">"global_avg_pool"</span>, GlobalAvgPool2d()) <span class="comment"># GlobalAvgPool2d的输出: (Batch, 512, 1, 1)</span></span><br><span class="line">net.add_module(<span class="string">"fc"</span>, nn.Sequential(FlattenLayer(), nn.Linear(<span class="number">512</span>, <span class="number">10</span>))) </span><br><span class="line"></span><br><span class="line">X = torch.rand((<span class="number">1</span>, <span class="number">1</span>, <span class="number">224</span>, <span class="number">224</span>))</span><br><span class="line"><span class="keyword">for</span> name, layer <span class="keyword">in</span> net.named_children():</span><br><span class="line">    X = layer(X)</span><br><span class="line">    print(name, <span class="string">' output shape:\t'</span>, X.shape)</span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">0  output shape:	 torch.Size([1, 64, 112, 112])</span><br><span class="line">1  output shape:	 torch.Size([1, 64, 112, 112])</span><br><span class="line">2  output shape:	 torch.Size([1, 64, 112, 112])</span><br><span class="line">3  output shape:	 torch.Size([1, 64, 56, 56])</span><br><span class="line">resnet_block1  output shape:	 torch.Size([1, 64, 56, 56])</span><br><span class="line">resnet_block2  output shape:	 torch.Size([1, 128, 28, 28])</span><br><span class="line">resnet_block3  output shape:	 torch.Size([1, 256, 14, 14])</span><br><span class="line">resnet_block4  output shape:	 torch.Size([1, 512, 7, 7])</span><br><span class="line">global_avg_pool  output shape:	 torch.Size([1, 512, 1, 1])</span><br><span class="line">fc  output shape:	 torch.Size([1, 10])</span><br></pre></td></tr></table></figure>
+<h2 id="DenseNet"><a href="#DenseNet" class="headerlink" title="DenseNet"></a>DenseNet</h2><p><img src="https://i.loli.net/2021/09/12/7BntVIOLba9feP5.png" alt="1593588801710.png"></p>
+<p>与ResNet的主要区别在于，DenseNet里模块BB<em>B</em>的输出不是像ResNet那样和模块AA<em>A</em>的输出相加，而是在通道维上连结。这样模块AA<em>A</em>的输出可以直接传入模块BB<em>B</em>后面的层。在这个设计里，模块AA<em>A</em>直接跟模块BB<em>B</em>后面的所有层连接在了一起。这也是它被称为“稠密连接”的原因。</p>
+<p>DenseNet的主要构建模块是稠密块（dense block）和过渡层（transition layer）。前者定义了输入和输出是如何连结的，后者则用来控制通道数，使之不过大。</p>
+<ul>
+<li>Dense块</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 单个卷积的固定模块</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">conv_block</span><span class="params">(in_channels, out_channels)</span>:</span></span><br><span class="line">    blk = nn.Sequential(nn.BatchNorm2d(in_channels), </span><br><span class="line">                        nn.ReLU(),</span><br><span class="line">                        nn.Conv2d(in_channels, out_channels, kernel_size=<span class="number">3</span>, padding=<span class="number">1</span>))</span><br><span class="line">    <span class="keyword">return</span> blk</span><br><span class="line"></span><br><span class="line"><span class="comment"># Dense块由多个卷积块组成，最后输出时在通道维连接</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DenseBlock</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, num_convs, in_channels, out_channels)</span>:</span>   <span class="comment">#</span></span><br><span class="line">        super(DenseBlock, self).__init__()</span><br><span class="line">        net = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(num_convs):</span><br><span class="line">            in_c = in_channels + i * out_channels    </span><br><span class="line">            <span class="comment"># 对每个卷积块，其输入通道是上一层的输出+上一层的输入，这里输出固定为out_ch,因此直接用最开始的输入 + i * out_ch</span></span><br><span class="line">            net.append(conv_block(in_c, out_channels))   </span><br><span class="line">        self.net = nn.ModuleList(net)</span><br><span class="line">        self.out_channels = in_channels + num_convs * out_channels <span class="comment"># 计算输出通道数</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, X)</span>:</span></span><br><span class="line">        <span class="keyword">for</span> blk <span class="keyword">in</span> self.net:</span><br><span class="line">            Y = blk(X)</span><br><span class="line">            X = torch.cat((X, Y), dim=<span class="number">1</span>)  <span class="comment"># 对每个卷积块，在通道维上将其输入和输出连结</span></span><br><span class="line">        <span class="keyword">return</span> X</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">blk = DenseBlock(<span class="number">2</span>, <span class="number">3</span>, <span class="number">10</span>)</span><br><span class="line">X = torch.rand(<span class="number">4</span>, <span class="number">3</span>, <span class="number">8</span>, <span class="number">8</span>)</span><br><span class="line">Y = blk(X)</span><br><span class="line">Y.shape <span class="comment"># torch.Size([4, 23, 8, 8])</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>过渡层</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 由于Dense块是串联的，过多使用会导致通道数过大，过渡层用1*1卷积减少通道数，并用步幅2减半高宽</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">transition_block</span><span class="params">(in_channels, out_channels)</span>:</span></span><br><span class="line">    blk = nn.Sequential(</span><br><span class="line">            nn.BatchNorm2d(in_channels), </span><br><span class="line">            nn.ReLU(),</span><br><span class="line">            nn.Conv2d(in_channels, out_channels, kernel_size=<span class="number">1</span>),  <span class="comment"># 1*1 卷积</span></span><br><span class="line">            nn.AvgPool2d(kernel_size=<span class="number">2</span>, stride=<span class="number">2</span>))                <span class="comment"># 步幅2的平均池化</span></span><br><span class="line">    <span class="keyword">return</span> blk</span><br><span class="line"></span><br><span class="line">blk = transition_block(<span class="number">23</span>, <span class="number">10</span>)</span><br><span class="line">blk(Y).shape <span class="comment"># torch.Size([4, 10, 4, 4])</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>实现DenseNet</li>
+</ul>
+<p>与之前类似，都是将模块进行组合得到，且在前端后端用适当的输入输出处理层。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="comment"># 常规输入卷积</span></span><br><span class="line">net = nn.Sequential(</span><br><span class="line">        nn.Conv2d(<span class="number">1</span>, <span class="number">64</span>, kernel_size=<span class="number">7</span>, stride=<span class="number">2</span>, padding=<span class="number">3</span>),  </span><br><span class="line">        nn.BatchNorm2d(<span class="number">64</span>), </span><br><span class="line">        nn.ReLU(),</span><br><span class="line">        nn.MaxPool2d(kernel_size=<span class="number">3</span>, stride=<span class="number">2</span>, padding=<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">num_channels, growth_rate = <span class="number">64</span>, <span class="number">32</span>  <span class="comment"># num_channels为当前的通道数</span></span><br><span class="line">num_convs_in_dense_blocks = [<span class="number">4</span>, <span class="number">4</span>, <span class="number">4</span>, <span class="number">4</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加Dense块</span></span><br><span class="line"><span class="keyword">for</span> i, num_convs <span class="keyword">in</span> enumerate(num_convs_in_dense_blocks):</span><br><span class="line">    DB = DenseBlock(num_convs, num_channels, growth_rate)  <span class="comment">#卷积块个数，输入通道数、单个卷积块输出通道数（增长数）</span></span><br><span class="line">    net.add_module(<span class="string">"DenseBlosk_%d"</span> % i, DB)</span><br><span class="line">    <span class="comment"># 上一个稠密块的输出通道数</span></span><br><span class="line">    num_channels = DB.out_channels</span><br><span class="line">    <span class="comment"># 在稠密块之间加入通道数减半的过渡层</span></span><br><span class="line">    <span class="keyword">if</span> i != len(num_convs_in_dense_blocks) - <span class="number">1</span>:  <span class="comment"># 不是最后一层</span></span><br><span class="line">        net.add_module(<span class="string">"transition_block_%d"</span> % i, transition_block(num_channels, num_channels // <span class="number">2</span>))</span><br><span class="line">        num_channels = num_channels // <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 接全局池化和FC</span></span><br><span class="line">net.add_module(<span class="string">"BN"</span>, nn.BatchNorm2d(num_channels))</span><br><span class="line">net.add_module(<span class="string">"relu"</span>, nn.ReLU())</span><br><span class="line">net.add_module(<span class="string">"global_avg_pool"</span>, GlobalAvgPool2d()) <span class="comment"># GlobalAvgPool2d的输出: (Batch, num_channels, 1, 1)</span></span><br><span class="line">net.add_module(<span class="string">"fc"</span>, nn.Sequential(FlattenLayer(), nn.Linear(num_channels, <span class="number">10</span>))) </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">X = torch.rand((<span class="number">1</span>, <span class="number">1</span>, <span class="number">96</span>, <span class="number">96</span>))</span><br><span class="line"><span class="keyword">for</span> name, layer <span class="keyword">in</span> net.named_children():</span><br><span class="line">    X = layer(X)</span><br><span class="line">    print(name, <span class="string">' output shape:\t'</span>, X.shape)</span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">0  output shape:	 torch.Size([1, 64, 48, 48])</span><br><span class="line">1  output shape:	 torch.Size([1, 64, 48, 48])</span><br><span class="line">2  output shape:	 torch.Size([1, 64, 48, 48])</span><br><span class="line">3  output shape:	 torch.Size([1, 64, 24, 24])</span><br><span class="line">DenseBlosk_0  output shape:	 torch.Size([1, 192, 24, 24])</span><br><span class="line">transition_block_0  output shape:	 torch.Size([1, 96, 12, 12])</span><br><span class="line">DenseBlosk_1  output shape:	 torch.Size([1, 224, 12, 12])</span><br><span class="line">transition_block_1  output shape:	 torch.Size([1, 112, 6, 6])</span><br><span class="line">DenseBlosk_2  output shape:	 torch.Size([1, 240, 6, 6])</span><br><span class="line">transition_block_2  output shape:	 torch.Size([1, 120, 3, 3])</span><br><span class="line">DenseBlosk_3  output shape:	 torch.Size([1, 248, 3, 3])</span><br><span class="line">BN  output shape:	 torch.Size([1, 248, 3, 3])</span><br><span class="line">relu  output shape:	 torch.Size([1, 248, 3, 3])</span><br><span class="line">global_avg_pool  output shape:	 torch.Size([1, 248, 1, 1])</span><br><span class="line">fc  output shape:	 torch.Size([1, 10])</span><br></pre></td></tr></table></figure>
+<p>对比网络结构：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Sequential(</span><br><span class="line">  (0): Conv2d(1, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3))</span><br><span class="line">  (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)</span><br><span class="line">  (2): ReLU()</span><br><span class="line">  (3): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)</span><br><span class="line">  (DenseBlosk_0): DenseBlock(</span><br><span class="line">    (net): ModuleList(</span><br><span class="line">      (0): Sequential(</span><br><span class="line">        (0): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)</span><br><span class="line">        (1): ReLU()</span><br><span class="line">        (2): Conv2d(64, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))</span><br><span class="line">      )</span><br><span class="line">      (1): Sequential(</span><br><span class="line">        (0): BatchNorm2d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)</span><br><span class="line">        (1): ReLU()</span><br><span class="line">        (2): Conv2d(96, 32, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="../../../../../../tags/pytorch/" rel="tag"># pytorch</a>
+          
+            <a href="../../../../../../tags/卷积网络/" rel="tag"># 卷积网络</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="../../../数据库/SQL命令一览/" rel="next" title="SQL命令一览">
+                <i class="fa fa-chevron-left"></i> SQL命令一览
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="../8.循环网络/" rel="prev" title="循环网络搭建">
+                循环网络搭建 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">brezezee</p>
+              <p class="site-description motion-element" itemprop="description">靡不有初，鲜克有终</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="https://brezezee.github.io/archives">
+              
+                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="../../../../../../categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="../../../../../../tags/index.html">
+                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础"><span class="nav-text">基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#互相关运算与卷积"><span class="nav-text">互相关运算与卷积</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#卷积层"><span class="nav-text">卷积层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#填充和步幅"><span class="nav-text">填充和步幅</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多通道"><span class="nav-text">多通道</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#池化层"><span class="nav-text">池化层</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#卷积神经网络-LeNet"><span class="nav-text">卷积神经网络(LeNet)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VGG网络"><span class="nav-text">VGG网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NiN网络"><span class="nav-text">NiN网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GoogleNet"><span class="nav-text">GoogleNet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#批量归一化-batch-normalization"><span class="nav-text">批量归一化(batch normalization)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#手动实现BN"><span class="nav-text">手动实现BN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简洁实现"><span class="nav-text">简洁实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ResNet（残差网络）"><span class="nav-text">ResNet（残差网络）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DenseNet"><span class="nav-text">DenseNet</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">brezezee</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">154.8k</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../../../lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../../../js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="../../../../../../js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="../../../../../../js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="../../../../../../js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="../../../../../../js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://brezezee.github.io/2019/09/01/framework/DL with pytorch/7.卷积网络/';
+          this.page.identifier = '2019/09/01/framework/DL with pytorch/7.卷积网络/';
+          this.page.title = '卷积网络搭建';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

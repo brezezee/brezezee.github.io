@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="STL  数组模拟单链表&amp;emsp;&amp;emsp;用数组模拟单链表，可以免去new占用的时间，加快算法执行速度。不过删除节点时会造成内存泄漏，但这一般是工程中考虑的问题，算法题跑时间就行了。 1234567891011121314// head 指向头节点， index 表示当前可用数组下标(只增)int head = -1, v[N], next[N], index = 0;//插入到头结点后（">
+<meta name="description" content="数组模拟单链表&amp;emsp;&amp;emsp;用数组模拟单链表，可以免去new占用的时间，加快算法执行速度。不过删除节点时会造成内存泄漏，但这一般是工程中考虑的问题，算法题跑时间就行了。 1234567891011121314// head 指向头节点， index 表示当前可用数组下标(只增)int head = -1, v[N], next[N], index = 0;//插入到头结点后（头插法），头">
 <meta name="keywords" content="算法模板,数据结构">
 <meta property="og:type" content="article">
 <meta property="og:title" content="模板(数据结构)">
 <meta property="og:url" content="https://brezezee.github.io/2019/10/15/algorithm/Acwing/2. 数据结构+STL/index.html">
 <meta property="og:site_name" content="brezezee">
-<meta property="og:description" content="STL  数组模拟单链表&amp;emsp;&amp;emsp;用数组模拟单链表，可以免去new占用的时间，加快算法执行速度。不过删除节点时会造成内存泄漏，但这一般是工程中考虑的问题，算法题跑时间就行了。 1234567891011121314// head 指向头节点， index 表示当前可用数组下标(只增)int head = -1, v[N], next[N], index = 0;//插入到头结点后（">
+<meta property="og:description" content="数组模拟单链表&amp;emsp;&amp;emsp;用数组模拟单链表，可以免去new占用的时间，加快算法执行速度。不过删除节点时会造成内存泄漏，但这一般是工程中考虑的问题，算法题跑时间就行了。 1234567891011121314// head 指向头节点， index 表示当前可用数组下标(只增)int head = -1, v[N], next[N], index = 0;//插入到头结点后（头插法），头">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://brezezee.github.io/2019/10/15/algorithm/Acwing/2.%20数据结构+STL/assets/1619358192132.png">
-<meta property="og:updated_time" content="2021-07-29T14:42:18.610Z">
+<meta property="og:updated_time" content="2021-09-12T05:46:05.257Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="模板(数据结构)">
-<meta name="twitter:description" content="STL  数组模拟单链表&amp;emsp;&amp;emsp;用数组模拟单链表，可以免去new占用的时间，加快算法执行速度。不过删除节点时会造成内存泄漏，但这一般是工程中考虑的问题，算法题跑时间就行了。 1234567891011121314// head 指向头节点， index 表示当前可用数组下标(只增)int head = -1, v[N], next[N], index = 0;//插入到头结点后（">
+<meta name="twitter:description" content="数组模拟单链表&amp;emsp;&amp;emsp;用数组模拟单链表，可以免去new占用的时间，加快算法执行速度。不过删除节点时会造成内存泄漏，但这一般是工程中考虑的问题，算法题跑时间就行了。 1234567891011121314// head 指向头节点， index 表示当前可用数组下标(只增)int head = -1, v[N], next[N], index = 0;//插入到头结点后（头插法），头">
 <meta name="twitter:image" content="https://brezezee.github.io/2019/10/15/algorithm/Acwing/2.%20数据结构+STL/assets/1619358192132.png">
 
 
@@ -310,8 +310,8 @@
               
                 <span class="post-meta-item-text">Post modified&#58;</span>
               
-              <time title="Post modified" itemprop="dateModified" datetime="2021-07-29T22:42:18+08:00">
-                2021-07-29
+              <time title="Post modified" itemprop="dateModified" datetime="2021-09-12T13:46:05+08:00">
+                2021-09-12
               </time>
             
           </span>
@@ -395,10 +395,7 @@
       
 
       
-        <ul>
-<li>STL</li>
-</ul>
-<h3 id="数组模拟单链表"><a href="#数组模拟单链表" class="headerlink" title="数组模拟单链表"></a>数组模拟单链表</h3><p>&emsp;&emsp;用数组模拟单链表，可以免去new占用的时间，加快算法执行速度。不过删除节点时会造成内存泄漏，但这一般是工程中考虑的问题，算法题跑时间就行了。</p>
+        <h3 id="数组模拟单链表"><a href="#数组模拟单链表" class="headerlink" title="数组模拟单链表"></a>数组模拟单链表</h3><p>&emsp;&emsp;用数组模拟单链表，可以免去new占用的时间，加快算法执行速度。不过删除节点时会造成内存泄漏，但这一般是工程中考虑的问题，算法题跑时间就行了。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// head 指向头节点， index 表示当前可用数组下标(只增)</span></span><br><span class="line"><span class="keyword">int</span> head = <span class="number">-1</span>, v[N], next[N], index = <span class="number">0</span>;</span><br><span class="line"><span class="comment">//插入到头结点后（头插法），头节点是递增的</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add2head</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    v[index] = x, ne[index] = head, head = index++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//插入到下标k后</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> k, <span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    v[index] = x, ne[index] = ne[k], ne[k] = index++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//删除下标k后一个节点</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">remove</span><span class="params">(<span class="keyword">int</span> k)</span></span>&#123;</span><br><span class="line">    ne[k] = ne[ne[k]];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="模拟栈和队列"><a href="#模拟栈和队列" class="headerlink" title="模拟栈和队列"></a>模拟栈和队列</h3><p>栈只需要一个top指针，队列需要一个头指针一个尾指针。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//*********************//栈</span></span><br><span class="line"><span class="keyword">int</span> stk[N], top = <span class="number">0</span>;</span><br><span class="line"><span class="comment">//p指向栈顶，插入时先+p再赋值</span></span><br><span class="line">stk[++top] = x;</span><br><span class="line"><span class="comment">//弹出</span></span><br><span class="line">top--;</span><br><span class="line"><span class="comment">//判断空</span></span><br><span class="line"><span class="keyword">if</span>(top &gt; <span class="number">0</span>) ;</span><br><span class="line"><span class="comment">//栈顶</span></span><br><span class="line">stk[top];</span><br><span class="line"></span><br><span class="line"><span class="comment">//**********************//队列</span></span><br><span class="line"><span class="comment">//队尾插入，队首弹出</span></span><br><span class="line"><span class="keyword">int</span> q[N], head = <span class="number">0</span>, tail = <span class="number">-1</span>;</span><br><span class="line"><span class="comment">//插入</span></span><br><span class="line">q[++tail] = x;</span><br><span class="line"><span class="comment">//弹出</span></span><br><span class="line">head ++;</span><br><span class="line"><span class="comment">// 判空</span></span><br><span class="line"><span class="keyword">if</span>(head &lt;= tail);</span><br><span class="line"><span class="comment">// 取队头</span></span><br><span class="line">q[head];</span><br><span class="line"></span><br><span class="line"><span class="comment">//*********************// 循环队列，hh和tt相等时为空，会损失一个容量</span></span><br><span class="line"><span class="comment">// hh 表示队头，tt表示队尾的后一个位置</span></span><br><span class="line"><span class="keyword">int</span> q[N], hh = <span class="number">0</span>, tt = <span class="number">0</span>;</span><br><span class="line"><span class="comment">// 向队尾插入一个数</span></span><br><span class="line">q[tt ++ ] = x;</span><br><span class="line"><span class="keyword">if</span> (tt == N) tt = <span class="number">0</span>;</span><br><span class="line"><span class="comment">// 从队头弹出一个数</span></span><br><span class="line">hh ++ ;</span><br><span class="line"><span class="keyword">if</span> (hh == N) hh = <span class="number">0</span>;</span><br><span class="line"><span class="comment">// 队头的值</span></span><br><span class="line">q[hh];</span><br><span class="line"><span class="comment">// 判断队列是否为空</span></span><br><span class="line"><span class="keyword">if</span> (hh != tt)</span><br></pre></td></tr></table></figure>
@@ -555,7 +552,7 @@
               
                 <a href="https://brezezee.github.io/archives">
               
-                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -566,7 +563,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="../../../../../../categories/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -577,7 +574,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="../../../../../../tags/index.html">
-                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-count">74</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -644,7 +641,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">155.9k</span>
+    <span title="Site words total count">154.8k</span>
   
 </div>
 
